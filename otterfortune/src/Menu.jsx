@@ -11,6 +11,8 @@ export const Menu = (props) => {
     const { email } = props;
     const [showLogin, setShowLogin] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [id, setId] = useState("");
+    const [content, setContent] = useState("");
 
     //const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
@@ -18,9 +20,10 @@ export const Menu = (props) => {
     console.log(email);   // una forma de acceder a email
     console.log(props.email);   // otra forma a través de props
     
-    const handleCrearPartida = (event) => {
+    const handleCrearPartida = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault(); // Para que no se abran dos ventanas alert
         window.alert('Partida creada con ID: x.');
     };
 
@@ -28,27 +31,38 @@ export const Menu = (props) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
         setIsOpen(true);
+        setId("");
+        //window.alert('Torneo creado con ID: x.');
+
     };
 
-    const handleCrearTorneo = (event) => {
+    const popup = (
+       // <Popup content="Contenido de la ventana emergente" handleClose={handleClose} />
+       <Popup handleClose={handleClose} />
+    );
+
+    const handleCrearTorneo = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault(); // Para que no se abran dos ventanas alert
         window.alert('Torneo creado con ID: x.');
     };
 
-    const handleUnirseTorneo = (event) => {
+    const handleUnirseTorneo = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault();
         window.alert('Unirse torneo con ID: x.');
     };
 
-    const handleTiendaSkins = (event) => {
+    const handleTiendaSkins = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault();
         window.alert('Tienda skins');
     };
 
-    const handleCerrarSesion = (event) => {
+    const handleCerrarSesion = (e) => {
         setShowLogin(true);
     };
 
@@ -88,7 +102,7 @@ export const Menu = (props) => {
                     name="menu" 
                     id="unirsePartida"/>
             </div>
-            {isOpen && <Popup content="Contenido de la ventana emergente" handleClose={handleClose} />}
+            {isOpen && popup}
 
             <div className="menu-option" onClick={handleCrearTorneo}>
                 <label htmlFor="crearTorneo">Crear torneo</label>

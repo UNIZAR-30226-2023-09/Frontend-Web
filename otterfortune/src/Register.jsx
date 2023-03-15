@@ -12,7 +12,6 @@ export const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.preventDefault();
     if (name.trim() === '') {
       window.alert('Por favor, ingrese su nombre.');
     } 

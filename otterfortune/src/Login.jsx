@@ -11,7 +11,7 @@ export const Login = (props) => {
   // Para ver contraseña
   // const [showPassword, setShowPassword] = useState(false);
 
-  // Cuando se hace el submit del login
+  // Cuando se pulsa el boton del login
   const handleSubmit = (e) => {
     e.preventDefault();
     // Comprobamos los campos
@@ -48,7 +48,7 @@ export const Login = (props) => {
 
   return (
     <div className={styles["auth-container"]}> {/* Utilizar la clase CSS desde el módulo */}
-        <form className={styles["login-form"]} onSubmit={handleSubmit}>
+        <form className={styles["login-form"]}>
             <div className={styles["form-container"]}>
                 <h2>Iniciar Sesión</h2>
                 <label htmlFor="email">Email</label>
@@ -68,7 +68,7 @@ export const Login = (props) => {
                   id="password" 
                   name="password" />
 
-                <button type="submit">Log In</button>
+                <button type="submit" onClick={handleSubmit}>Log In</button>
                 <button className={styles["link-btn"]} 
                   onClick={() => props.onFormSwitch('register')}>
                   ¿Eres nuevo? Crea una cuenta ahora.</button>
