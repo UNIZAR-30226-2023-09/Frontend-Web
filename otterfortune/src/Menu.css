@@ -23,9 +23,9 @@
   margin: 10px;
   width: 25%;  /* Para el ancho de los botones */
   height: 7%;
-  /* background-color: #f5eded; */
-  background-color: transparent;
-  color: white;
+  /* background-color: transparent;  */
+  background: linear-gradient(to right, #1DD6D6, #3B9AED);
+  color: rgb(255, 255, 255);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -33,11 +33,11 @@
 }
 
 .menu-option:hover {
-  transform: scale(1.1);
-  background-color: #5b8dec;
+  transform: scale(1.22);
+  background: linear-gradient(to right, #3794e5,#41e5e5);
 }
 
-.menu-option input[type="radio"] {
+.menu-option input[type="button"] {
   display: none;
 }
 
