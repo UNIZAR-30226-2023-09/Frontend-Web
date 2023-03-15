@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Login from "./Login";
-import loginImage from './logo.png';
 import './Menu.css';
 import nutria from './otter.png';
 import Popup from './Popup';
@@ -11,15 +10,26 @@ export const Menu = (props) => {
     const { email } = props;
     const [showLogin, setShowLogin] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [id, setId] = useState("");
     const [content, setContent] = useState("");
+    const [id, setId] = useState("");
+
+    // Para guardar el ID introducido
+    const handleIdChange = (newId) => {
+      setId(newId); // Establecemos el nuevo id
+    };
 
     //const handleOpen = () => setIsOpen(true);
-    const handleClose = () => setIsOpen(false);
+    const handleClose = (id) => {
+        setIsOpen(false);
+        // Actualizamos el id introducido
+        handleIdChange(id);
+        // console.log(id);
+    }
 
-    console.log(email);   // una forma de acceder a email
-    console.log(props.email);   // otra forma a través de props
+    //console.log(email);   // una forma de acceder a email
+    //console.log(props.email);   // otra forma a través de props
     
+    // Cuando se pulsa el botón de crear partida realizar lo necesario
     const handleCrearPartida = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
@@ -27,20 +37,19 @@ export const Menu = (props) => {
         window.alert('Partida creada con ID: x.');
     };
 
-    const handleUnirsePartida = (event) => {
+    // Cuando se pulsa el botón de unirse a partida realizar lo necesario
+    const handleUnirsePartida = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault();
         setIsOpen(true);
+        setContent("Introduzca el ID de la partida:");
         setId("");
         //window.alert('Torneo creado con ID: x.');
 
     };
 
-    const popup = (
-       // <Popup content="Contenido de la ventana emergente" handleClose={handleClose} />
-       <Popup handleClose={handleClose} />
-    );
-
+    // Cuando se pulsa el botón de crear torneo realizar lo necesario
     const handleCrearTorneo = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
@@ -48,13 +57,18 @@ export const Menu = (props) => {
         window.alert('Torneo creado con ID: x.');
     };
 
+    // Cuando se pulsa el botón de unirse torneo realizar lo necesario
     const handleUnirseTorneo = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault();
-        window.alert('Unirse torneo con ID: x.');
+        setIsOpen(true);
+        setContent("Introduzca el ID del torneo:");
+        setId("");
+        //window.alert('Unirse torneo con ID: x.');
     };
 
+    // Cuando se pulsa el botón de tienda skins realizar lo necesario
     const handleTiendaSkins = (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
@@ -62,10 +76,21 @@ export const Menu = (props) => {
         window.alert('Tienda skins');
     };
 
+    // Gestiona la ventana emergente 
+    const popup = (
+        // De esta forma, en popup, a través del props, se podrá acceder
+        // a handleClose y a content
+        // Se le puede pasar cualquier cosa
+        <Popup handleClose={handleClose}
+             content={content}/>
+     );
+
+    // Gestiona el boton de cerrar sesion
     const handleCerrarSesion = (e) => {
         setShowLogin(true);
     };
 
+    // Muestra el log in cuando se pone a true (cuando se cierra sesion)
     if (showLogin) {
         // Llamar a menu y guardar el valor del email en 'email'
         // También se guarda en 'props.email' y se accede en menu
@@ -118,6 +143,8 @@ export const Menu = (props) => {
                     name="menu" 
                     id="unirseTorneo"/>
             </div>
+            {isOpen && popup}
+
             <div className="menu-option" onClick={handleTiendaSkins}>
                 <label htmlFor="tiendaSkins">Tienda de skins</label>
                 <input 
