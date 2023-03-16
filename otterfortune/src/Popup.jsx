@@ -26,7 +26,7 @@ const Popup = (props) => {
       <div>
         <label htmlFor="text" className="popup__label">
           {props.content}</label>
-          <input
+          <input 
             type="number"
             id="input-id" /* Para modificar solo este en el css*/
             value={id}

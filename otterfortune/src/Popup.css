@@ -11,7 +11,7 @@
   }
   
   .popup__content {
-    background: linear-gradient(to right, #1DD6D6, #3B9AED);
+    background: linear-gradient(to right, #1DD6D6, #3B9AED); 
     padding: 20px;
     max-width: 48%;
     max-height: 70%;
@@ -20,6 +20,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
   
   .popup__close {
@@ -33,20 +34,23 @@
   }
 
   .popup__label {
-    font-size: 20px;
+    font-size: 25px;
     color: black;
     font-weight: bold;
-    /* otras reglas CSS que desees agregar */
+
   }
   
   /* Para que sea el del pop up especifico*/
   #input-id {
-    width: 20%;
-    margin-left: 3%;
+    width: 50%;
+    margin: 20%;
+    margin-bottom: 5%;
+    margin-top: 5%;
     padding: 10px;
     font-size: 16px;
     border: 2px solid #010101;
     background-color: #ffffff;
+
   }
 
   .cancel, .acept {
@@ -64,27 +68,27 @@
   }
   
   .cancel button {
-    width: 120%;
-    height: 150%;
-    margin-left: 210%;
+    width: 150px;
+    height: 45px;
+    margin-left: 40px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: black;
     font-weight: bold;
-    font-size: 100%;
+    font-size: 110%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
   }
 
   .acept button {
-    width: 150%;
-    height: 150%;
-    margin-right: 210%;
+    width: 150px;
+    height: 45px;
+    margin-right: 40px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: black;
     font-weight: bold;
-    font-size: 100%;
+    font-size: 110%;
     cursor: pointer;
     transition: background-color 0.5s ease;
   }

@@ -3,13 +3,18 @@ import Login from "./Login";
 import './Menu.css';
 import nutria from './otter.png';
 import Popup from './Popup';
+import PopupCrear from "./PopupCrear";
 
 export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props.data;
     const { email } = props;
     const [showLogin, setShowLogin] = useState(false);
+    // Para unirse
     const [isOpen, setIsOpen] = useState(false);
+    // Para crear
+    const [isOpenCreate, setIsOpenCreate] = useState(false);
+
     const [content, setContent] = useState("");
     const [id, setId] = useState("");
 
@@ -26,17 +31,6 @@ export const Menu = (props) => {
         // console.log(id);
     }
 
-    //console.log(email);   // una forma de acceder a email
-    //console.log(props.email);   // otra forma a través de props
-    
-    // Cuando se pulsa el botón de crear partida realizar lo necesario
-    const handleCrearPartida = (e) => {
-        // TODO:
-        // Aqui seria mandar al servidor y comprobar 
-        e.preventDefault(); // Para que no se abran dos ventanas alert
-        window.alert('Partida creada con ID: x.');
-    };
-
     // Cuando se pulsa el botón de unirse a partida realizar lo necesario
     const handleUnirsePartida = (e) => {
         // TODO:
@@ -49,14 +43,6 @@ export const Menu = (props) => {
 
     };
 
-    // Cuando se pulsa el botón de crear torneo realizar lo necesario
-    const handleCrearTorneo = (e) => {
-        // TODO:
-        // Aqui seria mandar al servidor y comprobar 
-        e.preventDefault(); // Para que no se abran dos ventanas alert
-        window.alert('Torneo creado con ID: x.');
-    };
-
     // Cuando se pulsa el botón de unirse torneo realizar lo necesario
     const handleUnirseTorneo = (e) => {
         // TODO:
@@ -67,6 +53,37 @@ export const Menu = (props) => {
         setId("");
         //window.alert('Unirse torneo con ID: x.');
     };
+
+    //const handleOpen = () => setIsOpen(true);
+    const handleCloseCreate = () => {
+        setIsOpenCreate(false);
+        // Actualizamos el id introducido
+        // console.log(id);
+    }
+
+    //console.log(email);   // una forma de acceder a email
+    //console.log(props.email);   // otra forma a través de props
+    
+    // Cuando se pulsa el botón de crear partida realizar lo necesario
+    const handleCrearPartida = (e) => {
+        // TODO:
+        // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault(); // Para que no se abran dos ventanas alert
+        setIsOpenCreate(true);
+        setContent("¿Estás seguro de crear la partida?");
+        //window.alert('Partida creada con ID: x.');
+    };
+
+    // Cuando se pulsa el botón de crear torneo realizar lo necesario
+    const handleCrearTorneo = (e) => {
+        // TODO:
+        // Aqui seria mandar al servidor y comprobar 
+        e.preventDefault(); // Para que no se abran dos ventanas alert
+        setIsOpenCreate(true);
+        setContent("¿Estás seguro de crear el torneo?");
+        //window.alert('Torneo creado con ID: x.');
+    };
+
 
     // Cuando se pulsa el botón de tienda skins realizar lo necesario
     const handleTiendaSkins = (e) => {
@@ -84,6 +101,15 @@ export const Menu = (props) => {
         <Popup handleClose={handleClose}
              content={content}/>
      );
+
+     const popupCrear = (
+        // De esta forma, en popup, a través del props, se podrá acceder
+        // a handleClose y a content
+        // Se le puede pasar cualquier cosa
+        <PopupCrear handleCloseCreate={handleCloseCreate}
+             content={content}/>
+     );
+
 
     // Gestiona el boton de cerrar sesion
     const handleCerrarSesion = (e) => {
@@ -119,7 +145,8 @@ export const Menu = (props) => {
                     name="crearPartida" 
                     id="crearPartida"/>
             </div>
-            
+            {isOpenCreate && popupCrear}
+
             <div className="menu-option" onClick={handleUnirsePartida}>
                 <label htmlFor="unirsePartida">Unirse a partida</label>
                 <input 
@@ -136,6 +163,8 @@ export const Menu = (props) => {
                     name="menu" 
                     id="crearTorneo"/>
             </div>
+            {isOpenCreate && popupCrear}
+
             <div className="menu-option" onClick={handleUnirseTorneo}>
                 <label htmlFor="unirseTorneo">Unirse a torneo</label>
                 <input 
