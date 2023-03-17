@@ -3,19 +3,13 @@ import loginImage from './Imagenes/logo.png';
 import styles from './CSS/Login.module.css'; // Importar el CSS como módulo
 import { Menu } from "./Menu";
 import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
 
 export const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showMenu, setShowMenu] = useState(false);
-  const [socket, setSocket] = useState(null);
-
-  // ws
-  useEffect(() => {
-    const newSocket = new WebSocket('ws://34.175.156.130:8080');
-    setSocket(newSocket);
-    return () => newSocket.close();
-  }, []);
+  const socket = useSocket();
 
   // Cuando se pulsa el boton del login
   const handleSubmit = async (e) => {

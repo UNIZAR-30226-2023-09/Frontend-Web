@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import loginImage from './Imagenes/logo.png';
 import styles from './CSS/Register.module.css';
 import { Menu } from "./Menu";
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
 
 export const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
   const [showMenu, setShowMenu] = useState(false);
+  const socket = useSocket();
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (name.trim() === '') {
       window.alert('Por favor, ingrese su nombre.');
@@ -22,9 +25,18 @@ export const Register = (props) => {
       window.alert('Por favor, ingrese su contraseña.');
     }
     else {
-      // TODO:
-      // Aqui seria mandar al servidor y comprobar 
-      setShowMenu(true);
+      // Mandar al servidor y comprobar
+      const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
+      console.log(registroExitoso);
+      if (registroExitoso) {
+        // Poner a true para mostrar el menu si se inicia correctamente
+        setShowMenu(true);
+      }
+      else {
+        setShowMenu(false);
+        window.alert('Te has registrado mal');
+      }
+      // console.log(email);
       //props.onFormSwitch('Menu', { email });
     }
   }

@@ -12,12 +12,11 @@ const waitForResponse = (socket) => {
     if (socket) {
       socket.send(`registrarse,${email},${contrasenya},${nombre}`);
       const response = await waitForResponse(socket);
-  
-      if (response === 'REGISTRO_OK') {
-        socket.send(`true`);
+
+      let msg = response.toString().split(",");
+      if (msg[0] === 'REGISTRO_OK') {
         return true;
       } else {
-        socket.send(`false`);
         return false;
       }
     }
