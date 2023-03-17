@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Popup.css';
+import './CSS/Popup.css';
 
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.

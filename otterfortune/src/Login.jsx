@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import loginImage from './logo.png';
-import styles from './Login.module.css'; // Importar el CSS como módulo
+import loginImage from './Imagenes/logo.png';
+import styles from './CSS/Login.module.css'; // Importar el CSS como módulo
 import { Menu } from "./Menu";
 
 export const Login = (props) => {

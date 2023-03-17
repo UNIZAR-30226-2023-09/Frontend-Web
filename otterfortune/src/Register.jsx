@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import loginImage from './logo.png';
-import styles from './Register.module.css';
+import loginImage from './Imagenes/logo.png';
+import styles from './CSS/Register.module.css';
 import { Menu } from "./Menu";
 
 export const Register = (props) => {

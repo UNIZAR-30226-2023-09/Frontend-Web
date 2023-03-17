@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
-import './Menu.css';
-import nutria from './otter.png';
+import './CSS/Menu.css';
+import nutria from './Imagenes/otter.png';
 import Popup from './Popup';
 import PopupCrear from "./PopupCrear";
 
