@@ -20,6 +20,7 @@ export const Login = (props) => {
     }
     else {
       // TODO:
+      
       // Aqui seria mandar al servidor y comprobar 
       // Poner a true para mostrar el menu si se inicia correctamente
       setShowMenu(true);

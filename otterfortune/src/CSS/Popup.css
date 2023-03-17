@@ -13,8 +13,8 @@
   .popup__content {
     /* background: linear-gradient(to right, #1DD6D6, #3B9AED);  */
     background-color: #0d2480;
-    padding: 20px;
-    max-width: 48%;
+    padding: 45px;
+    max-width: 45%;
     max-height: 70%;
     overflow-y: auto;
     border-radius: 5px;
@@ -27,8 +27,8 @@
   
   .popup__close {
     position: absolute;
-    top: 5px;
-    right: 8px;
+    top: 8px;
+    right: 10px;
     border: none;
     background-color: transparent;
     font-size: 20px;
@@ -40,10 +40,9 @@
     font-size: 25px;
     color: white;
     font-weight: bold;
-
   }
   
-  /* Para que sea el del pop up especifico*/
+  /* Para que sea el del pop up especifico el input*/
   #input-id {
     width: 50%;
     margin: 20%;
