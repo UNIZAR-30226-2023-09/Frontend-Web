@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import loginImage from './Imagenes/logo.png';
 import styles from './CSS/Login.module.css'; // Importar el CSS como módulo
 import { Menu } from "./Menu";
+import * as socketActions from './socketActions';
 
 export const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showMenu, setShowMenu] = useState(false);
+  const [socket, setSocket] = useState(null);
+
+  // ws
+  useEffect(() => {
+    const newSocket = new WebSocket('ws://34.175.156.130:8080');
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, []);
 
   // Cuando se pulsa el boton del login
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Comprobamos los campos
     if (email.trim() === '') {
@@ -19,11 +28,17 @@ export const Login = (props) => {
       window.alert('Por favor, ingrese su contraseña.');
     }
     else {
-      // TODO:
-      
-      // Aqui seria mandar al servidor y comprobar 
-      // Poner a true para mostrar el menu si se inicia correctamente
-      setShowMenu(true);
+      // Mandar al servidor y comprobar
+      const registroExitoso = await socketActions.iniciarSesion(socket, email, password);
+      console.log(registroExitoso);
+      if (registroExitoso) {
+        // Poner a true para mostrar el menu si se inicia correctamente
+        setShowMenu(true);
+      }
+      else {
+        setShowMenu(false);
+        window.alert('Login incorrecto.');
+      }
       // console.log(email);
       //props.onFormSwitch('Menu', { email });
     }
