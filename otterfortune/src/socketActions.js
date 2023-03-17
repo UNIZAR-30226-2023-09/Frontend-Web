@@ -32,6 +32,8 @@ const waitForResponse = (socket) => {
       socket.send(`iniciarSesion,${email},${contrasenya}`);
       const response = await waitForResponse(socket);
 
+      console.log(response)
+
       let msg = response.toString().split(",");
       if (msg[0] === 'INICIO_OK') {
         return true;
