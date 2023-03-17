@@ -1,3 +1,9 @@
+/******************************************************************************\
+* Asignatura: Proyecto Software (2022/2023)                                    *
+* Fichero: socketContext.js                                                    *
+* Autor: David Rivera Seves (NIP: 815124)                                      *
+\******************************************************************************/
+
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const SocketContext = createContext();

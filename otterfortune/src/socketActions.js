@@ -1,4 +1,8 @@
-// src/socketActions.js
+/******************************************************************************\
+* Asignatura: Proyecto Software (2022/2023)                                    *
+* Fichero: socketActions.js                                                    *
+* Autor: David Rivera Seves (NIP: 815124)                                      *
+\******************************************************************************/
 
 const waitForResponse = (socket) => {
     return new Promise((resolve) => {
