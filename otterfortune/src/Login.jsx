@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import loginImage from './Imagenes/logo.png';
 import styles from './CSS/Login.module.css'; // Importar el CSS como módulo
 import { Menu } from "./Menu";
@@ -24,7 +24,6 @@ export const Login = (props) => {
     else {
       // Mandar al servidor y comprobar
       const registroExitoso = await socketActions.iniciarSesion(socket, email, password);
-      console.log(registroExitoso);
       if (registroExitoso) {
         // Poner a true para mostrar el menu si se inicia correctamente
         setShowMenu(true);

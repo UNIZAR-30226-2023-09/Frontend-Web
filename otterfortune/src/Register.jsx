@@ -27,7 +27,6 @@ export const Register = (props) => {
     else {
       // Mandar al servidor y comprobar
       const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
-      console.log(registroExitoso);
       if (registroExitoso) {
         // Poner a true para mostrar el menu si se inicia correctamente
         setShowMenu(true);

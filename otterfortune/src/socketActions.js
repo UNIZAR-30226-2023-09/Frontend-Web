@@ -45,7 +45,7 @@ const waitForResponse = (socket) => {
     if (socket) {
       socket.send(`crearPartida,${ID_jugador}`);
       const response = await waitForResponse(socket);
-
+      // ...
       if (response === 'CREADAP_OK') {
         return true;
       } else {
