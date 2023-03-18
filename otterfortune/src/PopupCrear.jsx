@@ -24,7 +24,7 @@ const PopupCrear = (props) => {
       <div className="popup__content">
         <button className="popup__close" onClick={props.handleCloseCreate}>X</button>
         <div>
-          <p className="popup__label">{props.content}</p>
+          <p className="popup__label">¿Estás seguro de crear {props.content}?</p>
         </div>
         <div className="buttons-container">
           <div className="cancel">

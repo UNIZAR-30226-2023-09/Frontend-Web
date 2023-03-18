@@ -4,6 +4,8 @@ import './CSS/Menu.css';
 import nutria from './Imagenes/otter.png';
 import Popup from './Popup';
 import PopupCrear from "./PopupCrear";
+import Loading from "./Loading";
+
 
 export const Menu = (props) => {
     // Obtener el valor del email
@@ -17,6 +19,9 @@ export const Menu = (props) => {
 
     const [content, setContent] = useState("");
     const [id, setId] = useState("");
+    
+    const [loading, setLoading] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     // Para guardar el ID introducido
     const handleIdChange = (newId) => {
@@ -24,12 +29,17 @@ export const Menu = (props) => {
     };
 
     //const handleOpen = () => setIsOpen(true);
-    const handleClose = (id) => {
+    const handleClose = (id, loading) => {
+        console.log(loading);
         setIsOpen(false);
         // Actualizamos el id introducido
         handleIdChange(id);
+        // Actualizamos el valor de loading
+        setLoading(loading);
+        setShowLoading(loading);
         // console.log(id);
     }
+
 
     // Cuando se pulsa el botón de unirse a partida realizar lo necesario
     const handleUnirsePartida = (e) => {
@@ -37,7 +47,7 @@ export const Menu = (props) => {
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault();
         setIsOpen(true);
-        setContent("Introduzca el ID de la partida:");
+        setContent("Introduzca el ID de la partida");
         setId("");
         //window.alert('Torneo creado con ID: x.');
 
@@ -49,7 +59,7 @@ export const Menu = (props) => {
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault();
         setIsOpen(true);
-        setContent("Introduzca el ID del torneo:");
+        setContent("Introduzca el ID del torneo");
         setId("");
         //window.alert('Unirse torneo con ID: x.');
     };
@@ -70,7 +80,7 @@ export const Menu = (props) => {
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault(); // Para que no se abran dos ventanas alert
         setIsOpenCreate(true);
-        setContent("¿Estás seguro de crear la partida?");
+        setContent("la partida");
         //window.alert('Partida creada con ID: x.');
     };
 
@@ -80,7 +90,7 @@ export const Menu = (props) => {
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault(); // Para que no se abran dos ventanas alert
         setIsOpenCreate(true);
-        setContent("¿Estás seguro de crear el torneo?");
+        setContent("el torneo");
         //window.alert('Torneo creado con ID: x.');
     };
 
@@ -121,20 +131,25 @@ export const Menu = (props) => {
         // Llamar a menu y guardar el valor del email en 'email'
         // También se guarda en 'props.email' y se accede en menu
         return <Login />;
-      }
-
+    }
     return (
+        <>
+        {loading ? (
+          <Loading email={email}/>
+        ) : (
         <div className="menu-container">
             <div className="login-image image-container"> 
                 <img src={nutria} alt="Login" className="login-image"/>
             </div>
             <p>Bienvenido a OtterFortune </p>
+            
             <div className="email-container">
                     <p>{email}</p>
             </div>
             <div className="gemas-container">
                     <p>Tienes x gemas</p>
             </div>
+            
             <button className="cerrar-sesion-button" 
                 onClick={handleCerrarSesion}>Cerrar sesión</button>
             <div className="menu-option" onClick={handleCrearPartida}>
@@ -182,6 +197,9 @@ export const Menu = (props) => {
                     id="tiendaSkins"/>
             </div>
         </div>
-    )
+        )}
+        </>
+    );
 }
 
+export default Menu;

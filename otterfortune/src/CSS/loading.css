@@ -1,0 +1,30 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #3B9AED, #1DD6D6) !important;
+    height: 100vh;
+  }
+  
+  .loading h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 1rem;
+  }
+  
+  .loading-icon {
+    font-size: 4rem;
+    color: #333;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
