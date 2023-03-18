@@ -94,26 +94,26 @@ p {
 
 .email-container {
   color: white;
-  font-size: 60%;
+  font-size: 70%;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   margin-top: 1%;
   /* margin-bottom: 1%; */
   position: absolute;
   top: 1%;
-  right: 1%;  /* Moverlo a la izquierda */
+  right: 3%;  /* Moverlo a la izquierda */
 }
 
 .gemas-container {
   color: white;
-  font-size: 60%;
+  font-size: 70%;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   margin-top: 1%;
   /* margin-bottom: 1%; */
   position: absolute;
   top: 5%;
-  right: 1%;  /* Moverlo a la derecha */
+  right: 3%;  /* Moverlo a la derecha */
 }
 
 .cerrar-sesion-button {

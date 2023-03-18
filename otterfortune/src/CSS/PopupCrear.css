@@ -1,4 +1,4 @@
-.popup {
+.popupC {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,10 +10,10 @@
     align-items: center;
   }
   
-  .popup__content {
+  .popup__contentC {
     /* background: linear-gradient(to right, #1DD6D6, #3B9AED);  */
     background-color: #0d2480;
-    padding: 30px;
+    padding: 45px;
     max-width: 45%;
     max-height: 70%;
     overflow-y: auto;
@@ -25,7 +25,7 @@
     border-radius: 20px;
   }
   
-  .popup__close {
+  .popup__closeC {
     position: absolute;
     top: 8px;
     right: 10px;
@@ -36,14 +36,14 @@
     color: white;
   }
 
-  .popup__label {
+  .popup__labelC {
     font-size: 25px;
     color: white;
     font-weight: bold;
   }
   
   /* Para que sea el del pop up especifico el input*/
-  #input-id {
+  #input-idC {
     width: 50%;
     margin: 20%;
     margin-bottom: 5%;
@@ -55,7 +55,7 @@
 
   }
 
-  .cancel, .acept {
+  .cancelC, .aceptC {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,17 +63,18 @@
 
   }
   
-  .buttons-container {
+  .buttons-containerC {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 6%;
     width: 100%;
   }
   
-  .cancel button {
-    width: 150px;
+  .cancelC button {
+    width: 170px;
     height: 45px;
-    margin-left: 10%;
-    margin-right: 20px;
+    margin-left: 25%;
+    margin-right: 10px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: white;
@@ -83,11 +84,11 @@
     transition: background-color 0.5s ease;
   }
 
-  .acept button {
-    width: 150px;
+  .aceptC button {
+    width: 170px;
     height: 45px;
-    margin-right: 10%;
-    margin-left: 20px;
+    margin-right: 25%;
+    margin-left: 10px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: white;
@@ -97,7 +98,7 @@
     transition: background-color 0.5s ease;
   }
   
-  .cancel button:hover, .acept button:hover {
+  .cancelC button:hover, .aceptC button:hover {
     transform: scale(1.15);
     background: linear-gradient(to right, #3794e5,#41e5e5);
   }

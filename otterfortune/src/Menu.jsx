@@ -5,7 +5,7 @@ import nutria from './Imagenes/otter.png';
 import Popup from './Popup';
 import PopupCrear from "./PopupCrear";
 import Loading from "./Loading";
-
+import PopupEmpezar from "./PopupEmpezar";
 
 export const Menu = (props) => {
     // Obtener el valor del email
@@ -17,11 +17,18 @@ export const Menu = (props) => {
     // Para crear
     const [isOpenCreate, setIsOpenCreate] = useState(false);
 
+    // Para guardar el ID y el mensaje a mostrar
     const [content, setContent] = useState("");
     const [id, setId] = useState("");
     
+    // Para mostrar la pantalla de cargando
     const [loading, setLoading] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
+
+    // Para la pantalla de empezar partida
+    const [empPartida, setEmpPartida] = useState(false);
+    const [showEmpPartida, setShowEmpPartida] = useState(false);
+
 
     // Para guardar el ID introducido
     const handleIdChange = (newId) => {
@@ -39,7 +46,6 @@ export const Menu = (props) => {
         setShowLoading(loading);
         // console.log(id);
     }
-
 
     // Cuando se pulsa el botón de unirse a partida realizar lo necesario
     const handleUnirsePartida = (e) => {
@@ -65,8 +71,10 @@ export const Menu = (props) => {
     };
 
     //const handleOpen = () => setIsOpen(true);
-    const handleCloseCreate = () => {
+    const handleCloseCreate = (id, empezarP) => {
+        setEmpPartida(empezarP);
         setIsOpenCreate(false);
+        
         // Actualizamos el id introducido
         // console.log(id);
     }
@@ -120,6 +128,10 @@ export const Menu = (props) => {
              content={content}/>
      );
 
+     const popupEmpezar = (
+        <PopupEmpezar handleCloseCreate={handleCloseCreate} />
+     );
+
 
     // Gestiona el boton de cerrar sesion
     const handleCerrarSesion = (e) => {
@@ -132,10 +144,16 @@ export const Menu = (props) => {
         // También se guarda en 'props.email' y se accede en menu
         return <Login />;
     }
+
+    /*
+        empPartida ? (
+            <EmpezarPartida email={email}/>
+        ) : 
+    */
     return (
         <>
         {loading ? (
-          <Loading email={email}/>
+            <Loading email={email}/>
         ) : (
         <div className="menu-container">
             <div className="login-image image-container"> 
@@ -161,6 +179,7 @@ export const Menu = (props) => {
                     id="crearPartida"/>
             </div>
             {isOpenCreate && popupCrear}
+            {empPartida && popupEmpezar}
 
             <div className="menu-option" onClick={handleUnirsePartida}>
                 <label htmlFor="unirsePartida">Unirse a partida</label>

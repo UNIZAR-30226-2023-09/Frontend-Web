@@ -1,4 +1,4 @@
-.popup {
+.popupE {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,12 +10,12 @@
     align-items: center;
   }
   
-  .popup__content {
+  .popup__contentE {
     /* background: linear-gradient(to right, #1DD6D6, #3B9AED);  */
     background-color: #0d2480;
-    padding: 30px;
-    max-width: 45%;
-    max-height: 70%;
+    padding: 57px;
+    max-width: 50%;
+    max-height: 60%;
     overflow-y: auto;
     border-radius: 5px;
     position: relative;
@@ -25,69 +25,36 @@
     border-radius: 20px;
   }
   
-  .popup__close {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    border: none;
-    background-color: transparent;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-  }
 
-  .popup__label {
+  .popup__labelE {
     font-size: 25px;
     color: white;
     font-weight: bold;
   }
   
-  /* Para que sea el del pop up especifico el input*/
-  #input-id {
-    width: 50%;
-    margin: 20%;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #010101;
-    background-color: #ffffff;
 
-  }
-
-  .cancel, .acept {
+  .aceptE {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-
+    text-align: center;
   }
   
-  .buttons-container {
+  
+  .buttons-containerE {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    margin-top: 5%;
   }
   
-  .cancel button {
-    width: 150px;
-    height: 45px;
-    margin-left: 10%;
-    margin-right: 20px;
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: white;
-    font-weight: bold;
-    font-size: 110%;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-  }
 
-  .acept button {
-    width: 150px;
+  .aceptE button {
+    width: 200px;
     height: 45px;
-    margin-right: 10%;
-    margin-left: 20px;
+    margin: auto;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: white;
@@ -97,7 +64,8 @@
     transition: background-color 0.5s ease;
   }
   
-  .cancel button:hover, .acept button:hover {
+  
+  .aceptE button:hover {
     transform: scale(1.15);
     background: linear-gradient(to right, #3794e5,#41e5e5);
   }

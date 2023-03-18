@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './CSS/Popup.css';
+import './CSS/PopupCrear.css';
 
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
@@ -16,21 +16,23 @@ const PopupCrear = (props) => {
     // la pantalla del monopoly y pasarle el ID.
     // Seria hacer algo tipo <Tablero id={id} />
     // Y que tablero reciba props y acceder con props.id
-    props.handleCloseCreate();
+    
+    // Obtener el id recibido del mensaje
+    props.handleCloseCreate(id,true);
   };
   
   return (
-    <div className="popup">
-      <div className="popup__content">
-        <button className="popup__close" onClick={props.handleCloseCreate}>X</button>
+    <div className="popupC">
+      <div className="popup__contentC">
+        <button className="popup__closeC" onClick={props.handleCloseCreate}>X</button>
         <div>
-          <p className="popup__label">¿Estás seguro de crear {props.content}?</p>
+          <p className="popup__labelC">¿Estás seguro de crear {props.content}?</p>
         </div>
-        <div className="buttons-container">
-          <div className="cancel">
+        <div className="buttons-containerC">
+          <div className="cancelC">
             <button onClick={props.handleCloseCreate}>No</button>
           </div>
-          <div className="acept">
+          <div className="aceptC">
             <button onClick={handleAccept}>Sí</button>
           </div>
         </div>
