@@ -50,7 +50,8 @@ export const Login = (props) => {
   if (showMenu) {
     // Llamar a menu y guardar el valor del email en 'email'
     // También se guarda en 'props.email' y se accede en menu
-    return <Menu email={email} />;
+    // TODO: Pasar las gemas
+    return <Menu email={email} gemas={0}/>;
   }
 
   return (

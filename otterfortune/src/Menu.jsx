@@ -6,11 +6,13 @@ import Popup from './Popup';
 import PopupCrear from "./PopupCrear";
 import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
+import { TiendaSkins } from "./TiendaSkins";
 
 export const Menu = (props) => {
     // Obtener el valor del email
-    //const { email } = props.data;
-    const { email } = props;
+    //const { email } = props;
+    const email = props.email;
+    const gemas = props.gemas;
     const [showLogin, setShowLogin] = useState(false);
     // Para unirse
     const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +31,8 @@ export const Menu = (props) => {
     const [empPartida, setEmpPartida] = useState(false);
     const [showEmpPartida, setShowEmpPartida] = useState(false);
 
+    // Para la pantalla de tienda de skins
+    const [tiendaSkin, setTiendaSkin] = useState(false);
 
     // Para guardar el ID introducido
     const handleIdChange = (newId) => {
@@ -108,7 +112,8 @@ export const Menu = (props) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault();
-        window.alert('Tienda skins');
+        
+        setTiendaSkin(true);
     };
 
     // Gestiona la ventana emergente 
@@ -145,6 +150,10 @@ export const Menu = (props) => {
         return <Login />;
     }
 
+    if (tiendaSkin) {
+        return <TiendaSkins email={email} gemas={gemas}/>;
+    }
+
     /*
         empPartida ? (
             <EmpezarPartida email={email}/>
@@ -156,66 +165,68 @@ export const Menu = (props) => {
             <Loading email={email}/>
         ) : (
         <div className="menu-container">
-            <div className="login-image image-container"> 
-                <img src={nutria} alt="Login" className="login-image"/>
-            </div>
-            <p>Bienvenido a OtterFortune </p>
-            
             <div className="email-container">
                     <p>{email}</p>
             </div>
             <div className="gemas-container">
-                    <p>Tienes x gemas</p>
+                    <p>Tienes {gemas} gemas</p>
             </div>
             
             <button className="cerrar-sesion-button" 
                 onClick={handleCerrarSesion}>Cerrar sesión</button>
-            <div className="menu-option" onClick={handleCrearPartida}>
-                <label htmlFor="crearPartida">Crear partida</label>
-                <input 
-                    
-                    type="button" 
-                    name="crearPartida" 
-                    id="crearPartida"/>
-            </div>
-            {isOpenCreate && popupCrear}
-            {empPartida && popupEmpezar}
+            
+                <div className="login-image image-container"> 
+                    <img src={nutria} alt="Login" className="login-image"/>
+                </div>
+                <p>Bienvenido a OtterFortune </p>
 
-            <div className="menu-option" onClick={handleUnirsePartida}>
-                <label htmlFor="unirsePartida">Unirse a partida</label>
-                <input 
-                    type="button" 
-                    name="menu" 
-                    id="unirsePartida"/>
-            </div>
-            {isOpen && popup}
+                <div className="menu-option" onClick={handleCrearPartida}>
+                    <label htmlFor="crearPartida">Crear partida</label>
+                    <input 
+                        
+                        type="button" 
+                        name="crearPartida" 
+                        id="crearPartida"/>
+                </div>
+                {isOpenCreate && popupCrear}
+                {empPartida && popupEmpezar}
 
-            <div className="menu-option" onClick={handleCrearTorneo}>
-                <label htmlFor="crearTorneo">Crear torneo</label>
-                <input  
-                    type="button" 
-                    name="menu" 
-                    id="crearTorneo"/>
-            </div>
-            {isOpenCreate && popupCrear}
+                <div className="menu-option" onClick={handleUnirsePartida}>
+                    <label htmlFor="unirsePartida">Unirse a partida</label>
+                    <input 
+                        type="button" 
+                        name="menu" 
+                        id="unirsePartida"/>
+                </div>
+                {isOpen && popup}
 
-            <div className="menu-option" onClick={handleUnirseTorneo}>
-                <label htmlFor="unirseTorneo">Unirse a torneo</label>
-                <input 
-                    type="button" 
-                    name="menu" 
-                    id="unirseTorneo"/>
-            </div>
-            {isOpen && popup}
+                <div className="menu-option" onClick={handleCrearTorneo}>
+                    <label htmlFor="crearTorneo">Crear torneo</label>
+                    <input  
+                        type="button" 
+                        name="menu" 
+                        id="crearTorneo"/>
+                </div>
+                {isOpenCreate && popupCrear}
 
-            <div className="menu-option" onClick={handleTiendaSkins}>
-                <label htmlFor="tiendaSkins">Tienda de skins</label>
-                <input 
-                    type="button" 
-                    name="menu" 
-                    id="tiendaSkins"/>
+                <div className="menu-option" onClick={handleUnirseTorneo}>
+                    <label htmlFor="unirseTorneo">Unirse a torneo</label>
+                    <input 
+                        type="button" 
+                        name="menu" 
+                        id="unirseTorneo"/>
+                </div>
+                {isOpen && popup}
+
+                <div className="menu-option" onClick={handleTiendaSkins}>
+                    <label htmlFor="tiendaSkins">Tienda de skins</label>
+                    <input 
+                        type="button" 
+                        name="menu" 
+                        id="tiendaSkins"/>
+                </div>
+                {tiendaSkin}
             </div>
-        </div>
         )}
         </>
     );

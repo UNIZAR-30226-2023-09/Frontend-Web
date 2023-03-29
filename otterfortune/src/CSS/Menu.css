@@ -6,12 +6,50 @@
   height: 100%;
   width: 100%;
   /*border-radius: 0px;*/
-  background: linear-gradient(to right, #3B9AED, #1DD6D6);
+  /*background: linear-gradient(to right, #3B9AED, #1DD6D6);*/
+  background-image: url('../Imagenes/fondoMenu.jpg');
+  background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
   position: absolute;
   left: 50%;
   top: 20%;  /* Ajustar la posición superior */
   transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
   transition: all 0.2s ease-in-out;
+}
+
+.email-container {
+  color: white;
+  font-size: 70%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  margin-top: 1%;
+  /* margin-bottom: 1%; */
+  position: absolute;
+  top: 1%;
+  right: 3%;  /* Moverlo a la izquierda */
+}
+
+.gemas-container {
+  color: white;
+  font-size: 70%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  margin-top: 1%;
+  /* margin-bottom: 1%; */
+  position: absolute;
+  top: 5%;
+  right: 3%;  /* Moverlo a la derecha */
+}
+
+.cerrar-sesion-button {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 120%;
 }
 
 /* Para los butons */
@@ -92,39 +130,17 @@ p {
   margin-bottom: 1%;
 }
 
-.email-container {
-  color: white;
-  font-size: 70%;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
-  margin-top: 1%;
-  /* margin-bottom: 1%; */
-  position: absolute;
-  top: 1%;
-  right: 3%;  /* Moverlo a la izquierda */
-}
+/*.submenu {
+  padding: auto;
+  text-align: center;
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 25px #222;
+  backdrop-filter: blur(10px);
 
-.gemas-container {
-  color: white;
-  font-size: 70%;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
-  margin-top: 1%;
-  /* margin-bottom: 1%; */
-  position: absolute;
-  top: 5%;
-  right: 3%;  /* Moverlo a la derecha */
-}
+  height: 75%;
+  width: 70%;
+  left: 50%;
+  top: 25%;  /* Ajustar la posición superior */
+/*}*/
 
-.cerrar-sesion-button {
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  background-color: transparent;
-  border: 2px solid #ffffff;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 120%;
-  /* otros estilos para el botón */
-}
