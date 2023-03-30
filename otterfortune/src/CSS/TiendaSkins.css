@@ -42,6 +42,10 @@
     text-align: center;
     max-width: 300px;
   }
+
+  .skin:hover{
+    transform: scale(1.18);
+  }
   
   .skin img {
     width: 80%;
@@ -49,6 +53,20 @@
     margin-bottom: 10px;
   }
   
+  .skin img:hover {
+    animation: spin 2s ease-in-out;
+  }
+
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .skin h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -59,21 +77,7 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
-  
-  .skin a {
-    background-color: #333;
-    color: white;
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .skin a:hover {
-    background-color: #444;
-  }
-  
+
   .email-container {
     color: white;
     font-size: 70%;
@@ -84,6 +88,41 @@
     position: absolute;
     top: 1%;
     right: 3%;  /* Moverlo a la izquierda */
+  }
+
+  .email-container-button {
+    /*position: fixed;
+    right: 20px;
+    top: 2%;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 120%;*/
+    /*position: fixed;
+    right: 20px;
+    top: 2%;
+    background-color:  #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    padding: 25px;
+    font-weight: bold;*/
+    position: fixed;
+    right: 20px;
+    top: 0%;
+    display: inline-block;
+    padding: 30px;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #ffffff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-sizing: border-box;
   }
   
   .gemas-container {
@@ -109,14 +148,17 @@
   }
 
   .menu-sesion-button {
-    position: absolute;
+    position: fixed;
     top: 2%;
-    left: 2%;
+    left: 20px;
     background-color: transparent;
     border: 2px solid #ffffff;
     color: white;
     cursor: pointer;
     font-weight: bold;
     font-size: 120%;
-    /* otros estilos para el botón */
+  }
+
+  .menu-sesion-button:hover {
+    transform: scale(1.15);
   }

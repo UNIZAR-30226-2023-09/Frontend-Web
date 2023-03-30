@@ -78,7 +78,8 @@ export const Menu = (props) => {
     const handleCloseCreate = (id, empezarP) => {
         setEmpPartida(empezarP);
         setIsOpenCreate(false);
-        
+
+
         // Actualizamos el id introducido
         // console.log(id);
     }
@@ -175,6 +176,7 @@ export const Menu = (props) => {
             <button className="cerrar-sesion-button" 
                 onClick={handleCerrarSesion}>Cerrar sesión</button>
             
+            <div className="submenu">
                 <div className="login-image image-container"> 
                     <img src={nutria} alt="Login" className="login-image"/>
                 </div>
@@ -227,6 +229,7 @@ export const Menu = (props) => {
                 </div>
                 {tiendaSkin}
             </div>
+        </div>
         )}
         </>
     );

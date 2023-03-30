@@ -52,27 +52,66 @@
   font-size: 120%;
 }
 
+.cerrar-sesion-button:hover {
+  transform: scale(1.15);
+}
+
+/*.submenu {
+  padding: auto;
+  text-align: center;
+  color: #ffffff;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 25px #222;
+  /*backdrop-filter: blur(10px);*/
+ /* background-color: #e6dbdb;
+  border-radius: 15px;
+
+  height: 75%;
+  width: 60%;
+}*/
+
+.submenu {
+  padding: auto;
+  text-align: center;
+  color: #ffffff;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 25px #222;
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  height: 75%;
+  width: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Para los butons */
 .menu-option {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 10px;
-  width: 25%;  /* Para el ancho de los botones */
-  height: 7%;
+  width: 40%;  /* Para el ancho de los botones */
+  height: 9%;
   /* background-color: transparent;  */
-  background: linear-gradient(to right, #1DD6D6, #3B9AED);
+  /*background: linear-gradient(to right, #1DD6D6, #3B9AED);*/
+  background: linear-gradient(to bottom right, #ffd700, #dabf66, #8b7500);
   color: rgb(255, 255, 255);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border: 2px solid #ffffff; /* color de los bordes de los botones */
+  /* Alinear los botones en el centro*/
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 1%;
 }
 
 .menu-option:hover {
   transform: scale(1.22);
-  background: linear-gradient(to right, #3794e5,#41e5e5);
+  /*background: linear-gradient(to right, #3794e5,#41e5e5);*/
+  /*background: linear-gradient(to bottom right, #c0c0c0, #808080, #d3d3d3);*/
+  background: linear-gradient(to bottom right, #8b7500, #dabf66, #ffd700);
 }
 
 .menu-option input[type="button"] {
@@ -80,7 +119,7 @@
 }
 
 .menu-option label {
-  font-size: 130%;
+  font-size: 120%;
   text-align: center;
   font-family: "Arial", sans-serif;
 }
@@ -106,7 +145,10 @@
   display: flex;
   top: 30%;
   left: 50%;
-  width: 200px;
+  width: 170px;
+  margin: auto;
+  margin-bottom: 2%;
+  margin-top: -6%;
 }
 
 .login-image img {
@@ -127,20 +169,6 @@ p {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   margin-top: 0.5%;
-  margin-bottom: 1%;
+  margin-bottom: 3%;
 }
-
-/*.submenu {
-  padding: auto;
-  text-align: center;
-  color: #fff;
-  border: 3px solid #fff;
-  box-shadow: 0px 0px 25px #222;
-  backdrop-filter: blur(10px);
-
-  height: 75%;
-  width: 70%;
-  left: 50%;
-  top: 25%;  /* Ajustar la posición superior */
-/*}*/
 

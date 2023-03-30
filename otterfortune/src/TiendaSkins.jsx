@@ -8,6 +8,7 @@ export const TiendaSkins = (props) => {
     const gemas = props.gemas;
 
     const [showMenu, setShowMenu] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     const skins = [
       {
@@ -37,6 +38,15 @@ export const TiendaSkins = (props) => {
       const handleMenu = (e) => {
           setShowMenu(true);
       };
+
+      // Funciones para controlar el hover del correo electrónico
+      const handleHover = () => {
+          setIsHovered(true);
+      };
+
+      const handleLeave = () => {
+          setIsHovered(false);
+      };
   
       // Muestra el log in cuando se pone a true (cuando se cierra sesion)
       if (showMenu) {
@@ -49,17 +59,24 @@ export const TiendaSkins = (props) => {
     <div className="tienda-container">
       <button className="menu-sesion-button" 
                 onClick={handleMenu}>Menú de inicio</button>
-        <p> Tienda de Skins </p>
-        <div className="email-container">
-            <p>{email}</p>
-        </div>
-        <div className="gemas-container">
-            <p>Tienes {gemas} gemas</p>
-        </div>
+        <p> Tienda </p>
+
+        <button
+            className="email-container-button"
+            onMouseEnter={handleHover}
+            onMouseLeave={handleLeave}
+        >
+        {email}
+            {isHovered && (
+                <span> <br/><br/>
+                    Tienes {gemas} gemas</span>   
+            )}
+        </button>
+
         <div className="skins-container">
           {skins.map((skin) => (
             <div key={skin.id} className="skin">
-              <img src={skin.image} alt={skin.name} />
+              <img src={skin.image} alt={skin.name} className="spin"/>
               <h2>{skin.name}</h2>
               <h3>${skin.price}</h3>
               <a href={`/skin/${skin.id}`}>View Details</a>
@@ -70,3 +87,11 @@ export const TiendaSkins = (props) => {
     );
   }
   
+  /*
+          <div className="email-container">
+            <p>{email}</p>
+        </div>
+        <div className="gemas-container">
+                <p>Tienes {gemas} gemas</p>
+        </div>
+        */

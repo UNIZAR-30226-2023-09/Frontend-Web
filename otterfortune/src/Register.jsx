@@ -33,7 +33,7 @@ export const Register = (props) => {
       }
       else {
         setShowMenu(false);
-        window.alert('Te has registrado mal');
+        window.alert('Registro incorrecto: El usuario ya existe');
       }
       // console.log(email);
       //props.onFormSwitch('Menu', { email });
