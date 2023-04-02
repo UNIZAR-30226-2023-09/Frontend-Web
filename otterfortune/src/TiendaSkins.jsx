@@ -31,7 +31,29 @@ export const TiendaSkins = (props) => {
         price: 30,
         image: nutria,
         description: "This is skin 3."
+      },
+      {
+        id: 4,
+        name: "Skin 3",
+        price: 30,
+        image: nutria,
+        description: "This is skin 3."
+      },
+      {
+        id: 5,
+        name: "Skin 3",
+        price: 30,
+        image: nutria,
+        description: "This is skin 3."
+      },
+      {
+        id: 6,
+        name: "Skin 3",
+        price: 30,
+        image: nutria,
+        description: "This is skin 3."
       }
+
     ];
 
       // Gestiona el boton de ir al menú
@@ -47,6 +69,11 @@ export const TiendaSkins = (props) => {
       const handleLeave = () => {
           setIsHovered(false);
       };
+
+      // Función para manejar la compra de skins
+      const handleBuy = (skinId) => {
+          alert(`Ha comprado la piel con el ID: ${skinId}`);
+      };
   
       // Muestra el log in cuando se pone a true (cuando se cierra sesion)
       if (showMenu) {
@@ -57,41 +84,84 @@ export const TiendaSkins = (props) => {
   
     return (
     <div className="tienda-container">
-      <button className="menu-sesion-button" 
-                onClick={handleMenu}>Menú de inicio</button>
-        <p> Tienda </p>
-
-        <button
-            className="email-container-button"
-            onMouseEnter={handleHover}
-            onMouseLeave={handleLeave}
-        >
-        {email}
-            {isHovered && (
-                <span> <br/><br/>
-                    Tienes {gemas} gemas</span>   
-            )}
-        </button>
-
-        <div className="skins-container">
-          {skins.map((skin) => (
-            <div key={skin.id} className="skin">
-              <img src={skin.image} alt={skin.name} className="spin"/>
-              <h2>{skin.name}</h2>
-              <h3>${skin.price}</h3>
-              <a href={`/skin/${skin.id}`}>View Details</a>
+        <header className="App-header">
+            <button className="menu-sesion-button" 
+                    onClick={handleMenu}>Menú de inicio</button>
+            <div className="titulo">
+                <p> Tienda </p>
             </div>
-          ))}
+            <button
+                className="email-container-button"
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}>
+                {email}
+                {isHovered && (
+                    <span> <br/><br/>
+                        Tienes {gemas} gemas</span>   
+                )}
+            </button>
+        </header>
+        <div className="skins-container">
+            <div className="skin">
+                <img src={nutria} alt="Skin 1" className="spin"/>
+                <h2>Skin 1</h2>
+                <h3>$10</h3>
+                <button className="comprar-option" onClick={() => handleBuy(1)}>COMPRAR</button>
+            </div>
+            <div className="skin">
+                <img src={nutria} alt="Skin 2" className="spin"/>
+                <h2>Skin 2</h2>
+                <h3>$20</h3>
+                <button className="comprar-option" onClick={() => handleBuy(2)}>COMPRAR</button>
+            </div>
+            <div className="skin">
+                <img src={nutria} alt="Skin 3" className="spin"/>
+                <h2>Skin 3</h2>
+                <h3>$30</h3>
+                <button className="comprar-option" onClick={() => handleBuy(3)}>COMPRAR</button>
+            </div>
+            <div className="skin">
+                <img src={nutria} alt="Skin 4" className="spin"/>
+                <h2>Skin 4</h2>
+                <h3>$30</h3>
+                <button className="comprar-option" onClick={() => handleBuy(4)}>COMPRAR</button>
+            </div>
+            <div className="skin">
+                <img src={nutria} alt="Skin 5" className="spin"/>
+                <h2>Skin 5</h2>
+                <h3>$30</h3>
+                <button className="comprar-option" onClick={() => handleBuy(5)}>COMPRAR</button>
+            </div>
+            <div className="skin">
+                <img src={nutria} alt="Skin 6" className="spin"/>
+                <h2>Skin 6</h2>
+                <h3>$30</h3>
+                <button className="comprar-option" onClick={() => handleBuy(6)}>COMPRAR</button>
+            </div>
         </div>
+
       </div>
     );
   }
   
   /*
-          <div className="email-container">
-            <p>{email}</p>
-        </div>
-        <div className="gemas-container">
-                <p>Tienes {gemas} gemas</p>
-        </div>
+            <div className="email-container">
+                <p>{email}</p>
+            </div>
+            <div className="gemas-container">
+                <p><br></br>{gemas} gemas</p>
+            </div>
         */
+
+/*
+            <button
+                className="email-container-button"
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}>
+                {email}
+                {isHovered && (
+                    <span> <br/><br/>
+                        Tienes {gemas} gemas</span>   
+                )}
+            </button>
+*/

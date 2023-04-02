@@ -6,79 +6,34 @@
     height: 100%;
     width: 100%;
     /*border-radius: 0px;*/
-    background: linear-gradient(to right, #3B9AED, #1DD6D6);
+    background-image: url('../Imagenes/fondoMenu.jpg');
     position: absolute;
+    background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
     left: 50%;
     top: 20%;  /* Ajustar la posición superior */
     transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
     transition: all 0.2s ease-in-out;
   }
   
-  .App-header {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-  }
-  
-  .skins-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-  }
-  
-  .skin {
-    background-color:  #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    max-width: 100;
-    width: 20%;
-    margin: 20px;
-    padding: 20px;
+
+.App-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 999;
+    margin-bottom: 2000px;
+}
+
+.titulo {
     text-align: center;
-    max-width: 300px;
-  }
 
-  .skin:hover{
-    transform: scale(1.18);
-  }
-  
-  .skin img {
-    width: 80%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .skin img:hover {
-    animation: spin 2s ease-in-out;
-  }
+}
 
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  .skin h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .skin p {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .email-container {
+.email-container {
     color: white;
     font-size: 70%;
     font-family: 'Open Sans', sans-serif;
@@ -110,15 +65,16 @@
     padding: 25px;
     font-weight: bold;*/
     position: fixed;
-    right: 20px;
+    right: 0px;
     top: 0%;
+    width: 20%;
     display: inline-block;
-    padding: 30px;
+    padding: 18px;
     background-color: #fff;
     color: #333;
     border: 2px solid #ffffff;
     border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
@@ -135,6 +91,69 @@
     position: absolute;
     top: 5%;
     right: 3%;  /* Moverlo a la derecha */
+  }
+  
+  .skins-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+.skin {
+    margin-top: 1em;
+    background-color: #d0c3c3;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    /*margin-top: 150px; /* Agregar la propiedad margin-top */
+    padding: 15px;
+    
+}
+
+  .skin:hover{
+    transform: scale(1.18);
+  }
+  
+.skin img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+.skin1 img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+  .skin img:hover {
+    animation: spin 2s ease-in-out;
+  }
+
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .skin h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .skin p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
 
   p {
@@ -162,3 +181,41 @@
   .menu-sesion-button:hover {
     transform: scale(1.15);
   }
+
+  /* Para los butons */
+.comprar-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  width: 70%;  /* Para el ancho de los botones */
+/*  background: linear-gradient(to bottom, #dabf66 , #947631, #f7d778, #f7d161);*/
+  background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+  color: #684411;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-size: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid #ffffff; /* color de los bordes de los botones */
+  /* Alinear los botones en el centro*/
+  margin: auto;
+}
+
+.comprar-option:hover {
+    transform: scale(1.1);
+    /*background: linear-gradient(to right, #3794e5,#41e5e5);*/
+    /*background: linear-gradient(to bottom right, #c0c0c0, #808080, #d3d3d3);*/
+    background: linear-gradient(to bottom right, #8b7500, #dabf66, #ffd700);
+  }
+
+  .skins-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  

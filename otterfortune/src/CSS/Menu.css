@@ -95,8 +95,13 @@
   height: 9%;
   /* background-color: transparent;  */
   /*background: linear-gradient(to right, #1DD6D6, #3B9AED);*/
-  background: linear-gradient(to bottom right, #ffd700, #dabf66, #8b7500);
-  color: rgb(255, 255, 255);
+  /*background: linear-gradient(to bottom, #dabf66 , #947631, #f7d778, #f7d161);*/
+  background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+
+  color: #684411;
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 0.2px 0.2px 0.2px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -164,11 +169,10 @@
 }
 
 p {
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 210%;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   margin-top: 0.5%;
   margin-bottom: 3%;
 }
-
