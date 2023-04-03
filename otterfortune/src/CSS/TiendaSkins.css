@@ -9,21 +9,16 @@
     background-image: url('../Imagenes/fondoMenu.jpg');
     position: absolute;
     background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
-    left: 50%;
-    top: 20%;  /* Ajustar la posición superior */
-    transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
-    transition: all 0.2s ease-in-out;
 }
   
 .cabecera {
-    height: auto;
-    width: auto;
-
+    width: 100%;
+    height: 100%;
+    position: absolute;
     background-image: url('../Imagenes/fondoMenu.jpg');
     background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
     margin: 0 auto;
     overflow-x: hidden;
-  
 }
 
 .App-header {

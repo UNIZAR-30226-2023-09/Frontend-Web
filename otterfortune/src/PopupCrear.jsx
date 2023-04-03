@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import './CSS/PopupCrear.css';
 
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupCrear = (props) => {
@@ -8,7 +11,9 @@ const PopupCrear = (props) => {
 	const [id, setId] = useState(""); // Agregar esta línea
 	console.log(props.content);
 
-	const handleAccept = () => {
+	const socket = useSocket();
+
+	const handleAccept = async (e) => {
 		// TODO:
 		// Aquí iría comprobar el mensaje de unirse con el id
 		//console.log(id);
@@ -18,6 +23,7 @@ const PopupCrear = (props) => {
 		// Y que tablero reciba props y acceder con props.id
 		
 		// Obtener el id recibido del mensaje
+		const id = await socketActions.crearPartida(socket, props.email);
 		props.handleCloseCreate(id,true);
 	};
 

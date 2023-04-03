@@ -10,6 +10,9 @@ import { TiendaSkins } from "./TiendaSkins";
 import perfil from './Imagenes/perfil.png';
 import gema from './Imagenes/gema.png';
 
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+
 export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props;
@@ -32,6 +35,7 @@ export const Menu = (props) => {
 
     // Para la pantalla de empezar partida
     const [empPartida, setEmpPartida] = useState(false);
+    const [idPartida, setIdPartida] = useState(0);
     const [showEmpPartida, setShowEmpPartida] = useState(false);
 
     // Para la pantalla de tienda de skins
@@ -40,21 +44,34 @@ export const Menu = (props) => {
     // Para el perfil
     const [isHovered, setIsHovered] = useState(false);
 
+    const socket = useSocket();
+
+
     // Para guardar el ID introducido
     const handleIdChange = (newId) => {
       setId(newId); // Establecemos el nuevo id
     };
 
     //const handleOpen = () => setIsOpen(true);
-    const handleClose = (id, loading) => {
+    const handleClose = async (id, loading) => {
         console.log(loading);
         setIsOpen(false);
         // Actualizamos el id introducido
         handleIdChange(id);
+        console.log(id);
+        // TODO: LLamar a unirsePartida
         // Actualizamos el valor de loading
-        setLoading(loading);
-        setShowLoading(loading);
-        // console.log(id);
+        const resultado = await socketActions.unirsePartida(socket, email, id);
+        if (resultado) {
+            setLoading(true);
+            setShowLoading(true);
+        }
+        else {
+            setLoading(false);
+            setShowLoading(false);
+            window.alert("No existe la partida con ese ID");
+        }
+
     }
 
     // Cuando se pulsa el botón de unirse a partida realizar lo necesario
@@ -85,9 +102,8 @@ export const Menu = (props) => {
         setEmpPartida(empezarP);
         setIsOpenCreate(false);
 
-
         // Actualizamos el id introducido
-        // console.log(id);
+        setIdPartida(id);
     }
 
     //console.log(email);   // una forma de acceder a email
@@ -137,11 +153,11 @@ export const Menu = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <PopupCrear handleCloseCreate={handleCloseCreate}
-             content={content}/>
+             content={content} email={email}/>
      );
 
      const popupEmpezar = (
-        <PopupEmpezar handleCloseCreate={handleCloseCreate} />
+        <PopupEmpezar handleCloseCreate={handleCloseCreate} id={idPartida} />
      );
 
 

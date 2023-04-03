@@ -16,7 +16,7 @@ const PopupEmpezar = (props) => {
     <div className="popupE">
     <div className="popup__contentE">
         <div>
-        <p className="popup__labelE">Partida creada correctamente con ID: 0</p>
+        <p className="popup__labelE">Partida creada correctamente con ID: {props.id}</p>
         </div>
         <div className="buttons-containerE">
         <div className="aceptE">

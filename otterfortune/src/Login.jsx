@@ -12,6 +12,7 @@ export const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [register, setRegister] = useState(false);
+  const [numGemas, setNumGemas] = useState(0);
 
   const socket = useSocket();
 
@@ -26,19 +27,18 @@ export const Login = (props) => {
       window.alert('Por favor, ingrese su contraseña.');
     }
     else {
-      // Mandar al servidor y comprobar
-      const registroExitoso = await socketActions.iniciarSesion(socket, email, password);
-      if (registroExitoso) {
-        // Poner a true para mostrar el menu si se inicia correctamente
-        // TODO: Obtener nombre en vez de email
-        setShowMenu(true);
-      }
-      else {
-        setShowMenu(false);
-        window.alert('Login incorrecto.');
-      }
-      // console.log(email);
-      //props.onFormSwitch('Menu', { email });
+		// Mandar al servidor y comprobar. RegistroExitoso devuelve el numero de gemas
+		const gemas = await socketActions.iniciarSesion(socket, email, password);
+		if (gemas >= 0) {
+			// Poner a true para mostrar el menu si se inicia correctamente
+			// TODO: Obtener nombre en vez de email
+			setNumGemas(gemas);
+			setShowMenu(true);
+		}
+		else {
+			setShowMenu(false);
+			window.alert('Login incorrecto.');
+		}
     }
   }
 
@@ -63,8 +63,7 @@ export const Login = (props) => {
   if (showMenu) {
     // Llamar a menu y guardar el valor del email en 'email'
     // También se guarda en 'props.email' y se accede en menu
-    // TODO: Pasar las gemas
-    return <Menu email={email} gemas={0}/>;
+    return <Menu email={email} gemas={numGemas}/>;
   }
 
   return (

@@ -32,13 +32,27 @@ const Loading = (props) => {
       // TODO: Aquí iria a la del monopoly 
       // TODO: Mirar para hacerlo con variable y no ocn tiempo
       setShowMenu(true);
-    }, 30000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
 
+  /* 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // TODO: Ver como pasar lo de empezar la partida
+      let empezarP = true;
+      if (empezarP) {
+        setShowMenu(true);
+        clearInterval(interval);
+      }
+    }, 1000);
+  
+    return () => clearInterval(interval);
+  }, []);
+  */
   if (showMenu) {
-    return <Menu email={props.email}/>;
+    return <Menu email={props.email} gemas={props.gemas}/>;
   }
 
   return (

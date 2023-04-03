@@ -26,19 +26,17 @@ const waitForResponse = (socket) => {
     }
   }
   
-  
   export async function iniciarSesion(socket, email, contrasenya) {
     if (socket) {
       socket.send(`iniciarSesion,${email},${contrasenya}`);
       const response = await waitForResponse(socket);
 
-      console.log(response)
-
       let msg = response.toString().split(",");
+
       if (msg[0] === 'INICIO_OK') {
-        return true;
+        return msg[2];  //devuelve el numero de gemas del jugador que ha iniciado la partida.
       } else {
-        return false;
+        return -1;
       }
     }
   }
@@ -47,11 +45,13 @@ const waitForResponse = (socket) => {
     if (socket) {
       socket.send(`crearPartida,${ID_jugador}`);
       const response = await waitForResponse(socket);
-      // ...
-      if (response === 'CREADAP_OK') {
-        return true;
+
+	  let msg = response.toString().split(",");
+
+      if (msg[0] === 'CREADAP_OK') {
+        return msg[1];    //idPartida = msg[1].
       } else {
-        return false;
+        return -1;
       }
     }
   }
@@ -60,6 +60,15 @@ const waitForResponse = (socket) => {
     if (socket) {
       socket.send(`unirsePartida,${ID_jugador},${ID_partida}`);
       const response = await waitForResponse(socket);
+
+	  let msg = response.toString().split(",");
+
+	  if (msg[0] === 'UNIRP_OK') {
+        return true;    //idPartida = msg[1].
+      } else {
+        return false;
+      }
+
       return response;
     }
   }
