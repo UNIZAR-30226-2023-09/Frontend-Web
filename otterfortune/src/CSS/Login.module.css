@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /*background: linear-gradient(to right, #3B9AED, #1DD6D6) !important;*/
     background-image: url('../Imagenes/fondoMenu.jpg');
     position: absolute;
     background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
@@ -23,6 +22,7 @@
   :local(.form-container) {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin-bottom: 10%;  /* Cambiar tamaño del contenedor */
   }
   
@@ -38,10 +38,11 @@
     font-size: 20.0;
     font-weight: 500;
     margin-bottom: 0.5rem; 
+
   }
   
   :local(input) {
-    width: 90%;
+    width: 100%;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 0.25rem;
@@ -53,6 +54,7 @@
   :local(button[type="submit"]) {
     width: 100%;
     padding: 1rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 0.25rem;
     border: none;
@@ -89,22 +91,17 @@
   }
   
   :local(.login-form) {
-    margin-top: 120px;
+    margin-top: 90px;
   }
-    
-  /* :local(.auth-container) {
+
+  :local(.auth-container) {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #F2F2F2;
+    position: relative;
   }
-  
-  .column {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-  }
+
   
   :local(.login-form) {
     display: flex;
@@ -113,88 +110,11 @@
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-    background-color: #fff;
+    background-color: #f5eded;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
   }
-  
-  :local(.form-container) {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
-  
-  :local(h2) {
-    font-size: 2rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  :local(label) {
-    font-size: 20.0;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  
-  :local(input) {
-    width: 90%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    border: none;
-    font-size: 1.2rem;
-    background-color: #f2f2f2;
-  }
-  
-  :local(button[type="submit"]) {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
-    border: none;
-    font-size: 1.2rem;
-    color: #fff;
-    background-color: #333;
-    cursor: pointer;
-  }
-  
-  :local(.link-btn) {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    text-decoration: underline;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  :local(.login-image) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  :local(.login-image img) {
-    max-width: 50%;
-  }
-
-  @media only screen and (min-width: 768px) {
-    .column {
-      flex-direction: row;
-    }
-  
-    :local(.login-form) {
-      margin-top: 0;
-    }
-  
-    :local(.login-image) {
-      position: absolute;
-      left: 0;
-      top: 0;
-      margin-top: 100px;
-      margin-left: 300px;
-      height: 50%;
-      width: 35%;
-    }
-  } */
   

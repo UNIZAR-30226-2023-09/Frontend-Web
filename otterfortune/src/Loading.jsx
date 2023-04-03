@@ -21,6 +21,8 @@ import React, { useState, useEffect } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 import './CSS/loading.css';
 import Menu from "./Menu";
+import loginVideo from "./Imagenes/loginVideo.mp4";
+
 
 const Loading = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -30,7 +32,7 @@ const Loading = (props) => {
       // TODO: Aquí iria a la del monopoly 
       // TODO: Mirar para hacerlo con variable y no ocn tiempo
       setShowMenu(true);
-    }, 2000);
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -40,10 +42,15 @@ const Loading = (props) => {
   }
 
   return (
-    <div className="loading">
-      <h2>Te has unido correctamente</h2>
-      <h2>Esperando a que el líder de comienzo</h2>
-      <FaSpinner className="loading-icon" />
+    <div >
+      <video autoPlay loop className="video-fondo">
+        <source src={loginVideo} type="video/mp4"></source>
+      </video>
+      <div className="text-container">
+        <h2>Te has unido correctamente</h2>
+        <h2>Esperando a que el líder de comienzo</h2>
+        <FaSpinner className="loading-icon" />
+      </div>
     </div>
   );
 };
@@ -51,4 +58,8 @@ const Loading = (props) => {
 export default Loading;
 
 
-
+    /*<div className="loading">
+      <h2>Te has unido correctamente</h2>
+      <h2>Esperando a que el líder de comienzo</h2>
+      <FaSpinner className="loading-icon" />
+    </div>*/

@@ -3,7 +3,9 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to right, #3B9AED, #1DD6D6) !important;
+  background-image: url('../Imagenes/fondoMenu.jpg');
+  position: absolute;
+  background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
   flex-direction: row;
 }
 
@@ -39,7 +41,7 @@
 }
 
 :local(input) {
-  width: 90%;
+  width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.25rem;

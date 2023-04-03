@@ -4,12 +4,15 @@ import styles from './CSS/Register.module.css';
 import { Menu } from "./Menu";
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import Login from "./Login";
 
 export const Register = (props) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
   const [showMenu, setShowMenu] = useState(false);
+  const [register, setRegister] = useState(false);
+
   const socket = useSocket();
 
 
@@ -39,6 +42,15 @@ export const Register = (props) => {
       //props.onFormSwitch('Menu', { email });
     }
   }
+
+  const handleRegister = (event) => {
+    setRegister(true);
+  };
+
+  if (register) {
+    return <Login />;
+  }
+
   if (showMenu) {
     // Para pasar el valor del email en la variable 'email'
     return <Menu email={email} />;
@@ -78,7 +90,7 @@ export const Register = (props) => {
           <button type="submit">Registrarse</button>
           <button
             className={styles["link-btn"]}
-            onClick={() => props.onFormSwitch('login')}>
+            onClick={(handleRegister)}>
             ¿Ya tienes una cuenta? Inicia sesión aquí.
           </button>
         </div>

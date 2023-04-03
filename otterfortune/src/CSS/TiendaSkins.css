@@ -13,92 +13,100 @@
     top: 20%;  /* Ajustar la posición superior */
     transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
     transition: all 0.2s ease-in-out;
-  }
+}
   
+.prueba {
+    height: auto;
+    width: auto;
+
+    background-image: url('../Imagenes/fondoMenu.jpg');
+    background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
+    margin: 0 auto;
+    overflow-x: hidden;
+  
+}
 
 .App-header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 60px;
+    width: auto;
+    height: 70px;
     background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 999;
-    margin-bottom: 2000px;
+    margin-bottom: 20px;
 }
 
 .titulo {
     text-align: center;
-
 }
 
-.email-container {
-    color: white;
-    font-size: 70%;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
-    margin-top: 1%;
-    /* margin-bottom: 1%; */
+.email-container-button {
     position: absolute;
-    top: 1%;
-    right: 3%;  /* Moverlo a la izquierda */
-  }
-
-  .email-container-button {
-    /*position: fixed;
-    right: 20px;
-    top: 2%;
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 120%;*/
-    /*position: fixed;
-    right: 20px;
-    top: 2%;
-    background-color:  #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    padding: 25px;
-    font-weight: bold;*/
-    position: fixed;
-    right: 0px;
+    right: 0;
     top: 0%;
-    width: 20%;
-    display: inline-block;
-    padding: 18px;
-    background-color: #fff;
-    color: #333;
-    border: 2px solid #ffffff;
-    border-bottom-left-radius: 10px;
-
+    width: 200px;
+    padding: 15px;
+    /*background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);*/
+    background-color: transparent;
+    color: #684411;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-sizing: border-box;
-  }
-  
-  .gemas-container {
-    color: white;
+    border: 0px solid #ffffff;
+}
+
+.email-container-button:hover {
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+}
+
+.gemas-container {
+    position: absolute;
+    color: #684411;
     font-size: 70%;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     margin-top: 1%;
     /* margin-bottom: 1%; */
-    position: absolute;
     top: 5%;
     right: 3%;  /* Moverlo a la derecha */
-  }
+}
   
-  .skins-container {
+.menu-sesion-button {
+    position: absolute;
+    left: 0px;
+    top: 0%;
+    width: 250px;
+    padding: 21px;
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+    color: #684411;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0px solid #ffffff;
+    text-align: left;
+    padding-left: 60px;
+
+}
+
+.menu-sesion-button:hover {
+    transform: scale(1.15);
+}
+
+.skins-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
+    margin-top: 80px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .skins-container {
+        margin-top: 80px;
+    }
+}
+  
 
 .skin {
     margin-top: 1em;
@@ -108,79 +116,64 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
+    width: 230px;
     /*margin-top: 150px; /* Agregar la propiedad margin-top */
     padding: 15px;
-    
+    margin-left: 60px;
+    margin-right: 10px;
+    margin-bottom: 30px;
 }
 
-  .skin:hover{
+.skin:hover{
     transform: scale(1.18);
-  }
+}
   
-.skin img {
-    width: 80%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-.skin1 img {
+.nutria-imagen {
     width: 80%;
     height: auto;
     margin-bottom: 10px;
 }
 
 
-  .skin img:hover {
+.img-fluid:hover {
     animation: spin 2s ease-in-out;
-  }
+}
 
 
-  @keyframes spin {
+@keyframes spin {
     0% {
       transform: rotate(0deg);
     }
     100% {
       transform: rotate(360deg);
     }
-  }
+}
 
-  .skin h2 {
+.skin h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-  }
+    margin-top: 10px;
+}
+
+.skin h3 {
+    display: inline-block; /* Coloca el elemento h3 y la imagen en línea */
+}
   
-  .skin p {
+.skin p {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 20px;
-  }
+}
 
-  p {
+p {
     color: white; /* Cambiar el color del texto a blanco */
     font-size: 210%;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    margin-top: 0.5%;
+    margin-top: 100px;
     margin-bottom: 1%;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Agregar una sombra de texto */
-  }
-
-  .menu-sesion-button {
-    position: fixed;
-    top: 2%;
-    left: 20px;
-    background-color: transparent;
-    border: 2px solid #ffffff;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 120%;
-  }
-
-  .menu-sesion-button:hover {
-    transform: scale(1.15);
-  }
+}
 
   /* Para los butons */
 .comprar-option {
@@ -201,6 +194,7 @@
   border: 2px solid #ffffff; /* color de los bordes de los botones */
   /* Alinear los botones en el centro*/
   margin: auto;
+  margin-top: 5px;
 }
 
 .comprar-option:hover {
@@ -208,14 +202,38 @@
     /*background: linear-gradient(to right, #3794e5,#41e5e5);*/
     /*background: linear-gradient(to bottom right, #c0c0c0, #808080, #d3d3d3);*/
     background: linear-gradient(to bottom right, #8b7500, #dabf66, #ffd700);
-  }
+}
 
-  .skins-container {
+.logo-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+    
+.gema-skin {
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px; 
+}
+
+.gemas-mail {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    margin-top: 50px;
-  }
-  
-  
+    margin-left: 70px;
+}
+
+.gema-mail-img {
+    display: inline-block;
+    align-items: center;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px; 
+}

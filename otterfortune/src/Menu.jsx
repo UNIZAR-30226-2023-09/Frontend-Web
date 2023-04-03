@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import Login from "./Login";
 import './CSS/Menu.css';
 import nutria from './Imagenes/otter.png';
@@ -7,12 +7,15 @@ import PopupCrear from "./PopupCrear";
 import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
 import { TiendaSkins } from "./TiendaSkins";
+import perfil from './Imagenes/perfil.png';
+import gema from './Imagenes/gema.png';
 
 export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props;
     const email = props.email;
     const gemas = props.gemas;
+    
     const [showLogin, setShowLogin] = useState(false);
     // Para unirse
     const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +36,9 @@ export const Menu = (props) => {
 
     // Para la pantalla de tienda de skins
     const [tiendaSkin, setTiendaSkin] = useState(false);
+
+    // Para el perfil
+    const [isHovered, setIsHovered] = useState(false);
 
     // Para guardar el ID introducido
     const handleIdChange = (newId) => {
@@ -144,6 +150,15 @@ export const Menu = (props) => {
         setShowLogin(true);
     };
 
+    // Funciones para controlar el hover del correo electrónico
+    const handleHover = () => {
+        setIsHovered(true);
+    };
+
+    const handleLeave = () => {
+        setIsHovered(false);
+    };
+
     // Muestra el log in cuando se pone a true (cuando se cierra sesion)
     if (showLogin) {
         // Llamar a menu y guardar el valor del email en 'email'
@@ -166,19 +181,28 @@ export const Menu = (props) => {
             <Loading email={email}/>
         ) : (
         <div className="menu-container">
-            <div className="email-container">
-                    <p>{email}</p>
-            </div>
-            <div className="gemas-container">
-                    <p>Tienes {gemas} gemas</p>
-            </div>
+            <button
+                className="email-container-button"
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}>
+                <img src={perfil}  className="logo-perfil" />
+                {isHovered && (
+                        <span> 
+                            <br/>{email}<br/>
+                            <div className="gemas-mail">
+                                <h3>{gemas}</h3><img src={gema} alt="Gemas" className="gema-mail-img" />
+                            </div>
+                        </span>   
+                    )}
+            </button>
             
             <button className="cerrar-sesion-button" 
                 onClick={handleCerrarSesion}>Cerrar sesión</button>
             
             <div className="submenu">
                 <div className="login-image image-container"> 
-                    <img src={nutria} alt="Login" className="login-image"/>
+                    <img 
+                        src={nutria} alt="Login" className="login-image"/>
                 </div>
                 <p>Bienvenido a OtterFortune </p>
 
