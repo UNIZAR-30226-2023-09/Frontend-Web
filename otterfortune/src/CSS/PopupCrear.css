@@ -8,9 +8,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .popup__contentC {
+}
+
+.popup__contentC {
     /* background: linear-gradient(to right, #1DD6D6, #3B9AED);  */
     background: #aa881a;
     padding: 45px;
@@ -23,9 +23,9 @@
     flex-direction: column;
     text-align: center;
     border-radius: 20px;
-  }
-  
-  .popup__closeC {
+}
+
+.popup__closeC {
     position: absolute;
     top: 8px;
     right: 10px;
@@ -34,16 +34,16 @@
     font-size: 20px;
     cursor: pointer;
     color: white;
-  }
+}
 
-  .popup__labelC {
+.popup__labelC {
     font-size: 25px;
     color: white;
     font-weight: bold;
-  }
-  
-  /* Para que sea el del pop up especifico el input*/
-  #input-idC {
+}
+
+/* Para que sea el del pop up especifico el input*/
+#input-idC {
     width: 50%;
     margin: 20%;
     margin-bottom: 5%;
@@ -53,24 +53,25 @@
     border: 2px solid #010101;
     background-color: #ffffff;
 
-  }
+}
 
-  .cancelC, .aceptC {
+.cancelC,
+.aceptC {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 
-  }
-  
-  .buttons-containerC {
+}
+
+.buttons-containerC {
     display: flex;
     justify-content: space-between;
     margin-top: 6%;
     width: 100%;
-  }
-  
-  .cancelC button {
+}
+
+.cancelC button {
     width: 170px;
     height: 45px;
     margin-left: 25%;
@@ -82,9 +83,9 @@
     font-size: 110%;
     cursor: pointer;
     transition: background-color 0.5s ease;
-  }
+}
 
-  .aceptC button {
+.aceptC button {
     width: 170px;
     height: 45px;
     margin-right: 25%;
@@ -96,9 +97,10 @@
     font-size: 110%;
     cursor: pointer;
     transition: background-color 0.5s ease;
-  }
-  
-  .cancelC button:hover, .aceptC button:hover {
+}
+
+.cancelC button:hover,
+.aceptC button:hover {
     transform: scale(1.15);
-    background: linear-gradient(to bottom, #947631 , #f7d778, #caa322, #f7d161);
-  }
+    background: linear-gradient(to bottom, #947631, #f7d778, #caa322, #f7d161);
+}

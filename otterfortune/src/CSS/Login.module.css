@@ -2,56 +2,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-image: url('../Imagenes/fondoMenu.jpg');
     position: absolute;
-    background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
+    background-size: cover;
+    /* Para ajustar el tamaño de la imagen al contenedor*/
     flex-direction: row;
-  }
-  
-  :local(.login-form) {
+}
+
+:local(.login-form) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    padding: 30px;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
     background-color: #f5eded;
-  }
-  
-  :local(.form-container) {
+    width: auto;
+    height: auto;
+}
+
+:local(.form-container) {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 10%;  /* Cambiar tamaño del contenedor */
-  }
-  
-  :local(h2) {
+    margin-bottom: 10%;
+    /* Cambiar tamaño del contenedor */
+}
+
+:local(h2) {
     font-size: 2rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
     color: #333;
     text-align: center;
-  }
-  
-  :local(label) {
+}
+
+:local(label) {
     font-size: 20.0;
     font-weight: 500;
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
 
-  }
-  
-  :local(input) {
+}
+
+:local(input) {
     width: 100%;
-    padding: 1rem;
+    padding: 10px;
     margin-bottom: 1rem;
     border-radius: 0.25rem;
     border: none;
     font-size: 1.2rem;
     background-color: #ffffff;
-  }
-  
-  :local(button[type="submit"]) {
+}
+
+:local(button[type="submit"]) {
     width: 100%;
     padding: 1rem;
     margin-top: 1rem;
@@ -62,9 +66,9 @@
     color: #fff;
     background-color: #333;
     cursor: pointer;
-  }
-  
-  :local(.link-btn) {
+}
+
+:local(.link-btn) {
     font-size: 1rem;
     font-weight: 500;
     color: #333;
@@ -72,39 +76,41 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-  }
-  
-  :local(.login-image) {
+}
+
+:local(.login-image) {
     position: absolute;
     top: 17%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
-    z-index: 2; /* Ajusta este valor para que la imagen se sobreponga al formulario */
+    z-index: 2;
+    /* Ajusta este valor para que la imagen se sobreponga al formulario */
 
-  }
-  
-  :local(.login-image img) {
+}
+
+:local(.login-image img) {
     max-width: 100%;
-  }
-  :local(.auth-container) {
-    position: relative;
-  }
-  
-  :local(.login-form) {
-    margin-top: 90px;
-  }
+}
 
-  :local(.auth-container) {
+:local(.auth-container) {
+    position: relative;
+}
+
+:local(.login-form) {
+    margin-top: 90px;
+}
+
+:local(.auth-container) {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     position: relative;
-  }
+}
 
-  
-  :local(.login-form) {
+
+:local(.login-form) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,5 +123,4 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-  }
-  
+}

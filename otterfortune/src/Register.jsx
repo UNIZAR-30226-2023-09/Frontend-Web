@@ -7,96 +7,96 @@ import { useSocket } from './socketContext';
 import Login from "./Login";
 
 export const Register = (props) => {
-	const [email, setEmail] = useState('');
-	const [pass, setPass] = useState('');
-	const [name, setName] = useState('');
-	const [showMenu, setShowMenu] = useState(false);
-	const [register, setRegister] = useState(false);
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [name, setName] = useState('');
+    const [showMenu, setShowMenu] = useState(false);
+    const [register, setRegister] = useState(false);
 
-	const socket = useSocket();
+    const socket = useSocket();
 
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (name.trim() === '') {
-		window.alert('Por favor, ingrese su nombre.');
-		} 
-		else if (email.trim() === '') {
-		window.alert('Por favor, ingrese su email.');
-		} 
-		else if (pass.trim() === '') {
-		window.alert('Por favor, ingrese su contraseña.');
-		}
-		else {
-		// Mandar al servidor y comprobar
-		const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
-		if (registroExitoso) {
-			// Poner a true para mostrar el menu si se inicia correctamente
-			setShowMenu(true);
-			window.alert('Te has registrado correctamente. Inicie sesión aquí');
-			window.location.replace(Login);
-		}
-		else {
-			setShowMenu(false);
-			window.alert('Registro incorrecto: El usuario ya existe');
-		}
-		// console.log(email);
-		//props.onFormSwitch('Menu', { email });
-		}
-	}
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (name.trim() === '') {
+            window.alert('Por favor, ingrese su nombre.');
+        }
+        else if (email.trim() === '') {
+            window.alert('Por favor, ingrese su email.');
+        }
+        else if (pass.trim() === '') {
+            window.alert('Por favor, ingrese su contraseña.');
+        }
+        else {
+            // Mandar al servidor y comprobar
+            const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
+            if (registroExitoso) {
+                // Poner a true para mostrar el menu si se inicia correctamente
+                setShowMenu(true);
+                window.alert('Te has registrado correctamente. Inicie sesión aquí');
+                window.location.replace(Login);
+            }
+            else {
+                setShowMenu(false);
+                window.alert('Registro incorrecto: El usuario ya existe');
+            }
+            // console.log(email);
+            //props.onFormSwitch('Menu', { email });
+        }
+    }
 
-	const handleRegister = (event) => {
-		setRegister(true);
-	};
+    const handleRegister = (event) => {
+        setRegister(true);
+    };
 
-	if (register) {
-		return <Login />;
-	}
+    if (register) {
+        return <Login />;
+    }
 
-  return (
-    <div className={styles["auth-container"]}>
-      <form className={styles["login-form"]} onSubmit={handleSubmit}>
-        <div className={styles["form-container"]}>
-          <h2>Registro</h2>
-          <label htmlFor="name">Nombre</label>
-          <input
-            value={name}
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            id="name"
-            placeholder="Nombre" />
+    return (
+        <div className={styles["auth-container"]}>
+            <form className={styles["login-form"]} onSubmit={handleSubmit}>
+                <div className={styles["form-container"]}>
+                    <h2>Registro</h2>
+                    <label htmlFor="name">Nombre</label>
+                    <input
+                        value={name}
+                        name="name"
+                        onChange={(e) => setName(e.target.value)}
+                        id="name"
+                        placeholder="Nombre" />
 
-          <label htmlFor="email">Correo Electrónico</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="youremail@gmail.com"
-            id="email"
-            name="email" />
+                    <label htmlFor="email">Correo Electrónico</label>
+                    <input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="youremail@gmail.com"
+                        id="email"
+                        name="email" />
 
-          <label htmlFor="password">Contraseña</label>
-          <input
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-            type="password"
-            placeholder="********"
-            id="password"
-            name="password" />
+                    <label htmlFor="password">Contraseña</label>
+                    <input
+                        value={pass}
+                        onChange={(e) => setPass(e.target.value)}
+                        type="password"
+                        placeholder="********"
+                        id="password"
+                        name="password" />
 
-          <button type="submit">Registrarse</button>
-          <button
-            className={styles["link-btn"]}
-            onClick={(handleRegister)}>
-            ¿Ya tienes una cuenta? Inicia sesión aquí.
-          </button>
+                    <button type="submit">Registrarse</button>
+                    <button
+                        className={styles["link-btn"]}
+                        onClick={(handleRegister)}>
+                        ¿Ya tienes una cuenta? Inicia sesión aquí.
+                    </button>
+                </div>
+            </form>
+            <div className={styles["login-image"]}>
+                <img src={loginImage} alt="Login" className="login-image" />
+            </div>
         </div>
-      </form>
-      <div className={styles["login-image"]}>
-        <img src={loginImage} alt="Login" className="login-image" />
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Register;
