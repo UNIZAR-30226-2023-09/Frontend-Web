@@ -74,10 +74,10 @@
 
 :local(.login-image) {
   position: absolute;
-  top: 11%;
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
+  width: 190px;
   /*margin-top: -2.5%; /* Para ajustar la imagen */
 }
 

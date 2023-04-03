@@ -12,7 +12,7 @@
   
   .popup__content {
     /* background: linear-gradient(to right, #1DD6D6, #3B9AED);  */
-    background-color: #0d2480;
+    background: #aa881a;
     padding: 30px;
     max-width: 75%;
     max-height: 70%;
@@ -99,5 +99,5 @@
   
   .cancel button:hover, .acept button:hover {
     transform: scale(1.15);
-    background: linear-gradient(to right, #3794e5,#41e5e5);
+    background: linear-gradient(to bottom, #947631 , #f7d778, #caa322, #f7d161);
   }

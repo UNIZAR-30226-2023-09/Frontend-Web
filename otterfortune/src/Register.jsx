@@ -7,54 +7,51 @@ import { useSocket } from './socketContext';
 import Login from "./Login";
 
 export const Register = (props) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [name, setName] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
-  const [register, setRegister] = useState(false);
+	const [email, setEmail] = useState('');
+	const [pass, setPass] = useState('');
+	const [name, setName] = useState('');
+	const [showMenu, setShowMenu] = useState(false);
+	const [register, setRegister] = useState(false);
 
-  const socket = useSocket();
+	const socket = useSocket();
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (name.trim() === '') {
-      window.alert('Por favor, ingrese su nombre.');
-    } 
-    else if (email.trim() === '') {
-      window.alert('Por favor, ingrese su email.');
-    } 
-    else if (pass.trim() === '') {
-      window.alert('Por favor, ingrese su contraseña.');
-    }
-    else {
-      // Mandar al servidor y comprobar
-      const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
-      if (registroExitoso) {
-        // Poner a true para mostrar el menu si se inicia correctamente
-        setShowMenu(true);
-      }
-      else {
-        setShowMenu(false);
-        window.alert('Registro incorrecto: El usuario ya existe');
-      }
-      // console.log(email);
-      //props.onFormSwitch('Menu', { email });
-    }
-  }
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (name.trim() === '') {
+		window.alert('Por favor, ingrese su nombre.');
+		} 
+		else if (email.trim() === '') {
+		window.alert('Por favor, ingrese su email.');
+		} 
+		else if (pass.trim() === '') {
+		window.alert('Por favor, ingrese su contraseña.');
+		}
+		else {
+		// Mandar al servidor y comprobar
+		const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
+		if (registroExitoso) {
+			// Poner a true para mostrar el menu si se inicia correctamente
+			setShowMenu(true);
+			window.alert('Te has registrado correctamente. Inicie sesión aquí');
+			window.location.replace(Login);
+		}
+		else {
+			setShowMenu(false);
+			window.alert('Registro incorrecto: El usuario ya existe');
+		}
+		// console.log(email);
+		//props.onFormSwitch('Menu', { email });
+		}
+	}
 
-  const handleRegister = (event) => {
-    setRegister(true);
-  };
+	const handleRegister = (event) => {
+		setRegister(true);
+	};
 
-  if (register) {
-    return <Login />;
-  }
-
-  if (showMenu) {
-    // Para pasar el valor del email en la variable 'email'
-    return <Menu email={email} />;
-  }
+	if (register) {
+		return <Login />;
+	}
 
   return (
     <div className={styles["auth-container"]}>

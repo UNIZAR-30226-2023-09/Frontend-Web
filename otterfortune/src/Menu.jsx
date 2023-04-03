@@ -181,12 +181,18 @@ export const Menu = (props) => {
             <Loading email={email}/>
         ) : (
         <div className="menu-container">
-            <button
-                className="email-container-button"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}>
-                <img src={perfil}  className="logo-perfil" />
-                {isHovered && (
+            <header className="App-header">
+                <button className="menu-sesion-button2" 
+                        onClick={handleCerrarSesion}>Cerrar sesión</button>
+                <div className="titulo">
+                    <p>Bienvenido a OtterFortune </p>
+                </div>
+                <button
+                    className="email-container-button"
+                    onMouseEnter={handleHover}
+                    onMouseLeave={handleLeave}>
+                    <img src={perfil}  className="logo-perfil" />
+                    {isHovered && (
                         <span> 
                             <br/>{email}<br/>
                             <div className="gemas-mail">
@@ -194,17 +200,14 @@ export const Menu = (props) => {
                             </div>
                         </span>   
                     )}
-            </button>
-            
-            <button className="cerrar-sesion-button" 
-                onClick={handleCerrarSesion}>Cerrar sesión</button>
-            
+                </button>
+            </header>
+
             <div className="submenu">
                 <div className="login-image image-container"> 
                     <img 
                         src={nutria} alt="Login" className="login-image"/>
                 </div>
-                <p>Bienvenido a OtterFortune </p>
 
                 <div className="menu-option" onClick={handleCrearPartida}>
                     <label htmlFor="crearPartida">Crear partida</label>
@@ -260,3 +263,8 @@ export const Menu = (props) => {
 }
 
 export default Menu;
+
+/*
+            <button className="cerrar-sesion-button" 
+                    onClick={handleCerrarSesion}>Cerrar sesión</button>
+*/

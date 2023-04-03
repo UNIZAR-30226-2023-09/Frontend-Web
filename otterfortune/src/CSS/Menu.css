@@ -1,8 +1,20 @@
-.menu-container {
+/*.menu-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
+	width: 100%;
+	/*background: linear-gradient(to right, #3B9AED, #1DD6D6);*/
+	/*background-image: url('../Imagenes/fondoMenu.jpg');
+	background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
+	/*position: absolute;
+	left: 50%;
+	top: 20%;  /* Ajustar la posición superior */
+	/*transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
+/*}*/
+
+.menu-container {
 	height: 100%;
 	width: 100%;
 	/*border-radius: 0px;*/
@@ -10,22 +22,18 @@
 	background-image: url('../Imagenes/fondoMenu.jpg');
 	background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
 	position: absolute;
-	left: 50%;
-	top: 20%;  /* Ajustar la posición superior */
-	transform: translate(-50%, -20%);  /* Para ajustar el contenedor*/
-	transition: all 0.2s ease-in-out;
+    overflow-x: hidden;
 }
 
-.email-container {
+/*.email-container {
 	color: white;
 	font-size: 70%;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: bold;
 	margin-top: 1%;
-	/* margin-bottom: 1%; */
 	position: absolute;
 	top: 1%;
-	right: 3%;  /* Moverlo a la izquierda */
+	right: 3%;  
 }
 
 .gemas-container {
@@ -34,41 +42,28 @@
 	font-family: 'Open Sans', sans-serif;
 	font-weight: bold;
 	margin-top: 1%;
-	/* margin-bottom: 1%; */
 	position: absolute;
 	top: 5%;
-	right: 3%;  /* Moverlo a la derecha */
-}
+	right: 3%;  
+}*/
 
-.cerrar-sesion-button {
-	position: absolute;
-	top: 2%;
-	left: 2%;
-	background-color: transparent;
-	border: 2px solid #ffffff;
-	color: white;
-	cursor: pointer;
-	font-weight: bold;
-	font-size: 120%;
-}
-
-.cerrar-sesion-button:hover {
-	transform: scale(1.15);
-}
 
 .submenu {
-	padding: auto;
-	text-align: center;
-	color: #ffffff;
-	border: 3px solid #fff;
-	box-shadow: 0px 0px 25px #222;
-	backdrop-filter: blur(8px);
-	border-radius: 15px;
-	height: 75%;
-	width: 50%;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+    padding: auto;
+    text-align: center;
+    color: #ffffff;
+    border: 3px solid #fff;
+    box-shadow: 0px 0px 25px #222;
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    height: 75%;
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 40px;
 }
 
 /* Para los butons */
@@ -93,8 +88,8 @@
 	border: 2px solid #ffffff; /* color de los bordes de los botones */
 	/* Alinear los botones en el centro*/
 	margin: auto;
-	margin-top: 2%;
-	margin-bottom: 1%;
+	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .menu-option:hover {
@@ -126,16 +121,11 @@
 	transition: all 0.2s ease-in-out;
 }
 
-/* .login-button:hover {
-  background-color: #ff00dd;
-  color: #ff00dd;
-} */
-
 .login-image {
 	display: flex;
 	top: 30%;
 	left: 50%;
-	width: 170px;
+	width: 182px;
 	margin: auto;
 	margin-bottom: 2%;
 	margin-top: -6%;
@@ -145,20 +135,6 @@
 	max-width: 100%;
 }
 
-/*.login-image img:hover {
-	transform: scale(1.2);
-    animation: spin 2s ease-in-out;
-}
-
-
-@keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-}*/
 
 .auth-container {
 	position: relative;
@@ -166,15 +142,6 @@
 
 .login-form {
 	margin-top: 120px;
-}
-
-p {
-	color: rgb(255, 255, 255);
-	font-size: 210%;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
-	margin-top: 0.5%;
-	margin-bottom: 3%;
 }
 
 .logo-perfil {
@@ -185,3 +152,88 @@ p {
     object-position: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+.cabecera {
+    height: auto;
+    width: auto;
+
+    background-image: url('../Imagenes/fondoMenu.jpg');
+    background-size: cover; /* Para ajustar el tamaño de la imagen al contenedor*/
+    margin: 0 auto;
+    overflow-x: hidden;
+  
+}
+
+.App-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 70px;
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.email-container-button {
+    position: absolute;
+    right: 0;
+    top: 0%;
+    width: 200px;
+    padding: 15px;
+    /*background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);*/
+    background-color: transparent;
+    color: #684411;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0px solid #ffffff;
+}
+
+.email-container-button:hover {
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+}
+
+.gemas-container {
+    position: absolute;
+    color: #684411;
+    font-size: 70%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    margin-top: 1%;
+    /* margin-bottom: 1%; */
+    top: 5%;
+    right: 3%;  /* Moverlo a la derecha */
+}
+  
+.menu-sesion-button2 {
+    position: absolute;
+    left: 0px;
+    top: 0%;
+    width: 195px;
+    padding: 21px;
+    background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
+    color: #684411;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0px solid #ffffff;
+    text-align: left;
+    padding-left: 60px;
+}
+
+.menu-sesion-button2:hover {
+    transform: scale(1.05);
+}
+
+.titulo p {
+	color: rgb(255, 255, 255);
+	font-size: 34,5px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+	margin-top: 0.5%;
+	margin-bottom: 3%;
+    margin: 10px;
+    display: inline-block;
+}
+  

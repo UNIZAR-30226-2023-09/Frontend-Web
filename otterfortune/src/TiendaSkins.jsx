@@ -53,7 +53,7 @@ export const TiendaSkins = (props) => {
     }
   
     return (
-        <div className="prueba">
+        <div className="cabecera">
             <header className="App-header">
                 <button className="menu-sesion-button" 
                         onClick={handleMenu}>Menú de inicio</button>
