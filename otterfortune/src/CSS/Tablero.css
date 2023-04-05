@@ -1,0 +1,120 @@
+.imagen-tablero {
+    height: 631px;
+    overflow-x: hidden;
+}
+
+.imagen-extra {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.imagen-extra-tablero {
+    width: 80px;
+    height: 80px;
+    background: transparent;
+}
+
+.imagen-tablero {
+    width: 100%;
+}
+
+.caja-propiedades {
+    margin-top: 180px;
+}
+  
+input[type="button"] {
+    margin-bottom: 10px;
+    background: #e5b515;
+    border-radius: 8px;
+}
+  
+.row.no-gutters [class^='col-'] {
+    padding-right: 0;
+}
+  
+.btn-cartas-container {
+    margin-right: 10px;
+}
+
+.btn-jugadores {
+    margin-top: 5px;
+}
+/* Para la caja de los jugadores */
+.lista-jugadores {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    max-height: 200px;
+    margin-bottom: -140px;
+}
+  
+.lista-jugadores ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+}
+  
+.lista-jugadores li {
+    margin-bottom: 5px;
+}
+  
+.lista-jugadores h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Para la caja de las propiedades */
+.lista-propiedades {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    max-height: 2000px;
+    margin-bottom: -150px;
+}
+  
+.lista-propiedades ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+}
+  
+.lista-propiedades li {
+    margin-bottom: 5px;
+}
+  
+.lista-propiedades h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Para la caja de las cartas */
+.lista-cartas {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    max-height: 1000px;
+    margin-bottom: -150px;
+    margin-right: 10px;
+}
+  
+.lista-cartas ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+}
+  
+.lista-cartas li {
+    margin-bottom: 5px;
+}
+  
+.lista-cartas h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}

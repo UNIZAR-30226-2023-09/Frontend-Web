@@ -7,6 +7,7 @@ import PopupTorneo from './PopupTorneo';
 
 import PopupCrearPartida from "./PopupCrearPartida";
 import PopupCrearTorneo from "./PopupCrearTorneo";
+import Tablero from "./Tablero";
 
 import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
@@ -52,6 +53,10 @@ export const Menu = (props) => {
 
     // Para el perfil
     const [isHovered, setIsHovered] = useState(false);
+
+    // Para ir al tablero
+    const [irTablero, setIrTablero] = useState(false);
+
 
     const socket = useSocket();
 
@@ -174,6 +179,13 @@ export const Menu = (props) => {
         setTiendaSkin(true);
     };
 
+    const handleIrTablero = (id) => {
+        setIsOpenCreatePartida(false);
+        // Actualizamos el id introducido
+        setIdPartida(id);
+        setIrTablero(true);
+    }
+
     // Gestiona la ventana emergente 
     const popupPartida = (
         // De esta forma, en popup, a través del props, se podrá acceder
@@ -208,7 +220,7 @@ export const Menu = (props) => {
     )
 
     const popupEmpezar = (
-        <PopupEmpezar handleCloseCreate={handleCloseCreatePartida} id={idPartida} 
+        <PopupEmpezar handleCloseCreate={handleIrTablero} id={idPartida} 
             email={email} gemas={gemas}/>
     );
 
@@ -247,7 +259,7 @@ export const Menu = (props) => {
         <>
             {loading ? (
                 <Loading email={email} gemas={gemas} />
-            ) : (
+            ) : irTablero ? <Tablero email={email} /> : (
                 <div className="menu-container">
                     <header className="App-header">
                         <button className="menu-sesion-button2"
