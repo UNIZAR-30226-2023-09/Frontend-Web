@@ -10,8 +10,7 @@ const PopupPartida = (props) => {
     const [id, setId] = useState("");
     const [loading, setLoading] = useState(false);
 
-    //setLoading(true);    // mostrar el nuevo Popup de carga
-    console.log(loading); // debería mostrar false
+    console.log(props.gemas);
 
     const handleAccept = () => {
         if (id.trim() === '') {

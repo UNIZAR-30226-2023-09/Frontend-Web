@@ -5,19 +5,70 @@ import Menu from "./Menu";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import perfil from './Imagenes/perfil.png';
 import gema from './Imagenes/gema.png';
+import logo from './Imagenes/logo.png';
 
+import BAXTER from './Imagenes/BAXTER.png';
+import BERTA from './Imagenes/BERTA.png';
+import DIONIX from './Imagenes/DIONIX.png';
+import JEANCARLO from './Imagenes/JEAN-CARLO.png';
+import JULS from './Imagenes/JULS.png';
+import LUCAS from './Imagenes/LUCAS.png';
+import PLEX from './Imagenes/PLEX.png';
+import TITE from './Imagenes/TITE.png';
+ 
 
 export const TiendaSkins = (props) => {
     const email = props.email;
     const gemas = props.gemas;
-    const audioRef = useRef();
 
     const [showMenu, setShowMenu] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
+
     // TODO: Aquí iria el mensaje de obtener las skins con su precio
-    const nombreSkin = ["Skin 1","Skin 2","Skin 3","Skin 4","Skin 5","Skin 6","Skin 7","Skin 8"];
-    const precio = [1,2,3,4,5,6,7,8];
+    const skins = [
+        {
+            nombre: "PLEX",
+            imagen: PLEX,
+            precio: 10,
+        },
+        {
+            nombre: "JULS",
+            imagen: JULS,
+            precio: 7,
+        },
+        {
+            nombre: "JEANCARLO",
+            imagen: JEANCARLO,
+            precio: 20,
+        },
+        {
+            nombre: "TITE",
+            imagen: TITE,
+            precio: 50,
+        },
+        {
+            nombre: "DIONIX",
+            imagen: DIONIX,
+            precio: 3,
+        },
+        {
+            nombre: "BERTA",
+            imagen: BERTA,
+            precio: 2,
+        },
+        {
+            nombre: "LUCAS",
+            imagen: LUCAS,
+            precio: 40,
+        },
+        {
+            nombre: "BAXTER",
+            imagen: BAXTER,
+            precio: 1,
+        }
+    ];
+      
 
     // Gestiona el boton de ir al menú
     const handleMenu = (e) => {
@@ -55,8 +106,7 @@ export const TiendaSkins = (props) => {
     return (
         <div className="cabecera">
             <header className="App-header">
-                <button className="menu-sesion-button" 
-                        onClick={handleMenu}>Menú de inicio</button>
+                <img src={logo} className="menu-sesion-button" onClick={handleMenu}/>
                 <div className="titulo">
                     <p> Tienda </p>
                 </div>
@@ -76,10 +126,57 @@ export const TiendaSkins = (props) => {
                 </button>
             </header>
         <div className="row">
-
-            <div className="col-6 col-md-2 col-lg-3">
+            {skins.map((skin, index) => (
+            <div className="col-6 col-md-2 col-lg-3" key={index}>
             <div className="skin">
-            <img src={nutria} alt="Skin 1" className="spin img-fluid"/>
+                <img src={skin.imagen} alt={skin.nombre} className="spin img-fluid"/>
+                <h2>{skin.nombre}</h2>
+                <div className="skin-price">
+                <h3>{skin.precio}</h3><img src={gema} alt="Gemas" className="gema-skin" />
+                </div>
+                <button className="comprar-option" onClick={() => handleBuy(index + 1)}>
+                COMPRAR
+                </button>
+            </div>
+            </div>
+        ))}
+           
+        </div>
+        </div>
+    );
+  }
+  
+
+/*
+            <button
+                className="email-container-button"
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}>
+                {email}
+                {isHovered && (
+                    <span> <br/><br/>
+                        Tienes {gemas} gemas</span>   
+                )}
+            </button>
+*/
+
+/*
+            <img src={nutria} alt="Skin 1" className="spin nutria-imagen" onMouseOver={handleAudio} onMouseLeave={handleLeave} />
+                <audio 
+                        ref={audioRef} 
+                        src={hoverSound} 
+                        onCanPlayThrough={() => {
+                            if (isPlaying) {
+                                audioRef.current.play();
+                            }
+                      }}>
+                </audio>
+*/
+
+/*
+ <div className="col-6 col-md-2 col-lg-3">
+            <div className="skin">
+            <img src={plex} alt="Skin 1" className="spin img-fluid"/>
                 <h2>{nombreSkin[0]}</h2>
                 <div className="skin-price">
                     <h3>{precio[0]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
@@ -92,7 +189,7 @@ export const TiendaSkins = (props) => {
 
             <div className="col-6 col-md-2 col-lg-3">
             <div className="skin">
-                <img src={nutria} alt="Skin 2" className="spin img-fluid" />
+                <img src={baxter} alt="Skin 2" className="spin img-fluid" />
                 <h2>{nombreSkin[1]}</h2>
                 <div className="skin-price">
                     <h3>{precio[1]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
@@ -180,43 +277,4 @@ export const TiendaSkins = (props) => {
                 </button>
             </div>
             </div>
-        </div>
-        </div>
-    );
-  }
-  
-  /*
-            <div className="email-container">
-                <p>{email}</p>
-            </div>
-            <div className="gemas-container">
-                <p><br></br>{gemas} gemas</p>
-            </div>
-        */
-
-/*
-            <button
-                className="email-container-button"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}>
-                {email}
-                {isHovered && (
-                    <span> <br/><br/>
-                        Tienes {gemas} gemas</span>   
-                )}
-            </button>
-*/
-
-/*
-            <img src={nutria} alt="Skin 1" className="spin nutria-imagen" onMouseOver={handleAudio} onMouseLeave={handleLeave} />
-                <audio 
-                        ref={audioRef} 
-                        src={hoverSound} 
-                        onCanPlayThrough={() => {
-                            if (isPlaying) {
-                                audioRef.current.play();
-                            }
-                      }}>
-                </audio>
-
 */

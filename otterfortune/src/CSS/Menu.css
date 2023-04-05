@@ -170,17 +170,17 @@
     top: 0;
     left: 0;
     width: auto;
-    height: 70px;
+    height: 75px;
     background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 20px;
 }
 
-.email-container-button {
+.email-container-button2 {
     position: absolute;
     right: 0;
     top: 0%;
-    width: 200px;
+    width: 190px;
     padding: 15px;
     /*background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);*/
     background-color: transparent;
@@ -189,9 +189,10 @@
     font-weight: bold;
     cursor: pointer;
     border: 0px solid #ffffff;
+	z-index: 1;
 }
 
-.email-container-button:hover {
+.email-container-button2:hover {
     background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
 }
 
@@ -211,8 +212,9 @@
     position: absolute;
     left: 0px;
     top: 0%;
-    width: 195px;
+    width: 152px;
     padding: 21px;
+	height: 75px;
     background: linear-gradient(to bottom, #947631 , #f7d778, #dabf66, #f7d161);
     color: #684411;
     font-size: 18px;
@@ -220,7 +222,6 @@
     cursor: pointer;
     border: 0px solid #ffffff;
     text-align: left;
-    padding-left: 60px;
 }
 
 .menu-sesion-button2:hover {
@@ -229,12 +230,13 @@
 
 .titulo p {
 	color: rgb(255, 255, 255);
-	font-size: 34,5px;
+	font-size: 175%;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: bold;
 	margin-top: 0.5%;
 	margin-bottom: 3%;
-    margin: 10px;
+    margin: 11px;
+	margin-left: 30px;
     display: inline-block;
 }
   

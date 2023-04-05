@@ -66,7 +66,6 @@ export const Menu = (props) => {
         setIsOpenPartida(false);
         // Actualizamos el id introducido
         handleIdChange(id);
-        console.log(id);
         // TODO: LLamar a unirsePartida
         // Actualizamos el valor de loading
         const resultado = await socketActions.unirsePartida(socket, email, id);
@@ -181,7 +180,8 @@ export const Menu = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <PopupPartida handleClose={handleClose}
-            handleVerificarUnirsePartida={handleVerificarUnirsePartida} />
+            handleVerificarUnirsePartida={handleVerificarUnirsePartida} 
+            email={email} gemas={gemas}/>
     );
 
     // Gestiona la ventana emergente 
@@ -190,7 +190,8 @@ export const Menu = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <PopupTorneo handleClose={handleClose}
-            handleVerificarUnirsePartida={handleVerificarUnirseTorneo} />
+            handleVerificarUnirsePartida={handleVerificarUnirseTorneo}
+            email={email} gemas={gemas} />
     );
 
     const popupCrearPartida = (
@@ -198,16 +199,17 @@ export const Menu = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <PopupCrearPartida handleCloseCreate={handleCloseCreatePartida}
-            handleClose={handleClose} email={email} />
+            handleClose={handleClose}  email={email} gemas={gemas} />
     );
 
     const popupCrearTorneo = (
         <PopupCrearTorneo handleCloseCreate={handleCloseCreateTorneo}
-            handleClose={handleClose} email={email} />
+            handleClose={handleClose}  email={email} gemas={gemas} />
     )
 
     const popupEmpezar = (
-        <PopupEmpezar handleCloseCreate={handleCloseCreatePartida} id={idPartida} />
+        <PopupEmpezar handleCloseCreate={handleCloseCreatePartida} id={idPartida} 
+            email={email} gemas={gemas}/>
     );
 
 
@@ -244,7 +246,7 @@ export const Menu = (props) => {
     return (
         <>
             {loading ? (
-                <Loading email={email} />
+                <Loading email={email} gemas={gemas} />
             ) : (
                 <div className="menu-container">
                     <header className="App-header">
@@ -254,7 +256,7 @@ export const Menu = (props) => {
                             <p>Bienvenido a OtterFortune </p>
                         </div>
                         <button
-                            className="email-container-button"
+                            className="email-container-button2"
                             onMouseEnter={handleHover}
                             onMouseLeave={handleLeave}>
                             <img src={perfil} className="logo-perfil" />
