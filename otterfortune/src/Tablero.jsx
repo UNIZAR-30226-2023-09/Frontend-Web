@@ -14,6 +14,7 @@ export const Tablero = (props) => {
     const [abrirChat, setAbrirChat] = useState(false);
 
     const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
+    const [veces, setVeces] = useState(0);
 
     const handleMostrarPropiedades = () => {
       setMostrarPropiedades(true);
@@ -28,7 +29,14 @@ export const Tablero = (props) => {
     }
 
     const handleChat = () => {
-        setAbrirChat(true);
+        if (veces === 0) {
+            setAbrirChat(true);
+            setVeces(1);
+        }
+        else {
+            setAbrirChat(false);
+            setVeces(0);   
+        }
     }
 
     // {isOpenChat && popUpChat}
