@@ -35,8 +35,8 @@
   .popup2 {
     position: fixed;
     top: 0;
-    width: 800px;
-    height: 900vh; /* Cambio de altura */
+    width: 885px;
+    height: 91vh; /* Cambio de altura */
     display: flex;
   }
   
@@ -63,12 +63,6 @@
     bottom: 0;
     left: 0;
   }
-
-  .message-form {
-    /* margin-top: 600px; */
-
-  }
-
   
   .display-message {
     background-color: #f2f2f2;
