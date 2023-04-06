@@ -68,7 +68,7 @@
 
 :local(.login-image) {
     position: absolute;
-    top: 17%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
@@ -79,10 +79,7 @@
 
 :local(.login-image img) {
     max-width: 100%;
-}
-
-:local(.auth-container) {
-    position: relative;
+    width: 300px;
 }
 
 :local(.login-form) {

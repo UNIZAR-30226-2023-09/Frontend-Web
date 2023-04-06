@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: auto;
     background-image: url('../Imagenes/fondoMenu.jpg');
     position: absolute;
     background-size: cover;
@@ -17,21 +17,6 @@
     margin-bottom: 10%;
     /* Cambiar tamaño del contenedor */
     width: 100%;
-}
-
-:local(.login-form) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-    background-color: #f5eded;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
 }
 
 :local(h2) {
@@ -82,15 +67,22 @@
 
 :local(.login-image) {
     position: absolute;
-    top: 13%;
+    top: 19%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px;
+    width: 220px;
+    z-index: 2;
+
     /*margin-top: -2.5%; /* Para ajustar la imagen */
 }
 
 :local(.login-image img) {
     max-width: 100%;
+    width: 300px;
+}
+
+:local(.login-form) {
+    margin-top: 120px;
 }
 
 :local(.auth-container) {
@@ -101,5 +93,16 @@
     position: relative;}
 
 :local(.login-form) {
-    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    background-color: #f5eded;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }

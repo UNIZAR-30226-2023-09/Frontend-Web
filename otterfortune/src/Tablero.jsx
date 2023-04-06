@@ -6,6 +6,13 @@ import tablero from './Imagenes/TABLERO2.jpg'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
 
+import dice1 from './Imagenes/Dice1.png';
+import dice2 from './Imagenes/Dice2.png';
+import dice3 from './Imagenes/Dice3.png';
+import dice4 from './Imagenes/Dice4.png';
+import dice5 from './Imagenes/Dice5.png';
+import dice6 from './Imagenes/Dice6.png';
+
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 
@@ -87,6 +94,12 @@ export const Tablero = (props) => {
                                 <li>Propiedad 1</li>
                                 <li>Propiedad 2</li>
                                 <li>Propiedad 3</li>
+                                <li>Propiedad 4</li>
+                                <li>Propiedad 5</li>
+                                <li>Propiedad 6</li>
+                                <li>Propiedad 7</li>
+                                <li>Propiedad 8</li>
+
                             </ul>
                         </div>
                         ) : (
@@ -95,6 +108,11 @@ export const Tablero = (props) => {
                                     <li>Carta 1</li>
                                     <li>Carta 2</li>
                                     <li>Carta 3</li>
+                                    <li>Carta 4</li>
+                                    <li>Carta 5</li>
+                                    <li>Carta 6</li>
+                                    <li>Carta 7</li>
+                                    <li>Carta 8</li>
                                 </ul>
                         </div>
                          )}

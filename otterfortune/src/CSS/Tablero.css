@@ -1,5 +1,5 @@
 .imagen-tablero {
-    height: 631px;
+    height: 788px;
     overflow-x: hidden;
 }
 
@@ -47,7 +47,8 @@ input[type="button"] {
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     max-height: 200px;
-    margin-bottom: -140px;
+    margin-bottom: -120px;
+    overflow-y: auto;
 }
 
 .lista-jugadores ul {
@@ -73,7 +74,7 @@ input[type="button"] {
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     max-height: 2000px;
-    margin-bottom: -150px;
+    margin-bottom: -300px;
 }
 
 .lista-propiedades ul {
@@ -101,7 +102,7 @@ input[type="button"] {
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     max-height: 1000px;
-    margin-bottom: -150px;
+    margin-bottom: -300px;
     margin-right: 10px;
 }
 
