@@ -14,7 +14,7 @@ export const Tablero = (props) => {
     const [abrirChat, setAbrirChat] = useState(false);
 
     const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
-    const [veces, setVeces] = useState(0);
+    const [veces, setVeces] = useState(true);
 
     const handleMostrarPropiedades = () => {
       setMostrarPropiedades(true);
@@ -29,13 +29,13 @@ export const Tablero = (props) => {
     }
 
     const handleChat = () => {
-        if (veces === 0) {
+        if (veces) {
             setAbrirChat(true);
-            setVeces(1);
+            setVeces(false);
         }
         else {
             setAbrirChat(false);
-            setVeces(0);   
+            setVeces(true);   
         }
     }
 
