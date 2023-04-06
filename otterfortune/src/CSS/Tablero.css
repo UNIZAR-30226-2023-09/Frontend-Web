@@ -13,6 +13,7 @@
     width: 80px;
     height: 80px;
     background: transparent;
+    cursor: pointer;
 }
 
 .imagen-tablero {
@@ -20,19 +21,19 @@
 }
 
 .caja-propiedades {
-    margin-top: 180px;
+    margin-top: 170px;
 }
-  
+
 input[type="button"] {
     margin-bottom: 10px;
     background: #e5b515;
     border-radius: 8px;
 }
-  
+
 .row.no-gutters [class^='col-'] {
     padding-right: 0;
 }
-  
+
 .btn-cartas-container {
     margin-right: 10px;
 }
@@ -48,17 +49,17 @@ input[type="button"] {
     max-height: 200px;
     margin-bottom: -140px;
 }
-  
+
 .lista-jugadores ul {
     list-style: none;
     padding-left: 0;
     margin-top: 5px;
 }
-  
+
 .lista-jugadores li {
     margin-bottom: 5px;
 }
-  
+
 .lista-jugadores h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -74,17 +75,19 @@ input[type="button"] {
     max-height: 2000px;
     margin-bottom: -150px;
 }
-  
+
 .lista-propiedades ul {
     list-style: none;
     padding-left: 0;
     margin-top: 5px;
+    max-height: 270px;
+    overflow-y: auto;
 }
-  
+
 .lista-propiedades li {
     margin-bottom: 5px;
 }
-  
+
 .lista-propiedades h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -101,17 +104,19 @@ input[type="button"] {
     margin-bottom: -150px;
     margin-right: 10px;
 }
-  
+
 .lista-cartas ul {
     list-style: none;
     padding-left: 0;
     margin-top: 5px;
+    max-height: 270px;
+    overflow-y: auto;
 }
-  
+
 .lista-cartas li {
     margin-bottom: 5px;
 }
-  
+
 .lista-cartas h3 {
     margin-top: 0;
     margin-bottom: 10px;

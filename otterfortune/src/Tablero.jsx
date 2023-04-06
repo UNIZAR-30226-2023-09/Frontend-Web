@@ -4,25 +4,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import tablero from './Imagenes/TABLERO2.jpg'
 import iconoChat from './Imagenes/iconoChat.png';
-//import Chat from './Chat';
+import Chat from './Chat';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 
 export const Tablero = (props) => {
 
-    const [isOpenChat, setIsOpenChat] = useState(false);
     const [abrirChat, setAbrirChat] = useState(false);
 
-//    {isOpenPartida && popupChat}
+    const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
+
+    const handleMostrarPropiedades = () => {
+      setMostrarPropiedades(true);
+    };
+  
+    const handleMostrarCartas = () => {
+      setMostrarPropiedades(false);
+    };
 
     const handleClose = (e) => {
-        setIsOpenChat(false);
+        setAbrirChat(false);
     }
 
     const handleChat = () => {
         setAbrirChat(true);
     }
+
+    // {isOpenChat && popUpChat}
+    const popUpChat = (
+        // De esta forma, en popup, a través del props, se podrá acceder
+        // a handleClose y a content
+        // Se le puede pasar cualquier cosa
+        <Chat handleClose={handleClose} />
+    );
 
     return (
 
@@ -31,7 +46,7 @@ export const Tablero = (props) => {
                 <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
             </div>
             <div className="col-5">
-                <div className="row">
+                <div className="">
                     <div className="col-12 caja-jugadores">
                         <div className="btn-container">
                             <input type="button" className="btn-jugadores" value="Lista de jugadores" />
@@ -49,31 +64,38 @@ export const Tablero = (props) => {
                         <div className="row no-gutters">
                             <div className="col-6">
                                 <div className="btn-container">
-                                    <input type="button" className="btn-propiedades" value="Propiedades" />
+                                    <input type="button" className="btn-propiedades" value="Propiedades" onClick={handleMostrarPropiedades}/>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="btn-container btn-cartas-container">
-                                    <input type="button" className="btn-cartas" value="Cartas" />
+                                    <input type="button" className="btn-cartas" value="Cartas" onClick={handleMostrarCartas}/>
                                 </div>
                             </div>
                         </div>
+                        {mostrarPropiedades ? (
                         <div className="lista-propiedades">
+                            <ul>
+                                <li>Propiedad 1</li>
+                                <li>Propiedad 2</li>
+                                <li>Propiedad 3</li>
+                            </ul>
+                        </div>
+                        ) : (
+                        <div className="lista-cartas">
                                 <ul>
-                                    <li>Propiedad 1</li>
-                                    <li>Propiedad 2</li>
-                                    <li>Propiedad 3</li>
-                                    <li>Propiedad 4</li>
-                                    <li>Propiedad 5</li>
-                                    <li>Propiedad 6</li>
-                                    <li>Propiedad 7</li>
+                                    <li>Carta 1</li>
+                                    <li>Carta 2</li>
+                                    <li>Carta 3</li>
                                 </ul>
                         </div>
+                         )}
                     </div>
                 </div>
                 <div className="imagen-extra">
                     <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
                 </div>
+                {abrirChat && popUpChat}
             </div>
         </div>
 
