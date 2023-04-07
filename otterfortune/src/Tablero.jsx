@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import tablero from './Imagenes/TABLERO2.jpg'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
+import PopupCarta from './PopupCarta';
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -16,6 +17,7 @@ import tite from './Imagenes/TITE.png';
 import plex from './Imagenes/PLEX.png';
 import lucas from './Imagenes/LUCAS.png';
 import jeancarlo from './Imagenes/JEAN-CARLO.png';
+import simboloMas from './Imagenes/simboloMas.png';
 
 
 import * as socketActions from './socketActions';
@@ -27,6 +29,9 @@ export const Tablero = (props) => {
 
     const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
     const [veces, setVeces] = useState(0); // Para abrir/cerrar el chat
+
+    const [openCarta, setOpenCarta] = useState(false);
+
 
     // Controlar los dados
     /*const [numeroDado, setNumeroDado] = useState(1);
@@ -110,7 +115,7 @@ export const Tablero = (props) => {
       setMostrarPropiedades(false);
     };
 
-    const handleClose = (e) => {
+    const handleCloseChat = (e) => {
         setAbrirChat(false);
     }
 
@@ -194,7 +199,7 @@ export const Tablero = (props) => {
         // De esta forma, en popup, a través del props, se podrá acceder
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
-        <Chat handleClose={handleClose} />
+        <Chat handleClose={handleCloseChat} />
 
 
     );
@@ -207,6 +212,23 @@ export const Tablero = (props) => {
         { nombre: 'Cesar', imagen: plex, dinero: 200 },
         { nombre: 'Marcos', imagen: jeancarlo, dinero: 250 },
       ];
+
+    function mostrarPopUp1() {
+        setOpenCarta(true);
+    }
+
+    const handleCloseCarta = (e) => {
+        setOpenCarta(false);
+    }
+
+    // Gestiona la ventana emergente 
+    const popupCarta = (
+        // De esta forma, en popup, a través del props, se podrá acceder
+        // a handleClose y a content
+        // Se le puede pasar cualquier cosa
+        <PopupCarta handleClose={handleCloseCarta} />
+    );
+    
       
 
     return (
@@ -276,7 +298,11 @@ export const Tablero = (props) => {
                         {mostrarPropiedades ? (
                         <div className="lista-propiedades">
                             <ul>
-                                <li>Propiedad 1</li>
+                                <li>
+                                    Propiedad 1
+                                    <img src={simboloMas} onClick={mostrarPopUp1}/>
+                                </li>
+                                {openCarta && popupCarta}
                                 <li>Propiedad 2</li>
                                 <li>Propiedad 3</li>
                                 <li>Propiedad 4</li>

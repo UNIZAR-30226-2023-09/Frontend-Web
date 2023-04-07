@@ -1,0 +1,33 @@
+.popup5 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup__close5 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .popup__image5 {
+    position: absolute;
+    top: 50%;
+    left: 78%; /* Cambia este valor a la cantidad de píxeles que quieras mover la imagen hacia la derecha */
+    transform: translate(-50%, -50%);
+    max-width: 50%;
+    max-height: 50%;
+  }
+  

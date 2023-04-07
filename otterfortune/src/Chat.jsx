@@ -28,13 +28,6 @@ const Chat = (props) => {
         props.handleClose();
     };
 
-    const handleNewMessage = (e) => {
-        // Verificar si el mensaje es vacío o solo contiene saltos de línea
-        if (e.target.value.trim()) {
-          setNewMessage(e.target.value);
-        }
-      };
-
     return (
         <div className="row">
             <div className="col-7"></div>
@@ -62,7 +55,7 @@ const Chat = (props) => {
                                     type="text"
                                     className="form-control"
                                     value={newMessage}
-                                    onChange={handleNewMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
                                     placeholder="Escribe un mensaje..."
                                     style={{ width: "103%", position: "", bottom: 0 }}
                                 />
