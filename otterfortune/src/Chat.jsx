@@ -5,66 +5,71 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useSocket } from "./socketContext";
 import moment from "moment";
 import enviar from './Imagenes/enviar.png'
+import tite from './Imagenes/TITE.png';
 
 const Chat = (props) => {
-  const socket = useSocket();
+    const socket = useSocket();
 
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState("");
 
-  useEffect(() => {
-    // Aquí puedes colocar el código para cargar los mensajes existentes del chat
-  }, []);
+    useEffect(() => {
+        // Aquí puedes colocar el código para cargar los mensajes existentes del chat
+    }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes colocar el código para enviar el nuevo mensaje al chat
-    setMessages([      ...messages,      { text: newMessage, timestamp: new Date() },    ]);
-    setNewMessage("");
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Aquí puedes colocar el código para enviar el nuevo mensaje al chat
+        setMessages([...messages, { text: newMessage, timestamp: new Date() },]);
+        setNewMessage("");
+    };
 
-  const handleClose = () => {
-    props.handleClose();
-  };
+    const handleClose = () => {
+        props.handleClose();
+    };
 
-  return (
-    <div className="row">
-      <div className="col-7"></div>
-      <div className="col-7">
-        <div className="popup2" style={{ display: "flex" }}>
-          <div className="chat-container">
-            <div className="message-list" style={{ overflowY: "scroll" }}>
-              {messages.map((message, index) => (
-                <div key={index} className="message">
-                  <div className="message-content">
-                    <div className="message-text">{message.text}</div>
-                    <div className="message-timestamp"></div>
-                  </div>
+    return (
+        <div className="row">
+            <div className="col-7"></div>
+            <div className="col-7">
+                <div className="popup2" style={{ display: "flex" }}>
+                    <div className="chat-container">
+                        <h1 style={{ textAlign: "center" }}>CHAT</h1>
+                        <div className="message-list" style={{ overflowY: "scroll" }}>
+                            {messages.map((message, index) => (
+                                <div key={index} className="message">
+                                    <div className="message-content">
+                                        <div className="message-text">
+                                            {message.text}
+                                        </div>
+                                        <div className="message-timestamp"></div>
+                                    </div>
+                                    <img src={tite} alt="Descripción de la imagen" className="my-image" />
+                                </div>
+                            ))}
+                        </div>
+                        <form onSubmit={handleSubmit} className="message-form">
+                            <div className="form-group" style={{ position: "", bottom: 0 }}>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    placeholder="Escribe un mensaje..."
+                                    style={{ width: "103%", position: "", bottom: 0 }}
+                                />
+                            </div>
+                            <div >
+                                <button id="my-button" className="send-container" type="submit">
+                                    <img src={enviar} id="my-img" className="send-boton" />
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              ))}
             </div>
-            <form onSubmit={handleSubmit} className="message-form">
-              <div className="form-group" style={{ position: "", bottom: 0 }}>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Escribe un mensaje..."
-                  style={{ width: "103%" , position: "", bottom: 0 }}
-                />
-              </div>
-              <div >
-                <button id="my-button" className="send-container" type="submit">
-                    <img src={enviar} id="my-img" className="send-boton"/>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Chat;

@@ -21,7 +21,7 @@
 }
 
 .caja-propiedades {
-    margin-top: 170px;
+    margin-top: 160px;
 }
 
 input[type="button"] {
@@ -46,7 +46,7 @@ input[type="button"] {
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
-    max-height: 200px;
+    max-height: 229px;
     margin-bottom: -120px;
     overflow-y: auto;
 }
@@ -147,4 +147,13 @@ input[type="button"] {
 .posicion-dadoDcha img {
     width: 130px;
     height: 130px;
+}
+
+.prueba-posicion {
+    position: absolute;  
+}
+
+.prueba-posicion img {
+    width: 50px;
+    height: 50px;
 }
