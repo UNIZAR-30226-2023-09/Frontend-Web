@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useSocket } from "./socketContext";
 import moment from "moment";
+import enviar from './Imagenes/enviar.png'
 
 const Chat = (props) => {
   const socket = useSocket();
@@ -43,19 +44,21 @@ const Chat = (props) => {
               ))}
             </div>
             <form onSubmit={handleSubmit} className="message-form">
-              <div className="form-group" style={{ position: "sticky", bottom: 0 }}>
+              <div className="form-group" style={{ position: "", bottom: 0 }}>
                 <input
                   type="text"
                   className="form-control"
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Escribe un mensaje..."
-                  style={{ position: "sticky", bottom: 0 }}
+                  style={{ width: "103%" , position: "", bottom: 0 }}
                 />
               </div>
-              <button type="submit" className="btn btn-primary btn-send" style={{ position: "sticky", bottom: 0, left: 0 }}>
-                Enviar
-              </button>
+              <div >
+                <button id="my-button" className="send-container" type="submit">
+                    <img src={enviar} id="my-img" className="send-boton"/>
+                </button>
+              </div>
             </form>
           </div>
         </div>
@@ -65,3 +68,10 @@ const Chat = (props) => {
 };
 
 export default Chat;
+
+/*
+                <div style={{ position: "absolute", right: "10px", bottom: "6px" }}>
+                <button type="submit" className="btn btn-primary btn-send">
+                  Enviar
+                </button>
+*/

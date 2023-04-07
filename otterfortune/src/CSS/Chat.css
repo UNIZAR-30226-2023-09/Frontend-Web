@@ -31,18 +31,19 @@
   .message-form {
     margin-top: 600px;
   }*/
-  
-  .popup2 {
+
+.popup2 {
     position: fixed;
     top: 0;
     width: 885px;
-    height: 91vh; /* Cambio de altura */
+    height: 91vh;
     display: flex;
-  }
-  
-  .chat-container {
+    flex-direction: column;
+}
+
+.chat-container {
     background: #aa881a;
-    padding: 30px;
+    padding: 20px;
     overflow-y: auto;
     border-radius: 5px;
     position: relative;
@@ -51,21 +52,62 @@
     text-align: center;
     border-radius: 20px;
     margin-right: 200px;
-    width: 75%;
+    margin-top: 6px;
+    width: 76%;
     margin-left: -20px;
-    height: 91vh; 
-    max-height: 600px; /* ajusta el valor según sea necesario */
-  }
-  
-  .btn-send {
+    height: 95%;
+    /* Actualizamos la altura para que ocupe todo el espacio disponible */
+}
+
+.message-list {
+    flex-grow: 1;
+    /* El mensaje debe ocupar todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+
+.form-group {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.form-control {
     width: 100%;
-    position: absolute;
+}
+
+.btn-send {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+#my-button.send-container {
+    display: flex;
+    background-color: transparent; 
+    margin-bottom: 15px;
+}
+
+
+
+.message-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Agregamos esta propiedad para alinear verticalmente los elementos */
+    justify-content: space-between;
+    position: sticky;
     bottom: 0;
-    left: 0;
+    background-color: transparent;
+    padding: 5px;
+    margin-top: 5px;
   }
   
-  .display-message {
-    background-color: #f2f2f2;
-    padding: 10px;
+
+  #my-img.send-boton {
+    width: 40px;
+    height: 38px;
+    background-color: transparent;
     margin-bottom: 10px;
   }
+  
