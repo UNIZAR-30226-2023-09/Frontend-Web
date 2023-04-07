@@ -28,6 +28,13 @@ const Chat = (props) => {
         props.handleClose();
     };
 
+    const handleNewMessage = (e) => {
+        // Verificar si el mensaje es vacío o solo contiene saltos de línea
+        if (e.target.value.trim()) {
+          setNewMessage(e.target.value);
+        }
+      };
+
     return (
         <div className="row">
             <div className="col-7"></div>
@@ -35,6 +42,7 @@ const Chat = (props) => {
                 <div className="popup2" style={{ display: "flex" }}>
                     <div className="chat-container">
                         <h1 style={{ textAlign: "center" }}>CHAT</h1>
+                        
                         <div className="message-list" style={{ overflowY: "scroll" }}>
                             {messages.map((message, index) => (
                                 <div key={index} className="message">
@@ -54,7 +62,7 @@ const Chat = (props) => {
                                     type="text"
                                     className="form-control"
                                     value={newMessage}
-                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    onChange={handleNewMessage}
                                     placeholder="Escribe un mensaje..."
                                     style={{ width: "103%", position: "", bottom: 0 }}
                                 />

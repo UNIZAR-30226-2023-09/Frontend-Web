@@ -8,7 +8,7 @@
 }
 
 .chat-container {
-    background: #aa881a;
+    background: rgba(12, 147, 232, 0.9);
     padding: 20px;
     overflow-y: auto;
     border-radius: 5px;
@@ -22,7 +22,6 @@
     width: 75%;
     margin-left: -20px;
     height: 95%;
-    /* Actualizamos la altura para que ocupe todo el espacio disponible */
 }
 
 .message-list {
@@ -43,18 +42,15 @@
 }
 
 .message-text {
-    background-color: #fff;
+    background-color: rgb(171, 237, 144);
     border-radius: 20px;
     padding: 10px;
     font-size: 16px;
-    margin-right: 8px;
+    margin-right: 17px;
     max-width: 50%;
-    /* Agregamos esta propiedad */
     word-break: break-word;
-    /* Agregamos esta propiedad */
+    text-align: left;
 }
-
-
 
 .form-group {
     flex-grow: 1;
@@ -107,4 +103,18 @@
     width: 50px;
   }
 
+  .message-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* para centrar verticalmente */
+    margin-right: 50px;
+  }
+  
+  .my-image {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px; /* para separar la imagen del texto */
+    margin-bottom: 20px;
+    margin-top: -35px;
+  }
   

@@ -80,7 +80,7 @@ export const Tablero = (props) => {
 
     const rollDice2 = () => {
         let numRolls = 10; // número de veces que se cambiará la cara del dado
-        let rollDelay = 100; // tiempo en milisegundos entre cada cambio de cara
+        let rollDelay = 500; // tiempo en milisegundos entre cada cambio de cara
     
         // función que se ejecutará cada vez que cambie la cara del dado
         const rollStep = () => {
