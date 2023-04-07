@@ -124,3 +124,27 @@ input[type="button"] {
     font-size: 18px;
     font-weight: bold;
 }
+
+.posicion-dadoIzq {
+    position: absolute;
+    top: 50%;
+    left: 23%;
+    transform: translate(-50%, -50%);
+}
+
+.posicion-dadoIzq img {
+    width: 130px;
+    height: 130px;
+}
+
+.posicion-dadoDcha {
+    position: absolute;
+    top: 50%;
+    left: 33%;
+    transform: translate(-50%, -50%);
+}
+
+.posicion-dadoDcha img {
+    width: 130px;
+    height: 130px;
+}

@@ -21,7 +21,81 @@ export const Tablero = (props) => {
     const [abrirChat, setAbrirChat] = useState(false);
 
     const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
-    const [veces, setVeces] = useState(0);
+    const [veces, setVeces] = useState(0); // Para abrir/cerrar el chat
+
+    // Controlar los dados
+    /*const [numeroDado, setNumeroDado] = useState(1);
+    const [moviendoDado, setMoviendoDado] = useState(false);
+
+    const handleLanzarDado = () => {
+        setMoviendoDado(true);
+        const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+        setTimeout(() => {
+          setNumeroDado(numeroAleatorio);
+          setMoviendoDado(false);
+        }, 1000);
+    }
+    
+                    <img
+                    src={numeroDado === 1 ? dice1 : numeroDado === 2 ? dice2 : numeroDado === 3 ? dice3 : numeroDado === 4 ? dice4 : numeroDado === 5 ? dice5 : dice6}
+                    className={`dado ${moviendoDado ? 'moviendo' : ''}`}
+                    alt="Dado"
+                    onClick={handleLanzarDado}
+                    />
+    */
+
+    const [diceFace, setDiceFace] = useState(dice1);
+    const [diceFace2, setDiceFace2] = useState(dice1);
+
+    const rollDice = () => {
+        let numRolls = 10; // número de veces que se cambiará la cara del dado
+        let rollDelay = 100; // tiempo en milisegundos entre cada cambio de cara
+    
+        // función que se ejecutará cada vez que cambie la cara del dado
+        const rollStep = () => {
+        // elige una cara aleatoria del dado
+        const faces = [dice1, dice2, dice3, dice4, dice5, dice6];
+        const randomFace = faces[Math.floor(Math.random() * faces.length)];
+        const randomFace2 = faces[Math.floor(Math.random() * faces.length)];
+
+        // cambia la cara del dado
+        setDiceFace(randomFace);
+        setDiceFace2(randomFace2);
+
+        // si aún quedan cambios por hacer, programa el siguiente cambio
+        if (numRolls > 0) {
+            numRolls--;
+            setTimeout(rollStep, rollDelay);
+        }
+        };
+    
+        // empieza a cambiar la cara del dado
+        rollStep();
+    };
+
+    const rollDice2 = () => {
+        let numRolls = 10; // número de veces que se cambiará la cara del dado
+        let rollDelay = 100; // tiempo en milisegundos entre cada cambio de cara
+    
+        // función que se ejecutará cada vez que cambie la cara del dado
+        const rollStep = () => {
+        // elige una cara aleatoria del dado
+        const faces = [dice1, dice2, dice3, dice4, dice5, dice6];
+        const randomFace = faces[Math.floor(Math.random() * faces.length)];
+    
+        // cambia la cara del dado
+        setDiceFace2(randomFace);
+    
+        // si aún quedan cambios por hacer, programa el siguiente cambio
+        if (numRolls > 0) {
+            numRolls--;
+            setTimeout(rollStep, rollDelay);
+        }
+        };
+    
+        // empieza a cambiar la cara del dado
+        rollStep();
+    };
 
     const handleMostrarPropiedades = () => {
       setMostrarPropiedades(true);
@@ -59,6 +133,15 @@ export const Tablero = (props) => {
         <div className="row">
             <div className="col-7">
                 <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
+                <div onClick={rollDice}>
+                    <div className="posicion-dadoIzq">
+                        <img src={diceFace} />
+                    </div>
+                    <div className="posicion-dadoDcha">
+                        <img src={diceFace2} />
+                    </div>
+                </div>
+
             </div>
             <div className="col-5">
                 <div className="">
@@ -129,30 +212,3 @@ export const Tablero = (props) => {
 }
 
 export default Tablero;
-
-/*
-        {abrirChat ? (
-            <Chat email={email} gemas={gemas} />
-        ) : (
-*/
-
-/*
-        <div className="row">
-            <div className="col-9">
-                <img src={tablero} className="imagen-tablero w-75" alt="Tablero" />
-            </div>
-            <div className="col-3">
-                <div className="row">
-                    <div className="col-12 col-md-6 caja-jugadores">
-                        <input type="button" placeholder="1/4" />
-                    </div>
-                    <div className="col-12 col-md-6 caja-propiedades">
-                        <input type="text"  placeholder="3/4" />
-                    </div>
-                </div>
-                <div className="imagen-extra">
-                    <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
-                </div>
-            </div>
-        </div>
-*/
