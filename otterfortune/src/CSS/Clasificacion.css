@@ -1,0 +1,122 @@
+.fondoC {
+    height: 100%;
+    width: 100%;
+    /*border-radius: 0px;*/
+    /*background: linear-gradient(to right, #3B9AED, #1DD6D6);*/
+    background-image: url('../Imagenes/fondoMenu.jpg');
+    background-size: cover;
+    /* Para ajustar el tamaño de la imagen al contenedor*/
+    position: absolute;
+    overflow-x: hidden;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 70px 30px 70px;
+    border: 0px solid black;
+}
+
+.my-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.my-table th {
+    padding: 8px;
+    color: #000000;
+    font-size: 18px;
+    text-align: center;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-top: 2px solid #000000;
+}
+
+.my-table td {
+    padding: 8px;
+    color: #000000;
+    font-size: 18px;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-left: 2px solid #000000;
+}
+
+.my-table th {
+    background-color: #947631;
+    font-weight: bold;
+}
+
+.position {
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    background-color: #dabf66;
+}
+
+.points {
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    background-color: #f7d778;
+}
+
+.name {
+    width: auto;
+    height: 100px;
+    text-align: center;
+    background-color: #f7d161;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.name img {
+    margin-right: 50px;
+    margin-left: 30px;
+    height: 100px;
+    width: 110px;
+}
+
+.submenuC {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: auto;
+    text-align: center;
+    color: #ffffff;
+    border: 3px solid #fff;
+    box-shadow: 0px 0px 25px #222;
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    height: 80%;
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.nombre-skin {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+.submenuC button {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    background-color: #f7d161;
+    padding: 8px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 200px;
+}
+
+.submenuC button:hover {
+	transform: scale(1.22);
+	background: linear-gradient(to bottom right, #8b7500, #dabf66, #ffd700);
+}

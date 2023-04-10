@@ -8,6 +8,7 @@ import PopupTorneo from './PopupTorneo';
 import PopupCrearPartida from "./PopupCrearPartida";
 import PopupCrearTorneo from "./PopupCrearTorneo";
 import Tablero from "./Tablero";
+import Clasificacion from "./Clasificacion";
 
 import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
@@ -146,7 +147,7 @@ export const Menu = (props) => {
         setEmpTorneo(empezarT);
         setIsOpenCreateTorneo(false);
         // Actualizamos el id introducido
-        setIdPartida(id);
+        setIdTorneo(id);
     }
 
     //console.log(email);   // una forma de acceder a email
@@ -259,7 +260,9 @@ export const Menu = (props) => {
         <>
             {loading ? (
                 <Loading email={email} gemas={gemas} />
-            ) : irTablero ? <Tablero email={email} /> : (
+            ) : irTablero ? <Tablero email={email} gemas={gemas}/>
+                : empTorneo ? <Clasificacion email={email} gemas={gemas}/> : (
+
                 <div className="menu-container">
                     <header className="App-header">
                         <button className="menu-sesion-button2"

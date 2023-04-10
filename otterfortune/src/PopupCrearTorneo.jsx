@@ -23,7 +23,7 @@ const PopupCrear = (props) => {
 		// Y que tablero reciba props y acceder con props.id
 
 		// Obtener el id recibido del mensaje
-		const id = await socketActions.crearPartida(socket, props.email);
+		//const id = await socketActions.crearPartida(socket, props.email);
 		props.handleCloseCreate(id, true);
 	};
 
