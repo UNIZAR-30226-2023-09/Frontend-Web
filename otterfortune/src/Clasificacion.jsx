@@ -96,7 +96,7 @@ const Clasificacion = (props) => {
                     <thead>
                         <tr>
                             <th>Posición</th>
-                            <th>Nombre y Skin</th>
+                            <th>Jugador</th>
                             <th>Puntos</th>
                         </tr>
                     </thead>

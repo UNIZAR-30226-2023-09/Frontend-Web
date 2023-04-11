@@ -145,7 +145,7 @@ input[type="button"] {
 .posicion-dadoIzq {
     position: absolute;
     top: 50%;
-    left: 23%;
+    left: 25%;
     transform: translate(-50%, -50%);
 }
 
@@ -157,7 +157,7 @@ input[type="button"] {
 .posicion-dadoDcha {
     position: absolute;
     top: 50%;
-    left: 33%;
+    left: 34%;
     transform: translate(-50%, -50%);
 }
 

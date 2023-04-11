@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import './CSS/Tablero.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import tablero from './Imagenes/TABLERO2.jpg'
+import tablero from './Imagenes/TABLERO.png'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
 import PopupCarta from './PopupCarta';
@@ -38,10 +38,13 @@ export const Tablero = (props) => {
     const [diceFace2, setDiceFace2] = useState(dice1);
 
     // Saber la posicion de cada jugador
-    const [posicion1,setPosicion1] = useState(4);
-    const [posicion2,setPosicion2] = useState(2);
-    const [posicion3,setPosicion3] = useState(3);
+    const [posicion1,setPosicion1] = useState(1);
+    const [posicion2,setPosicion2] = useState(1);
+    const [posicion3,setPosicion3] = useState(1);
     const [posicion4,setPosicion4] = useState(1);
+
+    const [num1, setNum1] = useState(1);
+    const [num2, setNum2] = useState(1);
 
     const rollDice = () => {
         let numRolls = 10; // número de veces que se cambiará la cara del dado
@@ -49,24 +52,45 @@ export const Tablero = (props) => {
     
         // función que se ejecutará cada vez que cambie la cara del dado
         const rollStep = () => {
-        // elige una cara aleatoria del dado
-        const faces = [dice1, dice2, dice3, dice4, dice5, dice6];
-        const randomFace = faces[Math.floor(Math.random() * faces.length)];
-        const randomFace2 = faces[Math.floor(Math.random() * faces.length)];
+            // elige una cara aleatoria del dado
+            const faces = [{numero: 1, imagen: dice1}, {numero: 2, imagen: dice2}, {numero: 3, imagen: dice3}, {numero: 4, imagen: dice4}, {numero: 5, imagen: dice5}, {numero: 6, imagen: dice6}];
 
-        // cambia la cara del dado
-        setDiceFace(randomFace);
-        setDiceFace2(randomFace2);
+            //const randomFace = faces[Math.floor(Math.random() * faces.length)].imagen;
+            //const randomFace2 = faces[Math.floor(Math.random() * faces.length)].imagen;
+            const randomIndex = Math.floor(Math.random() * faces.length);
+            const randomFace = faces[randomIndex];
+            const randomNumber = randomFace.numero;
+            const randomImage = randomFace.imagen;
 
-        // si aún quedan cambios por hacer, programa el siguiente cambio
-        if (numRolls > 0) {
-            numRolls--;
-            setTimeout(rollStep, rollDelay);
-        }
+            const randomIndex2 = Math.floor(Math.random() * faces.length);
+            const randomFace2 = faces[randomIndex2];
+            const randomNumber2 = randomFace2.numero;
+            const randomImage2 = randomFace2.imagen;
+
+            // cambia la cara del dado
+            setDiceFace(randomImage);
+            setDiceFace2(randomImage2);
+
+            
+
+            // si aún quedan cambios por hacer, programa el siguiente cambio
+            if (numRolls > 0) {
+                numRolls--;
+                setNum1(randomNumber);
+                setNum2(randomNumber2);
+                setTimeout(rollStep, rollDelay);
+            }
+            else {
+                // guardamos la última cara del dado en posicion1 y posicion2
+                // TODO: Aquí sería darle el valor de los dados del mensaje obtenido
+                setPosicion1(posicion1 + randomNumber);
+                setPosicion2(posicion2 + randomNumber2);
+            }
         };
     
         // empieza a cambiar la cara del dado
         rollStep();
+
     };
 
     const handleMostrarPropiedades = () => {
