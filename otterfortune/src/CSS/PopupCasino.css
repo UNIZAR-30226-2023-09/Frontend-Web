@@ -64,14 +64,42 @@
 
 @keyframes rotate {
     from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(2520deg); 
+    }
+}
+  
+.rotate {
+    animation: rotate 10s ease-in-out;
+}
+  
+.pelota-rule {
+    position: absolute;
+    left: 46.1%;
+    top: 37%;
+    width: 12%;
+    height: 15%;
+}
+
+.rule2 {
+    position: absolute;
+    width: 25%;
+    height: 50%;
+    left: 38%;
+    top: 17%;
+}
+
+@keyframes rotate2 {
+    from {
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(1800deg);
+      transform: rotate(-2130deg); 
     }
   }
   
-  .rotate {
-    animation: rotate 4s ease-in-out;
-  }
-  
+.rotate2 {
+    animation: rotate 10s ease-in-out;
+}

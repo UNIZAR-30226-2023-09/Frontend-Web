@@ -5,7 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useSocket } from "./socketContext";
 
-import ruleta from './Imagenes/ruleta.png';
+import ruleta from './Imagenes/rule.png';
+import rule from './Imagenes/ruleta2.png';
+import bola from './Imagenes/bola2.png';
 
 const PopupCasino = (props) => {
     const socket = useSocket();
@@ -25,8 +27,9 @@ const PopupCasino = (props) => {
         setTimeout(() => {
             setIsBetting(false);
             // TODO: Aquí iría el mensaje de ganado/perdido
-            window.alert("La rotación de la imagen ha finalizado");
-          }, 4000);    };
+            window.alert("Eres un ludao");
+          }, 10000);    
+    };
 
     return (
         <div className="row">
@@ -37,7 +40,9 @@ const PopupCasino = (props) => {
                 <div className="popup5">
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <div className="image-container">
-                        <img className={`popup__imageC ${isBetting ? "rotate" : ""}`} src={ruleta} />
+                        <img className="popup__imageC" src={ruleta} />
+                        <img className={`rule2 ${isBetting ? "rotate" : ""}`} src={rule}/>
+                        <img className={`pelota-rule ${isBetting ? "rotate2" : ""}`} src={bola}/>
                         <div className="caja-rule">
                             <label className="titulo-apostar">Dinero a apostar:</label>
                             <input type="number" className="cantidad-apostar" value={betAmount} onChange={handleBetAmountChange} />
