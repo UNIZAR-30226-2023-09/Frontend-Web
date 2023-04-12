@@ -6,6 +6,7 @@ import tablero from './Imagenes/TABLERO.png'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
 import PopupCarta from './PopupCarta';
+import PopupCasino from './PopupCasino';
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -27,11 +28,12 @@ export const Tablero = (props) => {
 
     const [abrirChat, setAbrirChat] = useState(false);
 
-    const [mostrarPropiedades, setMostrarPropiedades] = useState(true);
     const [veces, setVeces] = useState(0); // Para abrir/cerrar el chat
 
     // Mostrar info de las propiedades
     const [openCarta, setOpenCarta] = useState(false);
+    // Mostrar la casilla del casino
+    const [openCasino, setOpenCasino] = useState(false);
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -83,8 +85,16 @@ export const Tablero = (props) => {
             else {
                 // guardamos la última cara del dado en posicion1 y posicion2
                 // TODO: Aquí sería darle el valor de los dados del mensaje obtenido
-                setPosicion1(posicion1 + randomNumber);
-                setPosicion2(posicion2 + randomNumber2);
+                let posnueva = (posicion1 + randomNumber)%41;
+                let posnueva2 = (posicion2 + randomNumber2)%41;
+                setPosicion1(posnueva);
+                console.log("1:", posnueva);
+                setPosicion2(posnueva2);
+                console.log("2:",posnueva2);
+                // TODO: Aquí sería mirar lo que hacer según cada casilla
+                if (posnueva > 0) {
+                    setOpenCasino(true);
+                }
             }
         };
     
@@ -93,13 +103,6 @@ export const Tablero = (props) => {
 
     };
 
-    const handleMostrarPropiedades = () => {
-        setMostrarPropiedades(true);
-    };
-  
-    const handleMostrarCartas = () => {
-      setMostrarPropiedades(false);
-    };
 
     const handleCloseChat = (e) => {
         setAbrirChat(false);
@@ -120,63 +123,66 @@ export const Tablero = (props) => {
     const casillas = new Map();
 
     // Estas son la columna izquierda de abajo arriba
-    casillas.set("Casilla1", { top: "700px", left: "60px", width: "50px", height: "50px" });
+    // --> 1px = 0.06%
+    casillas.set("Casilla1", { top: "700px", left: "3%", width: "5.8%", height: "5.8%" });
 
-    casillas.set("Casilla2", { top: "615px", left: "50px", width: "50px", height: "50px" });
+    casillas.set("Casilla2", { top: "608px", left: "3%", width: "5.8%", height: "5.8%" });
     // TODO: Para meter mas -> +25 en left empezando en 15
-    //casillas.set("Casilla2", { top: "615px", left: "15px", width: "50px", height: "50px" });
-    //casillas.set("Casilla2.1", { top: "615px", left: "40px", width: "50px", height: "50px" });
+    //casillas.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
+    //casillas.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
     //casillas.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
     //casillas.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
+    casillas.set("Casilla3", { top: "548px", left: "3%", width: "5.8%", height: "5.8%" });
 
-    casillas.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla4", { top: "495px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla5", { top: "435px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla6", { top: "375px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla7", { top: "308px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla8", { top: "248px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla9", { top: "187px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla10", { top: "125px", left: "50px", width: "50px", height: "50px" });
+   // casillas.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
+    casillas.set("Casilla4", { top: "488px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla5", { top: "428px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla6", { top: "368px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla7", { top: "305px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla8", { top: "243px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla9", { top: "184px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla10", { top: "122px", left: "3%", width: "5.8%", height: "5.8%" });
 
     // Estas son la fila de arriba de izquierda a derecha
-    casillas.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
-    casillas.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
+    //casillas.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
+    //casillas.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
+    casillas.set("Casilla11", { top: "4.4%", left: "3%", width: "5.8%", height: "5.8%" });
 
-    casillas.set("Casilla12", { top: "40px", left: "155px", width: "50px", height: "50px" });
-    casillas.set("Casilla13", { top: "40px", left: "225px", width: "50px", height: "50px" });
-    casillas.set("Casilla14", { top: "40px", left: "295px", width: "50px", height: "50px" });
-    casillas.set("Casilla15", { top: "40px", left: "365px", width: "50px", height: "50px" });
-    casillas.set("Casilla16", { top: "40px", left: "435px", width: "50px", height: "50px" });
-    casillas.set("Casilla17", { top: "40px", left: "505px", width: "50px", height: "50px" });
-    casillas.set("Casilla18", { top: "40px", left: "575px", width: "50px", height: "50px" });
-    casillas.set("Casilla19", { top: "40px", left: "645px", width: "50px", height: "50px" });
-    casillas.set("Casilla20", { top: "40px", left: "715px", width: "50px", height: "50px" });
+    casillas.set("Casilla12", { top: "4.4%", left: "9.3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla13", { top: "4.4%", left: "13.7%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla14", { top: "4.4%", left: "18%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla15", { top: "4.4%", left: "22.6%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla16", { top: "4.4%", left: "27.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla17", { top: "4.4%", left: "31.6%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla18", { top: "4.4%", left: "36.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla19", { top: "4.4%", left: "40.6%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla20", { top: "4.4%", left: "45.2%", width: "5.8%", height: "5.8%" });
 
     // Estas son la columna de la derecha de arriba a abajo
-    casillas.set("Casilla21", { top: "50px", left: "825px", width: "50px", height: "50px" });
+    casillas.set("Casilla21", { top: "38px", left: "51%", width: "6.6%", height: "6.6%" });
     
-    casillas.set("Casilla22", { top: "125px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla23", { top: "188px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla24", { top: "248px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla25", { top: "308px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla26", { top: "368px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla27", { top: "435px", left: "835px", width: "50px", height: "50px"});
-    casillas.set("Casilla28", { top: "495px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla29", { top: "555px", left: "835px", width: "50px", height: "50px" });
-    casillas.set("Casilla30", { top: "615px", left: "835px", width: "50px", height: "50px" });
+    casillas.set("Casilla22", { top: "122px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla23", { top: "184px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla24", { top: "245px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla25", { top: "304px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla26", { top: "364px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla27", { top: "431px", left: "51.2%", width: "6.6%", height: "6.6%"});
+    casillas.set("Casilla28", { top: "491px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla29", { top: "551px", left: "51.2%", width: "6.6%", height: "6.6%" });
+    casillas.set("Casilla30", { top: "611px", left: "51.2%", width: "6.6%", height: "6.6%" });
     
     // Esta es la fila de abajo de derecha a izquierda
-    casillas.set("Casilla31", { top: "700px", left: "815px", width: "50px", height: "50px" });
+    casillas.set("Casilla31", { top: "700px", left: "51%", width: "6.6%", height: "6.6%" });
 
-    casillas.set("Casilla32", { top: "695px", left: "725px", width: "50px", height: "50px" });
-    casillas.set("Casilla33", { top: "695px", left: "655px", width: "50px", height: "50px" });
-    casillas.set("Casilla34", { top: "695px", left: "585px", width: "50px", height: "50px" });
-    casillas.set("Casilla35", { top: "695px", left: "515px", width: "50px", height: "50px" });
-    casillas.set("Casilla36", { top: "695px", left: "435px", width: "50px", height: "50px" });
-    casillas.set("Casilla37", { top: "695px", left: "365px", width: "50px", height: "50px" });
-    casillas.set("Casilla38", { top: "695px", left: "295px", width: "50px", height: "50px" });
-    casillas.set("Casilla39", { top: "695px", left: "225px", width: "50px", height: "50px" });
-    casillas.set("Casilla40", { top: "695px", left: "155px", width: "50px", height: "50px" });
+    casillas.set("Casilla32", { top: "695px", left: "45.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla33", { top: "695px", left: "40.6%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla34", { top: "695px", left: "36.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla35", { top: "695px", left: "31.6%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla36", { top: "695px", left: "27.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla37", { top: "695px", left: "22.8%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla38", { top: "695px", left: "18.2%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla39", { top: "695px", left: "13.7%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla40", { top: "695px", left: "9.3%", width: "5.8%", height: "5.8%" });
 
     /* ---------------------------------------------------------*/
     // {isOpenChat && popUpChat}
@@ -185,8 +191,6 @@ export const Tablero = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <Chat handleClose={handleCloseChat} />
-
-
     );
 
     // TODO: Obtener lista de jugadores
@@ -208,12 +212,13 @@ export const Tablero = (props) => {
     const listaPropiedades = ['Propiedad 1', 'Propiedad 2', 'Propiedad 3', 'Propiedad 4', 'Propiedad 5', 'Propiedad 6', 'Propiedad 7', 'Propiedad 8'];
 
 
-    function mostrarPopUp1() {
+    function mostrarPopUpPropiedad() {
         setOpenCarta(true);
     }
 
     const handleCloseCarta = (e) => {
         setOpenCarta(false);
+        setOpenCasino(false);
     }
 
     // Gestiona la ventana emergente 
@@ -224,7 +229,9 @@ export const Tablero = (props) => {
         <PopupCarta handleClose={handleCloseCarta} />
     );
     
-      
+    const popUpCasino = (
+        <PopupCasino handleClose={handleCloseCarta} />
+    );
 
     return (
 
@@ -240,12 +247,11 @@ export const Tablero = (props) => {
                     </div>
                 </div>
 
-
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
                     <img src={tite} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
-                    <img src={lucas} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={lucas} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
                     <img src={plex} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
@@ -287,7 +293,7 @@ export const Tablero = (props) => {
                         <div className="row no-gutters">
                             <div className="col-12">
                                 <div className="btn-container">
-                                    <input type="button" className="btn-propiedades" value="Propiedades" onClick={handleMostrarPropiedades}/>
+                                    <input type="button" className="btn-propiedades" value="Propiedades" />
                                 </div>
                             </div>
                         </div>
@@ -296,10 +302,11 @@ export const Tablero = (props) => {
                                 {listaPropiedades.map((propiedad, index) => (
                                     <li 
                                         key={index}>{propiedad}
-                                        <img src={simboloMas} onClick={mostrarPopUp1}/>
+                                        <img src={simboloMas} onClick={mostrarPopUpPropiedad}/>
                                     </li>
                                 ))}
                                 {openCarta && popupCarta}
+                                {openCasino && popUpCasino}
 
                             </ul>
                         </div>
@@ -325,4 +332,18 @@ export default Tablero;
                     <img src={tite} style={{width: posicion.width, height: posicion.height}} />
                 </div>
                 ))}
+
+
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
+                    <img src={tite} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
+                    <img src={lucas} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
+                    <img src={plex} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
+                    <img src={jeancarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
 */

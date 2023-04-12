@@ -1,0 +1,77 @@
+.popup5 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup__close5 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
+
+/*.popup__image5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 68%;
+    max-height: 65%;
+}*/
+
+.caja-rule {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.titulo-apostar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.cantidad-apostar {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 25%;
+    width: 50%;
+    border: 1px solid black;
+}
+
+.boton-apostar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 34%;
+    width: 30%;
+}
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(1800deg);
+    }
+  }
+  
+  .rotate {
+    animation: rotate 4s ease-in-out;
+  }
+  

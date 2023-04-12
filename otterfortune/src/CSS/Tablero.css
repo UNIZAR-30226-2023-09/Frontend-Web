@@ -144,25 +144,23 @@ input[type="button"] {
 
 .posicion-dadoIzq {
     position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
+    top: 43%;
+    left: 21%;
 }
 
 .posicion-dadoIzq img {
-    width: 130px;
-    height: 130px;
+    width: 30%;
+    height: 30%;
 }
 
 .posicion-dadoDcha {
     position: absolute;
-    top: 50%;
-    left: 34%;
-    transform: translate(-50%, -50%);
+    top: 43%;
+    left: 31%;
 }
 
 .posicion-dadoDcha img {
-    width: 130px;
-    height: 130px;
+    width: 30%;
+    height: 30%;
 }
 
