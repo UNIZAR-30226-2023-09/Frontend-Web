@@ -40,7 +40,7 @@ const PopupCasino = (props) => {
                 <div className="popup5">
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <div className="image-container">
-                        <img className="popup__imageC" src={ruleta} />
+                        {/* <img className="popup__imageC" src={ruleta} /> */}
                         <img className={`rule2 ${isBetting ? "rotate" : ""}`} src={rule}/>
                         <img className={`pelota-rule ${isBetting ? "rotate2" : ""}`} src={bola}/>
                         <div className="caja-rule">

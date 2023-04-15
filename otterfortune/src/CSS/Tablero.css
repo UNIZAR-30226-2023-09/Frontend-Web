@@ -4,7 +4,7 @@
 }
 
 .imagen-extra {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
 }
@@ -21,7 +21,6 @@
 }
 
 .caja-propiedades {
-    margin-top: 160px;
 }
 
 input[type="button"] {
@@ -43,12 +42,13 @@ input[type="button"] {
 }
 /* Para la caja de los jugadores */
 .lista-jugadores {
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     max-height: 229px;
-    margin-bottom: -120px;
+    margin-bottom: 20px;
     overflow-y: auto;
+    font-size: 20px;
 }
 
 .lista-jugadores ul {
@@ -59,12 +59,12 @@ input[type="button"] {
 
 .lista-jugadores li {
     margin-bottom: 5px;
+    font-size: 20px;
 }
 
 .lista-jugadores h3 {
     margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -74,7 +74,6 @@ input[type="button"] {
     border: 1px solid #ccc;
     background-color: #f8f8f8;
     max-height: 2000px;
-    margin-bottom: -300px;
 }
 
 .lista-propiedades ul {
@@ -87,11 +86,11 @@ input[type="button"] {
 
 .lista-propiedades li {
     margin-bottom: 5px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .lista-propiedades li img {
-    margin-left: 8px;
+    margin-left: 13px;
     margin-bottom: 3px;
     width: 25px;
     height: 25px;
@@ -101,9 +100,74 @@ input[type="button"] {
 .lista-propiedades h3 {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 18px;
+    margin-left: 15px;
+    font-size: 15px;
     font-weight: bold;
 }
+
+button.vender {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #d31515;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+button.vender:hover {
+    background-color: #ff6666;
+}
+
+button.edificar {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #aa881a;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+button.edificar:hover {
+    background-color: #d3b38c;
+}
+
+/* Para la caja de la información partida */
+.lista-informacion {
+    padding: 0px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    max-height: 2000px;
+    margin-bottom: 5px;
+}
+
+.lista-informacion ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+    max-height: 270px;
+    overflow-y: auto;
+}
+
+.lista-informacion li {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
 
 /* Para la caja de las cartas */
 .lista-cartas {
@@ -163,4 +227,3 @@ input[type="button"] {
     width: 30%;
     height: 30%;
 }
-

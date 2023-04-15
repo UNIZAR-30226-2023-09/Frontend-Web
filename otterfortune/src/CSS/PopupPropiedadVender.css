@@ -1,0 +1,36 @@
+.popupProp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.popup__imagePropV {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 68%;
+    max-height: 65%;
+}
+  
+.popup__titleV {
+    position: absolute;
+    top: 80px;
+    color: black;
+    padding: 25px;
+    background-color: #f1f1f1;
+    color: #000000;
+    text-align: center;
+    width: 50%;
+    height: 70px;
+    border-radius: 20px;
+}
+
+  

@@ -7,6 +7,8 @@ import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
 import PopupCarta from './PopupCarta';
 import PopupCasino from './PopupCasino';
+import PopupPropiedad from "./PopupPropiedad";
+import PopupPropiedadVender from "./PopupPropiedadVender";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -18,8 +20,11 @@ import tite from './Imagenes/TITE.png';
 import plex from './Imagenes/PLEX.png';
 import lucas from './Imagenes/LUCAS.png';
 import jeancarlo from './Imagenes/JEAN-CARLO.png';
-import simboloMas from './Imagenes/simboloMas.png';
 
+import fichaJeanCarlo from './Imagenes/FICHAS/AMARILLO1.png';
+import fichaLucas from './Imagenes/FICHAS/ROJO1.png';
+import fichaTite from './Imagenes/FICHAS/MARRON1.png';
+import fichaPlex from './Imagenes/FICHAS/ROSA1.png';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -30,10 +35,14 @@ export const Tablero = (props) => {
 
     const [veces, setVeces] = useState(0); // Para abrir/cerrar el chat
 
-    // Mostrar info de las propiedades
+    // Mostrar info de las propiedades en el mas de cada propiedad
     const [openCarta, setOpenCarta] = useState(false);
     // Mostrar la casilla del casino
     const [openCasino, setOpenCasino] = useState(false);
+    // Mostrar la carta de cada propiedad cuando cae en cada casilla
+    const [openPropiedad, setOpenPropiedad] = useState(false);
+    // Mostrar la pantalla de vender propiedad
+    const [openVenderProp, setOpenVenderProp] = useState(false);
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -44,6 +53,14 @@ export const Tablero = (props) => {
     const [posicion2,setPosicion2] = useState(1);
     const [posicion3,setPosicion3] = useState(1);
     const [posicion4,setPosicion4] = useState(1);
+
+    const [jugadoresVisible, setJugadoresVisible] = useState(false);
+    const [propiedadesVisible, setPropiedadesVisible] = useState(false);
+
+    // Para la información de partida
+    const [dineroBanco, setDineroBanco] = useState(0);
+    const [dineroBote, setDineroBote] = useState(0);
+    const [ronda, setRonda] = useState(0);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
@@ -73,8 +90,6 @@ export const Tablero = (props) => {
             setDiceFace(randomImage);
             setDiceFace2(randomImage2);
 
-            
-
             // si aún quedan cambios por hacer, programa el siguiente cambio
             if (numRolls > 0) {
                 numRolls--;
@@ -94,6 +109,10 @@ export const Tablero = (props) => {
                 // TODO: Aquí sería mirar lo que hacer según cada casilla
                 if (posnueva > 0) {
                     setOpenCasino(true);
+                }
+               
+                if (posnueva > 0) {
+                    setOpenPropiedad(true);
                 }
             }
         };
@@ -126,22 +145,22 @@ export const Tablero = (props) => {
     // --> 1px = 0.06%
     casillas.set("Casilla1", { top: "700px", left: "3%", width: "5.8%", height: "5.8%" });
 
-    casillas.set("Casilla2", { top: "608px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla2", { top: "612px", left: "3%", width: "5.8%", height: "5.8%" });
     // TODO: Para meter mas -> +25 en left empezando en 15
     //casillas.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
     //casillas.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
     //casillas.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
     //casillas.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
-    casillas.set("Casilla3", { top: "548px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla3", { top: "553px", left: "3%", width: "5.8%", height: "5.8%" });
 
    // casillas.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
-    casillas.set("Casilla4", { top: "488px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla5", { top: "428px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla6", { top: "368px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla7", { top: "305px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla8", { top: "243px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla9", { top: "184px", left: "3%", width: "5.8%", height: "5.8%" });
-    casillas.set("Casilla10", { top: "122px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla4", { top: "495px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla5", { top: "435px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla6", { top: "373px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla7", { top: "312px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla8", { top: "250px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla9", { top: "190px", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla10", { top: "130px", left: "3%", width: "5.8%", height: "5.8%" });
 
     // Estas son la fila de arriba de izquierda a derecha
     //casillas.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
@@ -201,8 +220,10 @@ export const Tablero = (props) => {
     //setPosicion1(casillas.get("Casilla2"));
 
     const jugadores1 = [
-        { nombre: 'Jesus', imagen: tite, dinero: 100 },
-        { nombre: 'Alejandro', imagen: lucas, dinero: 150 },
+        { nombre: 'Jesus', imagen: tite, dinero: 100, ficha: fichaTite },
+        { nombre: 'Alejandro', imagen: lucas, dinero: 150, ficha: fichaLucas },
+        { nombre: 'Cesar', imagen: plex, dinero: 200, ficha: fichaPlex },
+        { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
     ];
     const jugadores2 = [
         { nombre: 'Cesar', imagen: plex, dinero: 200 },
@@ -211,26 +232,39 @@ export const Tablero = (props) => {
 
     const listaPropiedades = ['Propiedad 1', 'Propiedad 2', 'Propiedad 3', 'Propiedad 4', 'Propiedad 5', 'Propiedad 6', 'Propiedad 7', 'Propiedad 8'];
 
-
-    function mostrarPopUpPropiedad() {
+    const mostrarPopUpPropiedad = (e) => {
         setOpenCarta(true);
     }
 
     const handleCloseCarta = (e) => {
         setOpenCarta(false);
+        setOpenPropiedad(false);
         setOpenCasino(false);
+    }
+
+    const mostrarVender = (e) => {
+        setOpenVenderProp(true);
+    }
+
+    const handleCloseVender = (e) => {
+        setOpenVenderProp(false);
     }
 
     // Gestiona la ventana emergente 
     const popupCarta = (
-        // De esta forma, en popup, a través del props, se podrá acceder
-        // a handleClose y a content
-        // Se le puede pasar cualquier cosa
         <PopupCarta handleClose={handleCloseCarta} />
     );
     
     const popUpCasino = (
         <PopupCasino handleClose={handleCloseCarta} />
+    );
+
+    const popUpPropiedad = (
+        <PopupPropiedad handleClose={handleCloseCarta} propiedad={"NombreCarta"} />
+    );
+
+    const popUpVender = (
+        <PopupPropiedadVender handleClose={handleCloseVender} propiedad={"NombreCarta"} />
     );
 
     return (
@@ -248,70 +282,94 @@ export const Tablero = (props) => {
                 </div>
 
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
-                    <img src={tite} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
-                    <img src={lucas} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
+                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
-                    <img src={plex} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
-                    <img src={jeancarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
 
 
             </div>
             <div className="col-5">
                 <div className="">
+                    
                     <div className="col-12 caja-jugadores">
                         <div className="btn-container">
-                            <input type="button" className="btn-jugadores" value="Lista de jugadores" />
+                            <input type="button" className="btn-jugadores" value="Información partida" />
                         </div>
-                        <div className="lista-jugadores">
-                            <ul style={{ display: 'flex', flexDirection: 'row' }}>
-                                {jugadores1.map((jugador) => (
-                                <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '22px' }}>
-                                    <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
-                                    <span style={{ marginRight: '10px' }}>{jugador.nombre}</span>
-                                    <span>{jugador.dinero}$</span>
-                                </li>
-                                ))}
-                            </ul>
-                            <ul style={{ display: 'flex', flexDirection: 'row' }}>
-                                {jugadores2.map((jugador) => (
-                                <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '22px' }}>
-                                    <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
-                                    <span style={{ marginRight: '10px' }}>{jugador.nombre}</span>
-                                    <span>{jugador.dinero}$</span>
-                                </li>
-                                ))}
+                        <div className="lista-informacion">
+                            <ul>
+                                <li>Dinero en el banco: {dineroBanco}$ </li>
+                                <li>Dinero en el bote: {dineroBote}$ </li>
+                                <li>Ronda actual: {ronda} </li>
                             </ul>
                         </div>
+
                     </div>
+
+                    <div className="col-12 caja-jugadores">
+                        <div className="btn-container">
+                            <input type="button" className="btn-jugadores" value="Lista de jugadores" onClick={() => setJugadoresVisible(!jugadoresVisible)} />
+                        </div>
+
+                        {jugadoresVisible &&
+                            <div className="lista-jugadores">
+
+                                <ul style={{ display: 'flex', flexDirection: 'column' }}>
+                                    {jugadores1.map((jugador) => (
+                                        <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '20px' }}>
+                                            <img src={jugador.ficha} alt={jugador.ficha} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                                            <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                                            <span style={{ marginRight: '10px' }}>{jugador.nombre}</span>
+                                            <span>{jugador.dinero}$</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                            </div>
+                        }
+
+                    </div>
+
                     <div className="caja-propiedades">
-                        <div className="row no-gutters">
+                        <div className="row">
                             <div className="col-12">
+
                                 <div className="btn-container">
-                                    <input type="button" className="btn-propiedades" value="Propiedades" />
+                                    <input type="button" className="btn-propiedades" value="Propiedades" onClick={() => setPropiedadesVisible(!propiedadesVisible)} />
                                 </div>
+
                             </div>
                         </div>
-                        <div className="lista-propiedades">
-                            <ul>
-                                {listaPropiedades.map((propiedad, index) => (
-                                    <li 
-                                        key={index}>{propiedad}
-                                        <img src={simboloMas} onClick={mostrarPopUpPropiedad}/>
-                                    </li>
-                                ))}
-                                {openCarta && popupCarta}
-                                {openCasino && popUpCasino}
 
-                            </ul>
-                        </div>
+                        {propiedadesVisible &&
+                            <div className="lista-propiedades">
+                                <ul>
+
+                                    {listaPropiedades.map((propiedad, index) => (
+                                        <li 
+                                            key={index}>{propiedad}
+                                            <button className="vender" onClick={mostrarVender}>Vender</button>
+                                            <button className="edificar" onClick={mostrarPopUpPropiedad}>Edificar</button>
+                                        </li>
+                                    ))}
+                                    {openVenderProp && popUpVender}
+                                    {openCarta && popupCarta}
+                                </ul>
+                            </div>
+                        }
+
+                        {openCasino && popUpCasino}
+                        {openPropiedad && popUpPropiedad}
                        
                     </div>
+
                 </div>
                 <div className="imagen-extra">
                     <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
@@ -345,5 +403,19 @@ export default Tablero;
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
                     <img src={jeancarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
+
+
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
+                    <img src={ficha} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
+                    <img src={ficha} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
+                    <img src={ficha} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
+                    <img src={ficha} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
 */
