@@ -4,118 +4,188 @@
 * Autor: David Rivera Seves (NIP: 815124)                                      *
 \******************************************************************************/
 
+let waitingForResponse = false
+
 const waitForResponse = (socket) => {
     return new Promise((resolve) => {
         socket.onmessage = (event) => {
-            resolve(event.data);
-        };
-    });
-};
+            if (waitingForResponse) {
+                waitingForResponse = false
+                resolve(event.data)
+            } else {
+                cambiarEstado(event.data)
+            }
+        }
+    })
+}
+
+
+/*
+Escuchar:
+    ACTUALIZAR_USUARIO,email,dinero,casilla,propiedades
+    TURNO,email,id_partida
+    CHAT,email,msg
+*/
+function cambiarEstado(data) {
+    console.log("cambiarEstado: " + data)
+}
 
 export async function registrarse(socket, email, contrasenya, nombre) {
     if (socket) {
-        socket.send(`registrarse,${email},${contrasenya},${nombre}`);
-        const response = await waitForResponse(socket);
+        socket.send(`registrarse,${email},${contrasenya},${nombre}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
 
-        let msg = response.toString().split(",");
+        let msg = response.toString().split(",")
         if (msg[0] === 'REGISTRO_OK') {
-            return true;
+            console.log("Sí registrado")
+            return true
         } else {
-            return false;
+            console.log("No registrado")
+            return false
         }
     }
 }
 
 export async function iniciarSesion(socket, email, contrasenya) {
     if (socket) {
-        socket.send(`iniciarSesion,${email},${contrasenya}`);
-        const response = await waitForResponse(socket);
+        socket.send(`iniciarSesion,${email},${contrasenya}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
 
-        let msg = response.toString().split(",");
-
+        let msg = response.toString().split(",")
         if (msg[0] === 'INICIO_OK') {
-            return msg[2];  //devuelve el numero de gemas del jugador que ha iniciado la partida.
+            console.log("Sí iniciarSesion, gemas: " + msg[2])
+            return msg[2]  // Devuelve gemas
         } else {
-            return -1;
+            console.log("No iniciarSesion")
+            return -1
         }
     }
 }
 
-export async function crearPartida(socket, ID_jugador) {
+export async function crearPartida(socket, email) {
     if (socket) {
-        socket.send(`crearPartida,${ID_jugador}`);
-        const response = await waitForResponse(socket);
+        socket.send(`crearPartida,${email}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
 
-        let msg = response.toString().split(",");
-
+        let msg = response.toString().split(",")
         if (msg[0] === 'CREADAP_OK') {
-            return msg[1];    //idPartida = msg[1].
+            console.log("Sí crearPartida, id_partida: " + msg[1])
+            return msg[1]    // Devuelve idPartida
         } else {
-            return -1;
+            console.log("No crearPartida")
+            return -1
         }
     }
 }
 
-export async function unirsePartida(socket, ID_jugador, ID_partida) {
+export async function unirsePartida(socket, email, id_partida) {
     if (socket) {
-        socket.send(`unirsePartida,${ID_jugador},${ID_partida}`);
-        const response = await waitForResponse(socket);
+        socket.send(`unirsePartida,${email},${id_partida}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
 
-        let msg = response.toString().split(",");
-
+        let msg = response.toString().split(",")
         if (msg[0] === 'UNIRP_OK') {
-            return true;    //idPartida = msg[1].
+            console.log("Sí unirsePartida, id_partida: " + msg[1] + " email: " + msg[2])
+            return true
         } else {
-            return false;
+            console.log("No unirsePartida")
+            return false
         }
-
-        return response;
     }
 }
 
-export async function empezarPartida(socket, ID_Partida, ID_Lider) {
+
+export async function empezarPartida(socket, id_partida, email_lider) {
     if (socket) {
-        socket.send(`empezarPartida,${ID_Partida},${ID_Lider}`);
+        socket.send(`empezarPartida,${id_partida},${email_lider}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'EMPEZAR_OK') {
+            const jugadorYO = msg[3 + parseInt(msg[2])]
+            const indicesJugadores = [0, 1, 2, 3].filter(index => index !== parseInt(msg[2]))
+            const jugador1 = msg[3 + indicesJugadores[0]]
+            const jugador2 = msg[3 + indicesJugadores[1]]
+            const jugador3 = msg[3 + indicesJugadores[2]]
+
+            console.log("Sí empezarPartida, id_partida: " + msg[1] + " jugadorYO: " + jugadorYO + " jugador1: " + jugador1 + " jugador2: " + jugador2 + " jugador3: " +  jugador3)
+
+            return [jugadorYO, jugador1, jugador2, jugador3]    // Devuelve lista de jugadores, el primero soy yo
+        } else {
+            console.log("No empezarPartida")
+            return -1
+        }
+    }
+}
+
+
+export async function esperarEmpezarPartida(socket) {
+    if (socket) {
+        
+        console.log('Esperando ...')
+
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'EMPEZAR_OK') {
+            const jugadorYO = msg[3 + parseInt(msg[2])]
+            const indicesJugadores = [0, 1, 2, 3].filter(index => index !== parseInt(msg[2]))
+            const jugador1 = msg[3 + indicesJugadores[0]]
+            const jugador2 = msg[3 + indicesJugadores[1]]
+            const jugador3 = msg[3 + indicesJugadores[2]]
+
+            console.log("Sí empezarPartida, id_partida: " + msg[1] + " jugadorYO: " + jugadorYO + " jugador1: " + jugador1 + " jugador2: " + jugador2 + " jugador3: " +  jugador3)
+
+            return [jugadorYO, jugador1, jugador2, jugador3]    // Devuelve lista de jugadores, el primero soy yo
+        } else {
+            console.log("No empezarPartida")
+            return -1
+        }
+    }
+}
+
+
+export async function lanzarDados(socket, email, id_partida) {
+    if (socket) {
+        socket.send(`lanzarDados,${email},${id_partida}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function lanzarDados(socket, ID_jugador, ID_partida) {
+export async function apostar(socket, email, id_partida) {
     if (socket) {
-        socket.send(`lanzarDados,${ID_jugador},${ID_partida}`);
+        socket.send(`APOSTAR,${email},${id_partida}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function apostar(socket, ID_jugador, ID_partida) {
+export async function meterBanco(socket, email, id_partida, cantidad) {
     if (socket) {
-        socket.send(`APOSTAR,${ID_jugador},${ID_partida}`);
+        socket.send(`METER,${email},${id_partida},${cantidad}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function meterBanco(socket, ID_jugador, ID_partida, cantidad) {
+export async function sacarBanco(socket, email, id_partida, cantidad) {
     if (socket) {
-        socket.send(`METER,${ID_jugador},${ID_partida},${cantidad}`);
+        socket.send(`SACAR,${email},${id_partida},${cantidad}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function sacarBanco(socket, ID_jugador, ID_partida, cantidad) {
+export async function comprarPropiedad(socket, email, propiedad, id_partida) {
     if (socket) {
-        socket.send(`SACAR,${ID_jugador},${ID_partida},${cantidad}`);
-        const response = await waitForResponse(socket);
-        return response;
-    }
-}
-
-export async function comprarPropiedad(socket, ID_jugador, propiedad, ID_partida) {
-    if (socket) {
-        socket.send(`SI_COMPRAR_PROPIEDAD,${ID_jugador},${propiedad},${ID_partida}`);
+        socket.send(`SI_COMPRAR_PROPIEDAD,${email},${propiedad},${id_partida}`);
         const response = await waitForResponse(socket);
         return response;
     }
@@ -129,25 +199,25 @@ export async function noComprarPropiedad(socket) {
     }
 }
 
-export async function venderPropiedad(socket, ID_jugador, propiedad) {
+export async function venderPropiedad(socket, email, propiedad) {
     if (socket) {
-        socket.send(`venderPropiedad,${ID_jugador},${propiedad}`);
+        socket.send(`venderPropiedad,${email},${propiedad}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function quieroEdificar(socket, ID_jugador, ID_partida) {
+export async function quieroEdificar(socket, email, id_partida) {
     if (socket) {
-        socket.send(`QUIERO_EDIFICAR,${ID_jugador},${ID_partida}`);
+        socket.send(`QUIERO_EDIFICAR,${email},${id_partida}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function edificarPropiedad(socket, ID_jugador, ID_partida, propiedadPrecio) {
+export async function edificarPropiedad(socket, email, id_partida, propiedadPrecio) {
     if (socket) {
-        socket.send(`EDIFICAR,${ID_jugador},${ID_partida},${propiedadPrecio}`);
+        socket.send(`EDIFICAR,${email},${id_partida},${propiedadPrecio}`);
         const response = await waitForResponse(socket);
         return response;
     }
@@ -161,26 +231,45 @@ export async function usarCarta(socket) {
     }
 }
 
-export async function finTurno(socket, ID_jugador, ID_partida) {
+export async function finTurno(socket, email, id_partida) {
     if (socket) {
-        socket.send(`finTurno,${ID_jugador},${ID_partida}`);
+        socket.send(`finTurno,${email},${id_partida}`);
         const response = await waitForResponse(socket);
         return response;
     }
 }
 
-export async function crearTorneo(socket, ID_jugador) {
+export async function crearTorneo(socket, email) {
     if (socket) {
-        socket.send(`crearTorneo,${ID_jugador}`);
+        socket.send(`crearTorneo,${email}`);
+        waitingForResponse = true
         const response = await waitForResponse(socket);
-        return response;
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'CREADOT_OK') {
+            console.log("Sí crearTorneo, id_torneo: " + msg[1])
+            return msg[1]    // CREADOT_OK,1 -> devuelve idTorneo
+        } else {
+            console.log("No crearTorneo")
+            return -1
+        }
     }
 }
 
-export async function unirseTorneo(socket, ID_jugador, ID_Torneo) {
+
+export async function unirseTorneo(socket, email, id_torneo) {
     if (socket) {
-        socket.send(`unirseTorneo,${ID_jugador},${ID_Torneo}`);
+        socket.send(`unirseTorneo,${email},${id_torneo}`);
+        waitingForResponse = true
         const response = await waitForResponse(socket);
-        return response;
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'UNIRSET_OK') {
+            console.log("Sí unirseTorneo, id_torneo: " + msg[1] + " email: " + msg[2])
+            return true
+        } else {
+            console.log("No unirseTorneo")
+            return false
+        }
     }
 }
