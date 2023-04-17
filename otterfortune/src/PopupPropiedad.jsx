@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./CSS/Chat.css";
 import "./CSS/PopupPropiedad.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";

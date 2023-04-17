@@ -1,0 +1,85 @@
+.popupProp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup__close5 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .popup__imageProp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 68%;
+    max-height: 65%;
+}
+  
+.popup__title {
+    position: absolute;
+    top: 80px;
+    color: black;
+    padding: 15px;
+    background-color: #f1f1f1;
+    color: #000000;
+    text-align: center;
+    width: 50%;
+    height: 70px;
+    border-radius: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.confirmarP, .rechazarP, .retirarP {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 17px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: -120px;
+}
+
+.rechazarP {
+    background-color: #f44336;
+}
+
+.retirarP {
+    background-color: #1b1fe9;
+}
+
+.confirmarP:hover, .rechazarP:hover, .retirarP:hover {
+  transform: scale(1.15);
+}
+  

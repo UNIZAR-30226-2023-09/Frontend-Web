@@ -9,6 +9,7 @@ import PopupCarta from './PopupCarta';
 import PopupCasino from './PopupCasino';
 import PopupPropiedad from "./PopupPropiedad";
 import PopupPropiedadVender from "./PopupPropiedadVender";
+import PopupBanco from "./PopupBanco";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -43,6 +44,8 @@ export const Tablero = (props) => {
     const [openPropiedad, setOpenPropiedad] = useState(false);
     // Mostrar la pantalla de vender propiedad
     const [openVenderProp, setOpenVenderProp] = useState(false);
+    // Mostrar la pantalla del banco
+    const [openBanco, setOpenBanco] = useState(false);
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -108,10 +111,14 @@ export const Tablero = (props) => {
                 console.log("2:",posnueva2);
                 // TODO: Aquí sería mirar lo que hacer según cada casilla
                 if (posnueva > 0) {
+                    setOpenBanco(true);
+                }
+
+                if (posnueva > 10) {
                     setOpenCasino(true);
                 }
                
-                if (posnueva > 0) {
+                if (posnueva > 20) {
                     setOpenPropiedad(true);
                 }
             }
@@ -225,32 +232,41 @@ export const Tablero = (props) => {
         { nombre: 'Cesar', imagen: plex, dinero: 200, ficha: fichaPlex },
         { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
     ];
-    const jugadores2 = [
-        { nombre: 'Cesar', imagen: plex, dinero: 200 },
-        { nombre: 'Marcos', imagen: jeancarlo, dinero: 250 },
-    ];
 
     const listaPropiedades = ['Propiedad 1', 'Propiedad 2', 'Propiedad 3', 'Propiedad 4', 'Propiedad 5', 'Propiedad 6', 'Propiedad 7', 'Propiedad 8'];
 
+    // Gestiona la ventana emergente de comprar propiedades
     const mostrarPopUpPropiedad = (e) => {
         setOpenCarta(true);
     }
 
+    // Gestiona el cierre de la ventana emergente
     const handleCloseCarta = (e) => {
         setOpenCarta(false);
         setOpenPropiedad(false);
         setOpenCasino(false);
     }
 
+    // Gestiona la ventana emergente de vender propiedades
     const mostrarVender = (e) => {
         setOpenVenderProp(true);
     }
-
+    
     const handleCloseVender = (e) => {
         setOpenVenderProp(false);
     }
 
-    // Gestiona la ventana emergente 
+    // Gestiona la ventana emergente del banco
+    const mostrarBanco = (e) => {
+        setOpenBanco(true);
+    }
+
+    const handleCloseBanco = (e) => {
+        setOpenBanco(false);
+    }
+
+
+    // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupCarta handleClose={handleCloseCarta} />
     );
@@ -265,6 +281,10 @@ export const Tablero = (props) => {
 
     const popUpVender = (
         <PopupPropiedadVender handleClose={handleCloseVender} propiedad={"NombreCarta"} />
+    );
+
+    const popUpBanco = (
+        <PopupBanco handleClose={handleCloseBanco} />
     );
 
     return (
@@ -367,6 +387,7 @@ export const Tablero = (props) => {
 
                         {openCasino && popUpCasino}
                         {openPropiedad && popUpPropiedad}
+                        {openBanco && popUpBanco}
                        
                     </div>
 

@@ -20,20 +20,21 @@ export default Loading;*/
 import React, { useState, useEffect } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 import './CSS/loading.css';
-import Menu from "./Menu";
+import Tablero from "./Tablero";
 import loginVideo from "./Imagenes/loginVideo.mp4";
 
 
 const Loading = (props) => {
-	const [showMenu, setShowMenu] = useState(false);
+	const [showTablero, setshowTablero] = useState(false);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			// TODO: Aquí iria a la del monopoly 
-			// TODO: Mirar para hacerlo con variable y no ocn tiempo
-			setShowMenu(true);
+			// TODO: Mirar para hacerlo con variable y no con tiempo
+			setshowTablero(true);
 		}, 5000);
 
+		
 		return () => clearTimeout(timer);
 	}, []);
 
@@ -54,8 +55,8 @@ const Loading = (props) => {
 
 	console.log(props.gemas);
 	
-	if (showMenu) {
-		return <Menu email={props.email} gemas={props.gemas} />;
+	if (showTablero) {
+		return <Tablero email={props.email} gemas={props.gemas} />;
 	}
 
 	return (

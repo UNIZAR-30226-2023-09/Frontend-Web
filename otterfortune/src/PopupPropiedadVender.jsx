@@ -11,7 +11,7 @@ const PopupPropiedadVender = (props) => {
     const socket = useSocket();
     const nombrePropiedad = props.propiedad;
 
-    const comprarPropiedad = () =>  {
+    const venderPropiedad = () =>  {
         // TODO: Mensaje de comprar la propiedad
         window.alert("Has comprado la propiedad " + nombrePropiedad);
         props.handleClose();
@@ -28,7 +28,7 @@ const PopupPropiedadVender = (props) => {
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <img className="popup__imagePropV" src={chicago} />
                     <div className="buttonContainer">
-                        <button className="confirmarP" onClick={comprarPropiedad}>VENDER</button>
+                        <button className="confirmarP" onClick={venderPropiedad}>VENDER</button>
                         <button className="rechazarP" onClick={props.handleClose}>CANCELAR</button>
                     </div>
                 </div>

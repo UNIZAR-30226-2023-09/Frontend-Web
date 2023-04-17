@@ -45,7 +45,7 @@ export const Register = (props) => {
         }
     }
 
-    const handleRegister = (event) => {
+    const handleLogin = (event) => {
         setRegister(true);
     };
 
@@ -87,7 +87,7 @@ export const Register = (props) => {
                     <button type="submit">Registrarse</button>
                     <button
                         className={styles["link-btn"]}
-                        onClick={(handleRegister)}>
+                        onClick={(handleLogin)}>
                         ¿Ya tienes una cuenta? Inicia sesión aquí.
                     </button>
                 </div>
