@@ -300,18 +300,18 @@ export async function esperarEmpezarPartida(socket) {
 // asíncrona: espera más mensajes después
 export async function lanzarDados(socket, email, id_partida) {
     if (socket) {
-        socket.send(`lanzarDados,${email},${id_partida}`)
-        waitingForResponse = true
-        const response = await waitForResponse(socket)
+        socket.send(`lanzarDados,${email},${id_partida}`);
+        waitingForResponse = true;
+        const response = await waitForResponse(socket);
 
-        let msg = response.toString().split(",")
+        let msg = response.toString().split(",");
         if (msg[0] === 'DADOS') {
-            estadoPartida.dado1 = parseInt(msg[1])
-            estadoPartida.dado2 = parseInt(msg[2])
-            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
-            estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel = Boolean(msg[4])
-            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " estaCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel)
-            return true
+            estadoPartida.dado1 = parseInt(msg[1]);
+            estadoPartida.dado2 = parseInt(msg[2]);
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3]);
+            estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel = Boolean(msg[4]);
+            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " estaCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel);
+            return 1;
         } else {
             console.log("No lanzarDados")
             return false

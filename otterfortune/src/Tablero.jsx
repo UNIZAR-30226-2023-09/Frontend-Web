@@ -72,12 +72,12 @@ export const Tablero = (props) => {
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
 
-    const rollDice = () => {
+    const rollDice = async () => {
         let numRolls = 10; // número de veces que se cambiará la cara del dado
         let rollDelay = 100; // tiempo en milisegundos entre cada cambio de cara
     
         // función que se ejecutará cada vez que cambie la cara del dado
-        const rollStep = () => {
+        const rollStep = async () => {
             // elige una cara aleatoria del dado
             const faces = [{numero: 1, imagen: dice1}, {numero: 2, imagen: dice2}, {numero: 3, imagen: dice3}, {numero: 4, imagen: dice4}, {numero: 5, imagen: dice5}, {numero: 6, imagen: dice6}];
 
@@ -106,14 +106,17 @@ export const Tablero = (props) => {
                 // guardamos la última cara del dado en posicion1 y posicion2
                 // TODO: Aquí sería darle el valor de los dados del mensaje obtenido
 
-                socketActions.lanzarDados(socket, sesion.email, estadoPartida.id_partida)
-                setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
-                setNum1(estadoPartida.dado1);
-                setNum2(estadoPartida.dado2);
-
-                console.log("Posicion1: " + posicion1)
-                console.log("dado1: " + estadoPartida.dado1)
-                console.log("dado2: " + estadoPartida.dado2)
+                const seguir = await socketActions.lanzarDados(socket, sesion.email, estadoPartida.id_partida);
+                if (seguir === 1) {
+                    setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
+                    setNum1(estadoPartida.dado1);
+                    setNum2(estadoPartida.dado2);
+                    setDiceFace(faces[estadoPartida.dado1 - 1].imagen);
+                    setDiceFace2(faces[estadoPartida.dado2 - 1].imagen);
+                    console.log("Posicion1: " + posicion1)
+                    console.log("dado1: " + estadoPartida.dado1)
+                    console.log("dado2: " + estadoPartida.dado2)
+                }
 
                 // TODO: Aquí sería mirar lo que hacer según cada casilla
                 if (posicion1 > 0) {
@@ -398,7 +401,9 @@ export const Tablero = (props) => {
                     </div>
 
                 </div>
+
                 <div className="imagen-extra">
+                    <button onClick={handleChat}>Fin de turno</button>
                     <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
                 </div>
                 {abrirChat && popUpChat}
