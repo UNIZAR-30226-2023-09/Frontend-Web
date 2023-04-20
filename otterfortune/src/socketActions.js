@@ -66,7 +66,6 @@ function cambiarEstado(data) {
 
             // Si es null, se queda null, sino es "propiedad1, propiedad2, ..." -> [1,2,...]
             estadoPartida.Jugadores[jugadorIndex].propiedades = replacedMsg;
-            console.log("!!!!!!!ACTUALIZAR_USUARIO: " + msg)
             console.log("Actualizar usuario: " + msg[1] + " dinero: " + estadoPartida.Jugadores[jugadorIndex].dinero + " posicion: " + estadoPartida.Jugadores[jugadorIndex].posicion + " propiedades: " + estadoPartida.Jugadores[jugadorIndex].propiedades)
             break
 
@@ -300,18 +299,19 @@ export async function esperarEmpezarPartida(socket) {
 // asíncrona: espera más mensajes después
 export async function lanzarDados(socket, email, id_partida) {
     if (socket) {
-        socket.send(`lanzarDados,${email},${id_partida}`);
-        waitingForResponse = true;
-        const response = await waitForResponse(socket);
+        socket.send(`lanzarDados,${email},${id_partida}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
 
-        let msg = response.toString().split(",");
+        let msg = response.toString().split(",")
         if (msg[0] === 'DADOS') {
-            estadoPartida.dado1 = parseInt(msg[1]);
-            estadoPartida.dado2 = parseInt(msg[2]);
-            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3]);
-            estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel = Boolean(msg[4]);
-            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " estaCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel);
-            return 1;
+            estadoPartida.dado1 = parseInt(msg[1])
+            estadoPartida.dado2 = parseInt(msg[2])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
+            console.log("enCarcel: " + msg[4])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = Boolean(parseInt(msg[4]))
+            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel)
+            return true
         } else {
             console.log("No lanzarDados")
             return false
