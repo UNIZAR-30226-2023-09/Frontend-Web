@@ -6,6 +6,7 @@ import { Register } from "./Register";
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -28,11 +29,13 @@ export const Login = (props) => {
         }
         else {
             // Mandar al servidor y comprobar. RegistroExitoso devuelve el numero de gemas
-            const gemas = await socketActions.iniciarSesion(socket, email, password);
-            if (gemas >= 0) {
+            const login = await socketActions.iniciarSesion(socket, email, password);
+            setNumGemas(sesion.gemas);
+
+            if (login === true) {
                 // Poner a true para mostrar el menu si se inicia correctamente
                 // TODO: Obtener nombre en vez de email
-                setNumGemas(gemas);
+                setNumGemas(numGemas);
                 setShowMenu(true);
             }
             else {

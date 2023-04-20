@@ -12,6 +12,7 @@ let waitingForResponse = false
 const waitForResponse = (socket) => {
     return new Promise((resolve) => {
         socket.onmessage = (event) => {
+            console.log("waitForResponse: " + event.data)
             if (waitingForResponse) {
                 waitingForResponse = false
                 resolve(event.data)
@@ -205,7 +206,7 @@ export async function empezarPartida(socket, id_partida, email_lider) {
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
             estadoPartida.indiceYO = parseInt(msg[2])
-            estadoPartida.Jugadores[0].email = msg[4]
+            estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]
             estadoPartida.Jugadores[2].email = msg[5]
             estadoPartida.Jugadores[3].email = msg[6]
@@ -232,7 +233,7 @@ export async function esperarEmpezarPartida(socket) {
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
             estadoPartida.indiceYO = parseInt(msg[2])
-            estadoPartida.Jugadores[0].email = msg[4]
+            estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]
             estadoPartida.Jugadores[2].email = msg[5]
             estadoPartida.Jugadores[3].email = msg[6]
@@ -255,11 +256,11 @@ export async function lanzarDados(socket, email, id_partida) {
 
         let msg = response.toString().split(",")
         if (msg[0] === 'DADOS') {
-            estadoPartida.dado1 = msg[1]
-            estadoPartida.dado2 = msg[2]
-            estadoPartida.Jugadores[0].posicion = msg[3]
-            estadoPartida.Jugadores[0].estaCarcel = msg[4]
-            console.log("Sí lanzarDados, dado1: " + msg[1] + " dado2: " + msg[2] + " posicion: " + msg[3] + " estaCarcel: " + msg[4])
+            estadoPartida.dado1 = parseInt(msg[1])
+            estadoPartida.dado2 = parseInt(msg[2])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].estaCarcel = msg[4]
+            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " estaCarcel: " + msg[4])
             return true
         } else {
             console.log("No lanzarDados")

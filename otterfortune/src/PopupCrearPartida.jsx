@@ -3,6 +3,7 @@ import './CSS/PopupCrear.css';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
@@ -23,7 +24,8 @@ const PopupCrearPartida = (props) => {
 		// Y que tablero reciba props y acceder con props.id
 
 		// Obtener el id recibido del mensaje
-		const id = await socketActions.crearPartida(socket, props.email);
+		await socketActions.crearPartida(socket, props.email);
+		const id = estadoPartida.id_partida
 		props.handleCloseCreate(id, true);
 	};
 

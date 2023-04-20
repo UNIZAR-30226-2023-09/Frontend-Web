@@ -23,35 +23,26 @@ import './CSS/loading.css';
 import Tablero from "./Tablero";
 import loginVideo from "./Imagenes/loginVideo.mp4";
 
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
+
 
 const Loading = (props) => {
 	const [showTablero, setshowTablero] = useState(false);
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			// TODO: Aquí iria a la del monopoly 
-			// TODO: Mirar para hacerlo con variable y no con tiempo
+	const socket = useSocket();
+
+	async function iniciarPartida(socket) {
+		const empezar = await socketActions.esperarEmpezarPartida(socket);
+		if (empezar) {
 			setshowTablero(true);
-		}, 5000);
-
-		
-		return () => clearTimeout(timer);
-	}, []);
-
-	/* 
-	useEffect(() => {
-	  const interval = setInterval(() => {
-		// TODO: Ver como pasar lo de empezar la partida
-		let empezarP = true;
-		if (empezarP) {
-		  setShowMenu(true);
-		  clearInterval(interval);
 		}
-	  }, 1000);
-    
-	  return () => clearInterval(interval);
-	}, []);
-	*/
+	}
+
+	useEffect(() => {
+		iniciarPartida(socket, setshowTablero);
+	  }, [socket, setshowTablero]);
 
 	console.log(props.gemas);
 	

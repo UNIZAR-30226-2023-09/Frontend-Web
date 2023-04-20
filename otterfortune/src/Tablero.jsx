@@ -29,8 +29,12 @@ import fichaPlex from './Imagenes/FICHAS/ROSA1.png';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
+
 
 export const Tablero = (props) => {
+
+    const socket = useSocket();
 
     const [abrirChat, setAbrirChat] = useState(false);
 
@@ -96,29 +100,31 @@ export const Tablero = (props) => {
             // si aún quedan cambios por hacer, programa el siguiente cambio
             if (numRolls > 0) {
                 numRolls--;
-                setNum1(randomNumber);
-                setNum2(randomNumber2);
                 setTimeout(rollStep, rollDelay);
             }
             else {
                 // guardamos la última cara del dado en posicion1 y posicion2
                 // TODO: Aquí sería darle el valor de los dados del mensaje obtenido
-                let posnueva = (posicion1 + randomNumber)%41;
-                let posnueva2 = (posicion2 + randomNumber2)%41;
-                setPosicion1(posnueva);
-                console.log("1:", posnueva);
-                setPosicion2(posnueva2);
-                console.log("2:",posnueva2);
+
+                socketActions.lanzarDados(socket, sesion.email, estadoPartida.id_partida)
+                setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
+                setNum1(estadoPartida.dado1);
+                setNum2(estadoPartida.dado2);
+
+                console.log("Posicion1: " + posicion1)
+                console.log("dado1: " + estadoPartida.dado1)
+                console.log("dado2: " + estadoPartida.dado2)
+
                 // TODO: Aquí sería mirar lo que hacer según cada casilla
-                if (posnueva > 0) {
+                if (posicion1 > 0) {
                     setOpenBanco(true);
                 }
 
-                if (posnueva > 10) {
+                if (posicion1 > 10) {
                     setOpenCasino(true);
                 }
                
-                if (posnueva > 20) {
+                if (posicion1 > 20) {
                     setOpenPropiedad(true);
                 }
             }
