@@ -107,7 +107,8 @@ function cambiarEstado(data) {
 
         case 'DENTRO_CARCEL':
             //DENTRO_CARCEL,${ID_jugador}
-            console.log("!MSG!: " + data)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = true
+            console.log("Has entrado a la carcel!!")
             break
 
         case 'SUPERPODER':
@@ -133,6 +134,7 @@ function cambiarEstado(data) {
 
         case 'QUIERES_COMPRAR_PROPIEDAD':
             //QUIERES_COMPRAR_PROPIEDAD,${posicion},${ID_jugador},${ID_partida},${precio}
+            estadoPartida.puedesComprarPropiedad = true
             estadoPartida.comprarPropiedad = parseInt(msg[1])
             estadoPartida.comprarPropiedadPrecio = parseFloat(msg[4])
             console.log("Quieres comprar propiedad: " + estadoPartida.comprarPropiedad + " al precio: " + estadoPartida.comprarPropiedadPrecio)
@@ -140,12 +142,17 @@ function cambiarEstado(data) {
 
         case 'NUEVO_DINERO_ALQUILER':
             //NUEVO_DINERO_ALQUILER,${dineroJugadorPaga},${dineroJugadorRecibe}
-            console.log("!MSG!: " + data)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
+            console.log("Nuevo dinero alquiler, dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero)
             break
 
         case 'NUEVO_DINERO_ALQUILER_RECIBES':
             //NUEVO_DINERO_ALQUILER_RECIBES,${dineroJugadorRecibe},${ID_jugador},${dineroJugadorPaga}
-            console.log("!MSG!: " + data)
+
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
+            const indiceJugadorPropiedad = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[2]);
+            estadoPartida.Jugadores[indiceJugadorPropiedad].dinero = parseFloat(msg[3])
+            console.log("Nuevo dinero alquiler, recibes dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero + " desde: " + msg[2], + " [" + indiceJugadorPropiedad + "] " + " jugador paga: " + estadoPartida.Jugadores[indiceJugadorPropiedad].dinero)
             break
         
         case 'CASILLA':
@@ -308,7 +315,6 @@ export async function lanzarDados(socket, email, id_partida) {
             estadoPartida.dado1 = parseInt(msg[1])
             estadoPartida.dado2 = parseInt(msg[2])
             estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
-            console.log("enCarcel: " + msg[4])
             estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = Boolean(parseInt(msg[4]))
             console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel)
             return true
@@ -350,6 +356,8 @@ export async function meterBanco(socket, email, id_partida, cantidad) {
         if (msg[0] === 'METER_DINERO_BANCO') {
             //msg[3]  dineroJugadorBanco
             //msg[4]  dineroJugador
+            estadoPartida.dineroEnBanco = parseFloat(msg[3])
+            esperarEmpezarPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
             console.log("Sí meterBanco")
             return true
         } else {
@@ -370,6 +378,8 @@ export async function sacarBanco(socket, email, id_partida, cantidad) {
         if (msg[0] === 'SACAR_DINERO_BANCO') {
             //msg[3]  dineroJugadorBanco
             //msg[4]  dineroJugador
+            estadoPartida.dineroEnBanco = parseFloat(msg[3])
+            esperarEmpezarPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
             console.log("Sí sacarBanco")
             return true
         } else {
@@ -405,8 +415,7 @@ export async function comprarPropiedad(socket, email, propiedad, id_partida) {
 export async function noComprarPropiedad(socket) {
     if (socket) {
         socket.send(`NO_COMPRAR_PROPIEDAD`)
-        //waitingForResponse = true
-        //const response = await waitForResponse(socket)
+        console.log("No quiero comprar propiedad")
         return true
     }
 }

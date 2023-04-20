@@ -37,6 +37,7 @@ class EstadoPartida {
         this.apostarDinero = null   // bool
         this.dineroBote = null      // float
         this.tengoSuerte = null     // bool
+        this.puedesComprarPropiedad = false // bool
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
 
