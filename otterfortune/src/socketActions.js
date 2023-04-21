@@ -107,7 +107,7 @@ function cambiarEstado(data) {
 
         case 'DENTRO_CARCEL':
             //DENTRO_CARCEL,${ID_jugador}
-            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = true
+            estadoPartida.enCarcel = true
             console.log("Has entrado a la carcel!!")
             break
 
@@ -165,12 +165,18 @@ function cambiarEstado(data) {
             console.log("!MSG!: " + data)
             break
 
+        case 'JugadorMuerto':
+            //JugadorMuerto,${ID_jugador}
+            const indiceMuerto = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            estadoPartida.Jugadores[indiceMuerto].muerto = true
+            break
+
         default:
             console.log("!!!!!!! NUEVO MSG !!!!!!! " + data)
     }
 }
 
-// Síncrona: no espera más mensajes después
+
 export async function registrarse(socket, email, contrasenya, nombre) {
     if (socket) {
         socket.send(`registrarse,${email},${contrasenya},${nombre}`)
@@ -188,7 +194,7 @@ export async function registrarse(socket, email, contrasenya, nombre) {
     }
 }
 
-// Síncrona: no espera más mensajes después
+
 export async function iniciarSesion(socket, email, contrasenya) {
     if (socket) {
         socket.send(`iniciarSesion,${email},${contrasenya}`)
@@ -208,7 +214,7 @@ export async function iniciarSesion(socket, email, contrasenya) {
     }
 }
 
-// Síncrona: no espera más mensajes después
+
 export async function crearPartida(socket, email) {
     if (socket) {
         socket.send(`crearPartida,${email}`)
@@ -227,7 +233,7 @@ export async function crearPartida(socket, email) {
     }
 }
 
-// Síncrona: no espera más mensajes después
+
 export async function unirsePartida(socket, email, id_partida) {
     if (socket) {
         socket.send(`unirsePartida,${email},${id_partida}`)
@@ -251,7 +257,7 @@ export async function unirsePartida(socket, email, id_partida) {
 * Funciones de partida                                                         *
 \******************************************************************************/
 
-// asíncrona: espera más mensajes después
+
 export async function empezarPartida(socket, id_partida, email_lider) {
     if (socket) {
         socket.send(`empezarPartida,${id_partida},${email_lider}`)
@@ -276,7 +282,7 @@ export async function empezarPartida(socket, id_partida, email_lider) {
     }
 }
 
-// asíncrona: espera más mensajes después
+
 export async function esperarEmpezarPartida(socket) {
     if (socket) {
         
@@ -303,7 +309,7 @@ export async function esperarEmpezarPartida(socket) {
     }
 }
 
-// asíncrona: espera más mensajes después
+
 export async function lanzarDados(socket, email, id_partida) {
     if (socket) {
         socket.send(`lanzarDados,${email},${id_partida}`)
@@ -315,8 +321,8 @@ export async function lanzarDados(socket, email, id_partida) {
             estadoPartida.dado1 = parseInt(msg[1])
             estadoPartida.dado2 = parseInt(msg[2])
             estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
-            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = Boolean(parseInt(msg[4]))
-            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel)
+            estadoPartida.enCarcel = Boolean(parseInt(msg[4]))
+            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.enCarcel)
             return true
         } else {
             console.log("No lanzarDados")
@@ -357,7 +363,7 @@ export async function meterBanco(socket, email, id_partida, cantidad) {
             //msg[3]  dineroJugadorBanco
             //msg[4]  dineroJugador
             estadoPartida.dineroEnBanco = parseFloat(msg[3])
-            esperarEmpezarPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
             console.log("Sí meterBanco")
             return true
         } else {
@@ -379,7 +385,7 @@ export async function sacarBanco(socket, email, id_partida, cantidad) {
             //msg[3]  dineroJugadorBanco
             //msg[4]  dineroJugador
             estadoPartida.dineroEnBanco = parseFloat(msg[3])
-            esperarEmpezarPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[4])
             console.log("Sí sacarBanco")
             return true
         } else {
@@ -430,6 +436,7 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
         let msg = response.toString().split(",")
         if (msg[0] === 'VENDER_OK') {
             //msg[2]  dineroJugador
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
             console.log("Sí venderPropiedad")
             return true
         } else {
@@ -439,7 +446,7 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
     }
 }
 
-
+// Falta
 export async function quieroEdificar(socket, email, id_partida) {
     if (socket) {
         socket.send(`QUIERO_EDIFICAR,${email},${id_partida}`)
@@ -450,6 +457,7 @@ export async function quieroEdificar(socket, email, id_partida) {
         if (msg[0] === 'EDIFICAR') {
             //msg[2]  resultadoFinal (propiedades que puede edificar)
             // puede ser que no haya msg[2], simplemente [0] y [1]
+            console.log(msg)
             console.log("Sí quieroEdificar")
             return true
         } else {
@@ -459,16 +467,17 @@ export async function quieroEdificar(socket, email, id_partida) {
     }
 }
 
-
-export async function edificarPropiedad(socket, email, id_partida, propiedadPrecio) {
+// Falta
+export async function edificarPropiedad(socket, email, id_partida, propiedad, precio) {
     if (socket) {
-        socket.send(`EDIFICAR,${email},${id_partida},${propiedadPrecio}`)
+        socket.send(`EDIFICAR,${email},${id_partida},${propiedad}-${precio}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
         let msg = response.toString().split(",")
         if (msg[0] === 'EDIFICAR_OK') {
             //msg[2]  dineroJugador
+            console.log(msg)
             console.log("Sí edificarPropiedad")
             return true
         } else {
@@ -487,15 +496,19 @@ export async function finTurno(socket, email, id_partida) {
     }
 }
 
-
+// Falta
 export async function desplazarJugador(socket, email, id_partida, posicion) {
     if (socket) {
         socket.send(`DESPLAZARSE_CASILLA,${email},${id_partida},${posicion}`)
+        //return true
+        // DESPLAZAR_JUGADOR ya lo coge la otra funcion
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
+
         let msg = response.toString().split(",")
         if (msg[0] === 'DESPLAZAR_JUGADOR') {
+            console.log(msg)
             console.log("Sí desplazarJugador")
             return true
         } else {
@@ -505,7 +518,7 @@ export async function desplazarJugador(socket, email, id_partida, posicion) {
     }
 }
 
-
+// Falta
 export async function crearTorneo(socket, email, nPartidas) {
     if (socket) {
         socket.send(`crearTorneo,${email},${nPartidas}`)
@@ -524,7 +537,7 @@ export async function crearTorneo(socket, email, nPartidas) {
     }
 }
 
-
+// Falta
 export async function unirseTorneo(socket, email, id_torneo) {
     if (socket) {
         socket.send(`unirseTorneo,${email},${id_torneo}`)
@@ -543,7 +556,7 @@ export async function unirseTorneo(socket, email, id_torneo) {
     }
 }
 
-/*
+// Falta
 export async function intercambio(socket, email, id_torneo) {
     if (socket) {
         socket.send(`intercambio,${email},${id_torneo}`)
@@ -561,8 +574,8 @@ export async function intercambio(socket, email, id_torneo) {
         }
     }
 }
-*/
 
+// Falta
 export async function comprarSkin(socket, email, skin) {
     if (socket) {
         socket.send(`comprarSkin,${email},${skin}`)
@@ -581,7 +594,7 @@ export async function comprarSkin(socket, email, skin) {
     }
 }
 
-
+// Falta
 export async function verSkins(socket, email) {
     if (socket) {
         socket.send(`verSkins,${email}`)
