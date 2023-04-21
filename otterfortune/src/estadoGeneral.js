@@ -19,6 +19,7 @@ class Jugador {
         this.dinero = 1000          // float
         this.posicion = 1           // int
         this.propiedades = [];      // int [2, 3, 1, 39]
+        this.muerto = false         // bool
     }
 }
 
