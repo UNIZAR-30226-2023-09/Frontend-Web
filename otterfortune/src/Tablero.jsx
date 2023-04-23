@@ -10,6 +10,7 @@ import PopupCasino from './PopupCasino';
 import PopupPropiedad from "./PopupPropiedad";
 import PopupPropiedadVender from "./PopupPropiedadVender";
 import PopupBanco from "./PopupBanco";
+import PopupIrCarcel from "./PopupIrCarcel";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -50,6 +51,10 @@ export const Tablero = (props) => {
     const [openVenderProp, setOpenVenderProp] = useState(false);
     // Mostrar la pantalla del banco
     const [openBanco, setOpenBanco] = useState(false);
+    // Mostrar la pantalla de ir a la carcel
+    const [openIrCarcel, setOpenIrCarcel] = useState(false);
+
+    // TODO: MIRAR DADOS DOBLES
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -107,7 +112,7 @@ export const Tablero = (props) => {
                 // TODO: Aquí sería darle el valor de los dados del mensaje obtenido
 
                 const seguir = await socketActions.lanzarDados(socket, sesion.email, estadoPartida.id_partida);
-                if (seguir === 1) {
+                if (seguir === true) {
                     setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
                     setNum1(estadoPartida.dado1);
                     setNum2(estadoPartida.dado2);
@@ -116,20 +121,23 @@ export const Tablero = (props) => {
                     console.log("Posicion1: " + posicion1)
                     console.log("dado1: " + estadoPartida.dado1)
                     console.log("dado2: " + estadoPartida.dado2)
+                    
                 }
 
                 // TODO: Aquí sería mirar lo que hacer según cada casilla
-                if (posicion1 > 0) {
+                // Hacer un if else con los valores booleanos de EstadoPartida y mostrar
+                // una pantalla u otra dependiendo de lo que sea true
+                if (estadoPartida.enBanco) {
                     setOpenBanco(true);
                 }
-
-                if (posicion1 > 10) {
-                    setOpenCasino(true);
-                }
-               
-                if (posicion1 > 20) {
+                else if (estadoPartida.puedesComprarPropiedad) {
+                    // TODO: Mirar que propiedad
                     setOpenPropiedad(true);
                 }
+                else if (estadoPartida.apostarDinero) {
+                    setOpenCasino(true);
+                }
+
             }
         };
     
@@ -254,6 +262,7 @@ export const Tablero = (props) => {
         setOpenCarta(false);
         setOpenPropiedad(false);
         setOpenCasino(false);
+        setOpenIrCarcel(false);
     }
 
     // Gestiona la ventana emergente de vender propiedades
@@ -272,6 +281,12 @@ export const Tablero = (props) => {
 
     const handleCloseBanco = (e) => {
         setOpenBanco(false);
+    }
+
+    const handleFinTurno = (e) => {
+        // TODO: Aqui seria mandar al servidor que se ha acabado el turno
+        socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
+        estadoPartida.miTurno = false;
     }
 
 
@@ -296,12 +311,16 @@ export const Tablero = (props) => {
         <PopupBanco handleClose={handleCloseBanco} />
     );
 
+    const popUpIrCarcel = (
+        <PopupIrCarcel handleClose={handleCloseCarta} />
+    );
+
     return (
 
         <div className="row">
             <div className="col-7">
                 <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
-                <div onClick={rollDice}>
+                <div onClick={() => estadoPartida.miTurno && rollDice()}>
                     <div className="posicion-dadoIzq">
                         <img src={diceFace} />
                     </div>
@@ -337,6 +356,7 @@ export const Tablero = (props) => {
                                 <li>Dinero en el banco: {dineroBanco}$ </li>
                                 <li>Dinero en el bote: {dineroBote}$ </li>
                                 <li>Ronda actual: {ronda} </li>
+                                <li> <button onClick={handleFinTurno}>Fin de turno</button> </li>
                             </ul>
                         </div>
 
@@ -397,13 +417,13 @@ export const Tablero = (props) => {
                         {openCasino && popUpCasino}
                         {openPropiedad && popUpPropiedad}
                         {openBanco && popUpBanco}
+                        {openIrCarcel && popUpIrCarcel}
                        
                     </div>
 
                 </div>
 
                 <div className="imagen-extra">
-                    <button onClick={handleChat}>Fin de turno</button>
                     <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
                 </div>
                 {abrirChat && popUpChat}

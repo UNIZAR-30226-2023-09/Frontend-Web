@@ -168,6 +168,21 @@ button.edificar:hover {
     font-size: 20px;
 }
 
+.lista-informacion button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    background-color:  #aa881a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lista-informacion button:hover {
+    background-color: #d3b38c;
+}
 
 /* Para la caja de las cartas */
 .lista-cartas {
@@ -227,3 +242,4 @@ button.edificar:hover {
     width: 30%;
     height: 30%;
 }
+
