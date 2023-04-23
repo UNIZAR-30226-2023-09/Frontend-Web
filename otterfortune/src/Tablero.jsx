@@ -53,7 +53,8 @@ export const Tablero = (props) => {
     const [openBanco, setOpenBanco] = useState(false);
     // Mostrar la pantalla de ir a la carcel
     const [openIrCarcel, setOpenIrCarcel] = useState(false);
-
+    // Para controlar que solo se tiren una vez los dados
+    const [tirarDados, setTirarDados] = useState(true);
     // TODO: MIRAR DADOS DOBLES
 
     // Para los dados
@@ -78,6 +79,7 @@ export const Tablero = (props) => {
     const [num2, setNum2] = useState(1);
 
     const rollDice = async () => {
+        setTirarDados(false);
         let numRolls = 10; // número de veces que se cambiará la cara del dado
         let rollDelay = 100; // tiempo en milisegundos entre cada cambio de cara
     
@@ -121,22 +123,29 @@ export const Tablero = (props) => {
                     console.log("Posicion1: " + posicion1)
                     console.log("dado1: " + estadoPartida.dado1)
                     console.log("dado2: " + estadoPartida.dado2)
-                    
+                    // Si son los dados iguales que deje volver a tirarlos
+                    if (estadoPartida.dado1 === estadoPartida.dado2) {
+                        setTirarDados(true);
+                    }
+                    // TODO: Aquí sería mirar lo que hacer según cada casilla
+                    // Hacer un if else con los valores booleanos de EstadoPartida y mostrar
+                    // una pantalla u otra dependiendo de lo que sea true
+                    if (estadoPartida.enBanco) {
+                        setOpenBanco(true);
+                    }
+                    else if (estadoPartida.puedesComprarPropiedad) {
+                        // TODO: Mirar que propiedad
+                        setOpenPropiedad(true);
+                    }
+                    // TODO: ESTO ES CASINO?
+                    else if (estadoPartida.apostarDinero) {
+                        setOpenCasino(true);
+                    }
+                    // TODO: MIRAR LA DE IR CARCEL
+                        
                 }
 
-                // TODO: Aquí sería mirar lo que hacer según cada casilla
-                // Hacer un if else con los valores booleanos de EstadoPartida y mostrar
-                // una pantalla u otra dependiendo de lo que sea true
-                if (estadoPartida.enBanco) {
-                    setOpenBanco(true);
-                }
-                else if (estadoPartida.puedesComprarPropiedad) {
-                    // TODO: Mirar que propiedad
-                    setOpenPropiedad(true);
-                }
-                else if (estadoPartida.apostarDinero) {
-                    setOpenCasino(true);
-                }
+
 
             }
         };
@@ -287,6 +296,7 @@ export const Tablero = (props) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         estadoPartida.miTurno = false;
+        setTirarDados(true);
     }
 
 
@@ -320,7 +330,7 @@ export const Tablero = (props) => {
         <div className="row">
             <div className="col-7">
                 <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
-                <div onClick={() => estadoPartida.miTurno && rollDice()}>
+                <div onClick={() => estadoPartida.miTurno && tirarDados  && rollDice()}>
                     <div className="posicion-dadoIzq">
                         <img src={diceFace} />
                     </div>
