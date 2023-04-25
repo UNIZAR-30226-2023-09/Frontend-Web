@@ -10,7 +10,6 @@ import { sesion, estadoPartida } from './estadoGeneral.js';
 const PopupCrearPartida = (props) => {
 	//const [content, setContent] = useState("");
 	const [id, setId] = useState(""); // Agregar esta línea
-	console.log(props.content);
 
 	const socket = useSocket();
 

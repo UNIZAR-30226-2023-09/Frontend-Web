@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect  } from "react";
 import './CSS/Tablero.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import tablero from './Imagenes/TABLERO.png'
+import tablero from './Imagenes/TABLERO.jpg'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
 import PopupCarta from './PopupCarta';
@@ -78,6 +78,20 @@ export const Tablero = (props) => {
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
 
+    // Funcion que cada segundo actualiza la posicion de los jugadores de la partida
+    const actualizarPosicion = () => {
+        setPosicion1(estadoPartida.Jugadores[0].posicion);
+        setPosicion2(estadoPartida.Jugadores[1].posicion);
+        setPosicion3(estadoPartida.Jugadores[2].posicion);
+        setPosicion4(estadoPartida.Jugadores[3].posicion);
+      };
+    
+    useEffect(() => {
+        const intervalId = setInterval(actualizarPosicion, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
     const rollDice = async () => {
         setTirarDados(false);
         let numRolls = 10; // número de veces que se cambiará la cara del dado
@@ -115,12 +129,26 @@ export const Tablero = (props) => {
 
                 const seguir = await socketActions.lanzarDados(socket, sesion.email, estadoPartida.id_partida);
                 if (seguir === true) {
-                    setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
+                    //setPosicion1(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion);
+                    // Actualizar las posiciones de los jugadores
+                    actualizarPosicion();
+                    if (estadoPartida.indiceYO === 0) {
+                        setPosicion1(estadoPartida.Jugadores[0].posicion);
+                    }
+                    else if (estadoPartida.indiceYO === 1) {
+                        setPosicion2(estadoPartida.Jugadores[1].posicion);
+                    }
+                    else if (estadoPartida.indiceYO === 2) {
+                        setPosicion3(estadoPartida.Jugadores[2].posicion);
+                    }
+                    else if (estadoPartida.indiceYO === 3) {
+                        setPosicion4(estadoPartida.Jugadores[3].posicion);
+                    }
+
                     setNum1(estadoPartida.dado1);
                     setNum2(estadoPartida.dado2);
                     setDiceFace(faces[estadoPartida.dado1 - 1].imagen);
                     setDiceFace2(faces[estadoPartida.dado2 - 1].imagen);
-                    console.log("Posicion1: " + posicion1)
                     console.log("dado1: " + estadoPartida.dado1)
                     console.log("dado2: " + estadoPartida.dado2)
                     // Si son los dados iguales que deje volver a tirarlos
@@ -130,19 +158,23 @@ export const Tablero = (props) => {
                     // TODO: Aquí sería mirar lo que hacer según cada casilla
                     // Hacer un if else con los valores booleanos de EstadoPartida y mostrar
                     // una pantalla u otra dependiendo de lo que sea true
-                    if (estadoPartida.enBanco) {
-                        setOpenBanco(true);
-                    }
-                    else if (estadoPartida.puedesComprarPropiedad) {
+                
+                    if (estadoPartida.puedesComprarPropiedad) {
                         // TODO: Mirar que propiedad
                         setOpenPropiedad(true);
                     }
+                    // Casilla del banco
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 28) {
+                        setOpenBanco(true);
+                    }
                     // TODO: ESTO ES CASINO?
-                    else if (estadoPartida.apostarDinero) {
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 14) {
                         setOpenCasino(true);
                     }
                     // TODO: MIRAR LA DE IR CARCEL
-                        
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 31) {
+                        setOpenIrCarcel(true);
+                    }
                 }
 
 
@@ -198,7 +230,7 @@ export const Tablero = (props) => {
     // Estas son la fila de arriba de izquierda a derecha
     //casillas.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
     //casillas.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
-    casillas.set("Casilla11", { top: "4.4%", left: "3%", width: "5.8%", height: "5.8%" });
+    casillas.set("Casilla11", { top: "10%", left: "6%", width: "5.8%", height: "5.8%" });
 
     casillas.set("Casilla12", { top: "4.4%", left: "9.3%", width: "5.8%", height: "5.8%" });
     casillas.set("Casilla13", { top: "4.4%", left: "13.7%", width: "5.8%", height: "5.8%" });
@@ -252,12 +284,20 @@ export const Tablero = (props) => {
 
     //setPosicion1(casillas.get("Casilla2"));
 
+    // const jugadores1 = [
+    //     { nombre: 'Jesus', imagen: tite, dinero: 100, ficha: fichaTite },
+    //     { nombre: 'Alejandro', imagen: lucas, dinero: 150, ficha: fichaLucas },
+    //     { nombre: 'Cesar', imagen: plex, dinero: 200, ficha: fichaPlex },
+    //     { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
+    // ];
+
     const jugadores1 = [
-        { nombre: 'Jesus', imagen: tite, dinero: 100, ficha: fichaTite },
-        { nombre: 'Alejandro', imagen: lucas, dinero: 150, ficha: fichaLucas },
-        { nombre: 'Cesar', imagen: plex, dinero: 200, ficha: fichaPlex },
-        { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
+        { nombre: estadoPartida.Jugadores[0].email, imagen: tite, dinero: estadoPartida.Jugadores[0].dinero, ficha: fichaTite },
+        { nombre: estadoPartida.Jugadores[1].email, imagen: lucas, dinero: estadoPartida.Jugadores[1].dinero, ficha: fichaLucas },
+        { nombre: estadoPartida.Jugadores[2].email, imagen: plex, dinero: estadoPartida.Jugadores[2].dinero, ficha: fichaPlex },
+        { nombre: estadoPartida.Jugadores[3].email, imagen: jeancarlo, dinero: estadoPartida.Jugadores[3].dinero, ficha: fichaJeanCarlo },
     ];
+    
 
     const listaPropiedades = ['Propiedad 1', 'Propiedad 2', 'Propiedad 3', 'Propiedad 4', 'Propiedad 5', 'Propiedad 6', 'Propiedad 7', 'Propiedad 8'];
 
@@ -292,9 +332,9 @@ export const Tablero = (props) => {
         setOpenBanco(false);
     }
 
-    const handleFinTurno = (e) => {
+    const handleFinTurno = async (e) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
-        socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
+        await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         estadoPartida.miTurno = false;
         setTirarDados(true);
     }
@@ -340,16 +380,16 @@ export const Tablero = (props) => {
                 </div>
 
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaTite} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
+                    <img src={fichaLucas} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaPlex} style={{width:  casillas.get(`Casilla${posicion3}`).width, height: casillas.get(`Casilla${posicion3}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichaJeanCarlo} style={{width:  casillas.get(`Casilla${posicion4}`).width, height: casillas.get(`Casilla${posicion4}`).height}} />
                 </div>
 
 
@@ -366,7 +406,11 @@ export const Tablero = (props) => {
                                 <li>Dinero en el banco: {dineroBanco}$ </li>
                                 <li>Dinero en el bote: {dineroBote}$ </li>
                                 <li>Ronda actual: {ronda} </li>
-                                <li> <button onClick={handleFinTurno}>Fin de turno</button> </li>
+                                {estadoPartida.miTurno && (
+                                    <li>
+                                        <button onClick={handleFinTurno}>Fin de turno</button>
+                                    </li>
+                                )}
                             </ul>
                         </div>
 
