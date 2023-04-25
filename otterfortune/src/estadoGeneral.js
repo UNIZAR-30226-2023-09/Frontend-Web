@@ -31,16 +31,20 @@ class EstadoPartida {
         this.id_partida = null      // int
         this.dado1 = null           // int
         this.dado2 = null           // int
-        this.miTurno = false        // bool
         this.enCarcel = false       // bool
-        this.enBanco = false        // bool
         this.dineroEnBanco = null   // float
         this.apostarDinero = null   // bool
         this.dineroBote = null      // float
         this.tengoSuerte = null     // bool
-        this.puedesComprarPropiedad = false // bool
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
+
+        // Variables de turno
+        this.puedesComprarPropiedad = false // bool
+        this.enBanco = false        // bool
+        this.enCasino = false       // bool
+        this.miTurno = false        // bool
+
 
         // Jugadores[indiceYO] es mi usuario
         this.indiceYO = null        // int [0, 3]
@@ -52,6 +56,14 @@ class EstadoPartida {
             new Jugador(),          // Jugador2  [2]
             new Jugador()           // Jugador3  [3]
         ]
+    }
+
+    // Reiniciar variables de turno
+    reiniciarVariablesTurno() {
+        this.puedesComprarPropiedad = false;
+        this.enBanco = false;
+        this.enCasino = false;
+        this.miTurno = false;
     }
 }
 
