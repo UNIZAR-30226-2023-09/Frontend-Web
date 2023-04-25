@@ -491,6 +491,9 @@ export async function edificarPropiedad(socket, email, id_partida, propiedad, pr
 export async function finTurno(socket, email, id_partida) {
     if (socket) {
         socket.send(`finTurno,${email},${id_partida}`)
+
+        estadoPartida.reiniciarVariablesTurno();
+        
         console.log("Turno finalizado")
         return true
     }
