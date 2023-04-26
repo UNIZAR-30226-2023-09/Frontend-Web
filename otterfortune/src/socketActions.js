@@ -166,7 +166,6 @@ function cambiarEstado(data) {
             //CHAT,"${ID_jugador}, ${mensaje}
             estadoPartida.chat.push(msg[1] + ": " + msg[2])
             console.log("Chat recibo: " + msg[1] + ": " + msg[2])
-            console.log(msg)
             break
 
         case 'JugadorMuerto':
