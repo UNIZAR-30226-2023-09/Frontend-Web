@@ -108,6 +108,7 @@ function cambiarEstado(data) {
         case 'DENTRO_CARCEL':
             //DENTRO_CARCEL,${ID_jugador}
             estadoPartida.enCarcel = true
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = 11
             console.log("Has entrado a la carcel!!")
             break
 
