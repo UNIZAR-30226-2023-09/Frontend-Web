@@ -44,7 +44,6 @@ const Loading = (props) => {
 		iniciarPartida(socket, setshowTablero);
 	  }, [socket, setshowTablero]);
 
-	console.log(props.gemas);
 	
 	if (showTablero) {
 		return <Tablero email={props.email} gemas={props.gemas} />;

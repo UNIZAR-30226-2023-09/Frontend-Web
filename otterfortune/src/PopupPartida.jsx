@@ -10,8 +10,6 @@ const PopupPartida = (props) => {
     const [id, setId] = useState("");
     const [loading, setLoading] = useState(false);
 
-    console.log(props.gemas);
-
     const handleAccept = () => {
         if (id.trim() === '') {
             window.alert('Por favor, ingrese el id.');
