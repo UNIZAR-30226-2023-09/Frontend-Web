@@ -103,6 +103,7 @@ function cambiarEstado(data) {
             estadoPartida.enBanco = true
             estadoPartida.dineroEnBanco = parseFloat(msg[3])
             console.log("Estas en banco, dinero en banco: " + estadoPartida.dineroEnBanco)
+            console.log(msg)
             break
 
         case 'DENTRO_CARCEL':
@@ -165,6 +166,7 @@ function cambiarEstado(data) {
             //CHAT,"${ID_jugador}, ${mensaje}
             estadoPartida.chat.push(msg[1] + ": " + msg[2])
             console.log("Chat recibo: " + msg[1] + ": " + msg[2])
+            console.log(msg)
             break
 
         case 'JugadorMuerto':
@@ -193,6 +195,12 @@ function cambiarEstado(data) {
 
         case 'ACTUALIZAR_BANCO':
             //ACTUALIZAR_BANCO,${dinero}
+            estadoPartida.dineroEnBanco = parseFloat(msg[1])
+            console.log("Actualiza dinero en banco: " + estadoPartida.dineroEnBanco)
+            break
+
+        case 'ACTUALIZAR_DINERO_BANCO':
+            //ACTUALIZAR_DINERO_BANCO,${dinero}
             estadoPartida.dineroEnBanco = parseFloat(msg[1])
             console.log("Actualiza dinero en banco: " + estadoPartida.dineroEnBanco)
             break
