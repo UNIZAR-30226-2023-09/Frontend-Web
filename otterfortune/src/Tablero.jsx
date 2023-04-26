@@ -294,17 +294,17 @@ export const Tablero = (props) => {
     casillas1.set("Casilla30", { top: "606px", left: "50.7%", width: "38px", height: "33px" });
     
     // Esta es la fila de abajo de derecha a izquierda
-    casillas1.set("Casilla31", { top: "680px", left: "51%", width: "38px", height: "33px" });
+    casillas1.set("Casilla31", { top: "690px", left: "51%", width: "38px", height: "33px" });
 
-    casillas1.set("Casilla32", { top: "695px", left: "45.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla33", { top: "695px", left: "40.6%", width: "38px", height: "33px" });
-    casillas1.set("Casilla34", { top: "695px", left: "36.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla35", { top: "695px", left: "31.6%", width: "38px", height: "33px" });
-    casillas1.set("Casilla36", { top: "695px", left: "27.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla37", { top: "695px", left: "22.8%", width: "38px", height: "33px" });
-    casillas1.set("Casilla38", { top: "695px", left: "18.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla39", { top: "695px", left: "13.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla40", { top: "695px", left: "9.3%", width: "38px", height: "33px" });
+    casillas1.set("Casilla32", { top: "695px", left: "8.8%", width: "38px", height: "33px" });
+    casillas1.set("Casilla33", { top: "695px", left: "13.2%", width: "38px", height: "33px" });
+    casillas1.set("Casilla34", { top: "695px", left: "17.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla35", { top: "695px", left: "22.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla36", { top: "695px", left: "26.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla37", { top: "695px", left: "31.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla38", { top: "695px", left: "35.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla39", { top: "695px", left: "40.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla40", { top: "695px", left: "44.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 2 ------------------------*/
@@ -339,28 +339,30 @@ export const Tablero = (props) => {
     casillas2.set("Casilla20", { top: "4.1%", left: "46.7%", width: "38px", height: "33px" });
 
     // Estas son la columna de la derecha de arriba a abajo
-    casillas2.set("Casilla21", { top: "120px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla22", { top: "180px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla23", { top: "244px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla24", { top: "304px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla25", { top: "365px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla26", { top: "425px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla27", { top: "485px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla28", { top: "548px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla29", { top: "606px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla30", { top: "680px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla21", { top: "38px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla22", { top: "120px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla23", { top: "180px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla24", { top: "244px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla25", { top: "304px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla26", { top: "365px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla27", { top: "425px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla28", { top: "485px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla29", { top: "548px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla30", { top: "606px", left: "52.7%", width: "38px", height: "33px" });
     
     // Esta es la fila de abajo de derecha a izquierda
-    casillas2.set("Casilla31", { top: "700px", left: "51%", width: "38px", height: "33px" });
-    casillas2.set("Casilla32", { top: "695px", left: "45.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla33", { top: "695px", left: "40.6%", width: "38px", height: "33px" });
-    casillas2.set("Casilla34", { top: "695px", left: "36.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla35", { top: "695px", left: "31.6%", width: "38px", height: "33px" });
-    casillas2.set("Casilla36", { top: "695px", left: "27.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla37", { top: "695px", left: "22.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla38", { top: "695px", left: "18.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla39", { top: "695px", left: "13.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla40", { top: "695px", left: "9.3%", width: "38px", height: "33px" });
+    casillas2.set("Casilla31", { top: "690px", left: "53%", width: "38px", height: "33px" });
+
+
+    casillas2.set("Casilla32", { top: "695px", left: "10.6%", width: "38px", height: "33px" });
+    casillas2.set("Casilla33", { top: "695px", left: "15.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla34", { top: "695px", left: "19.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla35", { top: "695px", left: "24.3%", width: "38px", height: "33px" });
+    casillas2.set("Casilla36", { top: "695px", left: "28.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla37", { top: "695px", left: "33.2%", width: "38px", height: "33px" });
+    casillas2.set("Casilla38", { top: "695px", left: "37.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla39", { top: "695px", left: "42.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla40", { top: "695px", left: "46.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 3 ------------------------*/
@@ -384,42 +386,45 @@ export const Tablero = (props) => {
     casillas3.set("Casilla11", { top: "10%", left: "6%", width: "38px", height: "33px" });
 
 
-    casillas3.set("Casilla12", { top: "147px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla13", { top: "210px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla14", { top: "270px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla15", { top: "332px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla16", { top: "393px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla17", { top: "453px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla18", { top: "515px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla19", { top: "574px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla20", { top: "635px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla12", { top: "7.6%", left: "8.8%", width: "38px", height: "33px" });
+    casillas3.set("Casilla13", { top: "7.6%", left: "13.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla14", { top: "7.6%", left: "17.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla15", { top: "7.6%", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla16", { top: "7.6%", left: "26.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla17", { top: "7.6%", left: "31.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla18", { top: "7.6%", left: "35.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla19", { top: "7.6%", left: "40.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla20", { top: "7.6%", left: "44.7%", width: "38px", height: "33px" });
 
     // Estas son la columna de la derecha de arriba a abajo
-    casillas3.set("Casilla21", { top: "730px", left: "51%", width: "38px", height: "33px" });
+    casillas3.set("Casilla21", { top: "7.6%", left: "50%", width: "38px", height: "33px" });
 
 
 
-    casillas3.set("Casilla22", { top: "122px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla23", { top: "184px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla24", { top: "245px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla25", { top: "304px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla26", { top: "364px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla27", { top: "431px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla28", { top: "491px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla29", { top: "551px", left: "51.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla30", { top: "611px", left: "51.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla22", { top: "147px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla23", { top: "210px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla24", { top: "270px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla25", { top: "333px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla26", { top: "393px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla27", { top: "450px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla28", { top: "515px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla29", { top: "574px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla30", { top: "635px", left: "50.7%", width: "38px", height: "33px" });
     
     // Esta es la fila de abajo de derecha a izquierda
-    casillas3.set("Casilla31", { top: "700px", left: "51%", width: "38px", height: "33px" });
-    casillas3.set("Casilla32", { top: "695px", left: "45.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla33", { top: "695px", left: "40.6%", width: "38px", height: "33px" });
-    casillas3.set("Casilla34", { top: "695px", left: "36.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla35", { top: "695px", left: "31.6%", width: "38px", height: "33px" });
-    casillas3.set("Casilla36", { top: "695px", left: "27.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla37", { top: "695px", left: "22.8%", width: "38px", height: "33px" });
-    casillas3.set("Casilla38", { top: "695px", left: "18.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla39", { top: "695px", left: "13.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla40", { top: "695px", left: "9.3%", width: "38px", height: "33px" });
+    casillas3.set("Casilla31", { top: "720px", left: "51%", width: "38px", height: "33px" });
+
+
+
+    casillas3.set("Casilla32", { top: "730px", left: "8.8%", width: "38px", height: "33px" });
+    casillas3.set("Casilla33", { top: "730px", left: "13.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla34", { top: "730px", left: "17.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla35", { top: "730px", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla36", { top: "730px", left: "26.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla37", { top: "730px", left: "31.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla38", { top: "730px", left: "35.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla39", { top: "730px", left: "40.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla40", { top: "730px", left: "44.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 4 ------------------------*/
@@ -464,30 +469,31 @@ export const Tablero = (props) => {
     casillas4.set("Casilla20", { top: "7.6%", left: "46.7%", width: "38px", height: "33px" });
 
     // Estas son la columna de la derecha de arriba a abajo
-    casillas4.set("Casilla21", { top: "38px", left: "51%", width: "38px", height: "33px" });
+    casillas4.set("Casilla21", { top: "7.6%", left: "52.7%", width: "38px", height: "33px" });
     
-    casillas4.set("Casilla22", { top: "10%px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla23", { top: "147px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla24", { top: "210px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla25", { top: "270px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla26", { top: "393px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla27", { top: "453px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla28", { top: "515px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla29", { top: "5741px", left: "51.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla30", { top: "635px", left: "51.2%", width: "38px", height: "33px" });
+    casillas4.set("Casilla22", { top: "147px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla23", { top: "210px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla24", { top: "270px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla25", { top: "333px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla26", { top: "393px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla27", { top: "450px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla28", { top: "515px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla29", { top: "574px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla30", { top: "635px", left: "52.7%", width: "38px", height: "33px" });
     
     // Esta es la fila de abajo de derecha a izquierda
-    casillas4.set("Casilla31", { top: "730px", left: "51%", width: "38px", height: "33px" });
+    casillas4.set("Casilla31", { top: "720px", left: "53%", width: "38px", height: "33px" });
 
-    casillas4.set("Casilla32", { top: "695px", left: "45.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla33", { top: "695px", left: "40.6%", width: "38px", height: "33px" });
-    casillas4.set("Casilla34", { top: "695px", left: "36.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla35", { top: "695px", left: "31.6%", width: "38px", height: "33px" });
-    casillas4.set("Casilla36", { top: "695px", left: "27.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla37", { top: "695px", left: "22.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla38", { top: "695px", left: "18.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla39", { top: "695px", left: "13.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla40", { top: "695px", left: "9.3%", width: "38px", height: "33px" });
+
+    casillas4.set("Casilla32", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
+    casillas4.set("Casilla33", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla34", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla35", { top: "730px", left: "24.3%", width: "38px", height: "33px" });
+    casillas4.set("Casilla36", { top: "730px", left: "28.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla37", { top: "730px", left: "33.2%", width: "38px", height: "33px" });
+    casillas4.set("Casilla38", { top: "730px", left: "37.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla39", { top: "730px", left: "42.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla40", { top: "730px", left: "46.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
 
@@ -567,6 +573,7 @@ export const Tablero = (props) => {
 
     // Gestiona la ventana emergente de vender propiedades
     const mostrarVender = (propiedad) => {
+        console.log("Propiedad a vender: " + propiedad);
         setPropiedadVender(propiedad);
         setOpenVenderProp(true);
     }
@@ -575,9 +582,6 @@ export const Tablero = (props) => {
         setOpenVenderProp(false);
         if (vendida === 1) {
             window.alert("Has vendido la propiedad correctamente");
-        }
-        else {
-            window.alert("No has podido vender la propiedad");
         }
     }
 
@@ -642,20 +646,29 @@ export const Tablero = (props) => {
                 )}
 
 
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
-                    <img src={fichaTite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion2}`).top, left:  casillas1.get(`Casilla${posicion2}`).left }}>
-                    <img src={fichaLucas} style={{width:  casillas1.get(`Casilla${posicion2}`).width, height: casillas1.get(`Casilla${posicion2}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion3}`).top, left:  casillas1.get(`Casilla${posicion3}`).left }}>
-                    <img src={fichaPlex} style={{width:  casillas1.get(`Casilla${posicion3}`).width, height: casillas1.get(`Casilla${posicion3}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion4}`).top, left:  casillas1.get(`Casilla${posicion4}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas1.get(`Casilla${posicion4}`).width, height: casillas1.get(`Casilla${posicion4}`).height}} />
-                </div>
+                {Array.from(casillas1).map(([casilla, posicion11]) => (
+                    <div style={{ position: 'absolute', top: posicion11.top, left: posicion11.left }}>
+                        <img src={fichaTite} style={{width: posicion11.width, height: posicion11.height}} />
+                    </div>
+                ))}
+                
+                {Array.from(casillas2).map(([casilla, posicion22]) => (
+                    <div style={{ position: 'absolute', top: posicion22.top, left: posicion22.left }}>
+                        <img src={fichaPlex} style={{width: posicion22.width, height: posicion22.height}} />
+                    </div>
+                ))}
 
+                {Array.from(casillas3).map(([casilla, posicion33]) => (
+                    <div style={{ position: 'absolute', top: posicion33.top, left: posicion33.left }}>
+                        <img src={fichaLucas} style={{width: posicion33.width, height: posicion33.height}} />
+                    </div>
+                ))}
 
+                {Array.from(casillas4).map(([casilla, posicion44]) => (
+                    <div style={{ position: 'absolute', top: posicion44.top, left: posicion44.left }}>
+                        <img src={fichaJeanCarlo} style={{width: posicion44.width, height: posicion44.height}} />
+                    </div>
+                ))}
 
 
 

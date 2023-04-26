@@ -20,6 +20,7 @@ const PopupPropiedadVender = (props) => {
     "NuevaYork", "LosAngeles", "LuxuryTax", "Chicago"];
 
     const nombrePropiedad = props.propiedad;
+    console.log(nombrePropiedad);
 
 
     // Funcion que dado el nombre de una propiedad, devuelve su posicion en el tablero
@@ -37,6 +38,7 @@ const PopupPropiedadVender = (props) => {
         // TODO: Mensaje de comprar la propiedad
         //window.alert("Has comprado la propiedad " + nombrePropiedad);
         let propiedadPosicion = getPosicion(nombrePropiedad);
+        console.log("posicion del vector = " + propiedadPosicion);
         let resultado = await socketActions.venderPropiedad(socket, sesion.email, propiedadPosicion, estadoPartida.id_partida);
         if (resultado === true) {
             props.handleClose(1);

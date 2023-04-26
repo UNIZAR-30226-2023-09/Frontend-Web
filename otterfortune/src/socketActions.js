@@ -478,6 +478,7 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
             //msg[2]  dineroJugador
 
             // Actualizar el dinero del jugador
+            console.log("DINERO despues vender = " + msg[2]);
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2]);
 
             // Eliminar la propiedad del array de propiedades
