@@ -310,6 +310,7 @@ export async function empezarPartida(socket, id_partida, email_lider) {
             estadoPartida.Jugadores[2].email = msg[5]
             estadoPartida.Jugadores[3].email = msg[6]
 
+
             console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + ", " + estadoPartida.Jugadores[1].email + ", " + estadoPartida.Jugadores[2].email + ", " + estadoPartida.Jugadores[3].email + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {

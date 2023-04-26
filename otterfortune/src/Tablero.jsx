@@ -175,7 +175,9 @@ export const Tablero = (props) => {
                     // una pantalla u otra dependiendo de lo que sea true
                     // Mostrar en un consolo logsi es true o false la variable estadoPartida.puedesComprarPropiedad
                     console.log("puedes comprar propiedad: " + estadoPartida.puedesComprarPropiedad);
-
+                    
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    
                     if (estadoPartida.puedesComprarPropiedad) {
                         setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
                         setOpenPropiedad(true);
@@ -194,22 +196,18 @@ export const Tablero = (props) => {
                     }
                     // Tengo que pagar alquiler a otro jugador
                     else if (estadoPartida.pagoAlquiler) {
-                        await new Promise(resolve => setTimeout(resolve, 100));
                         window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
                     }
                     // Cuando caes en la casilla de tax
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
-                        await new Promise(resolve => setTimeout(resolve, 100));
                         window.alert("Tienes que pagar un tax por tus propiedades");
                     }
                     // Cuando caes en la casilla de luxury tax
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
-                        await new Promise(resolve => setTimeout(resolve, 100));
                         window.alert("Tienes que pagar un luxury tax por tus propiedades");
                     }
                     // Cuando caes en la casilla de treasure
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
-                        await new Promise(resolve => setTimeout(resolve, 100));
                         window.alert("Casilla de suerte!");
                     }
                 }
@@ -636,13 +634,26 @@ export const Tablero = (props) => {
         <PopupIrCarcel handleClose={handleCloseCarta} />
     );
 
+    const [showDice, setShowDice] = useState(false);
+
+    // Para mostrar bien los dados cuando yo sea el primero en tirar
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setShowDice(true);
+      }, 100);
+  
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }, []);
+
     //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
     return (
 
         <div className="row">
             <div className="col-7">
                 <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
-                {estadoPartida.miTurno  && (
+                {showDice && estadoPartida.miTurno && (
                                
                     <div onClick={() => tirarDados  && rollDice()}>
                         <div className="posicion-dadoIzq">
