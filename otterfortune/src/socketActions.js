@@ -88,8 +88,8 @@ function cambiarEstado(data) {
 
         case 'DINERO_APOSTAR':
             //DINERO_APOSTAR,${ID_jugador}
-            estadoPartida.apostarDinero = true
-            console.log("Apuesta dinero!!")
+            estadoPartida.enCasino = true
+            console.log("Has caido en Casino, apuesta dinero!!")
             break
 
         case 'OBTENER_BOTE':

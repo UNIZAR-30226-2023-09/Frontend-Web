@@ -34,8 +34,7 @@ class EstadoPartida {
         this.dado2 = null           // int
         this.enCarcel = false       // bool
         this.dineroEnBanco = 0      // float
-        this.apostarDinero = null   // bool
-        this.dineroBote = 0      // float
+        this.dineroBote = 0         // float
         this.tengoSuerte = null     // bool
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
@@ -79,7 +78,6 @@ class EstadoPartida {
         this.dado2 = null           // int
         this.enCarcel = false       // bool
         this.dineroEnBanco = 0      // float
-        this.apostarDinero = null   // bool
         this.dineroBote = 0         // float
         this.tengoSuerte = null     // bool
         this.comprarPropiedad = null        // int
