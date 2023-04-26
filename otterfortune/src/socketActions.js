@@ -459,16 +459,27 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
 
         let msg = response.toString().split(",")
         if (msg[0] === 'VENDER_OK') {
+            //msg[1]  propiedad
             //msg[2]  dineroJugador
-            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
-            console.log("Sí venderPropiedad")
-            return true
+
+            // Actualizar el dinero del jugador
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2]);
+
+            // Eliminar la propiedad del array de propiedades
+            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[1]));
+            if (index !== -1) {
+                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1);
+            }
+
+            console.log("Sí venderPropiedad");
+            return true;
         } else {
-            console.log("No venderPropiedad")
-            return false
+            console.log("No venderPropiedad");
+            return false;
         }
     }
 }
+
 
 // Falta
 export async function quieroEdificar(socket, email, id_partida) {
