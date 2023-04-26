@@ -41,6 +41,7 @@ class EstadoPartida {
         this.evento = null          // string
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
+        this.pagoAlquiler = false;  // bool
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
@@ -67,6 +68,7 @@ class EstadoPartida {
         this.enBanco = false;
         this.enCasino = false;
         this.miTurno = false;
+        this.pagoAlquiler = false
     }
 
     // Reiniciar variables para empezar nueva partida

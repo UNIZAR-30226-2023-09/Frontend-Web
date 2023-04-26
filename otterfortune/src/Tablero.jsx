@@ -70,13 +70,26 @@ export const Tablero = (props) => {
     const [jugadoresVisible, setJugadoresVisible] = useState(false);
     const [propiedadesVisible, setPropiedadesVisible] = useState(false);
 
-    // Para la información de partida
-    const [dineroBanco, setDineroBanco] = useState(0);
-    const [dineroBote, setDineroBote] = useState(0);
-    const [ronda, setRonda] = useState(0);
+    // Para saber en que propiedad he caido
+    const [propiedadCaida, setPropiedadCaida] = useState(0);
+    // Para saber que propiedad vender
+    const [propiedadVender, setPropiedadVender] = useState(0);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
+
+    /* --------------TABLERO------------*/
+    let tableroPropiedades = ["nada","Salida", "Monterrey", "Guadalajara", "Treasure", "Tax", "AeropuertoNarita", // 6
+    "Tokio", "Kioto", "Superpoder", "Osaka", "Carcel", "Roma", "Milan", "Casino", "Napoles", // 15
+    "Aeropuerto Heathrow", "Londres", "Superpoder", "Manchester", "Edimburgo", "Bote", "Madrid", // 22
+    "Barcelona", "Treasure", "Zaragoza", "AeropuertoOrly", "Paris", "Banco", "Marsella", // 29
+    "Lyon", "IrCarcel", "Toronto", "Vancouver", "Treasure", "Ottawa", "AeropuertoDeLosAngeles", // 36
+    "NuevaYork", "LosAngeles", "LuxuryTax", "Chicago"];
+
+    // Funcion que dada una posicion devuelva el nombre de la posicion del tablero
+    const nombrePosicion = (posicion) => {
+        return tableroPropiedades[posicion];
+    };
 
     // Funcion que cada segundo actualiza la posicion de los jugadores de la partida
     const actualizarPosicion = () => {
@@ -84,7 +97,7 @@ export const Tablero = (props) => {
         setPosicion2(estadoPartida.Jugadores[1].posicion);
         setPosicion3(estadoPartida.Jugadores[2].posicion);
         setPosicion4(estadoPartida.Jugadores[3].posicion);
-      };
+    };
     
     useEffect(() => {
         const intervalId = setInterval(actualizarPosicion, 1000);
@@ -165,6 +178,7 @@ export const Tablero = (props) => {
 
                     if (estadoPartida.puedesComprarPropiedad) {
                         // TODO: Mirar que propiedad
+                        setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
                         setOpenPropiedad(true);
                     }
                     // Casilla del banco
@@ -172,16 +186,34 @@ export const Tablero = (props) => {
                         setOpenBanco(true);
                     }
                     // TODO: ESTO ES CASINO?
-                    // else if (estadoPartida.) {
-                    //     setOpenCasino(true);
-                    // }
+                    else if (estadoPartida.enCasino) {
+                        setOpenCasino(true);
+                    }
                     // TODO: MIRAR LA DE IR CARCEL
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 31) {
                         setOpenIrCarcel(true);
                     }
+                    // Tengo que pagar alquiler a otro jugador
+                    else if (estadoPartida.pagoAlquiler) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
+                    }
+                    // Cuando caes en la casilla de tax
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        window.alert("Tienes que pagar un tax por tus propiedades");
+                    }
+                    // Cuando caes en la casilla de luxury tax
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        window.alert("Tienes que pagar un luxury tax por tus propiedades");
+                    }
+                    // Cuando caes en la casilla de treasure
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        window.alert("Casilla de suerte!");
+                    }
                 }
-
-
 
             }
         };
@@ -459,9 +491,6 @@ export const Tablero = (props) => {
 
     /* -------------------------------------------------------------------------------------*/
 
-
-
-
     // {isOpenChat && popUpChat}
     const popUpChat = (
         // De esta forma, en popup, a través del props, se podrá acceder
@@ -491,8 +520,26 @@ export const Tablero = (props) => {
         { nombre: estadoPartida.Jugadores[3].email, imagen: jeancarlo, dinero: estadoPartida.Jugadores[3].dinero, ficha: fichaJeanCarlo },
     ];
     
+    // Comprobar que posicion de la partida soy yo, comparando sesion.email con estadoPartida.Jugadores[i].email
+    // y guardar el indice en indiceYO
+    let indiceYO = 0;
+    for (let i = 0; i < estadoPartida.Jugadores.length; i++) {
+        if (sesion.email === estadoPartida.Jugadores[i].email) {
+            indiceYO = i;
+        }
+    }
 
-    const listaPropiedades = ['Propiedad 1', 'Propiedad 2', 'Propiedad 3', 'Propiedad 4', 'Propiedad 5', 'Propiedad 6', 'Propiedad 7', 'Propiedad 8'];
+    // Funcion que dado una lista de propiedades (con el numero de la propiedad) de un jugador
+    // devuelve una lista, buscando en el vector del tablero esa posicion y devolviendo el nombre de la propiedad
+    const obtenerNombrePropiedades = (listaPropiedades) => {
+        let listaNombres = [];
+        for (let i = 0; i < listaPropiedades.length; i++) {
+            listaNombres.push(tableroPropiedades[listaPropiedades[i]]);
+        }
+        return listaNombres;
+    }
+
+    let listaPropiedades = obtenerNombrePropiedades(estadoPartida.Jugadores[indiceYO].propiedades);
 
     // Gestiona la ventana emergente de comprar propiedades
     const mostrarPopUpPropiedad = (e) => {
@@ -507,13 +554,31 @@ export const Tablero = (props) => {
         setOpenIrCarcel(false);
     }
 
+    // Gestiona la ventana emergente de comprar propiedades
+    const handleCloseComprarPropiedad = (comprada) => {
+        setOpenPropiedad(false);
+        if (comprada === 1) {
+            window.alert("Has comprado la propiedad correctamente");
+        }
+        else {
+            window.alert("No tienes suficiente dinero para comprar la propiedad");
+        }
+    }
+
     // Gestiona la ventana emergente de vender propiedades
-    const mostrarVender = (e) => {
+    const mostrarVender = (propiedad) => {
+        setPropiedadVender(propiedad);
         setOpenVenderProp(true);
     }
     
-    const handleCloseVender = (e) => {
+    const handleCloseVender = (vendida) => {
         setOpenVenderProp(false);
+        if (vendida === 1) {
+            window.alert("Has vendido la propiedad correctamente");
+        }
+        else {
+            window.alert("No has podido vender la propiedad");
+        }
     }
 
     // Gestiona la ventana emergente del banco
@@ -543,11 +608,11 @@ export const Tablero = (props) => {
     );
 
     const popUpPropiedad = (
-        <PopupPropiedad handleClose={handleCloseCarta} propiedad={"NombreCarta"} />
+        <PopupPropiedad handleClose={handleCloseComprarPropiedad} propiedad={propiedadCaida} />
     );
 
     const popUpVender = (
-        <PopupPropiedadVender handleClose={handleCloseVender} propiedad={"NombreCarta"} />
+        <PopupPropiedadVender handleClose={handleCloseVender} propiedad={propiedadVender} />
     );
 
     const popUpBanco = (
@@ -558,6 +623,7 @@ export const Tablero = (props) => {
         <PopupIrCarcel handleClose={handleCloseCarta} />
     );
 
+    //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
     return (
 
         <div className="row">
@@ -576,30 +642,19 @@ export const Tablero = (props) => {
                 )}
 
 
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
+                    <img src={fichaTite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion2}`).top, left:  casillas1.get(`Casilla${posicion2}`).left }}>
+                    <img src={fichaLucas} style={{width:  casillas1.get(`Casilla${posicion2}`).width, height: casillas1.get(`Casilla${posicion2}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion3}`).top, left:  casillas1.get(`Casilla${posicion3}`).left }}>
+                    <img src={fichaPlex} style={{width:  casillas1.get(`Casilla${posicion3}`).width, height: casillas1.get(`Casilla${posicion3}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion4}`).top, left:  casillas1.get(`Casilla${posicion4}`).left }}>
+                    <img src={fichaJeanCarlo} style={{width:  casillas1.get(`Casilla${posicion4}`).width, height: casillas1.get(`Casilla${posicion4}`).height}} />
+                </div>
 
-                {Array.from(casillas1).map(([casilla, posicion11]) => (
-                    <div style={{ position: 'absolute', top: posicion11.top, left: posicion11.left }}>
-                        <img src={fichaTite} style={{width: posicion11.width, height: posicion11.height}} />
-                    </div>
-                ))}
-                
-                {Array.from(casillas2).map(([casilla, posicion22]) => (
-                    <div style={{ position: 'absolute', top: posicion22.top, left: posicion22.left }}>
-                        <img src={fichaPlex} style={{width: posicion22.width, height: posicion22.height}} />
-                    </div>
-                ))}
-
-                {Array.from(casillas3).map(([casilla, posicion33]) => (
-                    <div style={{ position: 'absolute', top: posicion33.top, left: posicion33.left }}>
-                        <img src={fichaLucas} style={{width: posicion33.width, height: posicion33.height}} />
-                    </div>
-                ))}
-
-                {Array.from(casillas4).map(([casilla, posicion44]) => (
-                    <div style={{ position: 'absolute', top: posicion44.top, left: posicion44.left }}>
-                        <img src={fichaJeanCarlo} style={{width: posicion44.width, height: posicion44.height}} />
-                    </div>
-                ))}
 
 
 
@@ -614,9 +669,9 @@ export const Tablero = (props) => {
                         </div>
                         <div className="lista-informacion">
                             <ul>
-                                <li>Dinero en el banco: {dineroBanco}$ </li>
-                                <li>Dinero en el bote: {dineroBote}$ </li>
-                                <li>Ronda actual: {ronda} </li>
+                                <li>Dinero en el banco: {estadoPartida.dineroEnBanco}$ </li>
+                                <li>Dinero en el bote: {estadoPartida.dineroBote}$ </li>
+                                <li>Ronda actual: {estadoPartida.ronda} </li>
 
                                 {estadoPartida.miTurno && !tirarDados && (
                                     <li>
@@ -670,7 +725,7 @@ export const Tablero = (props) => {
                                     {listaPropiedades.map((propiedad, index) => (
                                         <li 
                                             key={index}>{propiedad}
-                                            <button className="vender" onClick={mostrarVender}>Vender</button>
+                                            <button className="vender" onClick={() => mostrarVender(propiedad)}>Vender</button>
                                             <button className="edificar" onClick={mostrarPopUpPropiedad}>Edificar</button>
                                         </li>
                                     ))}
@@ -704,11 +759,30 @@ export default Tablero;
 
 /*
 
-                {Array.from(casillas1).map(([casilla, posicion]) => (
-                    <div style={{ position: 'absolute', top: posicion.top, left: posicion.left }}>
-                        <img src={tite} style={{width: posicion.width, height: posicion.height}} />
+                {Array.from(casillas1).map(([casilla, posicion11]) => (
+                    <div style={{ position: 'absolute', top: posicion11.top, left: posicion11.left }}>
+                        <img src={fichaTite} style={{width: posicion11.width, height: posicion11.height}} />
                     </div>
                 ))}
+                
+                {Array.from(casillas2).map(([casilla, posicion22]) => (
+                    <div style={{ position: 'absolute', top: posicion22.top, left: posicion22.left }}>
+                        <img src={fichaPlex} style={{width: posicion22.width, height: posicion22.height}} />
+                    </div>
+                ))}
+
+                {Array.from(casillas3).map(([casilla, posicion33]) => (
+                    <div style={{ position: 'absolute', top: posicion33.top, left: posicion33.left }}>
+                        <img src={fichaLucas} style={{width: posicion33.width, height: posicion33.height}} />
+                    </div>
+                ))}
+
+                {Array.from(casillas4).map(([casilla, posicion44]) => (
+                    <div style={{ position: 'absolute', top: posicion44.top, left: posicion44.left }}>
+                        <img src={fichaJeanCarlo} style={{width: posicion44.width, height: posicion44.height}} />
+                    </div>
+                ))}
+
 
 
                 <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
