@@ -33,7 +33,7 @@ class EstadoPartida {
         this.dado1 = null           // int
         this.dado2 = null           // int
         this.enCarcel = false       // bool
-        this.dineroEnBanco = 0   // float
+        this.dineroEnBanco = 0      // float
         this.apostarDinero = null   // bool
         this.dineroBote = 0      // float
         this.tengoSuerte = null     // bool

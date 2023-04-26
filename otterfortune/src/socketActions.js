@@ -194,7 +194,7 @@ function cambiarEstado(data) {
         case 'ACTUALIZAR_BANCO':
             //ACTUALIZAR_BANCO,${dinero}
             estadoPartida.dineroEnBanco = parseFloat(msg[1])
-            console.log("Actualiza dinero en banco: " + estadoPartida.economia)
+            console.log("Actualiza dinero en banco: " + estadoPartida.dineroEnBanco)
             break
 
 
