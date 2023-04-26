@@ -162,7 +162,8 @@ function cambiarEstado(data) {
         
         case 'CHAT':
             //CHAT,"${ID_jugador}, ${mensaje}
-            console.log("!MSG!: " + data)
+            estadoPartida.chat.push(msg[1] + ": " + msg[2])
+            console.log("Chat recibo: " + msg[1] + ": " + msg[2])
             break
 
         case 'JugadorMuerto':
@@ -170,6 +171,25 @@ function cambiarEstado(data) {
             const indiceMuerto = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
             estadoPartida.Jugadores[indiceMuerto].muerto = true
             break
+
+        case 'FIN_RONDA':
+            //FIN_RONDA, ${ronda}
+            estadoPartida.ronda = parseInt(msg[1])
+            console.log("Ronda número: " + estadoPartida.ronda)
+            break
+
+        case 'EVENTO':
+            //EVENTO,${efecto}
+            estadoPartida.evento = msg[1]
+            console.log("Evento: " + estadoPartida.evento)
+            break
+
+        case 'ECONOMIA':
+            //ECONOMIA,${economia}
+            estadoPartida.economia = parseFloat(msg[1])
+            console.log("Economia: " + estadoPartida.economia)
+            break
+
 
         default:
             console.log("!!!!!!! NUEVO MSG !!!!!!! " + data)
@@ -263,6 +283,8 @@ export async function empezarPartida(socket, id_partida, email_lider) {
         socket.send(`empezarPartida,${id_partida},${email_lider}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
+        
+        estadoPartida.reiniciarVariablesNuevaPartida()
 
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
@@ -290,6 +312,8 @@ export async function esperarEmpezarPartida(socket) {
 
         waitingForResponse = true
         const response = await waitForResponse(socket)
+
+        estadoPartida.reiniciarVariablesNuevaPartida()
 
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
@@ -586,8 +610,9 @@ export async function comprarSkin(socket, email, skin) {
         const response = await waitForResponse(socket)
 
         let msg = response.toString().split(",")
-        if (msg[0] === 'COMPRADA_OK') {
+        if (msg[0] === 'SKIN_COMPRADA_OK') {
             //msg[2]    gemas
+            sesion.gemas = parseInt(msg[2])
             console.log("Sí comprarSkin")
             return true
         } else {
@@ -620,8 +645,8 @@ export async function verSkins(socket, email) {
 export async function chat(socket, email, id_partida, mensaje) {
     if (socket) {
         socket.send(`chat,${email},${id_partida},${mensaje}`)
-        //waitingForResponse = true
-        //const response = await waitForResponse(socket)
+        estadoPartida.chat.push(estadoPartida.Jugadores[estadoPartida.indiceYO].email + ": " + mensaje)
+        console.log("Chat envio: " + estadoPartida.Jugadores[estadoPartida.indiceYO] + ": " + mensaje)
         return true
     }
 }

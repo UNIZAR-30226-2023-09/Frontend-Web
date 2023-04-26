@@ -29,6 +29,7 @@ class EstadoPartida {
     constructor() {
         // Información de la partida y de mi usuario
         this.id_partida = null      // int
+        this.ronda = 1              // int
         this.dado1 = null           // int
         this.dado2 = null           // int
         this.enCarcel = false       // bool
@@ -38,6 +39,9 @@ class EstadoPartida {
         this.tengoSuerte = null     // bool
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
+        this.evento = null          // string
+        this.economia = null        // float
+        this.chat = [];             // string ["pablo: hola", "alex: adios"]
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
@@ -64,6 +68,27 @@ class EstadoPartida {
         this.enBanco = false;
         this.enCasino = false;
         this.miTurno = false;
+    }
+
+    // Reiniciar variables para empezar nueva partida
+    reiniciarVariablesNuevaPartida() {
+                // Información de la partida y de mi usuario
+                //this.id_partida = null      // int NOOOOOO BORRAR
+                this.ronda = 1              // int
+                this.dado1 = null           // int
+                this.dado2 = null           // int
+                this.enCarcel = false       // bool
+                this.dineroEnBanco = null   // float
+                this.apostarDinero = null   // bool
+                this.dineroBote = null      // float
+                this.tengoSuerte = null     // bool
+                this.comprarPropiedad = null        // int
+                this.comprarPropiedadPrecio = null  // float
+                this.puedesComprarPropiedad = false // bool
+                this.enBanco = false        // bool
+                this.enCasino = false       // bool
+                this.miTurno = false        // bool
+                this.indiceYO = null        // int [0, 3]
     }
 }
 
