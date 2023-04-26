@@ -42,6 +42,7 @@ class EstadoPartida {
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.pagoAlquiler = false;  // bool
+        this.resultCasino = false   // bool
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool

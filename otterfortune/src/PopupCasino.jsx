@@ -3,7 +3,9 @@ import "./CSS/PopupCasino.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { useSocket } from "./socketContext";
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 import ruleta from './Imagenes/rule.png';
 import rule from './Imagenes/ruleta2.png';
@@ -19,16 +21,21 @@ const PopupCasino = (props) => {
         setBetAmount(event.target.value); // Actualiza el estado de betAmount con el valor de entrada del usuario
     };
 
-    const handlePlaceBet = () => {
-        // TODO: Aquí iría el mensaje de mandar lo apostado, la cantidad es betAmount
+    const handlePlaceBet = async () => {
         setIsBetting(true); // cambia el estado a "haciendo apuesta"
         // Lógica para enviar la apuesta al servidor a través del socket
         // Cuando se complete la lógica de la apuesta, cambia el estado de nuevo a "no haciendo apuesta" para detener la animación
+        await socketActions.apostar(socket, sesion.email, estadoPartida.id_partida, betAmount, 0);
         setTimeout(() => {
             setIsBetting(false);
+            if (estadoPartida.resultCasino === true) {
+                props.handleClose(1);
+            }
+            else {
+                props.handleClose(0);
+            }
             // TODO: Aquí iría el mensaje de ganado/perdido
-            window.alert("Eres un ludao");
-          }, 10000);    
+        }, 10000);    
     };
 
     return (

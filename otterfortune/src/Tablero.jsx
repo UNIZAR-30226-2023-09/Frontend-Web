@@ -177,7 +177,6 @@ export const Tablero = (props) => {
                     console.log("puedes comprar propiedad: " + estadoPartida.puedesComprarPropiedad);
 
                     if (estadoPartida.puedesComprarPropiedad) {
-                        // TODO: Mirar que propiedad
                         setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
                         setOpenPropiedad(true);
                     }
@@ -556,7 +555,6 @@ export const Tablero = (props) => {
     const handleCloseCarta = (e) => {
         setOpenCarta(false);
         setOpenPropiedad(false);
-        setOpenCasino(false);
         setOpenIrCarcel(false);
     }
 
@@ -594,6 +592,17 @@ export const Tablero = (props) => {
         setOpenBanco(false);
     }
 
+    // Gestiona la ventana emergente de cerrar el casino
+    const handleCloseCasino = (ganado) => {
+        if (ganado === 1) {
+            window.alert("Has duplicado tu apuesta");
+        }
+        else if (ganado === 0) {
+            window.alert("Has perdido tu apuesta");
+        }
+        setOpenCasino(false);
+    }
+
     const handleFinTurno = async (e) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
@@ -608,7 +617,7 @@ export const Tablero = (props) => {
     );
     
     const popUpCasino = (
-        <PopupCasino handleClose={handleCloseCarta} />
+        <PopupCasino handleClose={handleCloseCasino} />
     );
 
     const popUpPropiedad = (
@@ -646,29 +655,18 @@ export const Tablero = (props) => {
                 )}
 
 
-                {Array.from(casillas1).map(([casilla, posicion11]) => (
-                    <div style={{ position: 'absolute', top: posicion11.top, left: posicion11.left }}>
-                        <img src={fichaTite} style={{width: posicion11.width, height: posicion11.height}} />
-                    </div>
-                ))}
-                
-                {Array.from(casillas2).map(([casilla, posicion22]) => (
-                    <div style={{ position: 'absolute', top: posicion22.top, left: posicion22.left }}>
-                        <img src={fichaPlex} style={{width: posicion22.width, height: posicion22.height}} />
-                    </div>
-                ))}
-
-                {Array.from(casillas3).map(([casilla, posicion33]) => (
-                    <div style={{ position: 'absolute', top: posicion33.top, left: posicion33.left }}>
-                        <img src={fichaLucas} style={{width: posicion33.width, height: posicion33.height}} />
-                    </div>
-                ))}
-
-                {Array.from(casillas4).map(([casilla, posicion44]) => (
-                    <div style={{ position: 'absolute', top: posicion44.top, left: posicion44.left }}>
-                        <img src={fichaJeanCarlo} style={{width: posicion44.width, height: posicion44.height}} />
-                    </div>
-                ))}
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
+                    <img src={fichaTite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion2}`).top, left:  casillas1.get(`Casilla${posicion2}`).left }}>
+                    <img src={fichaLucas} style={{width:  casillas1.get(`Casilla${posicion2}`).width, height: casillas1.get(`Casilla${posicion2}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion3}`).top, left:  casillas1.get(`Casilla${posicion3}`).left }}>
+                    <img src={fichaPlex} style={{width:  casillas1.get(`Casilla${posicion3}`).width, height: casillas1.get(`Casilla${posicion3}`).height}} />
+                </div>
+                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion4}`).top, left:  casillas1.get(`Casilla${posicion4}`).left }}>
+                    <img src={fichaJeanCarlo} style={{width:  casillas1.get(`Casilla${posicion4}`).width, height: casillas1.get(`Casilla${posicion4}`).height}} />
+                </div>
 
 
 
