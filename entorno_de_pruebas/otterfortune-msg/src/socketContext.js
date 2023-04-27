@@ -17,7 +17,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     //const newSocket = new WebSocket('ws://34.175.156.130:8080');
-    const newSocket = new WebSocket('ws://34.175.172.53:8080');
+    const newSocket = new WebSocket('ws://34.175.149.140:8080');
     setSocket(newSocket);
 
     return () => newSocket.close();
