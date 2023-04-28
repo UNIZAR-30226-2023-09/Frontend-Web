@@ -562,7 +562,7 @@ export const Tablero = (props) => {
         if (comprada === 1) {
             window.alert("Has comprado la propiedad correctamente");
         }
-        else {
+        else if (comprada === 0) {
             window.alert("No tienes suficiente dinero para comprar la propiedad");
         }
     }
