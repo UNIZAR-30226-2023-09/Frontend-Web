@@ -9,6 +9,7 @@ class Sesion {
     constructor() {
         this.email = null           // string
         this.gemas = null           // int
+        this.skinEquipada = null    // string
     }
 }
 
@@ -36,21 +37,21 @@ class EstadoPartida {
         this.enCarcel = false       // bool
         this.dineroEnBanco = 0      // float
         this.dineroBote = 0         // float
-        this.tengoSuerte = null     // bool
+        this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
         this.evento = null          // string
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
-        this.pagoAlquiler = false;  // bool
-        this.resultCasino = false   // bool
+        this.elegirCasilla = false  // bool
+        this.superPoder = null      // string
+        this.precioVenta = null     // float
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
         this.enBanco = false        // bool
         this.enCasino = false       // bool
         this.miTurno = false        // bool
-        this.pagoAlquiler = false;  // bool
 
 
         // Jugadores[indiceYO] es mi usuario
@@ -71,7 +72,6 @@ class EstadoPartida {
         this.enBanco = false;
         this.enCasino = false;
         this.miTurno = false;
-        this.pagoAlquiler = false;  // bool
     }
 
     // Reiniciar variables para empezar nueva partida
@@ -84,17 +84,29 @@ class EstadoPartida {
         this.enCarcel = false       // bool
         this.dineroEnBanco = 0      // float
         this.dineroBote = 0         // float
-        this.tengoSuerte = null     // bool
+        this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
         this.evento = null          // string
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
+        this.elegirCasilla = false  // bool
+        this.superPoder = null      // string
+        this.precioVenta = null     // float
+        // Variables de turno
         this.puedesComprarPropiedad = false // bool
         this.enBanco = false        // bool
         this.enCasino = false       // bool
         this.miTurno = false        // bool
+        // Jugadores[indiceYO] es mi usuario
         this.indiceYO = null        // int [0, 3]
+        // Vector de Jugadores
+        this.Jugadores = [
+            new Jugador(),          // Jugador0  [0]
+            new Jugador(),          // Jugador1  [1]
+            new Jugador(),          // Jugador2  [2]
+            new Jugador()           // Jugador3  [3]
+        ]
     }
 }
 
