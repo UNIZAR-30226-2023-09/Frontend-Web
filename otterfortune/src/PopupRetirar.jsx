@@ -16,6 +16,10 @@ const PopupRetirar = (props) => {
         if (cantidad.trim() === '') {
             window.alert('Por favor, ingrese la cantidad.');
         }
+        // Si la cantidad es superior a mi dinero actual en el banco
+        else if (cantidad > estadoPartida.dineroEnBanco) {
+            window.alert('No puede retirar más dinero del que tiene.');
+        }
         else {
             //props.handleClose(id, load);
             let resultado = await socketActions.sacarBanco(socket, sesion.email, estadoPartida.id_partida, cantidad);

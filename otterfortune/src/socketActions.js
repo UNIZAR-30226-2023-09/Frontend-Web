@@ -78,6 +78,7 @@ function cambiarEstado(data) {
         case 'ELIMINADO':
             //ELIMINADO
             console.log("!MSG!: " + data)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = true;
             break
 
         case 'NUEVO_DINERO_BOTE':
@@ -173,6 +174,7 @@ function cambiarEstado(data) {
             //JugadorMuerto,${ID_jugador}
             const indiceMuerto = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
             estadoPartida.Jugadores[indiceMuerto].muerto = true
+            console.log("Jugador muerto: " + estadoPartida.Jugadores[indiceMuerto].email)
             break
 
         case 'FIN_RONDA':

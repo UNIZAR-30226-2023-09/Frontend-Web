@@ -237,6 +237,7 @@ export const Tablero = (props) => {
                     // Tengo que pagar alquiler a otro jugador
                     else if (estadoPartida.pagoAlquiler) {
                         window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
+                        estadoPartida.pagoAlquiler = false;  // bool
                     }
                     // Cuando caes en la casilla de tax
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
@@ -249,10 +250,6 @@ export const Tablero = (props) => {
                     // Cuando caes en la casilla de treasure
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
                         window.alert("Casilla de suerte!");
-                    }
-                    // Cuando caes en la casilla de superpoder
-                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 9 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 18) {
-                        window.alert("Casilla de superpoder!");
                     }
                 }
 
@@ -682,11 +679,13 @@ export const Tablero = (props) => {
 
 
     const jugadores1 = [
-        { nombre: estadoPartida.Jugadores[0].email, imagen: obtenerSkin(estadoPartida.Jugadores[0].skin), dinero: estadoPartida.Jugadores[0].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[0].skin,1) },
-        { nombre: estadoPartida.Jugadores[1].email, imagen: obtenerSkin(estadoPartida.Jugadores[1].skin), dinero: estadoPartida.Jugadores[1].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[1].skin,2)  },
-        { nombre: estadoPartida.Jugadores[2].email, imagen: obtenerSkin(estadoPartida.Jugadores[2].skin), dinero: estadoPartida.Jugadores[2].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[2].skin,3)  },
-        { nombre: estadoPartida.Jugadores[3].email, imagen: obtenerSkin(estadoPartida.Jugadores[3].skin), dinero: estadoPartida.Jugadores[3].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[3].skin,4)  },
+        { nombre: estadoPartida.Jugadores[0].email, imagen: obtenerSkin(estadoPartida.Jugadores[0].skin), dinero: estadoPartida.Jugadores[0].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[0].skin,1), muerto: estadoPartida.Jugadores[0].muerto },
+        { nombre: estadoPartida.Jugadores[1].email, imagen: obtenerSkin(estadoPartida.Jugadores[1].skin), dinero: estadoPartida.Jugadores[1].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[1].skin,2), muerto: estadoPartida.Jugadores[1].muerto },
+        { nombre: estadoPartida.Jugadores[2].email, imagen: obtenerSkin(estadoPartida.Jugadores[2].skin), dinero: estadoPartida.Jugadores[2].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[2].skin,3), muerto: estadoPartida.Jugadores[2].muerto },
+        { nombre: estadoPartida.Jugadores[3].email, imagen: obtenerSkin(estadoPartida.Jugadores[3].skin), dinero: estadoPartida.Jugadores[3].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[3].skin,4), muerto: estadoPartida.Jugadores[3].muerto },
     ];
+
+    console.log(jugadores1);
 
     // Comprobar que posicion de la partida soy yo, comparando sesion.email con estadoPartida.Jugadores[i].email
     // y guardar el indice en indiceYO
@@ -838,20 +837,26 @@ export const Tablero = (props) => {
                     AQUI EN LA POSICION COMPARAR SI ESTA EN LA CARCEL Y MOVERLO A LA DERECH
                     MIRAR PRECIO EN COMPRAR PROPIEDAD    
                 */}
-
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
-                    <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
-                    <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
-                    <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
-                    <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
-                </div>
-
+                {!jugadores1[0].muerto &&
+                    <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
+                        <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                    </div>
+                }
+                {!jugadores1[1].muerto &&
+                    <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
+                        <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
+                    </div>
+                }
+                {!jugadores1[2].muerto &&
+                    <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
+                        <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
+                    </div>
+                }
+                {!jugadores1[3].muerto &&
+                    <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
+                        <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
+                    </div>
+                }
 
 
             </div>
@@ -888,6 +893,7 @@ export const Tablero = (props) => {
 
                                 <ul style={{ display: 'flex', flexDirection: 'column' }}>
                                     {jugadores1.map((jugador) => (
+                                        jugador.muerto ? null :
                                         <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '20px' }}>
                                             <img src={jugador.ficha} alt={jugador.ficha} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
                                             <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />

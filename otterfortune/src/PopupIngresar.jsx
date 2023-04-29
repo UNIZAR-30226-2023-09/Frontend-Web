@@ -17,6 +17,10 @@ const PopupIngresar = (props) => {
         if (cantidad.trim() === '') {
             window.alert('Por favor, ingrese la cantidad.');
         }
+        // Si la cantidad es superior a mi dinero actual
+        else if (cantidad > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+            window.alert('No puede ingresar más dinero del que tiene.');
+        }
         else {
             //props.handleClose(id, load);
             let resultado = await socketActions.meterBanco(socket, sesion.email, estadoPartida.id_partida, cantidad);
