@@ -17,7 +17,7 @@ const Chat = (props) => {
     const [newMessage, setNewMessage] = useState("");
     const [chatNuestro, setChatNuestro] = useState([]); // [author, text
 
-    // Para saber mi email en la partida
+    // Para saber mi email en la partida 
     const miEmail = sesion.email;
 
     useEffect(() => {
