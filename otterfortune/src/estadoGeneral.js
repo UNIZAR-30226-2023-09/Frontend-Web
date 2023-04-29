@@ -16,6 +16,7 @@ class Sesion {
 class Jugador {
     constructor() {
         this.email = null           // string
+        this.skin = null            // string
         this.dinero = 1000          // float
         this.posicion = 1           // int
         this.propiedades = [];      // int [2, 3, 1, 39]
@@ -41,8 +42,6 @@ class EstadoPartida {
         this.evento = null          // string
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
-        this.pagoAlquiler = false;  // bool
-        this.resultCasino = false   // bool
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
@@ -69,7 +68,6 @@ class EstadoPartida {
         this.enBanco = false;
         this.enCasino = false;
         this.miTurno = false;
-        this.pagoAlquiler = false
     }
 
     // Reiniciar variables para empezar nueva partida

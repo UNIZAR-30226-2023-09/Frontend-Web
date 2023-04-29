@@ -144,9 +144,7 @@ function cambiarEstado(data) {
 
         case 'NUEVO_DINERO_ALQUILER':
             //NUEVO_DINERO_ALQUILER,${dineroJugadorPaga},${dineroJugadorRecibe}
-            console.log("Nuevo dinero alquiler, dinero del que paga: " + msg[1] + " del que recibe: " + msg[2]);
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
-            estadoPartida.pagoAlquiler = true;
             console.log("Nuevo dinero alquiler, dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero)
             break
 
@@ -310,9 +308,12 @@ export async function empezarPartida(socket, id_partida, email_lider) {
             estadoPartida.Jugadores[1].email = msg[4]
             estadoPartida.Jugadores[2].email = msg[5]
             estadoPartida.Jugadores[3].email = msg[6]
+            estadoPartida.Jugadores[0].skin = msg[7]
+            estadoPartida.Jugadores[1].skin = msg[8]
+            estadoPartida.Jugadores[2].skin = msg[9]
+            estadoPartida.Jugadores[3].skin = msg[10]
 
-
-            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + ", " + estadoPartida.Jugadores[1].email + ", " + estadoPartida.Jugadores[2].email + ", " + estadoPartida.Jugadores[3].email + ", YOsoy [" + estadoPartida.indiceYO + "]")
+            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {
             console.log("No empezarPartida")
@@ -340,8 +341,12 @@ export async function esperarEmpezarPartida(socket) {
             estadoPartida.Jugadores[1].email = msg[4]
             estadoPartida.Jugadores[2].email = msg[5]
             estadoPartida.Jugadores[3].email = msg[6]
+            estadoPartida.Jugadores[0].skin = msg[7]
+            estadoPartida.Jugadores[1].skin = msg[8]
+            estadoPartida.Jugadores[2].skin = msg[9]
+            estadoPartida.Jugadores[3].skin = msg[10]
 
-            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + ", " + estadoPartida.Jugadores[1].email + ", " + estadoPartida.Jugadores[2].email + ", " + estadoPartida.Jugadores[3].email + ", YOsoy [" + estadoPartida.indiceYO + "]")
+            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {
             console.log("No empezarPartida")
@@ -378,19 +383,11 @@ export async function apostar(socket, email, id_partida, cantidad, suerte) {
         socket.send(`APOSTAR,${email},${id_partida},${cantidad},${suerte}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-        let dineroAntesApostar = estadoPartida.Jugadores[estadoPartida.indiceYO].dinero;
 
         let msg = response.toString().split(",")
         if (msg[0] === 'APOSTAR_OK') {
             //msg[2]      // nuevoDinero
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseInt(msg[2])
-            // He perdido la apuesta
-            if (dineroAntesApostar > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
-                estadoPartida.resultCasino = false;
-            }
-            else {
-                estadoPartida.resultCasino = true;
-            }
             console.log("Sí apostar")
             return true
         } else {
@@ -488,7 +485,6 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
             //msg[2]  dineroJugador
 
             // Actualizar el dinero del jugador
-            console.log("DINERO despues vender = " + msg[2]);
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2]);
 
             // Eliminar la propiedad del array de propiedades
@@ -682,7 +678,7 @@ export async function verSkins(socket, email) {
 export async function chat(socket, email, id_partida, mensaje) {
     if (socket) {
         socket.send(`chat,${email},${id_partida},${mensaje}`)
-        estadoPartida.chat.push(estadoPartida.Jugadores[estadoPartida.indiceYO].email + ":" + mensaje)
+        estadoPartida.chat.push(estadoPartida.Jugadores[estadoPartida.indiceYO].email + ": " + mensaje)
         console.log("Chat envio: " + estadoPartida.Jugadores[estadoPartida.indiceYO] + ": " + mensaje)
         return true
     }
