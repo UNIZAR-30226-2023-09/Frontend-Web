@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./CSS/PopupBanco.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { useSocket } from "./socketContext";
-
 import PopupIngresar from "./PopupIngresar";
 import PopupRetirar from "./PopupRetirar";
 
 import chicago from './Imagenes/CHICAGO.png';
+
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 const PopupBanco = (props) => {
     const socket = useSocket();
@@ -29,6 +31,8 @@ const PopupBanco = (props) => {
     // Para guardar la cantidad introducida a ingresar
     const modificarCantidadIngresar = async (cantidadI) => {
         setcantidadIngresar(cantidadI);
+        // Almacenamos el dinero ingresado en el banco
+        estadoPartida.dineroEnBanco += cantidadI;
         // TODO: Mensajes
     }
 
@@ -39,9 +43,31 @@ const PopupBanco = (props) => {
     }
 
     // Gestionar el cierre de la ventana emergente de ingresar cantidad
-    const handleCloseP = () => {
+    const handleCloseIngresar = (resultado) => {
         setopenIngresar(false);
+        if (resultado === 1) {
+            window.alert('Dinero ingresado correctamente.');
+            handleClose();
+        }
+        else if (resultado === 0) {
+            window.alert('No se ha podido ingresar el dinero en el banco.');
+            handleClose();
+        }
+        
+    }
+
+    // Gestionar el cierre de la ventana emergente de retirar cantidad
+    const handleCloseRetirar = (resultado) => {
         setopenRetirar(false);
+        if (resultado === 1) {
+            window.alert('Dinero retirado correctamente.');
+            handleClose();
+        }
+        else if (resultado === 0) {
+            window.alert('No hay suficiente dinero en el banco.');
+            handleClose();
+        }
+        
     }
 
     const handleClose = () => {
@@ -51,8 +77,8 @@ const PopupBanco = (props) => {
     return (
         <>
             {openIngresar ? (
-                <PopupIngresar modificarCantidadIngresar={modificarCantidadIngresar} handleCloseP={handleCloseP} handleClose={handleClose}/>
-            ) : openRetirar ? <PopupRetirar modificarCantidadRetirar={modificarCantidadRetirar} handleCloseP={handleCloseP} handleClose={handleClose}/> 
+                <PopupIngresar handleCloseP={handleCloseIngresar} handleClose={handleClose}/>
+            ) : openRetirar ? <PopupRetirar handleCloseP={handleCloseRetirar} handleClose={handleClose}/> 
             : (
             <div className="row">
                 <div className="col-7"> </div>

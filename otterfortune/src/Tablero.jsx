@@ -23,10 +23,10 @@ import plex from './Imagenes/PLEX.png';
 import lucas from './Imagenes/LUCAS.png';
 import jeancarlo from './Imagenes/JEAN-CARLO.png';
 
-import fichaJeanCarlo from './Imagenes/FICHAS/AMARILLO1.png';
-import fichaLucas from './Imagenes/FICHAS/ROJO1.png';
-import fichaTite from './Imagenes/FICHAS/MARRON1.png';
-import fichaPlex from './Imagenes/FICHAS/ROSA1.png';
+import fichajeanCarlo from './Imagenes/FICHAS/AMARILLO1.png';
+import fichalucas from './Imagenes/FICHAS/ROJO1.png';
+import fichatite from './Imagenes/FICHAS/MARRON1.png';
+import fichaplex from './Imagenes/FICHAS/ROSA1.png';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -516,11 +516,16 @@ export const Tablero = (props) => {
     //     { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
     // ];
 
+    // Funcion que dado un nombre y un numero, concatene "ficha" + nombre + numero
+    function obtenerFicha(nombre, numero) {
+        return "ficha" + nombre + numero;
+    }
+
     const jugadores1 = [
-        { nombre: estadoPartida.Jugadores[0].email, imagen: tite, dinero: estadoPartida.Jugadores[0].dinero, ficha: fichaTite },
-        { nombre: estadoPartida.Jugadores[1].email, imagen: lucas, dinero: estadoPartida.Jugadores[1].dinero, ficha: fichaLucas },
-        { nombre: estadoPartida.Jugadores[2].email, imagen: plex, dinero: estadoPartida.Jugadores[2].dinero, ficha: fichaPlex },
-        { nombre: estadoPartida.Jugadores[3].email, imagen: jeancarlo, dinero: estadoPartida.Jugadores[3].dinero, ficha: fichaJeanCarlo },
+        { nombre: estadoPartida.Jugadores[0].email, imagen: tite, dinero: estadoPartida.Jugadores[0].dinero, ficha: fichatite },
+        { nombre: estadoPartida.Jugadores[1].email, imagen: lucas, dinero: estadoPartida.Jugadores[1].dinero, ficha: fichalucas },
+        { nombre: estadoPartida.Jugadores[2].email, imagen: plex, dinero: estadoPartida.Jugadores[2].dinero, ficha: fichaplex },
+        { nombre: estadoPartida.Jugadores[3].email, imagen: jeancarlo, dinero: estadoPartida.Jugadores[3].dinero, ficha: fichajeanCarlo },
     ];
     
     // Comprobar que posicion de la partida soy yo, comparando sesion.email con estadoPartida.Jugadores[i].email
@@ -559,6 +564,7 @@ export const Tablero = (props) => {
     // Gestiona la ventana emergente de comprar propiedades
     const handleCloseComprarPropiedad = (comprada) => {
         setOpenPropiedad(false);
+        estadoPartida.puedesComprarPropiedad = false;
         if (comprada === 1) {
             window.alert("Has comprado la propiedad correctamente");
         }
@@ -587,11 +593,13 @@ export const Tablero = (props) => {
     }
 
     const handleCloseBanco = (e) => {
+        estadoPartida.enBanco = false;
         setOpenBanco(false);
     }
 
     // Gestiona la ventana emergente de cerrar el casino
     const handleCloseCasino = (ganado) => {
+        estadoPartida.enCasino = false;
         if (ganado === 1) {
             window.alert("Has duplicado tu apuesta");
         }
@@ -665,18 +673,22 @@ export const Tablero = (props) => {
                     </div>
                 )}
 
+                {/* AÑADIR LO DE MUERTO EN JUGADORES
+                    AQUI EN LA POSICION COMPARAR SI ESTA EN LA CARCEL Y MOVERLO A LA DERECH
+                    MIRAR PRECIO EN COMPRAR PROPIEDAD    
+                */}
 
                 <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
-                    <img src={fichaTite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                    <img src={fichatite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                 </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion2}`).top, left:  casillas1.get(`Casilla${posicion2}`).left }}>
-                    <img src={fichaLucas} style={{width:  casillas1.get(`Casilla${posicion2}`).width, height: casillas1.get(`Casilla${posicion2}`).height}} />
+                <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
+                    <img src={fichalucas} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
                 </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion3}`).top, left:  casillas1.get(`Casilla${posicion3}`).left }}>
-                    <img src={fichaPlex} style={{width:  casillas1.get(`Casilla${posicion3}`).width, height: casillas1.get(`Casilla${posicion3}`).height}} />
+                <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
+                    <img src={fichaplex} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                 </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion4}`).top, left:  casillas1.get(`Casilla${posicion4}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas1.get(`Casilla${posicion4}`).width, height: casillas1.get(`Casilla${posicion4}`).height}} />
+                <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
+                    <img src={fichajeanCarlo} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                 </div>
 
 

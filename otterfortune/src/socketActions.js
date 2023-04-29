@@ -144,6 +144,7 @@ function cambiarEstado(data) {
 
         case 'NUEVO_DINERO_ALQUILER':
             //NUEVO_DINERO_ALQUILER,${dineroJugadorPaga},${dineroJugadorRecibe}
+            console.log("Nuevo dinero alquiler, dinero del que paga: " + msg[1] + " del que recibe: " + msg[2]);
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
             estadoPartida.pagoAlquiler = true;
             console.log("Nuevo dinero alquiler, dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero)

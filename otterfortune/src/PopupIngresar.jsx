@@ -1,27 +1,31 @@
 import React, { useState } from "react";
 import './CSS/Popup.css';
 
+
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupIngresar = (props) => {
     //const [content, setContent] = useState("");
     const [cantidad, setCantidad] = useState("");
+    const socket = useSocket();
 
-    const handleAccept = () => {
+    const handleAccept = async () => {
         if (cantidad.trim() === '') {
             window.alert('Por favor, ingrese la cantidad.');
         }
         else {
             //props.handleClose(id, load);
-            setTimeout(() => {
-                // TODO: aquí iría la lógica para comprobar el mensaje de unirse con el id
-                // Llamada a handleVerificarUnirsePartida dentro del then de la promesa que devuelve setTimeout
-                setTimeout(() => {
-                    props.modificarCantidadIngresar(cantidad);
-                    window.alert('Se han ingresado ' + cantidad + '$ con éxito');
-                    props.handleClose();
-                }, 200);
-            }, 200);
+            let resultado = await socketActions.meterBanco(socket, sesion.email, estadoPartida.id_partida, cantidad);
+            if (resultado === true) {
+                props.handleCloseP(1);
+            }
+            else {
+                props.handleCloseP(0);
+            }
         }
     };
 

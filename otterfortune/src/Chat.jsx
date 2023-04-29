@@ -6,6 +6,7 @@ import { useSocket } from "./socketContext";
 import moment from "moment";
 import enviar from './Imagenes/enviar.png'
 import tite from './Imagenes/TITE.png';
+import { estadoPartida } from "./estadoGeneral";
 
 const Chat = (props) => {
     const socket = useSocket();
@@ -37,6 +38,7 @@ const Chat = (props) => {
                         <h1 style={{ textAlign: "center" }}>CHAT</h1>
                         
                         <div className="message-list" style={{ overflowY: "scroll" }}>
+                            {/*Mostrar el contenido del array estadoPartida.chat */}
                             {messages.map((message, index) => (
                                 <div key={index} className="message">
                                     <div className="message-content">
