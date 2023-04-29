@@ -145,13 +145,14 @@ function cambiarEstado(data) {
         case 'NUEVO_DINERO_ALQUILER':
             //NUEVO_DINERO_ALQUILER,${dineroJugadorPaga},${dineroJugadorRecibe}
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
+            estadoPartida.pagoAlquiler = true;
             console.log("Nuevo dinero alquiler, dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero)
             break
 
         case 'NUEVO_DINERO_ALQUILER_RECIBES':
             //NUEVO_DINERO_ALQUILER_RECIBES,${dineroJugadorRecibe},${ID_jugador},${dineroJugadorPaga}
-
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
+            estadoPartida.pagoAlquiler = true;
             const indiceJugadorPropiedad = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[2]);
             estadoPartida.Jugadores[indiceJugadorPropiedad].dinero = parseFloat(msg[3])
             console.log("Nuevo dinero alquiler, recibes dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero + " desde: " + msg[2], + " [" + indiceJugadorPropiedad + "] " + " jugador paga: " + estadoPartida.Jugadores[indiceJugadorPropiedad].dinero)
@@ -384,10 +385,19 @@ export async function apostar(socket, email, id_partida, cantidad, suerte) {
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
+        let dineroAntesApostar = estadoPartida.Jugadores[estadoPartida.indiceYO].dinero;
+
         let msg = response.toString().split(",")
         if (msg[0] === 'APOSTAR_OK') {
             //msg[2]      // nuevoDinero
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseInt(msg[2])
+            // He perdido la apuesta
+            if (dineroAntesApostar > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+                estadoPartida.resultCasino = false;
+            }
+            else {
+                estadoPartida.resultCasino = true;
+            }
             console.log("Sí apostar")
             return true
         } else {
