@@ -306,7 +306,7 @@ export const Tablero = (props) => {
     // Estas son la fila de arriba de izquierda a derecha
     //casillas1.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
     //casillas1.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
-    casillas1.set("Casilla11", { top: "10%", left: "6%", width: "38px", height: "33px" });
+    casillas1.set("Casilla11", { top: "1.4%", left: "6.5%", width: "38px", height: "33px" });
 
     casillas1.set("Casilla12", { top: "4.1%", left: "8.8%", width: "38px", height: "33px" });
     casillas1.set("Casilla13", { top: "4.1%", left: "13.2%", width: "38px", height: "33px" });
@@ -363,7 +363,7 @@ export const Tablero = (props) => {
     casillas2.set("Casilla10", { top: "120px", left: "4.8%", width: "38px", height: "33px" });
 
     // Estas son la fila de arriba de izquierda a derecha
-    casillas2.set("Casilla11", { top: "10%", left: "6%", width: "38px", height: "33px" });
+    casillas2.set("Casilla11", { top: "3.7%", left: "6.5%", width: "38px", height: "33px" });
 
 
     casillas2.set("Casilla12", { top: "4.1%", left: "10.6%", width: "38px", height: "33px" });
@@ -421,7 +421,7 @@ export const Tablero = (props) => {
     casillas3.set("Casilla10", { top: "147px", left: "2.5%", width: "38px", height: "33px" });
 
     // Estas son la fila de arriba de izquierda a derecha
-    casillas3.set("Casilla11", { top: "10%", left: "6%", width: "38px", height: "33px" });
+    casillas3.set("Casilla11", { top: "6.2%", left: "6.5%", width: "38px", height: "33px" });
 
 
     casillas3.set("Casilla12", { top: "7.6%", left: "8.8%", width: "38px", height: "33px" });
@@ -493,7 +493,7 @@ export const Tablero = (props) => {
     // Estas son la fila de arriba de izquierda a derecha
     //casillas4.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
     //casillas4.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
-    casillas4.set("Casilla11", { top: "10%", left: "6%", width: "38px", height: "33px" });
+    casillas4.set("Casilla11", { top: "8.6%", left: "6.5%", width: "38px", height: "33px" });
 
 
     casillas4.set("Casilla12", { top: "7.6%", left: "10.6%", width: "38px", height: "33px" });
@@ -839,31 +839,39 @@ export const Tablero = (props) => {
                     </div>
                 )}
 
-                {/* 
-                    AÑADIR LO DE MUERTO EN JUGADORES
-                    AQUI EN LA POSICION COMPARAR SI ESTA EN LA CARCEL Y MOVERLO A LA DERECH
-                    MIRAR PRECIO EN COMPRAR PROPIEDAD    
-                */}
                 {!jugadores1[0].muerto &&
-                    <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
+                    <div style={{ 
+                            position: 'absolute', 
+                            top: casillas1.get(`Casilla${posicion1}`).top, 
+                            left: estadoPartida.enCarcel ? '4.5%' : casillas1.get(`Casilla${posicion1}`).left}}>
                         <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                     </div>
                 }
                 {!jugadores1[1].muerto &&
-                    <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
+                    <div style={{ 
+                            position: 'absolute', 
+                            top: casillas2.get(`Casilla${posicion2}`).top, 
+                            left: estadoPartida.enCarcel ? '4.5%' : casillas2.get(`Casilla${posicion2}`).left }}>
                         <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
                     </div>
                 }
                 {!jugadores1[2].muerto &&
-                    <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
+                    <div style={{ 
+                            position: 'absolute', 
+                            top: casillas3.get(`Casilla${posicion3}`).top, 
+                            left: estadoPartida.enCarcel ? '4.5%' : casillas3.get(`Casilla${posicion3}`).left }}>
                         <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                     </div>
                 }
                 {!jugadores1[3].muerto &&
-                    <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
+                    <div style={{ 
+                            position: 'absolute', 
+                            top: casillas4.get(`Casilla${posicion4}`).top, 
+                            left: estadoPartida.enCarcel ? '4.5%' : casillas4.get(`Casilla${posicion4}`).left }}>
                         <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                     </div>
                 }
+                
 
 
             </div>
@@ -969,25 +977,25 @@ export default Tablero;
 
                 {Array.from(casillas1).map(([casilla, posicion11]) => (
                     <div style={{ position: 'absolute', top: posicion11.top, left: posicion11.left }}>
-                        <img src={fichaTite} style={{width: posicion11.width, height: posicion11.height}} />
+                        <img src={fichaBAXTER1} style={{width: posicion11.width, height: posicion11.height}} />
                     </div>
                 ))}
                 
                 {Array.from(casillas2).map(([casilla, posicion22]) => (
                     <div style={{ position: 'absolute', top: posicion22.top, left: posicion22.left }}>
-                        <img src={fichaPlex} style={{width: posicion22.width, height: posicion22.height}} />
+                        <img src={fichaDIONIX2} style={{width: posicion22.width, height: posicion22.height}} />
                     </div>
                 ))}
 
                 {Array.from(casillas3).map(([casilla, posicion33]) => (
                     <div style={{ position: 'absolute', top: posicion33.top, left: posicion33.left }}>
-                        <img src={fichaLucas} style={{width: posicion33.width, height: posicion33.height}} />
+                        <img src={fichaLUCAS3} style={{width: posicion33.width, height: posicion33.height}} />
                     </div>
                 ))}
 
                 {Array.from(casillas4).map(([casilla, posicion44]) => (
                     <div style={{ position: 'absolute', top: posicion44.top, left: posicion44.left }}>
-                        <img src={fichaJeanCarlo} style={{width: posicion44.width, height: posicion44.height}} />
+                        <img src={fichaJEANCARLO4} style={{width: posicion44.width, height: posicion44.height}} />
                     </div>
                 ))}
 
@@ -1007,16 +1015,24 @@ export default Tablero;
                 </div>
 
 // EL BUENOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
-                    <img src={fichaTite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion2}`).top, left:  casillas1.get(`Casilla${posicion2}`).left }}>
-                    <img src={fichaLucas} style={{width:  casillas1.get(`Casilla${posicion2}`).width, height: casillas1.get(`Casilla${posicion2}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion3}`).top, left:  casillas1.get(`Casilla${posicion3}`).left }}>
-                    <img src={fichaPlex} style={{width:  casillas1.get(`Casilla${posicion3}`).width, height: casillas1.get(`Casilla${posicion3}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion4}`).top, left:  casillas1.get(`Casilla${posicion4}`).left }}>
-                    <img src={fichaJeanCarlo} style={{width:  casillas1.get(`Casilla${posicion4}`).width, height: casillas1.get(`Casilla${posicion4}`).height}} />
-                </div>
+                {!jugadores1[0].muerto &&
+                    <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
+                        <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                    </div>
+                }
+                {!jugadores1[1].muerto &&
+                    <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
+                        <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
+                    </div>
+                }
+                {!jugadores1[2].muerto &&
+                    <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
+                        <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
+                    </div>
+                }
+                {!jugadores1[3].muerto &&
+                    <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
+                        <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
+                    </div>
+                }
 */

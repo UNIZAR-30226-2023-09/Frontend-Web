@@ -31,7 +31,7 @@
     max-height: 65%;
 }
   
-.popup__title {
+.popup__titleP {
     position: absolute;
     top: 80px;
     color: black;
@@ -39,8 +39,8 @@
     background-color: #f1f1f1;
     color: #000000;
     text-align: center;
-    width: 50%;
-    height: 70px;
+    width: 60%;
+    height: 80px;
     border-radius: 20px;
 }
 
