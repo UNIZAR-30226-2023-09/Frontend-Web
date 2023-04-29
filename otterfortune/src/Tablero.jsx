@@ -809,7 +809,6 @@ export const Tablero = (props) => {
     );
 
     const [showDice, setShowDice] = useState(false);
-
     // Para mostrar bien los dados cuando yo sea el primero en tirar
     useEffect(() => {
       const timeoutId = setTimeout(() => {
@@ -885,8 +884,9 @@ export const Tablero = (props) => {
                         <div className="lista-informacion">
                             <ul>
                                 <li>Dinero en el banco: {estadoPartida.dineroEnBanco}$ </li>
-                                <li>Dinero en el bote: {estadoPartida.dineroBote}$ </li>
-                                <li>Ronda actual: {estadoPartida.ronda} </li>
+                                <li>Dinero en el bote: {estadoPartida.dineroBote}$</li>
+                                <li>Ronda actual: {estadoPartida.ronda}</li>
+                                <li>Evento: {estadoPartida.evento}</li>
 
                                 {estadoPartida.miTurno && !tirarDados && (
                                     <li>

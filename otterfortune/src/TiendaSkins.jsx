@@ -17,9 +17,15 @@ import PLEX from './Imagenes/PLEX.png';
 import TITE from './Imagenes/TITE.png';
  
 
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
+
 export const TiendaSkins = (props) => {
     const email = props.email;
     const gemas = props.gemas;
+
+    const socket = useSocket();
 
     const [showMenu, setShowMenu] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
@@ -86,8 +92,13 @@ export const TiendaSkins = (props) => {
     };
 
     // Función para manejar la compra de skins
-    const handleBuy = (skinId) => {
-        alert(`Ha comprado la piel con el ID: ${skinId}`);
+    const handleBuy = async (skinId) => {
+        let resultado = await socketActions.comprarSkin(socket, email, skinId);
+        if (resultado === true) {
+            alert("Skin comprada correctamente");
+        } else {
+            alert("No tienes gemas suficientes");
+        }
     };
 
     /*const handleAudio = () => {
