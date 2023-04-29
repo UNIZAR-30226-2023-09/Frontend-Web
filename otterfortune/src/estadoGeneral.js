@@ -71,6 +71,7 @@ class EstadoPartida {
         this.enBanco = false;
         this.enCasino = false;
         this.miTurno = false;
+        this.pagoAlquiler = false;  // bool
     }
 
     // Reiniciar variables para empezar nueva partida

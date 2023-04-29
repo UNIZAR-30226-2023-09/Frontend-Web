@@ -54,7 +54,7 @@ const PopupPropiedad = (props) => {
             <div className="col-7">
             <div className="col-7">
                 <div className="popupProp">
-                    <h3 className="popup__title">Quieres comprar la propiedad: {props.propiedad}?</h3>
+                    <h3 className="popup__title">¿Quieres comprar la propiedad: {props.propiedad} que vale {estadoPartida.comprarPropiedadPrecio}$? </h3>
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <img className="popup__imageProp" src={chicago} />
                     <div className="buttonContainer">
