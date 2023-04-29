@@ -652,7 +652,7 @@ export const Tablero = (props) => {
     useEffect(() => {
       const timeoutId = setTimeout(() => {
         setShowDice(true);
-      }, 100);
+      }, 300);
   
       return () => {
         clearTimeout(timeoutId);

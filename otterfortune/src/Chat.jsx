@@ -15,13 +15,20 @@ const Chat = (props) => {
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [chatNuestro, setChatNuestro] = useState([]); // [author, text
 
     // Para saber mi email en la partida
     const miEmail = sesion.email;
 
     useEffect(() => {
-        // Aquí puedes colocar el código para cargar los mensajes existentes del chat
-    }, []);
+        const interval = setInterval(() => {
+          // Cargar la variable chat aquí
+          // Actualizar el estado de messages con los nuevos mensajes recibidos
+          setChatNuestro(estadoPartida.chat);
+        }, 100);
+      
+        return () => clearInterval(interval);
+      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,29 +52,20 @@ const Chat = (props) => {
                         
                         <div className="message-list" style={{ overflowY: "scroll" }}>
                             {/*Mostrar el contenido del array estadoPartida.chat */}
-                            {estadoPartida.chat.map((message, index) => (
-                                <div key={index} className="message">
-                                    <div className="message-content">
-                                        <div className="message-text">
-                                            {message.text}
+                            {chatNuestro.map((message, index) => {
+                                const [author, text] = String(message).split(':');
+                                const isMyMessage = author === miEmail;
+                                return (
+                                    <div key={index} className="message">
+                                        <div className="message-content">
+                                            <div className={`${isMyMessage ? "message-text" : "other-message"}`}>{text}</div>
+                                            <div className="message-timestamp"></div>
                                         </div>
-                                        <div className="message-timestamp"></div>
+                                        <img src={tite} alt="Descripción de la imagen" className="my-image" />
                                     </div>
-                                    <img src={tite} alt="Descripción de la imagen" className="my-image" />
-                                </div>
-                            ))}
+                                );
+                            })}
 
-                            {messages.map((message, index) => (
-                                <div key={index} className="message">
-                                    <div className="message-content">
-                                        <div className="message-text">
-                                            {message.text}
-                                        </div>
-                                        <div className="message-timestamp"></div>
-                                    </div>
-                                    <img src={tite} alt="Descripción de la imagen" className="my-image" />
-                                </div>
-                            ))}
 
                         </div>
                         <form onSubmit={handleSubmit} className="message-form">

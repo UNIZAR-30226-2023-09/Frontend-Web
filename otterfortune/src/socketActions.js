@@ -682,7 +682,7 @@ export async function verSkins(socket, email) {
 export async function chat(socket, email, id_partida, mensaje) {
     if (socket) {
         socket.send(`chat,${email},${id_partida},${mensaje}`)
-        estadoPartida.chat.push(estadoPartida.Jugadores[estadoPartida.indiceYO].email + ": " + mensaje)
+        estadoPartida.chat.push(estadoPartida.Jugadores[estadoPartida.indiceYO].email + ":" + mensaje)
         console.log("Chat envio: " + estadoPartida.Jugadores[estadoPartida.indiceYO] + ": " + mensaje)
         return true
     }
