@@ -382,11 +382,19 @@ export async function apostar(socket, email, id_partida, cantidad, suerte) {
         socket.send(`APOSTAR,${email},${id_partida},${cantidad},${suerte}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
+        let dineroAntesApostar = estadoPartida.Jugadores[estadoPartida.indiceYO].dinero;
 
         let msg = response.toString().split(",")
         if (msg[0] === 'APOSTAR_OK') {
             //msg[2]      // nuevoDinero
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseInt(msg[2])
+            // He perdido la apuesta
+            if (dineroAntesApostar > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+                estadoPartida.resultCasino = false;
+            }
+            else {
+                estadoPartida.resultCasino = true;
+            }
             console.log("Sí apostar")
             return true
         } else {

@@ -768,11 +768,19 @@ export const Tablero = (props) => {
         setOpenCasino(false);
     }
 
+    // Gestiona el fin del turno
     const handleFinTurno = async (e) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         estadoPartida.miTurno = false;
         setTirarDados(true);
+    }
+
+    // Funcion que compruebe cada segundo si estoy muerto o no, y si lo estoy, que me muestre un window alert
+    function comprobarMuerte() {
+        if (estadoPartida.Jugadores[indiceYO].muerto === true) {
+            window.alert("Has perdido la partida");
+        }
     }
 
 

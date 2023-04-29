@@ -43,6 +43,7 @@ class EstadoPartida {
         this.evento = null          // string
         this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
+        this.resultCasino = false   // bool
         this.elegirCasilla = false  // bool
         this.superPoder = null      // string
         this.precioVenta = null     // float
@@ -52,6 +53,8 @@ class EstadoPartida {
         this.enBanco = false        // bool
         this.enCasino = false       // bool
         this.miTurno = false        // bool
+        this.pagoAlquiler = false;  // bool
+
 
 
         // Jugadores[indiceYO] es mi usuario
