@@ -23,10 +23,11 @@ const Chat = (props) => {
         // Aquí puedes colocar el código para cargar los mensajes existentes del chat
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Aquí puedes colocar el código para enviar el nuevo mensaje al chat
         setMessages([...messages, { text: newMessage, timestamp: new Date() },]);
+        await socketActions.chat(socket, sesion.email, estadoPartida.id_partida, newMessage);
         setNewMessage("");
     };
 
