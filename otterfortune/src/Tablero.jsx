@@ -685,7 +685,6 @@ export const Tablero = (props) => {
         { nombre: estadoPartida.Jugadores[3].email, imagen: obtenerSkin(estadoPartida.Jugadores[3].skin), dinero: estadoPartida.Jugadores[3].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[3].skin,4), muerto: estadoPartida.Jugadores[3].muerto },
     ];
 
-    console.log(jugadores1);
 
     // Comprobar que posicion de la partida soy yo, comparando sesion.email con estadoPartida.Jugadores[i].email
     // y guardar el indice en indiceYO
