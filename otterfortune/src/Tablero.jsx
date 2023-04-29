@@ -18,15 +18,55 @@ import dice3 from './Imagenes/Dice3.png';
 import dice4 from './Imagenes/Dice4.png';
 import dice5 from './Imagenes/Dice5.png';
 import dice6 from './Imagenes/Dice6.png';
-import tite from './Imagenes/TITE.png';
-import plex from './Imagenes/PLEX.png';
-import lucas from './Imagenes/LUCAS.png';
-import jeancarlo from './Imagenes/JEAN-CARLO.png';
 
-import fichajeanCarlo from './Imagenes/FICHAS/AMARILLO1.png';
-import fichalucas from './Imagenes/FICHAS/ROJO1.png';
-import fichatite from './Imagenes/FICHAS/MARRON1.png';
-import fichaplex from './Imagenes/FICHAS/ROSA1.png';
+// Importar todas las imagenes de los jugadores de la carpeta Imagenes
+import TITE from './Imagenes/TITE.png';
+import PLEX from './Imagenes/PLEX.png';
+import LUCAS from './Imagenes/LUCAS.png';
+import JEANCARLO from './Imagenes/JEAN-CARLO.png';
+import BAXTER from './Imagenes/BAXTER.png';
+import BERTA from './Imagenes/BERTA.png';
+import DIONIX from './Imagenes/DIONIX.png';
+import JULS from './Imagenes/JULS.png';
+
+
+// Importar todas las fichas de cada skin con sus colores y numeros 1-2-3-4
+import fichaJEANCARLO1 from './Imagenes/FICHAS/AMARILLO1.png';
+import fichaLUCAS1 from './Imagenes/FICHAS/ROJO1.png';
+import fichaTITE1 from './Imagenes/FICHAS/MARRON1.png';
+import fichaPLEX1 from './Imagenes/FICHAS/ROSA1.png';
+import fichaBAXTER1 from './Imagenes/FICHAS/AZUL1.png';
+import fichaBERTA1 from './Imagenes/FICHAS/NARANJA1.png';
+import fichaDIONIX1 from './Imagenes/FICHAS/VERDE1.png';
+import fichaJULS1 from './Imagenes/FICHAS/MORADO1.png';
+
+import fichaJEANCARLO2 from './Imagenes/FICHAS/AMARILLO2.png';
+import fichaLUCAS2 from './Imagenes/FICHAS/ROJO2.png';
+import fichaTITE2 from './Imagenes/FICHAS/MARRON2.png';
+import fichaPLEX2 from './Imagenes/FICHAS/ROSA2.png';
+import fichaBAXTER2 from './Imagenes/FICHAS/AZUL2.png';
+import fichaBERTA2 from './Imagenes/FICHAS/NARANJA2.png';
+import fichaDIONIX2 from './Imagenes/FICHAS/VERDE2.png';
+import fichaJULS2 from './Imagenes/FICHAS/MORADO2.png';
+
+import fichaJEANCARLO3 from './Imagenes/FICHAS/AMARILLO3.png';
+import fichaLUCAS3 from './Imagenes/FICHAS/ROJO3.png';
+import fichaTITE3 from './Imagenes/FICHAS/MARRON3.png';
+import fichaPLEX3 from './Imagenes/FICHAS/ROSA3.png';
+import fichaBAXTER3 from './Imagenes/FICHAS/AZUL3.png';
+import fichaBERTA3 from './Imagenes/FICHAS/NARANJA3.png';
+import fichaDIONIX3 from './Imagenes/FICHAS/VERDE3.png';
+import fichaJULS3 from './Imagenes/FICHAS/MORADO3.png';
+
+import fichaJEANCARLO4 from './Imagenes/FICHAS/AMARILLO4.png';
+import fichaLUCAS4 from './Imagenes/FICHAS/ROJO4.png';
+import fichaTITE4 from './Imagenes/FICHAS/MARRON4.png';
+import fichaPLEX4 from './Imagenes/FICHAS/ROSA4.png';
+import fichaBAXTER4 from './Imagenes/FICHAS/AZUL4.png';
+import fichaBERTA4 from './Imagenes/FICHAS/NARANJA4.png';
+import fichaDIONIX4 from './Imagenes/FICHAS/VERDE4.png';
+import fichaJULS4 from './Imagenes/FICHAS/MORADO4.png';
+
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -520,18 +560,134 @@ export const Tablero = (props) => {
     //     { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
     // ];
 
-    // Funcion que dado un nombre y un numero, concatene "ficha" + nombre + numero
+    // Funcion que dado un nombre y un numero, compruebe el nombre de la ficha y, para cada nombre
+    // compruebe el numero que es y devuelva la imagen de la ficha en mayusculas
     function obtenerFicha(nombre, numero) {
-        return "ficha" + nombre + numero;
+        switch (nombre) {
+            case "TITE":
+                switch (numero) {
+                    case 1:
+                        return fichaTITE1;
+                    case 2:
+                        return fichaTITE2;
+                    case 3:
+                        return fichaTITE3;
+                    case 4:
+                        return fichaTITE4;
+                }
+            case "LUCAS":
+                switch (numero) {
+                    case 1:
+                        return fichaLUCAS1;
+                    case 2:
+                        return fichaLUCAS2;
+                    case 3:
+                        return fichaLUCAS3;
+                    case 4:
+                        return fichaLUCAS4;
+                }
+            case "PLEX":
+                switch (numero) {
+                    case 1:
+                        return fichaPLEX1;
+                    case 2:
+                        return fichaPLEX2;
+                    case 3:
+                        return fichaPLEX3;
+                    case 4:
+                        return fichaPLEX4;
+                }
+            case "JEANCARLO":
+                switch (numero) {
+                    case 1:
+                        return fichaJEANCARLO1;
+                    case 2:
+                        return fichaJEANCARLO2;
+                    case 3:
+                        return fichaJEANCARLO3;
+                    case 4:
+                        return fichaJEANCARLO4;
+                }
+            case "BERTA":
+                switch (numero) {
+                    case 1:
+                        return fichaBERTA1;
+                    case 2:
+                        return fichaBERTA2;
+                    case 3:
+                        return fichaBERTA3;
+                    case 4:
+                        return fichaBERTA4;
+                }
+            case "BAXTER":
+                switch (numero) {
+                    case 1:
+                        return fichaBAXTER1;
+                    case 2:
+                        return fichaBAXTER2;
+                    case 3:
+                        return fichaBAXTER3;
+                    case 4:
+                        return fichaBAXTER4;
+                }
+            case "DIONIX":
+                switch (numero) {
+                    case 1:
+                        return fichaDIONIX1;
+                    case 2:
+                        return fichaDIONIX2;
+                    case 3:
+                        return fichaDIONIX3;
+                    case 4:
+                        return fichaDIONIX4;
+                }
+            case "JULS":
+                switch (numero) {
+                    case 1:
+                        return fichaJULS1;
+                    case 2:
+                        return fichaJULS2;
+                    case 3:
+                        return fichaJULS3;
+                    case 4:
+                        return fichaJULS4;
+                }
+            }
     }
 
+
+
+    // Funcion que dado el nombre de una SKIN, devuelva la imagen de la ficha con el nombre importado
+    function obtenerSkin(nombre) {
+        switch (nombre) {
+            case "TITE":
+                return TITE;
+            case "LUCAS":
+                return LUCAS;
+            case "PLEX":
+                return PLEX;
+            case "JEANCARLO":
+                return JEANCARLO;
+            case "BERTA":
+                return BERTA;
+            case "BAXTER":
+                return BAXTER;
+            case "DIONIX":
+                return DIONIX;
+            case "JULS":
+                return JULS;
+            // TODO: BOT
+        }
+    }
+
+
     const jugadores1 = [
-        { nombre: estadoPartida.Jugadores[0].email, imagen: tite, dinero: estadoPartida.Jugadores[0].dinero, ficha: fichatite },
-        { nombre: estadoPartida.Jugadores[1].email, imagen: lucas, dinero: estadoPartida.Jugadores[1].dinero, ficha: fichalucas },
-        { nombre: estadoPartida.Jugadores[2].email, imagen: plex, dinero: estadoPartida.Jugadores[2].dinero, ficha: fichaplex },
-        { nombre: estadoPartida.Jugadores[3].email, imagen: jeancarlo, dinero: estadoPartida.Jugadores[3].dinero, ficha: fichajeanCarlo },
+        { nombre: estadoPartida.Jugadores[0].email, imagen: obtenerSkin(estadoPartida.Jugadores[0].skin), dinero: estadoPartida.Jugadores[0].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[0].skin,1) },
+        { nombre: estadoPartida.Jugadores[1].email, imagen: obtenerSkin(estadoPartida.Jugadores[1].skin), dinero: estadoPartida.Jugadores[1].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[1].skin,2)  },
+        { nombre: estadoPartida.Jugadores[2].email, imagen: obtenerSkin(estadoPartida.Jugadores[2].skin), dinero: estadoPartida.Jugadores[2].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[2].skin,3)  },
+        { nombre: estadoPartida.Jugadores[3].email, imagen: obtenerSkin(estadoPartida.Jugadores[3].skin), dinero: estadoPartida.Jugadores[3].dinero, ficha: obtenerFicha(estadoPartida.Jugadores[3].skin,4)  },
     ];
-    
+
     // Comprobar que posicion de la partida soy yo, comparando sesion.email con estadoPartida.Jugadores[i].email
     // y guardar el indice en indiceYO
     let indiceYO = 0;
@@ -684,16 +840,16 @@ export const Tablero = (props) => {
                 */}
 
                 <div style={{ position: 'absolute', top: casillas1.get(`Casilla${posicion1}`).top, left:  casillas1.get(`Casilla${posicion1}`).left }}>
-                    <img src={fichatite} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                    <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas2.get(`Casilla${posicion2}`).top, left:  casillas2.get(`Casilla${posicion2}`).left }}>
-                    <img src={fichalucas} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
+                    <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas3.get(`Casilla${posicion3}`).top, left:  casillas3.get(`Casilla${posicion3}`).left }}>
-                    <img src={fichaplex} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
+                    <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                 </div>
                 <div style={{ position: 'absolute', top: casillas4.get(`Casilla${posicion4}`).top, left:  casillas4.get(`Casilla${posicion4}`).left }}>
-                    <img src={fichajeanCarlo} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
+                    <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                 </div>
 
 
