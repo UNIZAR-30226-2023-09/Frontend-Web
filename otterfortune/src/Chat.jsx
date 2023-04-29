@@ -2,17 +2,22 @@ import React, { useState, useEffect } from "react";
 import "./CSS/Chat.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { useSocket } from "./socketContext";
 import moment from "moment";
 import enviar from './Imagenes/enviar.png'
 import tite from './Imagenes/TITE.png';
-import { estadoPartida } from "./estadoGeneral";
+
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 const Chat = (props) => {
     const socket = useSocket();
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+
+    // Para saber mi email en la partida
+    const miEmail = sesion.email;
 
     useEffect(() => {
         // Aquí puedes colocar el código para cargar los mensajes existentes del chat
@@ -39,6 +44,18 @@ const Chat = (props) => {
                         
                         <div className="message-list" style={{ overflowY: "scroll" }}>
                             {/*Mostrar el contenido del array estadoPartida.chat */}
+                            {estadoPartida.chat.map((message, index) => (
+                                <div key={index} className="message">
+                                    <div className="message-content">
+                                        <div className="message-text">
+                                            {message.text}
+                                        </div>
+                                        <div className="message-timestamp"></div>
+                                    </div>
+                                    <img src={tite} alt="Descripción de la imagen" className="my-image" />
+                                </div>
+                            ))}
+
                             {messages.map((message, index) => (
                                 <div key={index} className="message">
                                     <div className="message-content">
@@ -50,6 +67,7 @@ const Chat = (props) => {
                                     <img src={tite} alt="Descripción de la imagen" className="my-image" />
                                 </div>
                             ))}
+
                         </div>
                         <form onSubmit={handleSubmit} className="message-form">
                             <div className="form-group" style={{ position: "", bottom: 0 }}>

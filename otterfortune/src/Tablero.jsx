@@ -210,6 +210,10 @@ export const Tablero = (props) => {
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
                         window.alert("Casilla de suerte!");
                     }
+                    // Cuando caes en la casilla de superpoder
+                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 9 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 18) {
+                        window.alert("Casilla de superpoder!");
+                    }
                 }
 
             }
@@ -673,7 +677,8 @@ export const Tablero = (props) => {
                     </div>
                 )}
 
-                {/* AÑADIR LO DE MUERTO EN JUGADORES
+                {/* 
+                    AÑADIR LO DE MUERTO EN JUGADORES
                     AQUI EN LA POSICION COMPARAR SI ESTA EN LA CARCEL Y MOVERLO A LA DERECH
                     MIRAR PRECIO EN COMPRAR PROPIEDAD    
                 */}
