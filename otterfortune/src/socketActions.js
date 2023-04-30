@@ -687,7 +687,6 @@ export async function verSkins(socket, email) {
         socket.send(`MOSTRAR_SKINS,${email}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-
         let msg = response.toString().split(",")
         if (msg[0] === 'LISTA_SKIN') {
             //msg[1], msg[2], ...    lista skins
@@ -696,6 +695,7 @@ export async function verSkins(socket, email) {
 
             for (let i = 0; i < skinsPrecio.length; i++) {
                 let submsg = skinsPrecio[i].toString().split(":");
+                console.log("submsg: " + submsg);
                 // submsg[0] nombre
                 // submsg[1] precio
                 let newSkin = {
@@ -703,6 +703,7 @@ export async function verSkins(socket, email) {
                     precio: parseFloat(submsg[1])
                 };
                 sesion.todasSkins.push(newSkin);
+                console.log("sesion.todasSkins: " + sesion.todasSkins);
             }
             console.log("Sí verSkins")
             return true

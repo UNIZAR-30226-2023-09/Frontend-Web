@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import './CSS/TiendaSkins.css';
 import nutria from './Imagenes/otter.png';
 import Menu from "./Menu";
@@ -22,7 +22,7 @@ import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
 export const TiendaSkins = (props) => {
-    const email = props.email;
+    const email = sesion.email;
     const gemas = sesion.gemas;
 
     const socket = useSocket();
@@ -30,52 +30,52 @@ export const TiendaSkins = (props) => {
     const [showMenu, setShowMenu] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
+    // Funcion que dado el nombre de una skin devuelva su imagen
+    const obtenerImagen = (nombre) => {
+        switch (nombre) {
+            case "PLEX":
+                return PLEX;
+            case "JULS":
+                return JULS;
+            case "JEANCARLO":
+                return JEANCARLO;
+            case "TITE":
+                return TITE;
+            case "DIONIX":
+                return DIONIX;
+            case "BERTA":
+                return BERTA;
+            case "LUCAS":
+                return LUCAS;
+            case "BAXTER":
+                return BAXTER;
+            default:
+                return BAXTER;
+        }
+    }    
 
     // TODO: Aquí iria el mensaje de obtener las skins con su precio
-    const skins = [
-        {
-            nombre: "PLEX",
-            imagen: PLEX,
-            precio: 10,
-        },
-        {
-            nombre: "JULS",
-            imagen: JULS,
-            precio: 7,
-        },
-        {
-            nombre: "JEANCARLO",
-            imagen: JEANCARLO,
-            precio: 20,
-        },
-        {
-            nombre: "TITE",
-            imagen: TITE,
-            precio: 50,
-        },
-        {
-            nombre: "DIONIX",
-            imagen: DIONIX,
-            precio: 3,
-        },
-        {
-            nombre: "BERTA",
-            imagen: BERTA,
-            precio: 2,
-        },
-        {
-            nombre: "LUCAS",
-            imagen: LUCAS,
-            precio: 40,
-        },
-        {
-            nombre: "BAXTER",
-            imagen: BAXTER,
-            precio: 1,
-        }
-    ];
+    const skins = [];
 
-      
+    const obtenerSkins = async () => {
+        await socketActions.verSkins(socket, email);
+    };
+
+    
+
+    // Obtener el nombre y el precio de la skin y si el precio es 0 que ponga la variable pertenece a true
+    for (let i = 0; i < sesion.todasSkins.length; i++) {
+        skins.push({
+            nombre: sesion.todasSkins[i].nombre,
+            precio: sesion.todasSkins[i].precio,
+            imagen: obtenerImagen(sesion.todasSkins[i].nombre),
+            // Si el precio es 0, pertenece ponerlo a true, sino a false
+            pertenece: sesion.todasSkins[i].precio === 0 ? true : false,
+        });
+    }
+
+    console.log(skins);
+  
 
     // Gestiona el boton de ir al menú
     const handleMenu = (e) => {
@@ -107,6 +107,18 @@ export const TiendaSkins = (props) => {
             alert("No tienes gemas suficientes para comprar " + skinComprar);
         }
     };
+
+    // Función para manejar equipar una skin
+    const handleEquip = async (skinId) => {
+        let skinEquipar = getSkinName(skinId);
+        let resultado = await socketActions.equiparSkin(socket, email, skinEquipar);
+        if (resultado === true) {
+            alert("Skin " + skinEquipar + " equipada correctamente");
+        } else {
+            alert("No tienes la skin " + skinEquipar + " comprada");
+        }
+    };
+
 
     /*const handleAudio = () => {
         audioRef.current.load();
@@ -149,12 +161,30 @@ export const TiendaSkins = (props) => {
             <div className="skin">
                 <img src={skin.imagen} alt={skin.nombre} className="spin img-fluid"/>
                     <h2>{skin.nombre}</h2>
-                <div className="skin-price">
-                    <h3>{skin.precio}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(index)}>
-                    COMPRAR
-                </button>
+
+                        
+                            {skin.pertenece ? (
+                                <div className="skin-price">
+                                    <h3> 
+                                        <br/>
+                                    </h3>
+                                </div> 
+                            ) : (
+                                <div className="skin-price">
+                                    <h3>{skin.precio}</h3><img src={gema} alt="Gemas" className="gema-skin" />
+                                </div>
+                            )}
+                        
+                        <button className="comprar-option" onClick={() => {
+                            if (skin.pertenece) {
+                                handleEquip(index);
+                            } else {
+                                handleBuy(index);
+                            }
+                            }}>
+                            {skin.pertenece ? "EQUIPAR" : "COMPRAR"}
+                        </button>
+
             </div>
             </div>
         ))}
@@ -162,137 +192,4 @@ export const TiendaSkins = (props) => {
         </div>
         </div>
     );
-  }
-  
-
-/*
-            <button
-                className="email-container-button"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}>
-                {email}
-                {isHovered && (
-                    <span> <br/><br/>
-                        Tienes {gemas} gemas</span>   
-                )}
-            </button>
-*/
-
-/*
-            <img src={nutria} alt="Skin 1" className="spin nutria-imagen" onMouseOver={handleAudio} onMouseLeave={handleLeave} />
-                <audio 
-                        ref={audioRef} 
-                        src={hoverSound} 
-                        onCanPlayThrough={() => {
-                            if (isPlaying) {
-                                audioRef.current.play();
-                            }
-                      }}>
-                </audio>
-*/
-
-/*
- <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-            <img src={plex} alt="Skin 1" className="spin img-fluid"/>
-                <h2>{nombreSkin[0]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[0]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(1)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={baxter} alt="Skin 2" className="spin img-fluid" />
-                <h2>{nombreSkin[1]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[1]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(2)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 3" className="spin img-fluid" />
-                <h2>{nombreSkin[2]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[2]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(3)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 4" className="spin img-fluid" />
-                <h2>{nombreSkin[3]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[3]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(4)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 5" className="spin img-fluid" />
-                <h2>{nombreSkin[4]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[4]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(5)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 6" className="spin img-fluid" />
-                <h2>{nombreSkin[5]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[5]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(6)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 7" className="spin img-fluid" />
-                <h2>{nombreSkin[6]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[6]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(1)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-
-            <div className="col-6 col-md-2 col-lg-3">
-            <div className="skin">
-                <img src={nutria} alt="Skin 8" className="spin img-fluid" />
-                <h2>{nombreSkin[7]}</h2>
-                <div className="skin-price">
-                    <h3>{precio[7]}</h3><img src={gema} alt="Gemas" className="gema-skin" />
-                </div>
-                <button className="comprar-option" onClick={() => handleBuy(1)}>
-                COMPRAR
-                </button>
-            </div>
-            </div>
-*/
+}
