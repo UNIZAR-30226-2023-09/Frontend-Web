@@ -22,20 +22,25 @@ const PopupCasino = (props) => {
     };
 
     const handlePlaceBet = async () => {
-        setIsBetting(true); // cambia el estado a "haciendo apuesta"
-        // Lógica para enviar la apuesta al servidor a través del socket
-        // Cuando se complete la lógica de la apuesta, cambia el estado de nuevo a "no haciendo apuesta" para detener la animación
-        await socketActions.apostar(socket, sesion.email, estadoPartida.id_partida, betAmount, 0);
-        setTimeout(() => {
-            setIsBetting(false);
-            if (estadoPartida.resultCasino === true) {
-                props.handleClose(1);
-            }
-            else {
-                props.handleClose(0);
-            }
-            // TODO: Aquí iría el mensaje de ganado/perdido
-        }, 10000);    
+        if (betAmount > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+            window.alert('No tienes suficiente dinero para apostar esa cantidad.');
+        }
+        else {
+            setIsBetting(true); // cambia el estado a "haciendo apuesta"
+            // Lógica para enviar la apuesta al servidor a través del socket
+            // Cuando se complete la lógica de la apuesta, cambia el estado de nuevo a "no haciendo apuesta" para detener la animación
+            await socketActions.apostar(socket, sesion.email, estadoPartida.id_partida, betAmount, 0);
+            setTimeout(() => {
+                setIsBetting(false);
+                if (estadoPartida.resultCasino === true) {
+                    props.handleClose(1);
+                }
+                else {
+                    props.handleClose(0);
+                }
+                // TODO: Aquí iría el mensaje de ganado/perdido
+            }, 10000);  
+        }  
     };
 
     return (

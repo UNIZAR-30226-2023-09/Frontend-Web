@@ -335,15 +335,15 @@ export const Tablero = (props) => {
     // Esta es la fila de abajo de derecha a izquierda
     casillas1.set("Casilla31", { top: "690px", left: "51%", width: "38px", height: "33px" });
 
-    casillas1.set("Casilla32", { top: "695px", left: "8.8%", width: "38px", height: "33px" });
-    casillas1.set("Casilla33", { top: "695px", left: "13.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla34", { top: "695px", left: "17.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla35", { top: "695px", left: "22.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla40", { top: "695px", left: "8.8%", width: "38px", height: "33px" });
+    casillas1.set("Casilla39", { top: "695px", left: "13.2%", width: "38px", height: "33px" });
+    casillas1.set("Casilla38", { top: "695px", left: "17.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla37", { top: "695px", left: "22.1%", width: "38px", height: "33px" });
     casillas1.set("Casilla36", { top: "695px", left: "26.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla37", { top: "695px", left: "31.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla38", { top: "695px", left: "35.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla39", { top: "695px", left: "40.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla40", { top: "695px", left: "44.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla35", { top: "695px", left: "31.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla34", { top: "695px", left: "35.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla33", { top: "695px", left: "40.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla32", { top: "695px", left: "44.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 2 ------------------------*/
@@ -393,15 +393,15 @@ export const Tablero = (props) => {
     casillas2.set("Casilla31", { top: "690px", left: "53%", width: "38px", height: "33px" });
 
 
-    casillas2.set("Casilla32", { top: "695px", left: "10.6%", width: "38px", height: "33px" });
-    casillas2.set("Casilla33", { top: "695px", left: "15.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla34", { top: "695px", left: "19.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla35", { top: "695px", left: "24.3%", width: "38px", height: "33px" });
+    casillas2.set("Casilla40", { top: "695px", left: "10.6%", width: "38px", height: "33px" });
+    casillas2.set("Casilla39", { top: "695px", left: "15.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla38", { top: "695px", left: "19.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla37", { top: "695px", left: "24.3%", width: "38px", height: "33px" });
     casillas2.set("Casilla36", { top: "695px", left: "28.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla37", { top: "695px", left: "33.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla38", { top: "695px", left: "37.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla39", { top: "695px", left: "42.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla40", { top: "695px", left: "46.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla35", { top: "695px", left: "33.2%", width: "38px", height: "33px" });
+    casillas2.set("Casilla34", { top: "695px", left: "37.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla33", { top: "695px", left: "42.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla32", { top: "695px", left: "46.7%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 3 ------------------------*/
@@ -453,17 +453,17 @@ export const Tablero = (props) => {
     // Esta es la fila de abajo de derecha a izquierda
     casillas3.set("Casilla31", { top: "720px", left: "51%", width: "38px", height: "33px" });
 
-
-
-    casillas3.set("Casilla32", { top: "730px", left: "8.8%", width: "38px", height: "33px" });
-    casillas3.set("Casilla33", { top: "730px", left: "13.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla34", { top: "730px", left: "17.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla35", { top: "730px", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla32", { top: "730px", left: "44.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla33", { top: "730px", left: "40.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla34", { top: "730px", left: "35.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla35", { top: "730px", left: "31.1%", width: "38px", height: "33px" });
     casillas3.set("Casilla36", { top: "730px", left: "26.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla37", { top: "730px", left: "31.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla38", { top: "730px", left: "35.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla39", { top: "730px", left: "40.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla40", { top: "730px", left: "44.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla37", { top: "730px", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla38", { top: "730px", left: "17.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla39", { top: "730px", left: "13.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla40", { top: "730px", left: "8.8%", width: "38px", height: "33px" });
+
+ 
 
     /* -------------------------------------------------------------------------------------*/
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 4 ------------------------*/
@@ -523,16 +523,15 @@ export const Tablero = (props) => {
     // Esta es la fila de abajo de derecha a izquierda
     casillas4.set("Casilla31", { top: "720px", left: "53%", width: "38px", height: "33px" });
 
-
-    casillas4.set("Casilla32", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
-    casillas4.set("Casilla33", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla34", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla35", { top: "730px", left: "24.3%", width: "38px", height: "33px" });
+    casillas4.set("Casilla32", { top: "730px", left: "46.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla33", { top: "730px", left: "42.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla34", { top: "730px", left: "37.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla35", { top: "730px", left: "33.2%", width: "38px", height: "33px" });
     casillas4.set("Casilla36", { top: "730px", left: "28.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla37", { top: "730px", left: "33.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla38", { top: "730px", left: "37.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla39", { top: "730px", left: "42.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla40", { top: "730px", left: "46.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla37", { top: "730px", left: "24.3%", width: "38px", height: "33px" });
+    casillas4.set("Casilla38", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla39", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla40", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
 
     /* -------------------------------------------------------------------------------------*/
 
@@ -850,32 +849,33 @@ export const Tablero = (props) => {
                         {!jugadores1[0].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
-                                    top: casillas1.get(`Casilla${posicion1}`).top, 
-                                    left: casillas1.get(`Casilla${posicion1}`).left}}>
+                                    top: estadoPartida.Jugadores[0].enCarcel ? '2.4%' : casillas1.get(`Casilla${posicion1}`).top, 
+                                    left: estadoPartida.Jugadores[0].enCarcel ? '4.5%' : casillas1.get(`Casilla${posicion1}`).left}}>
                                 <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                             </div>
                         }
+
                         {!jugadores1[1].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
-                                    top: casillas2.get(`Casilla${posicion2}`).top, 
-                                    left: casillas2.get(`Casilla${posicion2}`).left }}>
+                                    top: estadoPartida.Jugadores[1].enCarcel ? '4.7%' : casillas2.get(`Casilla${posicion2}`).top, 
+                                    left: estadoPartida.Jugadores[1].enCarcel ? '4.5%' : casillas2.get(`Casilla${posicion2}`).left }}>
                                 <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
                             </div>
                         }
                         {!jugadores1[2].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
-                                    top: casillas3.get(`Casilla${posicion3}`).top, 
-                                    left: casillas3.get(`Casilla${posicion3}`).left }}>
+                                    top: estadoPartida.Jugadores[2].enCarcel ? '7%' : casillas3.get(`Casilla${posicion3}`).top, 
+                                    left: estadoPartida.Jugadores[2].enCarcel ? '4.5%' : casillas3.get(`Casilla${posicion3}`).left }}>
                                 <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                             </div>
                         }
                         {!jugadores1[3].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
-                                    top: casillas4.get(`Casilla${posicion4}`).top, 
-                                    left: casillas4.get(`Casilla${posicion4}`).left }}>
+                                    top: estadoPartida.Jugadores[3].enCarcel ? '9.2%' : casillas4.get(`Casilla${posicion4}`).top, 
+                                    left: estadoPartida.Jugadores[3].enCarcel ? '4.5%' : casillas4.get(`Casilla${posicion4}`).left }}>
                                 <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                             </div>
                         }
