@@ -92,8 +92,8 @@ class EstadoPartida {
         this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = null          // string
-        this.economia = null        // float
+        this.evento = "Ninguno"     // string
+        this.economia = 1           // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.elegirCasilla = false  // bool
         this.superPoder = null      // string

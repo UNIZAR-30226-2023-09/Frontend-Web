@@ -18,6 +18,7 @@ import gema from './Imagenes/gema.png';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 export const Menu = (props) => {
     // Obtener el valor del email
@@ -57,7 +58,6 @@ export const Menu = (props) => {
 
     // Para ir al tablero
     const [irTablero, setIrTablero] = useState(false);
-
 
     const socket = useSocket();
 
@@ -173,10 +173,11 @@ export const Menu = (props) => {
 
 
     // Cuando se pulsa el botón de tienda skins realizar lo necesario
-    const handleTiendaSkins = (e) => {
+    const handleTiendaSkins = async (e) => {
         // TODO:
         // Aqui seria mandar al servidor y comprobar 
         e.preventDefault();
+        await socketActions.verSkins(socket, sesion.email);
         setTiendaSkin(true);
     };
 
@@ -186,6 +187,7 @@ export const Menu = (props) => {
         setIdPartida(id);
         setIrTablero(true);
     }
+
 
     // Gestiona la ventana emergente 
     const popupPartida = (
@@ -247,9 +249,9 @@ export const Menu = (props) => {
         return <Login />;
     }
 
-    if (tiendaSkin) {
-        return <TiendaSkins email={email} gemas={gemas} />;
-    }
+    // if (tiendaSkin) {
+    //     return <TiendaSkins email={email} gemas={gemas} />;
+    // }
 
     /*
         empPartida ? (
@@ -259,9 +261,11 @@ export const Menu = (props) => {
     return (
         <>
             {loading ? (
-                <Loading email={email} gemas={gemas} />
-            ) : irTablero ? <Tablero email={email} gemas={gemas}/>
-                : empTorneo ? <Clasificacion email={email} gemas={gemas}/> : (
+                        <Loading email={email} gemas={gemas} />
+                    ) 
+                    : irTablero ? <Tablero email={email} gemas={gemas}/>
+                    : tiendaSkin ? <TiendaSkins email={email} gemas={gemas}/>
+                    : empTorneo ? <Clasificacion email={email} gemas={gemas}/> : (
 
                 <div className="menu-container">
                     <header className="App-header">

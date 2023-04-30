@@ -687,6 +687,7 @@ export async function verSkins(socket, email) {
         socket.send(`MOSTRAR_SKINS,${email}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
+        console.log("response: " + response)
         let msg = response.toString().split(",")
         if (msg[0] === 'LISTA_SKIN') {
             //msg[1], msg[2], ...    lista skins

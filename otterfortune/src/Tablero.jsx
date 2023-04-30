@@ -892,6 +892,7 @@ export const Tablero = (props) => {
                                         <li>Dinero en el bote: {estadoPartida.dineroBote}$</li>
                                         <li>Ronda actual: {estadoPartida.ronda}</li>
                                         <li>Evento: {estadoPartida.evento}</li>
+                                        <li>Economía: {estadoPartida.economia} </li>
 
                                         {estadoPartida.miTurno && !tirarDados && (
                                             <li>

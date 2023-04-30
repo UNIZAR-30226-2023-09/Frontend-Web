@@ -57,13 +57,6 @@ export const TiendaSkins = (props) => {
     // TODO: Aquí iria el mensaje de obtener las skins con su precio
     const skins = [];
 
-    const obtenerSkins = async () => {
-        await socketActions.verSkins(socket, email);
-    };
-
-    
-
-    // Obtener el nombre y el precio de la skin y si el precio es 0 que ponga la variable pertenece a true
     for (let i = 0; i < sesion.todasSkins.length; i++) {
         skins.push({
             nombre: sesion.todasSkins[i].nombre,
@@ -73,9 +66,6 @@ export const TiendaSkins = (props) => {
             pertenece: sesion.todasSkins[i].precio === 0 ? true : false,
         });
     }
-
-    console.log(skins);
-  
 
     // Gestiona el boton de ir al menú
     const handleMenu = (e) => {
@@ -97,14 +87,27 @@ export const TiendaSkins = (props) => {
         return skins[index].nombre;
     };
 
+    const [skinList, setSkinList] = useState(skins);
+
     // Función para manejar la compra de skins
     const handleBuy = async (skinId) => {
         let skinComprar = getSkinName(skinId);
-        let resultado = await socketActions.comprarSkin(socket, email, skinComprar);
-        if (resultado === true) {
-            alert("Skin " + skinComprar + " comprada correctamente");
+        // Comprobar si skin[skinId].pertenece es true o false
+        // Si es true, se equipa
+        // Si es false, se puede comprar
+        if (skinList[skinId].pertenece === true) {
+            handleEquip(skinId);
         } else {
-            alert("No tienes gemas suficientes para comprar " + skinComprar);
+            let resultado = await socketActions.comprarSkin(socket, email, skinComprar);
+            if (resultado === true) {
+                const newSkinList = [...skinList];
+                newSkinList[skinId].pertenece = true;
+                newSkinList[skinId].precio = 0;
+                setSkinList(newSkinList);
+                window.alert("Skin " + skinComprar + " comprada correctamente");
+            } else {
+                window.alert("No tienes gemas suficientes para comprar " + skinComprar);
+            }
         }
     };
 
@@ -156,7 +159,7 @@ export const TiendaSkins = (props) => {
                 </button>
             </header>
         <div className="row">
-            {skins.map((skin, index) => (
+            {skinList.map((skin, index) => (
             <div className="col-6 col-md-2 col-lg-3" key={index}>
             <div className="skin">
                 <img src={skin.imagen} alt={skin.nombre} className="spin img-fluid"/>
@@ -175,13 +178,7 @@ export const TiendaSkins = (props) => {
                                 </div>
                             )}
                         
-                        <button className="comprar-option" onClick={() => {
-                            if (skin.pertenece) {
-                                handleEquip(index);
-                            } else {
-                                handleBuy(index);
-                            }
-                            }}>
+                        <button className="comprar-option" onClick={() => {handleBuy(index)}}>
                             {skin.pertenece ? "EQUIPAR" : "COMPRAR"}
                         </button>
 
