@@ -7,9 +7,10 @@
 // Clase Sesion, información de sesión
 class Sesion {
     constructor() {
-        this.email = null           // string
-        this.gemas = null           // int
-        this.skinEquipada = null    // string
+        this.email = null;           // string
+        this.gemas = null;           // int
+        this.skinEquipada = null;    // string
+        this.todasSkins = [];        // Skin, sesion.todasSkins[0].nombre, sesion.todasSkins[0].precio
     }
 }
 
@@ -22,6 +23,7 @@ class Jugador {
         this.posicion = 1           // int
         this.propiedades = [];      // int [2, 3, 1, 39]
         this.muerto = false         // bool
+        this.enCarcel = false       // bool
     }
 }
 
@@ -34,7 +36,6 @@ class EstadoPartida {
         this.ronda = 1              // int
         this.dado1 = null           // int
         this.dado2 = null           // int
-        this.enCarcel = false       // bool
         this.dineroEnBanco = 0      // float
         this.dineroBote = 0         // float
         this.tengoSuerte = null     // string '0' o '1'
@@ -71,10 +72,11 @@ class EstadoPartida {
 
     // Reiniciar variables de turno
     reiniciarVariablesTurno() {
-        this.puedesComprarPropiedad = false;
-        this.enBanco = false;
-        this.enCasino = false;
-        this.miTurno = false;
+        this.puedesComprarPropiedad = false // bool
+        this.enBanco = false        // bool
+        this.enCasino = false       // bool
+        this.miTurno = false        // bool
+        this.pagoAlquiler = false;  // bool
     }
 
     // Reiniciar variables para empezar nueva partida
