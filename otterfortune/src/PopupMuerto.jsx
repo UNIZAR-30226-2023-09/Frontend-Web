@@ -7,10 +7,11 @@ import { Menu } from "./Menu";
 const PopupMuerto = (props) => {
     // Para ir al meno
     const [irMenu, setIrMenu] = useState(false);
+    socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
 
     const handleAccept = () => {
         setIrMenu(true);    // mostrar el menu de vuelta
-};  
+    };  
 
     return (
         <>
@@ -20,10 +21,7 @@ const PopupMuerto = (props) => {
                     <div className="popup__content">
                         <div>
                             <label htmlFor="text" className="popup__label">
-                                Te has quedado sin dinero y estás eliminado de la partida
-                            </label>
-                            <label htmlFor="text" className="popup__label">
-                                Has ganado {props.gemasGanadas} gemas
+                                Te has quedado sin dinero y estás eliminado de la partida. Has ganado {props.gemasGanadas} gemas
                             </label>
 
                         </div>

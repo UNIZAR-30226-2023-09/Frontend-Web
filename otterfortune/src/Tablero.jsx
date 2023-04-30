@@ -775,14 +775,6 @@ export const Tablero = (props) => {
         setTirarDados(true);
     }
 
-    // Funcion que compruebe cada segundo si estoy muerto o no, y si lo estoy, que me muestre un window alert
-    function comprobarMuerte() {
-        if (estadoPartida.Jugadores[indiceYO].muerto === true) {
-            window.alert("Has perdido la partida");
-        }
-    }
-
-
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupCarta handleClose={handleCloseCarta} />
