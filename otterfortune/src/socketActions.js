@@ -671,7 +671,7 @@ export async function comprarSkin(socket, email, skin) {
         if (msg[0] === 'SKIN_COMPRADA_OK') {
             //msg[2]    gemas
             sesion.gemas = parseInt(msg[2])
-            console.log("Sí comprarSkin")
+            console.log("Sí comprarSkin: " + sesion.gemas)
             return true
         } else {
             console.log("No comprarSkin")

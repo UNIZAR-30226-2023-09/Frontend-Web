@@ -23,7 +23,7 @@ import { sesion, estadoPartida } from './estadoGeneral.js';
 
 export const TiendaSkins = (props) => {
     const email = props.email;
-    const gemas = props.gemas;
+    const gemas = sesion.gemas;
 
     const socket = useSocket();
 
@@ -74,6 +74,7 @@ export const TiendaSkins = (props) => {
             precio: 1,
         }
     ];
+
       
 
     // Gestiona el boton de ir al menú
@@ -91,13 +92,19 @@ export const TiendaSkins = (props) => {
        // audioRef.current.pause();
     };
 
+    // Función que dado un índice de la skin devuelva el nombre de esta en el vector 
+    const getSkinName = (index) => {
+        return skins[index].nombre;
+    };
+
     // Función para manejar la compra de skins
     const handleBuy = async (skinId) => {
-        let resultado = await socketActions.comprarSkin(socket, email, skinId);
+        let skinComprar = getSkinName(skinId);
+        let resultado = await socketActions.comprarSkin(socket, email, skinComprar);
         if (resultado === true) {
-            alert("Skin comprada correctamente");
+            alert("Skin " + skinComprar + " comprada correctamente");
         } else {
-            alert("No tienes gemas suficientes");
+            alert("No tienes gemas suficientes para comprar " + skinComprar);
         }
     };
 
@@ -141,12 +148,12 @@ export const TiendaSkins = (props) => {
             <div className="col-6 col-md-2 col-lg-3" key={index}>
             <div className="skin">
                 <img src={skin.imagen} alt={skin.nombre} className="spin img-fluid"/>
-                <h2>{skin.nombre}</h2>
+                    <h2>{skin.nombre}</h2>
                 <div className="skin-price">
-                <h3>{skin.precio}</h3><img src={gema} alt="Gemas" className="gema-skin" />
+                    <h3>{skin.precio}</h3><img src={gema} alt="Gemas" className="gema-skin" />
                 </div>
-                <button className="comprar-option" onClick={() => handleBuy(index + 1)}>
-                COMPRAR
+                <button className="comprar-option" onClick={() => handleBuy(index)}>
+                    COMPRAR
                 </button>
             </div>
             </div>

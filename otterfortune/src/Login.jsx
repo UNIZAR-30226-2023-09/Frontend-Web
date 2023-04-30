@@ -35,7 +35,7 @@ export const Login = (props) => {
             if (login === true) {
                 // Poner a true para mostrar el menu si se inicia correctamente
                 // TODO: Obtener nombre en vez de email
-                setNumGemas(numGemas);
+                setNumGemas(sesion.gemas);
                 setShowMenu(true);
             }
             else {

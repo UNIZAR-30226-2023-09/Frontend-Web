@@ -11,6 +11,7 @@ import PopupPropiedad from "./PopupPropiedad";
 import PopupPropiedadVender from "./PopupPropiedadVender";
 import PopupBanco from "./PopupBanco";
 import PopupIrCarcel from "./PopupIrCarcel";
+import PopupMuerto from "./PopupMuerto";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -808,11 +809,13 @@ export const Tablero = (props) => {
         <PopupIrCarcel handleClose={handleCloseCarta} />
     );
 
+      
     const [showDice, setShowDice] = useState(false);
     // Para mostrar bien los dados cuando yo sea el primero en tirar
     useEffect(() => {
       const timeoutId = setTimeout(() => {
         setShowDice(true);
+        comprobarMuerte();
       }, 300);
   
       return () => {
@@ -821,153 +824,156 @@ export const Tablero = (props) => {
     }, []);
 
     //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
+    // TODO: Mirar cuantas gemas has ganado en la partida y pasarlas al popupMuerto
     return (
+        <>
+            {estadoPartida.Jugadores[indiceYO].muerto ? (
+                <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
+            ) : (
+                <div className="row">
+                    <div className="col-7">
+                        <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
+                        {showDice && estadoPartida.miTurno && (
+                                    
+                            <div onClick={() => tirarDados  && rollDice()}>
+                                <div className="posicion-dadoIzq">
+                                    <img src={diceFace} />
+                                </div>
+                                <div className="posicion-dadoDcha">
+                                    <img src={diceFace2} />
+                                </div>
+                            </div>
+                        )}
 
-        <div className="row">
-            <div className="col-7">
-                <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
-                {showDice && estadoPartida.miTurno && (
-                               
-                    <div onClick={() => tirarDados  && rollDice()}>
-                        <div className="posicion-dadoIzq">
-                            <img src={diceFace} />
-                        </div>
-                        <div className="posicion-dadoDcha">
-                            <img src={diceFace2} />
-                        </div>
-                    </div>
-                )}
-
-                {!jugadores1[0].muerto &&
-                    <div style={{ 
-                            position: 'absolute', 
-                            top: casillas1.get(`Casilla${posicion1}`).top, 
-                            left: estadoPartida.enCarcel ? '4.5%' : casillas1.get(`Casilla${posicion1}`).left}}>
-                        <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
-                    </div>
-                }
-                {!jugadores1[1].muerto &&
-                    <div style={{ 
-                            position: 'absolute', 
-                            top: casillas2.get(`Casilla${posicion2}`).top, 
-                            left: estadoPartida.enCarcel ? '4.5%' : casillas2.get(`Casilla${posicion2}`).left }}>
-                        <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
-                    </div>
-                }
-                {!jugadores1[2].muerto &&
-                    <div style={{ 
-                            position: 'absolute', 
-                            top: casillas3.get(`Casilla${posicion3}`).top, 
-                            left: estadoPartida.enCarcel ? '4.5%' : casillas3.get(`Casilla${posicion3}`).left }}>
-                        <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
-                    </div>
-                }
-                {!jugadores1[3].muerto &&
-                    <div style={{ 
-                            position: 'absolute', 
-                            top: casillas4.get(`Casilla${posicion4}`).top, 
-                            left: estadoPartida.enCarcel ? '4.5%' : casillas4.get(`Casilla${posicion4}`).left }}>
-                        <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
-                    </div>
-                }
-                
-
-
-            </div>
-            <div className="col-5">
-                <div className="">
-                    
-                    <div className="col-12 caja-jugadores">
-                        <div className="btn-container">
-                            <input type="button" className="btn-jugadores" value="Información partida" />
-                        </div>
-                        <div className="lista-informacion">
-                            <ul>
-                                <li>Dinero en el banco: {estadoPartida.dineroEnBanco}$ </li>
-                                <li>Dinero en el bote: {estadoPartida.dineroBote}$</li>
-                                <li>Ronda actual: {estadoPartida.ronda}</li>
-                                <li>Evento: {estadoPartida.evento}</li>
-
-                                {estadoPartida.miTurno && !tirarDados && (
-                                    <li>
-                                        <button onClick={handleFinTurno}>Fin de turno</button>
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div className="col-12 caja-jugadores">
-                        <div className="btn-container">
-                            <input type="button" className="btn-jugadores" value="Lista de jugadores" onClick={() => setJugadoresVisible(!jugadoresVisible)} />
-                        </div>
-
-                        {jugadoresVisible &&
-                            <div className="lista-jugadores">
-
-                                <ul style={{ display: 'flex', flexDirection: 'column' }}>
-                                    {jugadores1.map((jugador) => (
-                                        jugador.muerto ? null :
-                                        <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '20px' }}>
-                                            <img src={jugador.ficha} alt={jugador.ficha} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
-                                            <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
-                                            <span style={{ marginRight: '10px' }}>{jugador.nombre}</span>
-                                            <span>{jugador.dinero}$</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
+                        {!jugadores1[0].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: casillas1.get(`Casilla${posicion1}`).top, 
+                                    left: casillas1.get(`Casilla${posicion1}`).left}}>
+                                <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[1].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: casillas2.get(`Casilla${posicion2}`).top, 
+                                    left: casillas2.get(`Casilla${posicion2}`).left }}>
+                                <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[2].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: casillas3.get(`Casilla${posicion3}`).top, 
+                                    left: casillas3.get(`Casilla${posicion3}`).left }}>
+                                <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[3].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: casillas4.get(`Casilla${posicion4}`).top, 
+                                    left: casillas4.get(`Casilla${posicion4}`).left }}>
+                                <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                             </div>
                         }
 
                     </div>
-
-                    <div className="caja-propiedades">
-                        <div className="row">
-                            <div className="col-12">
-
+                    <div className="col-5">
+                        <div className="">
+                            
+                            <div className="col-12 caja-jugadores">
                                 <div className="btn-container">
-                                    <input type="button" className="btn-propiedades" value="Propiedades" onClick={() => setPropiedadesVisible(!propiedadesVisible)} />
+                                    <input type="button" className="btn-jugadores" value="Información partida" />
+                                </div>
+                                <div className="lista-informacion">
+                                    <ul>
+                                        <li>Dinero en el banco: {estadoPartida.dineroEnBanco}$ </li>
+                                        <li>Dinero en el bote: {estadoPartida.dineroBote}$</li>
+                                        <li>Ronda actual: {estadoPartida.ronda}</li>
+                                        <li>Evento: {estadoPartida.evento}</li>
+
+                                        {estadoPartida.miTurno && !tirarDados && (
+                                            <li>
+                                                <button onClick={handleFinTurno}>Fin de turno</button>
+                                            </li>
+                                        )}
+                                    </ul>
                                 </div>
 
                             </div>
+
+                            <div className="col-12 caja-jugadores">
+                                <div className="btn-container">
+                                    <input type="button" className="btn-jugadores" value="Lista de jugadores" onClick={() => setJugadoresVisible(!jugadoresVisible)} />
+                                </div>
+
+                                {jugadoresVisible &&
+                                    <div className="lista-jugadores">
+
+                                        <ul style={{ display: 'flex', flexDirection: 'column' }}>
+                                            {jugadores1.map((jugador) => (
+                                                jugador.muerto ? null :
+                                                <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '20px' }}>
+                                                    <img src={jugador.ficha} alt={jugador.ficha} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                                                    <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                                                    <span style={{ marginRight: '10px' }}>{jugador.nombre}</span>
+                                                    <span>{jugador.dinero}$</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div className="caja-propiedades">
+                                <div className="row">
+                                    <div className="col-12">
+
+                                        <div className="btn-container">
+                                            <input type="button" className="btn-propiedades" value="Propiedades" onClick={() => setPropiedadesVisible(!propiedadesVisible)} />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {propiedadesVisible &&
+                                    <div className="lista-propiedades">
+                                        <ul>
+
+                                            {listaPropiedades.map((propiedad, index) => (
+                                                <li 
+                                                    key={index}>{propiedad}
+                                                    <button className="vender" onClick={() => mostrarVender(propiedad)}>Vender</button>
+                                                    <button className="edificar" onClick={mostrarPopUpPropiedad}>Edificar</button>
+                                                </li>
+                                            ))}
+                                            {openVenderProp && popUpVender}
+                                            {openCarta && popupCarta}
+                                        </ul>
+                                    </div>
+                                }
+
+                                {openCasino && popUpCasino}
+                                {openPropiedad && popUpPropiedad}
+                                {openBanco && popUpBanco}
+                                {openIrCarcel && popUpIrCarcel}
+                            
+                            </div>
+
                         </div>
 
-                        {propiedadesVisible &&
-                            <div className="lista-propiedades">
-                                <ul>
-
-                                    {listaPropiedades.map((propiedad, index) => (
-                                        <li 
-                                            key={index}>{propiedad}
-                                            <button className="vender" onClick={() => mostrarVender(propiedad)}>Vender</button>
-                                            <button className="edificar" onClick={mostrarPopUpPropiedad}>Edificar</button>
-                                        </li>
-                                    ))}
-                                    {openVenderProp && popUpVender}
-                                    {openCarta && popupCarta}
-                                </ul>
-                            </div>
-                        }
-
-                        {openCasino && popUpCasino}
-                        {openPropiedad && popUpPropiedad}
-                        {openBanco && popUpBanco}
-                        {openIrCarcel && popUpIrCarcel}
-                       
+                        <div className="imagen-extra">
+                            <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
+                        </div>
+                        {abrirChat && popUpChat}
                     </div>
-
                 </div>
-
-                <div className="imagen-extra">
-                    <img src={iconoChat} className="imagen-extra-tablero" onClick={handleChat}/>
-                </div>
-                {abrirChat && popUpChat}
-            </div>
-        </div>
-
-    )
+            )}
+        </>
+    );
 }
 
 export default Tablero;
@@ -1001,18 +1007,41 @@ export default Tablero;
 
 
 
-                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion1}`).top, left:  casillas.get(`Casilla${posicion1}`).left }}>
-                    <img src={tite} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion2}`).top, left:  casillas.get(`Casilla${posicion2}`).left }}>
-                    <img src={lucas} style={{width:  casillas.get(`Casilla${posicion2}`).width, height: casillas.get(`Casilla${posicion2}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion3}`).top, left:  casillas.get(`Casilla${posicion3}`).left }}>
-                    <img src={plex} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
-                </div>
-                <div style={{ position: 'absolute', top: casillas.get(`Casilla${posicion4}`).top, left:  casillas.get(`Casilla${posicion4}`).left }}>
-                    <img src={jeancarlo} style={{width:  casillas.get(`Casilla${posicion1}`).width, height: casillas.get(`Casilla${posicion1}`).height}} />
-                </div>
+                        /* {!jugadores1[0].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: estadoPartida.jugadores1[0].enCarcel ? '2.4%' : casillas1.get(`Casilla${posicion1}`).top, 
+                                    left: estadoPartida.jugadores1[0].enCarcel ? '4.5%' : casillas1.get(`Casilla${posicion1}`).left}}>
+                                <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[1].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: estadoPartida.jugadores1[1].enCarcel ? '4.7%' : casillas2.get(`Casilla${posicion2}`).top, 
+                                    left: estadoPartida.Jugadores1[1].enCarcel ? '4.5%' : casillas2.get(`Casilla${posicion2}`).left }}>
+                                <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[2].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: estadoPartida.Jugadores1[2].enCarcel ? '7%' : casillas3.get(`Casilla${posicion3}`).top, 
+                                    left: estadoPartida.Jugadores1[2].enCarcel ? '4.5%' : casillas3.get(`Casilla${posicion3}`).left }}>
+                                <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
+                            </div>
+                        }
+                        {!jugadores1[3].muerto &&
+                            <div style={{ 
+                                    position: 'absolute', 
+                                    top: estadoPartida.Jugadores1[3].enCarcel ? '9.2%' : casillas4.get(`Casilla${posicion4}`).top, 
+                                    left: estadoPartida.Jugadores1[3].enCarcel ? '4.5%' : casillas4.get(`Casilla${posicion4}`).left }}>
+                                <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
+                            </div>
+                        }
+                         
+
+
 
 // EL BUENOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                 {!jugadores1[0].muerto &&
