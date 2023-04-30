@@ -17,6 +17,7 @@ const PopupMuerto = (props) => {
 
     const handleAccept = () => {
         setIrMenu(true);    // mostrar el menu de vuelta
+        estadoPartida.Jugadores[indiceYO].muerto = false;
     };  
 
     return (
