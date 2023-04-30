@@ -693,6 +693,9 @@ export async function verSkins(socket, email) {
             // Tomar los elementos desde el índice 1 (msg[1]) hasta el final
             const skinsPrecio = msg.slice(1);
 
+            // Vaciar skins
+            sesion.todasSkins = []
+
             for (let i = 0; i < skinsPrecio.length; i++) {
                 let submsg = skinsPrecio[i].toString().split(":");
                 console.log("submsg: " + submsg);
