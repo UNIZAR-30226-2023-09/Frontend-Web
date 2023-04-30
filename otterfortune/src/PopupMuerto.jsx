@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import './CSS/Popup.css';
 import { Menu } from "./Menu";
 
+import * as socketActions from './socketActions';
+import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupMuerto = (props) => {
     // Para ir al meno
     const [irMenu, setIrMenu] = useState(false);
+
+    const socket = useSocket();
     socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
 
     const handleAccept = () => {

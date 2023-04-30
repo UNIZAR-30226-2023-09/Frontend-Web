@@ -806,12 +806,12 @@ export const Tablero = (props) => {
     useEffect(() => {
       const timeoutId = setTimeout(() => {
         setShowDice(true);
-        comprobarMuerte();
-      }, 300);
+        //comprobarMuerte();
+    }, 300);
   
-      return () => {
+    return () => {
         clearTimeout(timeoutId);
-      };
+    };
     }, []);
 
     //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
