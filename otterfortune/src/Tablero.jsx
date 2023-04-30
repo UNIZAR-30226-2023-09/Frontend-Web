@@ -830,9 +830,11 @@ export const Tablero = (props) => {
             {estadoPartida.Jugadores[indiceYO].muerto ? (
                 <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
             ) : (
+                
                 <div className="row">
                     <div className="col-7">
                         <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
+                        
                         {showDice && estadoPartida.miTurno && (
                                     
                             <div onClick={() => tirarDados  && rollDice()}>
@@ -886,6 +888,7 @@ export const Tablero = (props) => {
                                 <div className="btn-container">
                                     <input type="button" className="btn-jugadores" value="Información partida" />
                                 </div>
+
                                 <div className="lista-informacion">
                                     <ul>
                                         <li>Dinero en el banco: {estadoPartida.dineroEnBanco}$ </li>
@@ -893,6 +896,7 @@ export const Tablero = (props) => {
                                         <li>Ronda actual: {estadoPartida.ronda}</li>
                                         <li>Evento: {estadoPartida.evento}</li>
                                         <li>Economía: {estadoPartida.economia} </li>
+                                        
 
                                         {estadoPartida.miTurno && !tirarDados && (
                                             <li>

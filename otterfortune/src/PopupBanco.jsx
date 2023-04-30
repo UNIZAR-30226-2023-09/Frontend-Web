@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PopupIngresar from "./PopupIngresar";
 import PopupRetirar from "./PopupRetirar";
 
-import chicago from './Imagenes/CHICAGO.png';
+import banco from './Imagenes/banco.png';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -87,7 +87,7 @@ const PopupBanco = (props) => {
                     <div className="popupProp">
                         <h3 className="popup__title">¿Que desea hacer?</h3>
                         <button className="popup__close5" onClick={props.handleClose}>X</button>
-                        <img className="popup__imageProp" src={chicago} />
+                        <img className="popup__imageProp" src={banco} />
                         <div className="buttonContainer">
                             <button className="confirmarP" onClick={ingresar}>INGRESAR</button>
                             <button className="retirarP" onClick={retirar}>RETIRAR</button>
