@@ -105,9 +105,10 @@ function cambiarEstado(data) {
 
         case 'DENTRO_CARCEL':
             //DENTRO_CARCEL,${ID_jugador}
-            estadoPartida.enCarcel = true
-            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = 11
-            console.log("Has entrado a la carcel!!")
+            const indiceCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            estadoPartida.Jugadores[indiceCarcel].enCarcel = true
+            estadoPartida.Jugadores[indiceCarcel].posicion = 11
+            console.log("El jugador: " + msg[1] + " ha entrado a la carcel!!")
             break
 
         case 'SUPERPODER':
@@ -367,8 +368,8 @@ export async function lanzarDados(socket, email, id_partida) {
             estadoPartida.dado1 = parseInt(msg[1])
             estadoPartida.dado2 = parseInt(msg[2])
             estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[3])
-            estadoPartida.enCarcel = Boolean(parseInt(msg[4]))
-            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.enCarcel)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = Boolean(parseInt(msg[4]))
+            console.log("Sí lanzarDados, dado1: " + estadoPartida.dado1 + " dado2: " + estadoPartida.dado2 + " posicion: " + estadoPartida.Jugadores[estadoPartida.indiceYO].posicion + " enCarcel: " + estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel)
             return true
         } else {
             console.log("No lanzarDados")
@@ -680,7 +681,7 @@ export async function comprarSkin(socket, email, skin) {
     }
 }
 
-// Falta
+
 export async function verSkins(socket, email) {
     if (socket) {
         socket.send(`MOSTRAR_SKINS,${email}`)
@@ -689,8 +690,20 @@ export async function verSkins(socket, email) {
 
         let msg = response.toString().split(",")
         if (msg[0] === 'LISTA_SKIN') {
-            //msg[2]    lista skins
-            console.log(msg)
+            //msg[1], msg[2], ...    lista skins
+            // Tomar los elementos desde el índice 1 (msg[1]) hasta el final
+            const skinsPrecio = msg.slice(1);
+
+            for (let i = 0; i < skinsPrecio.length; i++) {
+                let submsg = skinsPrecio[i].toString().split(":");
+                // submsg[0] nombre
+                // submsg[1] precio
+                let newSkin = {
+                    nombre: submsg[0],
+                    precio: parseFloat(submsg[1])
+                };
+                sesion.todasSkins.push(newSkin);
+            }
             console.log("Sí verSkins")
             return true
         } else {
