@@ -888,7 +888,6 @@ export const Tablero = (props) => {
     };
     }, []);
 
-    console.log("Mi turno:" + sesion.tableroEquipada);
 
     //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
     // TODO: Mirar cuantas gemas has ganado en la partida y pasarlas al popupMuerto
