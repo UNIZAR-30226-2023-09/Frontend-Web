@@ -686,8 +686,6 @@ export const Tablero = (props) => {
             }
     }
 
-
-
     // Funcion que dado el nombre de una SKIN, devuelva la imagen de la ficha con el nombre importado
     function obtenerSkin(nombre) {
         switch (nombre) {
@@ -716,6 +714,20 @@ export const Tablero = (props) => {
             case "TABLERO4":
                 return TABLERO4;
             // TODO: BOT
+        }
+    }
+
+    // Funcion que dado el nombre de un tablero, devuelva la imagen del tablero con el nombre importado
+    function obtenerTablero(nombre) {
+        switch (nombre) {
+            case "TABLERO1":
+                return TABLERO1;
+            case "TABLERO2":
+                return TABLERO2;
+            case "TABLERO3":
+                return TABLERO3;
+            case "TABLERO4":
+                return TABLERO4;
         }
     }
 
@@ -876,6 +888,8 @@ export const Tablero = (props) => {
     };
     }, []);
 
+    console.log("Mi turno:" + sesion.tableroEquipada);
+
     //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
     // TODO: Mirar cuantas gemas has ganado en la partida y pasarlas al popupMuerto
     return (
@@ -886,7 +900,7 @@ export const Tablero = (props) => {
                 
                 <div className="row">
                     <div className="col-7">
-                        <img src={tablero} className="imagen-tablero w-100" alt="Tablero" />
+                        <img src={obtenerTablero(sesion.tableroEquipada)} className="imagen-tablero w-100" alt="Tablero" />
                         
                         {showDice && estadoPartida.miTurno && (
                                     
