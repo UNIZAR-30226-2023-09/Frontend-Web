@@ -507,43 +507,43 @@ export const Tablero = (props) => {
                         setOpenPropiedad(true);
                     }
                     // Cuando caes en la de superpoder
-                    else if (estadoPartida.superPoder !== null) {
+                    if (estadoPartida.superPoder !== null) {
                         setSuperpoderVisible(true);
                     }
 
                     // Casilla del banco
-                    else if (estadoPartida.enBanco) {
+                    if (estadoPartida.enBanco) {
                         setOpenBanco(true);
                     }
 
                     // Casilla del casino
-                    else if (estadoPartida.enCasino) {
+                    if (estadoPartida.enCasino) {
                         setOpenCasino(true);
                     }
 
                     // TODO: MIRAR LA DE IR CARCEL
-                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 31) {
+                    if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 31) {
                         setOpenIrCarcel(true);
                     }
 
                     // Tengo que pagar alquiler a otro jugador
-                    else if (estadoPartida.pagoAlquiler) {
+                    if (estadoPartida.pagoAlquiler) {
                         window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
                         estadoPartida.pagoAlquiler = false;  // bool
                     }
 
                     // Cuando caes en la casilla de tax
-                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
+                    if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
                         window.alert("Tienes que pagar un tax por tus propiedades");
                     }
 
                     // Cuando caes en la casilla de luxury tax
-                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
+                    if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
                         window.alert("Tienes que pagar un luxury tax por tus propiedades");
                     }
 
                     // Cuando caes en la casilla de treasure
-                    else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
+                    if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
                         window.alert("Casilla de suerte!");
                     }
                 }
@@ -841,6 +841,14 @@ export const Tablero = (props) => {
         estadoPartida.superPoder = null;
     }
 
+    // Gestionar pagar salir carcel
+    const handlePagarCarcel = async (e) => {
+        // await socketActions.pagarSalirCarcel(socket, sesion.email, estadoPartida.id_partida);
+        // estadoPartida.enCarcel = false;
+        // estadoPartida.miTurno = false;
+        window.alert("Has pagado para salir de la carcel");
+    }
+
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupCarta handleClose={handleCloseCarta} />
@@ -889,7 +897,6 @@ export const Tablero = (props) => {
     }, []);
 
 
-    //TODO: MIRAR PORQUE NO SE ACTUALIZA EL MI TURNO DE PRIMERAS
     // TODO: Mirar cuantas gemas has ganado en la partida y pasarlas al popupMuerto
     return (
         <>
@@ -965,6 +972,11 @@ export const Tablero = (props) => {
                                         <li>Evento: {estadoPartida.evento}</li>
                                         <li>Economía: {estadoPartida.economia} </li>
                                         
+                                        {estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel && (
+                                            <li>
+                                                <button onClick={handlePagarCarcel}>Pagar 50$</button>
+                                            </li>
+                                        )}
 
                                         {estadoPartida.miTurno && !tirarDados && (
                                             <li>
