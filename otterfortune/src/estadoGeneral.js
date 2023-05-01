@@ -11,7 +11,7 @@ class Sesion {
         this.gemas = null;           // int
         this.skinEquipada = null;    // string
         this.tableroEquipada = null  // string
-        this.todasSkins = [];        // Skin, sesion.todasSkins[0].nombre, sesion.todasSkins[0].precio
+        this.todasSkins = [];        // [nombre: string, precio: string], sesion.todasSkins[i].nombre, sesion.todasSkins[i].precio
     }
 }
 
@@ -22,7 +22,8 @@ class Jugador {
         this.skin = null            // string
         this.dinero = 1000          // float
         this.posicion = 1           // int
-        this.propiedades = [];      // int [2, 3, 1, 39]
+        this.propiedades = []       // int [2, 3, 1, 39]
+        this.numCasas = new Map()   // estadoPartida.Jugadores[i].numCasas.set(key, value), estadoPartida.Jugadores[i].numCasas.get(key)
         this.muerto = false         // bool
         this.enCarcel = false       // bool
     }
@@ -50,6 +51,8 @@ class EstadoPartida {
         this.superPoder = null      // string
         this.precioVenta = null     // float
 
+        this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
+
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
         this.enBanco = false        // bool
@@ -60,7 +63,8 @@ class EstadoPartida {
 
 
         // Jugadores[indiceYO] es mi usuario
-        this.indiceYO = null        // int [0, 3]
+        // Se actualiza al indice real cuando inicia partida
+        this.indiceYO = 0           // int [0, 3]
 
         // Vector de Jugadores
         this.Jugadores = [

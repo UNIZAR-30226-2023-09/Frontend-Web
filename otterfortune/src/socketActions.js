@@ -534,7 +534,6 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
 }
 
 
-// Falta
 export async function quieroEdificar(socket, email, id_partida) {
     if (socket) {
         socket.send(`QUIERO_EDIFICAR,${email},${id_partida}`)
@@ -543,9 +542,32 @@ export async function quieroEdificar(socket, email, id_partida) {
 
         let msg = response.toString().split(",")
         if (msg[0] === 'EDIFICAR') {
-            //msg[2]  resultadoFinal (propiedades que puede edificar)
-            // puede ser que no haya msg[2], simplemente [0] y [1]
-            console.log(msg)
+            //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
+            //msg[2], msg[3], ...  propiedades (propiedad-precio)
+
+            //UPDATE Partida SET propiedad17 = 'dav', propiedad19 = 'dav', propiedad20 = 'dav' WHERE idPartida = 3;
+
+            // Tomar los elementos desde el índice 2 (msg[2]) hasta el final
+            const propiedadPrecio = msg.slice(2);
+
+            // Vaciar propiedades
+            estadoPartida.propiedadesEdificar = []
+
+            for (let i = 0; i < propiedadPrecio.length; i++) {
+                let submsg = propiedadPrecio[i].toString().split("-");
+                // submsg[0] nombre (propiedad1, propiedad2, ...)
+                // submsg[1] precio
+
+                // Reemplazar 'propiedad' con '' en cada elemento de newMsg
+                const replacedNombre = submsg[0].replace(/propiedad/g, ''); // Reemplazar 'map' con 'replace'
+                
+                let newPropiedad = {
+                    nombre: replacedNombre,
+                    precio: parseFloat(submsg[1])
+                };
+                estadoPartida.propiedadesEdificar.push(newPropiedad);
+            }
+
             console.log("Sí quieroEdificar")
             return true
         } else {
@@ -555,7 +577,7 @@ export async function quieroEdificar(socket, email, id_partida) {
     }
 }
 
-// Falta
+
 export async function edificarPropiedad(socket, email, id_partida, propiedad, precio) {
     if (socket) {
         socket.send(`EDIFICAR,${email},${id_partida},${propiedad}-${precio}`)
@@ -565,7 +587,15 @@ export async function edificarPropiedad(socket, email, id_partida, propiedad, pr
         let msg = response.toString().split(",")
         if (msg[0] === 'EDIFICAR_OK') {
             //msg[2]  dineroJugador
-            console.log(msg)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
+
+            // Incremento una edificación
+            if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) == null) {
+                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, 1);
+            } else {
+                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) + 1);
+            }
+
             console.log("Sí edificarPropiedad")
             return true
         } else {
