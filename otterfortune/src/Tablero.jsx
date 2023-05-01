@@ -148,6 +148,17 @@ export const Tablero = (props) => {
     "Lyon", "IrCarcel", "Toronto", "Vancouver", "Treasure", "Ottawa", "AeropuertoDeLosAngeles", // 36
     "NuevaYork", "LosAngeles", "LuxuryTax", "Chicago"];
 
+    // Funcion que dado el nombre de una propiedad, devuelve su posicion en el tablero
+    function posicionTablero(nombrePropiedad){
+        let posicion = 0;
+        for(let i = 0; i < tableroPropiedades.length; i++){
+            if(tableroPropiedades[i] === nombrePropiedad){
+                posicion = i;
+            }
+        }
+        return posicion;
+    }
+
     /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 1 ------------------------*/
     const casillas1 = new Map();
 
@@ -505,13 +516,14 @@ export const Tablero = (props) => {
                     
                     await new Promise(resolve => setTimeout(resolve, 100));
                     
-                    if (estadoPartida.puedesComprarPropiedad) {
-                        setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
-                        setOpenPropiedad(true);
-                    }
                     // Cuando caes en la de superpoder
                     if (estadoPartida.superPoder !== null) {
                         setSuperpoderVisible(true);
+                    }
+
+                    if (estadoPartida.puedesComprarPropiedad) {
+                        setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
+                        setOpenPropiedad(true);
                     }
 
                     // Casilla del banco
@@ -585,14 +597,6 @@ export const Tablero = (props) => {
     //       Obtener dinero de cada uno
     //       Obtener el nombre dado el email
     //       Obtener la posición
-
-
-    // const jugadores1 = [
-    //     { nombre: 'Jesus', imagen: tite, dinero: 100, ficha: fichaTite },
-    //     { nombre: 'Alejandro', imagen: lucas, dinero: 150, ficha: fichaLucas },
-    //     { nombre: 'Cesar', imagen: plex, dinero: 200, ficha: fichaPlex },
-    //     { nombre: 'Marcos', imagen: jeancarlo, dinero: 250, ficha: fichaJeanCarlo },
-    // ];
 
     // Funcion que dado un nombre y un numero, compruebe el nombre de la ficha y, para cada nombre
     // compruebe el numero que es y devuelva la imagen de la ficha en mayusculas
@@ -768,8 +772,6 @@ export const Tablero = (props) => {
     const mostrarPopUpPropiedad = (e) => {
         setOpenCarta(true);
     }
-
-
 
     // Gestiona el cierre de la ventana emergente
     const handleCloseCarta = (e) => {
@@ -1054,16 +1056,35 @@ export const Tablero = (props) => {
                                 {propiedadesVisible &&
                                     <div className="lista-propiedades">
                                         <ul>
+                                        {listaPropiedades.map((propiedad, index) => {
+                                            let posicion = posicionTablero(propiedad);
+                                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
+                                            let propiedadAE;
 
-                                            {listaPropiedades.map((propiedad, index) => (
-                                                <li 
-                                                    key={index}>{propiedad}
-                                                    <button className="vender" onClick={() => mostrarVender(propiedad)}>Vender</button>
-                                                    <button className="edificar" onClick={() => handleEdificar(propiedad)}>Edificar</button>
+                                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
+                                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
+                                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
+                                                    break;
+                                                }
+                                            }
+                                        
+                                            return (
+                                                <li key={index}>
+                                                {propiedad}
+                                                <button className="vender" onClick={() => mostrarVender(propiedad)}>
+                                                    Vender
+                                                </button>
+                                    
+                                                {propiedadAE && (
+                                                    <button className="edificar" onClick={() =>handleEdificar(propiedad)}>
+                                                    Edificar ({propiedadAE.precio}) - {estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(posicion)}
+                                                    </button>
+                                                )}
                                                 </li>
-                                            ))}
-                                            
-                                            {openCarta && popupCarta}
+                                                
+                                            );
+
+                                        })}
                                         </ul>
                                     </div>
                                 }

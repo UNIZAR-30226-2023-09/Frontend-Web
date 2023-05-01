@@ -67,7 +67,7 @@ const PopupEdificar = (props) => {
         // Dado el nombre de la propiedad, buscarla en el vector y guardar en una variable el precio
         let precioEdificar = 0;
         for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
-            if (estadoPartida.propiedadesEdificar[i].nombre === propiedadPosicion) {
+            if (estadoPartida.propiedadesEdificar[i].nombre == propiedadPosicion) {
                 precioEdificar = estadoPartida.propiedadesEdificar[i].precio;
             }
         }
@@ -151,7 +151,7 @@ const PopupEdificar = (props) => {
             <div className="col-7">
             <div className="col-7">
                 <div className="popupProp">
-                    <h3 className="popup__titleP">¿Quieres edificar la propiedad {props.propiedad} {estadoPartida.comprarPropiedadPrecio}$? </h3>
+                    <h3 className="popup__titleP">¿Quieres edificar la propiedad {props.propiedad}? </h3>
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <img className="popup__imageProp" src={getImagen(props.propiedad)} />
                     <div className="buttonContainer">

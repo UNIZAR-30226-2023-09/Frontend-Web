@@ -539,7 +539,7 @@ export async function quieroEdificar(socket, email, id_partida) {
         socket.send(`QUIERO_EDIFICAR,${email},${id_partida}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-
+        console.log(response)
         let msg = response.toString().split(",")
         if (msg[0] === 'EDIFICAR') {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
