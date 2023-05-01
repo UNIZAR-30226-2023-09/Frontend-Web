@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import tablero from './Imagenes/TABLERO.jpg'
 import iconoChat from './Imagenes/iconoChat.png';
 import Chat from './Chat';
-import PopupCarta from './PopupCarta';
+import PopupEdificar from './PopupEdificar';
 import PopupCasino from './PopupCasino';
 import PopupPropiedad from "./PopupPropiedad";
 import PopupPropiedadVender from "./PopupPropiedadVender";
@@ -108,7 +108,6 @@ export const Tablero = (props) => {
     const [openIrCarcel, setOpenIrCarcel] = useState(false);
     // Para controlar que solo se tiren una vez los dados
     const [tirarDados, setTirarDados] = useState(true);
-    // TODO: MIRAR DADOS DOBLES
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -133,6 +132,10 @@ export const Tablero = (props) => {
 
     // Para saber cuando mostrar el superpoder
     const [superpoderVisible, setSuperpoderVisible] = useState(false);
+
+    // Para saber cuando mostrar la de edificar
+    const [edificarVisible, setEdificarVisible] = useState(false);
+    const [propiedadEdificar, setPropiedadEdificar] = useState(0);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
@@ -766,6 +769,8 @@ export const Tablero = (props) => {
         setOpenCarta(true);
     }
 
+
+
     // Gestiona el cierre de la ventana emergente
     const handleCloseCarta = (e) => {
         setOpenCarta(false);
@@ -826,6 +831,8 @@ export const Tablero = (props) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         estadoPartida.miTurno = false;
+        // Mandar el mensaje de quiero edificar
+        await socketActions.quieroEdificar(socket, sesion.email, estadoPartida.id_partida);
         setTirarDados(true);
     }
 
@@ -849,9 +856,26 @@ export const Tablero = (props) => {
         window.alert("Has pagado para salir de la carcel");
     }
 
+    // Gestiona abrir edificar
+    const handleEdificar = (propiedad) => {
+        setEdificarVisible(true);
+        setPropiedadEdificar(propiedad)
+    }
+
+    // Gestiona cerrar edificar
+    const handleCloseEdificar = (edificada) => {
+        if (edificada === 1) {
+            window.alert("Has edificado la propiedad correctamente");
+        }
+        else if (edificada === 0) {
+            window.alert("No tienes suficiente dinero para edificar la propiedad");
+        }
+        setEdificarVisible(false);
+    }
+
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
-        <PopupCarta handleClose={handleCloseCarta} />
+        <PopupEdificar handleClose={handleCloseEdificar} />
     );
     
     const popUpCasino = (
@@ -882,6 +906,9 @@ export const Tablero = (props) => {
         <PopupSuperpoder handleClose={handleCloseSuperpoder} superPoder={estadoPartida.superPoder}/>
     );
 
+    const popUpEdificar = (
+        <PopupEdificar handleClose={handleCloseEdificar} propiedad={propiedadEdificar}/>
+    );
       
     const [showDice, setShowDice] = useState(false);
     // Para mostrar bien los dados cuando yo sea el primero en tirar
@@ -1032,15 +1059,17 @@ export const Tablero = (props) => {
                                                 <li 
                                                     key={index}>{propiedad}
                                                     <button className="vender" onClick={() => mostrarVender(propiedad)}>Vender</button>
-                                                    <button className="edificar" onClick={mostrarPopUpPropiedad}>Edificar</button>
+                                                    <button className="edificar" onClick={() => handleEdificar(propiedad)}>Edificar</button>
                                                 </li>
                                             ))}
-                                            {openVenderProp && popUpVender}
+                                            
                                             {openCarta && popupCarta}
                                         </ul>
                                     </div>
                                 }
 
+                                {openVenderProp && popUpVender}
+                                {edificarVisible && popUpEdificar}
                                 {openCasino && popUpCasino}
                                 {openPropiedad && popUpPropiedad}
                                 {openBanco && popUpBanco}
