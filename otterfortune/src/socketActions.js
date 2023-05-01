@@ -313,8 +313,9 @@ export async function empezarPartida(socket, id_partida, email_lider) {
             estadoPartida.Jugadores[1].skin = msg[8]
             estadoPartida.Jugadores[2].skin = msg[9]
             estadoPartida.Jugadores[3].skin = msg[10]
+            sesion.tableroEquipada = msg[11]
 
-            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
+            console.log("Sí empezarPartida, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {
             console.log("No empezarPartida")
@@ -346,8 +347,9 @@ export async function esperarEmpezarPartida(socket) {
             estadoPartida.Jugadores[1].skin = msg[8]
             estadoPartida.Jugadores[2].skin = msg[9]
             estadoPartida.Jugadores[3].skin = msg[10]
+            sesion.tableroEquipada = msg[11]
 
-            console.log("Sí empezarPartida, id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
+            console.log("Sí empezarPartida, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {
             console.log("No empezarPartida")
