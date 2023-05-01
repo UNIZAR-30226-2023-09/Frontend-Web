@@ -10,6 +10,7 @@ class Sesion {
         this.email = null;           // string
         this.gemas = null;           // int
         this.skinEquipada = null;    // string
+        this.tableroEquipada = null  // string
         this.todasSkins = [];        // Skin, sesion.todasSkins[0].nombre, sesion.todasSkins[0].precio
     }
 }
@@ -92,8 +93,8 @@ class EstadoPartida {
         this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = "Ninguno"     // string
-        this.economia = 1           // float
+        this.evento = null          // string
+        this.economia = null        // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.elegirCasilla = false  // bool
         this.superPoder = null      // string

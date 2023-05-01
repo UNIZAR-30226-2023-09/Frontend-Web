@@ -643,21 +643,11 @@ export async function unirseTorneo(socket, email, id_torneo) {
 }
 
 // Falta
-export async function intercambio(socket, email, id_torneo) {
+export async function subastar(socket, email, id_partida, propiedad, precio) {
     if (socket) {
-        socket.send(`intercambio,${email},${id_torneo}`)
-        waitingForResponse = true
-        const response = await waitForResponse(socket)
-
-        let msg = response.toString().split(",")
-        if (msg[0] === 'UNIRSET_OK') {
-            //msg[1]    id_torneo
-            console.log("Sí intercambio")
-            return true
-        } else {
-            console.log("No intercambio")
-            return false
-        }
+        socket.send(`SUBASTAR,${email},${id_partida},${propiedad},${precio}`)
+        console.log("Inicio subasta de " + propiedad + " , precio: " + precio)
+        return true
     }
 }
 
@@ -726,7 +716,14 @@ export async function equiparSkin(socket, email, skin) {
         let msg = response.toString().split(",")
         if (msg[0] === 'SKIN_EQUIPADA_OK') {
             //msg[2]    skin
-            sesion.skinEquipada = msg[2]
+
+            // Si contiene 8 caracteres es un tablero
+            if (skin.length === 8) {
+                sesion.tableroEquipada = msg[2];
+            } else {
+                sesion.skinEquipada = msg[2];
+            }
+
             console.log("Sí equiparSkin")
             return true
         } else {
@@ -763,5 +760,15 @@ export async function venderEdificacion(socket, email, id_partida, propiedad) {
             console.log("No venderEdificacion")
             return false
         }
+    }
+}
+
+
+// Falta
+export async function comprarSubasta(socket, email, id_partida, email_propietario) {
+    if (socket) {
+        socket.send(`SUBASTAR,${email},${id_partida},${email_propietario}`)
+        console.log("Comprar subasta de propietario: " + email_propietario)
+        return true
     }
 }
