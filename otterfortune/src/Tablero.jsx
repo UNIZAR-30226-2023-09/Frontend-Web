@@ -12,6 +12,8 @@ import PopupPropiedadVender from "./PopupPropiedadVender";
 import PopupBanco from "./PopupBanco";
 import PopupIrCarcel from "./PopupIrCarcel";
 import PopupMuerto from "./PopupMuerto";
+import PopupEvento from "./PopupEvento";
+import PopupSuperpoder from "./PopupSuperpoder";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -29,7 +31,17 @@ import BAXTER from './Imagenes/BAXTER.png';
 import BERTA from './Imagenes/BERTA.png';
 import DIONIX from './Imagenes/DIONIX.png';
 import JULS from './Imagenes/JULS.png';
-
+// Importar los tableros
+import TABLERO1 from './Imagenes/TABLEROS/WEB1.png';
+import TABLERO2 from './Imagenes/TABLEROS/WEB2.png';
+import TABLERO3 from './Imagenes/TABLEROS/WEB3.png';
+import TABLERO4 from './Imagenes/TABLEROS/WEB4.png';
+// Importar las tarjetas de los eventos
+import EVENTO1 from './Imagenes/EVENTOS/EV1.png';
+import EVENTO2 from './Imagenes/EVENTOS/EV2.png';
+import EVENTO3 from './Imagenes/EVENTOS/EV3.png';
+import EVENTO4 from './Imagenes/EVENTOS/EV4.png';
+import EVENTO5 from './Imagenes/EVENTOS/EV5.png';
 
 // Importar todas las fichas de cada skin con sus colores y numeros 1-2-3-4
 import fichaJEANCARLO1 from './Imagenes/FICHAS/AMARILLO1.png';
@@ -116,16 +128,287 @@ export const Tablero = (props) => {
     // Para saber que propiedad vender
     const [propiedadVender, setPropiedadVender] = useState(0);
 
+    // Para saber cuando mostrar el evento
+    const [eventoVisible, setEventoVisible] = useState(false);
+
+    // Para saber cuando mostrar el superpoder
+    const [superpoderVisible, setSuperpoderVisible] = useState(false);
+
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
 
-    /* --------------TABLERO------------*/
+    /* ----------------------------------TABLERO-------------------------------*/
     let tableroPropiedades = ["nada","Salida", "Monterrey", "Guadalajara", "Treasure", "Tax", "AeropuertoNarita", // 6
     "Tokio", "Kioto", "Superpoder", "Osaka", "Carcel", "Roma", "Milan", "Casino", "Napoles", // 15
     "Aeropuerto Heathrow", "Londres", "Superpoder", "Manchester", "Edimburgo", "Bote", "Madrid", // 22
     "Barcelona", "Treasure", "Zaragoza", "AeropuertoOrly", "Paris", "Banco", "Marsella", // 29
     "Lyon", "IrCarcel", "Toronto", "Vancouver", "Treasure", "Ottawa", "AeropuertoDeLosAngeles", // 36
     "NuevaYork", "LosAngeles", "LuxuryTax", "Chicago"];
+
+    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 1 ------------------------*/
+    const casillas1 = new Map();
+
+    // Estas son la columna izquierda de abajo arriba
+    // --> 1px = 0.06%
+    // 38 de ancho 33 de largo
+    casillas1.set("Casilla1", { top: "680px", left: "2.5%", width: "38px", height: "33px" });
+
+    casillas1.set("Casilla2", { top: "606px", left: "2.5%", width: "38px", height: "33px" });
+    // TODO: Para meter mas -> +25 en left empezando en 15
+    //casillas1.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
+    //casillas1.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
+    //casillas1.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
+    //casillas1.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
+    casillas1.set("Casilla3", { top: "548px", left: "2.5%", width: "38px", height: "33px" });
+
+   // casillas1.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
+    casillas1.set("Casilla4", { top: "485px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla5", { top: "425px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla6", { top: "365px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla7", { top: "304px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla8", { top: "244px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla9", { top: "180px", left: "2.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla10", { top: "120px", left: "2.5%", width: "38px", height: "33px" });
+
+    // Estas son la fila de arriba de izquierda a derecha
+    //casillas1.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
+    //casillas1.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
+    casillas1.set("Casilla11", { top: "1.4%", left: "6.5%", width: "38px", height: "33px" });
+
+    casillas1.set("Casilla12", { top: "4.1%", left: "8.8%", width: "38px", height: "33px" });
+    casillas1.set("Casilla13", { top: "4.1%", left: "13.2%", width: "38px", height: "33px" });
+    casillas1.set("Casilla14", { top: "4.1%", left: "17.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla15", { top: "4.1%", left: "22.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla16", { top: "4.1%", left: "26.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla17", { top: "4.1%", left: "31.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla18", { top: "4.1%", left: "35.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla19", { top: "4.1%", left: "40.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla20", { top: "4.1%", left: "44.7%", width: "38px", height: "33px" });
+
+    // Estas son la columna de la derecha de arriba a abajo
+    casillas1.set("Casilla21", { top: "38px", left: "50%", width: "38px", height: "33px" });
+    
+    casillas1.set("Casilla22", { top: "120px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla23", { top: "180px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla24", { top: "244px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla25", { top: "304px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla26", { top: "365px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla27", { top: "425px", left: "50.7%", width: "38px", height: "33px"});
+    casillas1.set("Casilla28", { top: "485px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla29", { top: "548px", left: "50.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla30", { top: "606px", left: "50.7%", width: "38px", height: "33px" });
+    
+    // Esta es la fila de abajo de derecha a izquierda
+    casillas1.set("Casilla31", { top: "690px", left: "51%", width: "38px", height: "33px" });
+
+    casillas1.set("Casilla40", { top: "695px", left: "8.8%", width: "38px", height: "33px" });
+    casillas1.set("Casilla39", { top: "695px", left: "13.2%", width: "38px", height: "33px" });
+    casillas1.set("Casilla38", { top: "695px", left: "17.5%", width: "38px", height: "33px" });
+    casillas1.set("Casilla37", { top: "695px", left: "22.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla36", { top: "695px", left: "26.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla35", { top: "695px", left: "31.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla34", { top: "695px", left: "35.7%", width: "38px", height: "33px" });
+    casillas1.set("Casilla33", { top: "695px", left: "40.1%", width: "38px", height: "33px" });
+    casillas1.set("Casilla32", { top: "695px", left: "44.7%", width: "38px", height: "33px" });
+
+    /* -------------------------------------------------------------------------------------*/
+    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 2 ------------------------*/
+    const casillas2 = new Map();
+
+    // Estas son la columna izquierda de abajo arriba
+    // --> 1px = 0.06%
+    // 38 de ancho 33 de largo
+    casillas2.set("Casilla1", { top: "680px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla2", { top: "606px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla3", { top: "548px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla4", { top: "485px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla5", { top: "425px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla6", { top: "365px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla7", { top: "304px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla8", { top: "244px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla9", { top: "180px", left: "4.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla10", { top: "120px", left: "4.8%", width: "38px", height: "33px" });
+
+    // Estas son la fila de arriba de izquierda a derecha
+    casillas2.set("Casilla11", { top: "3.7%", left: "6.5%", width: "38px", height: "33px" });
+
+    casillas2.set("Casilla12", { top: "4.1%", left: "10.6%", width: "38px", height: "33px" });
+    casillas2.set("Casilla13", { top: "4.1%", left: "15.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla14", { top: "4.1%", left: "19.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla15", { top: "4.1%", left: "24.3%", width: "38px", height: "33px" });
+    casillas2.set("Casilla16", { top: "4.1%", left: "28.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla17", { top: "4.1%", left: "33.2%", width: "38px", height: "33px" });
+    casillas2.set("Casilla18", { top: "4.1%", left: "37.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla19", { top: "4.1%", left: "42.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla20", { top: "4.1%", left: "46.7%", width: "38px", height: "33px" });
+
+    // Estas son la columna de la derecha de arriba a abajo
+    casillas2.set("Casilla21", { top: "38px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla22", { top: "120px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla23", { top: "180px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla24", { top: "244px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla25", { top: "304px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla26", { top: "365px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla27", { top: "425px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla28", { top: "485px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla29", { top: "548px", left: "52.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla30", { top: "606px", left: "52.7%", width: "38px", height: "33px" });
+    
+    // Esta es la fila de abajo de derecha a izquierda
+    casillas2.set("Casilla31", { top: "690px", left: "53%", width: "38px", height: "33px" });
+
+    casillas2.set("Casilla40", { top: "695px", left: "10.6%", width: "38px", height: "33px" });
+    casillas2.set("Casilla39", { top: "695px", left: "15.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla38", { top: "695px", left: "19.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla37", { top: "695px", left: "24.3%", width: "38px", height: "33px" });
+    casillas2.set("Casilla36", { top: "695px", left: "28.8%", width: "38px", height: "33px" });
+    casillas2.set("Casilla35", { top: "695px", left: "33.2%", width: "38px", height: "33px" });
+    casillas2.set("Casilla34", { top: "695px", left: "37.7%", width: "38px", height: "33px" });
+    casillas2.set("Casilla33", { top: "695px", left: "42.1%", width: "38px", height: "33px" });
+    casillas2.set("Casilla32", { top: "695px", left: "46.7%", width: "38px", height: "33px" });
+
+    /* -------------------------------------------------------------------------------------*/
+    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 3 ------------------------*/
+    const casillas3 = new Map();
+
+    // Estas son la columna izquierda de abajo arriba
+    // --> 1px = 0.06%
+    // 38 de ancho 33 de largo
+    casillas3.set("Casilla1", { top: "730px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla2", { top: "635px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla3", { top: "574px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla4", { top: "515px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla5", { top: "453px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla6", { top: "393px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla7", { top: "332px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla8", { top: "270px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla9", { top: "210px", left: "2.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla10", { top: "147px", left: "2.5%", width: "38px", height: "33px" });
+
+    // Estas son la fila de arriba de izquierda a derecha
+    casillas3.set("Casilla11", { top: "6.2%", left: "6.5%", width: "38px", height: "33px" });
+
+
+    casillas3.set("Casilla12", { top: "7.6%", left: "8.8%", width: "38px", height: "33px" });
+    casillas3.set("Casilla13", { top: "7.6%", left: "13.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla14", { top: "7.6%", left: "17.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla15", { top: "7.6%", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla16", { top: "7.6%", left: "26.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla17", { top: "7.6%", left: "31.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla18", { top: "7.6%", left: "35.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla19", { top: "7.6%", left: "40.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla20", { top: "7.6%", left: "44.7%", width: "38px", height: "33px" });
+
+    // Estas son la columna de la derecha de arriba a abajo
+    casillas3.set("Casilla21", { top: "7.6%", left: "50%", width: "38px", height: "33px" });
+
+    casillas3.set("Casilla22", { top: "147px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla23", { top: "210px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla24", { top: "270px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla25", { top: "333px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla26", { top: "393px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla27", { top: "450px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla28", { top: "515px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla29", { top: "574px", left: "50.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla30", { top: "635px", left: "50.7%", width: "38px", height: "33px" });
+    
+    // Esta es la fila de abajo de derecha a izquierda
+    casillas3.set("Casilla31", { top: "720px", left: "51%", width: "38px", height: "33px" });
+
+    casillas3.set("Casilla32", { top: "730px", left: "44.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla33", { top: "730px", left: "40.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla34", { top: "730px", left: "35.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla35", { top: "730px", left: "31.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla36", { top: "730px", left: "26.7%", width: "38px", height: "33px" });
+    casillas3.set("Casilla37", { top: "730px", left: "22.1%", width: "38px", height: "33px" });
+    casillas3.set("Casilla38", { top: "730px", left: "17.5%", width: "38px", height: "33px" });
+    casillas3.set("Casilla39", { top: "730px", left: "13.2%", width: "38px", height: "33px" });
+    casillas3.set("Casilla40", { top: "730px", left: "8.8%", width: "38px", height: "33px" });
+
+    /* -------------------------------------------------------------------------------------*/
+    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 4 ------------------------*/
+    const casillas4 = new Map();
+
+    // Estas son la columna izquierda de abajo arriba
+    // --> 1px = 0.06%
+    // 38 de ancho 33 de largo
+    casillas4.set("Casilla1", { top: "730px", left: "4.8%", width: "38px", height: "33px" });
+
+    casillas4.set("Casilla2", { top: "635px", left: "4.8%", width: "38px", height: "33px" });
+    // TODO: Para meter mas -> +25 en left empezando en 15
+    //casillas4.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
+    //casillas4.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
+    //casillas4.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
+    //casillas4.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
+    casillas4.set("Casilla3", { top: "574px", left: "4.8%", width: "38px", height: "33px" });
+
+   // casillas4.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
+    casillas4.set("Casilla4", { top: "515px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla5", { top: "453px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla6", { top: "393px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla7", { top: "332px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla8", { top: "270px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla9", { top: "210px", left: "4.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla10", { top: "147px", left: "4.8%", width: "38px", height: "33px" });
+
+    // Estas son la fila de arriba de izquierda a derecha
+    //casillas4.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
+    //casillas4.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
+    casillas4.set("Casilla11", { top: "8.6%", left: "6.5%", width: "38px", height: "33px" });
+
+
+    casillas4.set("Casilla12", { top: "7.6%", left: "10.6%", width: "38px", height: "33px" });
+    casillas4.set("Casilla13", { top: "7.6%", left: "15.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla14", { top: "7.6%", left: "19.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla15", { top: "7.6%", left: "24.3%", width: "38px", height: "33px" });
+    casillas4.set("Casilla16", { top: "7.6%", left: "28.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla17", { top: "7.6%", left: "33.2%", width: "38px", height: "33px" });
+    casillas4.set("Casilla18", { top: "7.6%", left: "37.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla19", { top: "7.6%", left: "42.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla20", { top: "7.6%", left: "46.7%", width: "38px", height: "33px" });
+
+    // Estas son la columna de la derecha de arriba a abajo
+    casillas4.set("Casilla21", { top: "7.6%", left: "52.7%", width: "38px", height: "33px" });
+    
+    casillas4.set("Casilla22", { top: "147px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla23", { top: "210px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla24", { top: "270px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla25", { top: "333px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla26", { top: "393px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla27", { top: "450px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla28", { top: "515px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla29", { top: "574px", left: "52.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla30", { top: "635px", left: "52.7%", width: "38px", height: "33px" });
+    
+    // Esta es la fila de abajo de derecha a izquierda
+    casillas4.set("Casilla31", { top: "720px", left: "53%", width: "38px", height: "33px" });
+
+    casillas4.set("Casilla32", { top: "730px", left: "46.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla33", { top: "730px", left: "42.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla34", { top: "730px", left: "37.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla35", { top: "730px", left: "33.2%", width: "38px", height: "33px" });
+    casillas4.set("Casilla36", { top: "730px", left: "28.8%", width: "38px", height: "33px" });
+    casillas4.set("Casilla37", { top: "730px", left: "24.3%", width: "38px", height: "33px" });
+    casillas4.set("Casilla38", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
+    casillas4.set("Casilla39", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
+    casillas4.set("Casilla40", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
+
+    /* -------------------------------------------------------------------------------------*/
+
+    const [vecesAbierto, setVecesAbierto] = useState(1);
+    // Funcion que compruebe cuando sea mi turno si hay algun evento y mostrar la tarjeta correspondiente
+    useEffect(() => {
+        // Aquí comprobamos si la variable es true o false
+        if (vecesAbierto === 0 && estadoPartida.evento !== "Ninguno") {
+            setEventoVisible(true);
+            setVecesAbierto(1);
+        } 
+        if (estadoPartida.evento === "Ninguno") {
+            setEventoVisible(false);
+            setVecesAbierto(0);
+        }
+    }, [estadoPartida.evento]);    
+
 
     // Funcion que dada una posicion devuelva el nombre de la posicion del tablero
     const nombrePosicion = (posicion) => {
@@ -223,31 +506,42 @@ export const Tablero = (props) => {
                         setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
                         setOpenPropiedad(true);
                     }
+                    // Cuando caes en la de superpoder
+                    else if (estadoPartida.superPoder !== null) {
+                        setSuperpoderVisible(true);
+                    }
+
                     // Casilla del banco
                     else if (estadoPartida.enBanco) {
                         setOpenBanco(true);
                     }
-                    // TODO: ESTO ES CASINO?
+
+                    // Casilla del casino
                     else if (estadoPartida.enCasino) {
                         setOpenCasino(true);
                     }
+
                     // TODO: MIRAR LA DE IR CARCEL
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 31) {
                         setOpenIrCarcel(true);
                     }
+
                     // Tengo que pagar alquiler a otro jugador
                     else if (estadoPartida.pagoAlquiler) {
                         window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
                         estadoPartida.pagoAlquiler = false;  // bool
                     }
+
                     // Cuando caes en la casilla de tax
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
                         window.alert("Tienes que pagar un tax por tus propiedades");
                     }
+
                     // Cuando caes en la casilla de luxury tax
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
                         window.alert("Tienes que pagar un luxury tax por tus propiedades");
                     }
+
                     // Cuando caes en la casilla de treasure
                     else if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
                         window.alert("Casilla de suerte!");
@@ -261,7 +555,6 @@ export const Tablero = (props) => {
         rollStep();
 
     };
-
 
     const handleCloseChat = (e) => {
         setAbrirChat(false);
@@ -277,265 +570,7 @@ export const Tablero = (props) => {
             setVeces(0);   
         }
     }
-
-
-    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 1 ------------------------*/
-    const casillas1 = new Map();
-
-    // Estas son la columna izquierda de abajo arriba
-    // --> 1px = 0.06%
-    // 38 de ancho 33 de largo
-    casillas1.set("Casilla1", { top: "680px", left: "2.5%", width: "38px", height: "33px" });
-
-    casillas1.set("Casilla2", { top: "606px", left: "2.5%", width: "38px", height: "33px" });
-    // TODO: Para meter mas -> +25 en left empezando en 15
-    //casillas1.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
-    //casillas1.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
-    //casillas1.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
-    //casillas1.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
-    casillas1.set("Casilla3", { top: "548px", left: "2.5%", width: "38px", height: "33px" });
-
-   // casillas1.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
-    casillas1.set("Casilla4", { top: "485px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla5", { top: "425px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla6", { top: "365px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla7", { top: "304px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla8", { top: "244px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla9", { top: "180px", left: "2.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla10", { top: "120px", left: "2.5%", width: "38px", height: "33px" });
-
-    // Estas son la fila de arriba de izquierda a derecha
-    //casillas1.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
-    //casillas1.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
-    casillas1.set("Casilla11", { top: "1.4%", left: "6.5%", width: "38px", height: "33px" });
-
-    casillas1.set("Casilla12", { top: "4.1%", left: "8.8%", width: "38px", height: "33px" });
-    casillas1.set("Casilla13", { top: "4.1%", left: "13.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla14", { top: "4.1%", left: "17.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla15", { top: "4.1%", left: "22.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla16", { top: "4.1%", left: "26.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla17", { top: "4.1%", left: "31.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla18", { top: "4.1%", left: "35.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla19", { top: "4.1%", left: "40.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla20", { top: "4.1%", left: "44.7%", width: "38px", height: "33px" });
-
-    // Estas son la columna de la derecha de arriba a abajo
-    casillas1.set("Casilla21", { top: "38px", left: "50%", width: "38px", height: "33px" });
     
-    casillas1.set("Casilla22", { top: "120px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla23", { top: "180px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla24", { top: "244px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla25", { top: "304px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla26", { top: "365px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla27", { top: "425px", left: "50.7%", width: "38px", height: "33px"});
-    casillas1.set("Casilla28", { top: "485px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla29", { top: "548px", left: "50.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla30", { top: "606px", left: "50.7%", width: "38px", height: "33px" });
-    
-    // Esta es la fila de abajo de derecha a izquierda
-    casillas1.set("Casilla31", { top: "690px", left: "51%", width: "38px", height: "33px" });
-
-    casillas1.set("Casilla40", { top: "695px", left: "8.8%", width: "38px", height: "33px" });
-    casillas1.set("Casilla39", { top: "695px", left: "13.2%", width: "38px", height: "33px" });
-    casillas1.set("Casilla38", { top: "695px", left: "17.5%", width: "38px", height: "33px" });
-    casillas1.set("Casilla37", { top: "695px", left: "22.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla36", { top: "695px", left: "26.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla35", { top: "695px", left: "31.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla34", { top: "695px", left: "35.7%", width: "38px", height: "33px" });
-    casillas1.set("Casilla33", { top: "695px", left: "40.1%", width: "38px", height: "33px" });
-    casillas1.set("Casilla32", { top: "695px", left: "44.7%", width: "38px", height: "33px" });
-
-    /* -------------------------------------------------------------------------------------*/
-    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 2 ------------------------*/
-    const casillas2 = new Map();
-
-    // Estas son la columna izquierda de abajo arriba
-    // --> 1px = 0.06%
-    // 38 de ancho 33 de largo
-    casillas2.set("Casilla1", { top: "680px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla2", { top: "606px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla3", { top: "548px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla4", { top: "485px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla5", { top: "425px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla6", { top: "365px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla7", { top: "304px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla8", { top: "244px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla9", { top: "180px", left: "4.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla10", { top: "120px", left: "4.8%", width: "38px", height: "33px" });
-
-    // Estas son la fila de arriba de izquierda a derecha
-    casillas2.set("Casilla11", { top: "3.7%", left: "6.5%", width: "38px", height: "33px" });
-
-
-    casillas2.set("Casilla12", { top: "4.1%", left: "10.6%", width: "38px", height: "33px" });
-    casillas2.set("Casilla13", { top: "4.1%", left: "15.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla14", { top: "4.1%", left: "19.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla15", { top: "4.1%", left: "24.3%", width: "38px", height: "33px" });
-    casillas2.set("Casilla16", { top: "4.1%", left: "28.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla17", { top: "4.1%", left: "33.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla18", { top: "4.1%", left: "37.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla19", { top: "4.1%", left: "42.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla20", { top: "4.1%", left: "46.7%", width: "38px", height: "33px" });
-
-    // Estas son la columna de la derecha de arriba a abajo
-    casillas2.set("Casilla21", { top: "38px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla22", { top: "120px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla23", { top: "180px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla24", { top: "244px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla25", { top: "304px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla26", { top: "365px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla27", { top: "425px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla28", { top: "485px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla29", { top: "548px", left: "52.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla30", { top: "606px", left: "52.7%", width: "38px", height: "33px" });
-    
-    // Esta es la fila de abajo de derecha a izquierda
-    casillas2.set("Casilla31", { top: "690px", left: "53%", width: "38px", height: "33px" });
-
-
-    casillas2.set("Casilla40", { top: "695px", left: "10.6%", width: "38px", height: "33px" });
-    casillas2.set("Casilla39", { top: "695px", left: "15.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla38", { top: "695px", left: "19.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla37", { top: "695px", left: "24.3%", width: "38px", height: "33px" });
-    casillas2.set("Casilla36", { top: "695px", left: "28.8%", width: "38px", height: "33px" });
-    casillas2.set("Casilla35", { top: "695px", left: "33.2%", width: "38px", height: "33px" });
-    casillas2.set("Casilla34", { top: "695px", left: "37.7%", width: "38px", height: "33px" });
-    casillas2.set("Casilla33", { top: "695px", left: "42.1%", width: "38px", height: "33px" });
-    casillas2.set("Casilla32", { top: "695px", left: "46.7%", width: "38px", height: "33px" });
-
-    /* -------------------------------------------------------------------------------------*/
-    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 3 ------------------------*/
-    const casillas3 = new Map();
-
-    // Estas son la columna izquierda de abajo arriba
-    // --> 1px = 0.06%
-    // 38 de ancho 33 de largo
-    casillas3.set("Casilla1", { top: "730px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla2", { top: "635px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla3", { top: "574px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla4", { top: "515px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla5", { top: "453px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla6", { top: "393px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla7", { top: "332px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla8", { top: "270px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla9", { top: "210px", left: "2.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla10", { top: "147px", left: "2.5%", width: "38px", height: "33px" });
-
-    // Estas son la fila de arriba de izquierda a derecha
-    casillas3.set("Casilla11", { top: "6.2%", left: "6.5%", width: "38px", height: "33px" });
-
-
-    casillas3.set("Casilla12", { top: "7.6%", left: "8.8%", width: "38px", height: "33px" });
-    casillas3.set("Casilla13", { top: "7.6%", left: "13.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla14", { top: "7.6%", left: "17.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla15", { top: "7.6%", left: "22.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla16", { top: "7.6%", left: "26.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla17", { top: "7.6%", left: "31.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla18", { top: "7.6%", left: "35.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla19", { top: "7.6%", left: "40.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla20", { top: "7.6%", left: "44.7%", width: "38px", height: "33px" });
-
-    // Estas son la columna de la derecha de arriba a abajo
-    casillas3.set("Casilla21", { top: "7.6%", left: "50%", width: "38px", height: "33px" });
-
-
-
-    casillas3.set("Casilla22", { top: "147px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla23", { top: "210px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla24", { top: "270px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla25", { top: "333px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla26", { top: "393px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla27", { top: "450px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla28", { top: "515px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla29", { top: "574px", left: "50.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla30", { top: "635px", left: "50.7%", width: "38px", height: "33px" });
-    
-    // Esta es la fila de abajo de derecha a izquierda
-    casillas3.set("Casilla31", { top: "720px", left: "51%", width: "38px", height: "33px" });
-
-    casillas3.set("Casilla32", { top: "730px", left: "44.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla33", { top: "730px", left: "40.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla34", { top: "730px", left: "35.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla35", { top: "730px", left: "31.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla36", { top: "730px", left: "26.7%", width: "38px", height: "33px" });
-    casillas3.set("Casilla37", { top: "730px", left: "22.1%", width: "38px", height: "33px" });
-    casillas3.set("Casilla38", { top: "730px", left: "17.5%", width: "38px", height: "33px" });
-    casillas3.set("Casilla39", { top: "730px", left: "13.2%", width: "38px", height: "33px" });
-    casillas3.set("Casilla40", { top: "730px", left: "8.8%", width: "38px", height: "33px" });
-
- 
-
-    /* -------------------------------------------------------------------------------------*/
-    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 4 ------------------------*/
-    const casillas4 = new Map();
-
-    // Estas son la columna izquierda de abajo arriba
-    // --> 1px = 0.06%
-    // 38 de ancho 33 de largo
-    casillas4.set("Casilla1", { top: "730px", left: "4.8%", width: "38px", height: "33px" });
-
-    casillas4.set("Casilla2", { top: "635px", left: "4.8%", width: "38px", height: "33px" });
-    // TODO: Para meter mas -> +25 en left empezando en 15
-    //casillas4.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
-    //casillas4.set("Casilla2.1", { top: "615px", left: "40px", width: "5.8%", height: "5.8%" });
-    //casillas4.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
-    //casillas4.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
-    casillas4.set("Casilla3", { top: "574px", left: "4.8%", width: "38px", height: "33px" });
-
-   // casillas4.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
-    casillas4.set("Casilla4", { top: "515px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla5", { top: "453px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla6", { top: "393px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla7", { top: "332px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla8", { top: "270px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla9", { top: "210px", left: "4.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla10", { top: "147px", left: "4.8%", width: "38px", height: "33px" });
-
-    // Estas son la fila de arriba de izquierda a derecha
-    //casillas4.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
-    //casillas4.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
-    casillas4.set("Casilla11", { top: "8.6%", left: "6.5%", width: "38px", height: "33px" });
-
-
-    casillas4.set("Casilla12", { top: "7.6%", left: "10.6%", width: "38px", height: "33px" });
-    casillas4.set("Casilla13", { top: "7.6%", left: "15.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla14", { top: "7.6%", left: "19.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla15", { top: "7.6%", left: "24.3%", width: "38px", height: "33px" });
-    casillas4.set("Casilla16", { top: "7.6%", left: "28.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla17", { top: "7.6%", left: "33.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla18", { top: "7.6%", left: "37.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla19", { top: "7.6%", left: "42.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla20", { top: "7.6%", left: "46.7%", width: "38px", height: "33px" });
-
-    // Estas son la columna de la derecha de arriba a abajo
-    casillas4.set("Casilla21", { top: "7.6%", left: "52.7%", width: "38px", height: "33px" });
-    
-    casillas4.set("Casilla22", { top: "147px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla23", { top: "210px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla24", { top: "270px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla25", { top: "333px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla26", { top: "393px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla27", { top: "450px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla28", { top: "515px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla29", { top: "574px", left: "52.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla30", { top: "635px", left: "52.7%", width: "38px", height: "33px" });
-    
-    // Esta es la fila de abajo de derecha a izquierda
-    casillas4.set("Casilla31", { top: "720px", left: "53%", width: "38px", height: "33px" });
-
-    casillas4.set("Casilla32", { top: "730px", left: "46.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla33", { top: "730px", left: "42.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla34", { top: "730px", left: "37.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla35", { top: "730px", left: "33.2%", width: "38px", height: "33px" });
-    casillas4.set("Casilla36", { top: "730px", left: "28.8%", width: "38px", height: "33px" });
-    casillas4.set("Casilla37", { top: "730px", left: "24.3%", width: "38px", height: "33px" });
-    casillas4.set("Casilla38", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
-    casillas4.set("Casilla39", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
-    casillas4.set("Casilla40", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
-
-    /* -------------------------------------------------------------------------------------*/
-
-    // {isOpenChat && popUpChat}
     const popUpChat = (
         // De esta forma, en popup, a través del props, se podrá acceder
         // a handleClose y a content
@@ -548,7 +583,6 @@ export const Tablero = (props) => {
     //       Obtener el nombre dado el email
     //       Obtener la posición
 
-    //setPosicion1(casillas.get("Casilla2"));
 
     // const jugadores1 = [
     //     { nombre: 'Jesus', imagen: tite, dinero: 100, ficha: fichaTite },
@@ -673,6 +707,14 @@ export const Tablero = (props) => {
                 return DIONIX;
             case "JULS":
                 return JULS;
+            case "TABLERO1":
+                return TABLERO1;
+            case "TABLERO2":
+                return TABLERO2;
+            case "TABLERO3":
+                return TABLERO3;
+            case "TABLERO4":
+                return TABLERO4;
             // TODO: BOT
         }
     }
@@ -775,6 +817,18 @@ export const Tablero = (props) => {
         setTirarDados(true);
     }
 
+    // Gestiona cerrar el evento
+    const handleCloseEvento = (e) => {
+        setVecesAbierto(100);
+        setEventoVisible(false);
+    }
+
+    // Gestiona cerrar el superpoder
+    const handleCloseSuperpoder = (e) => {
+        setSuperpoderVisible(false);
+        estadoPartida.superPoder = null;
+    }
+
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupCarta handleClose={handleCloseCarta} />
@@ -798,6 +852,14 @@ export const Tablero = (props) => {
 
     const popUpIrCarcel = (
         <PopupIrCarcel handleClose={handleCloseCarta} />
+    );
+
+    const popUpEvento = (
+        <PopupEvento handleClose={handleCloseEvento} evento={estadoPartida.evento} />
+    );
+
+    const popUpSuperpoder = (
+        <PopupSuperpoder handleClose={handleCloseSuperpoder} superPoder={estadoPartida.superPoder}/>
     );
 
       
@@ -837,6 +899,7 @@ export const Tablero = (props) => {
                                 </div>
                             </div>
                         )}
+
 
                         {!jugadores1[0].muerto &&
                             <div style={{ 
@@ -957,6 +1020,8 @@ export const Tablero = (props) => {
                                 {openPropiedad && popUpPropiedad}
                                 {openBanco && popUpBanco}
                                 {openIrCarcel && popUpIrCarcel}
+                                {eventoVisible && popUpEvento}
+                                {superpoderVisible && popUpSuperpoder}
                             
                             </div>
 

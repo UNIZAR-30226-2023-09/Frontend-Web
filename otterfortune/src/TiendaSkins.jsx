@@ -15,6 +15,12 @@ import JULS from './Imagenes/JULS.png';
 import LUCAS from './Imagenes/LUCAS.png';
 import PLEX from './Imagenes/PLEX.png';
 import TITE from './Imagenes/TITE.png';
+
+// Importar los tableros
+import TABLERO1 from './Imagenes/TABLEROS/WEB1.png';
+import TABLERO2 from './Imagenes/TABLEROS/WEB2.png';
+import TABLERO3 from './Imagenes/TABLEROS/WEB3.png';
+import TABLERO4 from './Imagenes/TABLEROS/WEB4.png';
  
 
 import * as socketActions from './socketActions';
@@ -49,6 +55,14 @@ export const TiendaSkins = (props) => {
                 return LUCAS;
             case "BAXTER":
                 return BAXTER;
+            case "TABLERO1":
+                return TABLERO1;
+            case "TABLERO2":
+                return TABLERO2;
+            case "TABLERO3":
+                return TABLERO3;
+            case "TABLERO4":
+                return TABLERO4;
             default:
                 return BAXTER;
         }
