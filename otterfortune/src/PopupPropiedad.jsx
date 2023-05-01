@@ -31,6 +31,10 @@ import Chicago from './Imagenes/CARTAS_EDIFICIOS/EEUU/CHICAGO.png';
 import Toronto from './Imagenes/CARTAS_EDIFICIOS/CANADA/TORONTO.png';
 import Vancouver from './Imagenes/CARTAS_EDIFICIOS/CANADA/VANCOUVER.png';
 import Ottawa from './Imagenes/CARTAS_EDIFICIOS/CANADA/OTTAWA.png';
+import AeropuertoNarita from './Imagenes/AEROPUERTOS/NARITA_AP.png';
+import AeropuertoHeathrow from './Imagenes/AEROPUERTOS/LONDRES_AP.png';
+import AeropuertoOrly from './Imagenes/AEROPUERTOS/ORLY_AP.png';
+import AeropuertoDeLosAngeles from './Imagenes/AEROPUERTOS/LA_AP.png';
 
 
 const PopupPropiedad = (props) => {
@@ -60,7 +64,7 @@ const PopupPropiedad = (props) => {
         // TODO: Mensaje de comprar la propiedad
         //window.alert("Has comprado la propiedad " + nombrePropiedad);
         let propiedadPosicion = getPosicion(nombrePropiedad);
-        let resultado = await socketActions.comprarPropiedad(socket, sesion.email, propiedadPosicion, estadoPartida.id_partida);
+        let resultado = await socketActions.comprarPropiedad(socket, sesion.email, estadoPartida.comprarPropiedad, estadoPartida.id_partida);
         if (resultado === true) {
             props.handleClose(1);
         }
@@ -118,8 +122,14 @@ const PopupPropiedad = (props) => {
                 return Vancouver;
             case "Ottawa":
                 return Ottawa;
+            case "AeropuertoNarita":
+                return AeropuertoNarita;
+            case "Aeropuerto Heathrow":
+                return AeropuertoHeathrow;
+            case "AeropuertoOrly":
+                return AeropuertoOrly;
             default:
-                return Chicago;
+                return AeropuertoDeLosAngeles;
         }
     }
 
