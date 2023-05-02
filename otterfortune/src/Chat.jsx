@@ -10,6 +10,15 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+import TITE from './Imagenes/TITE.png';
+import PLEX from './Imagenes/PLEX.png';
+import LUCAS from './Imagenes/LUCAS.png';
+import JEANCARLO from './Imagenes/JEAN-CARLO.png';
+import BAXTER from './Imagenes/BAXTER.png';
+import BERTA from './Imagenes/BERTA.png';
+import DIONIX from './Imagenes/DIONIX.png';
+import JULS from './Imagenes/JULS.png';
+
 const Chat = (props) => {
     const socket = useSocket();
 
@@ -55,13 +64,41 @@ const Chat = (props) => {
                             {chatNuestro.map((message, index) => {
                                 const [author, text] = String(message).split(':');
                                 const isMyMessage = author === miEmail;
+                                console.log("autor: " + author);
+                                // Buscar en que posicion de estadoPartida.jugadores está el autor
+                                const posicion = estadoPartida.Jugadores.findIndex(jugador => jugador.email == author);
+                                console.log("posicion: " + posicion);
+                                // Funcion que dado el de una skin devuelva la imagen importada
+                                const skinToImage = (skin) => {
+                                    switch (skin) {
+                                        case "TITE":
+                                            return TITE;
+                                        case "PLEX":
+                                            return PLEX;
+                                        case "LUCAS":
+                                            return LUCAS;
+                                        case "JEAN-CARLO":
+                                            return JEANCARLO;
+                                        case "BAXTER":
+                                            return BAXTER;
+                                        case "BERTA":
+                                            return BERTA;
+                                        case "DIONIX":
+                                            return DIONIX;
+                                        case "JULS":
+                                            return JULS;
+                                        default:
+                                            return TITE;
+                                    }
+                                }
+
                                 return (
                                     <div key={index} className="message">
                                         <div className="message-content">
                                             <div className={`${isMyMessage ? "message-text" : "other-message"}`}>{text}</div>
                                             <div className="message-timestamp"></div>
                                         </div>
-                                        <img src={tite} alt="Descripción de la imagen" className="my-image" />
+                                        <img src={skinToImage(estadoPartida.Jugadores[posicion].skin)} alt="Descripción de la imagen" className="my-image" />
                                     </div>
                                 );
                             })}

@@ -42,6 +42,13 @@ import EVENTO2 from './Imagenes/EVENTOS/EV2.png';
 import EVENTO3 from './Imagenes/EVENTOS/EV3.png';
 import EVENTO4 from './Imagenes/EVENTOS/EV4.png';
 import EVENTO5 from './Imagenes/EVENTOS/EV5.png';
+// Importar las tarjetas de las casas
+import CASA1 from './Imagenes/CASAS_HOTEL/C1.png';
+import CASA2 from './Imagenes/CASAS_HOTEL/C2.png';
+import CASA3 from './Imagenes/CASAS_HOTEL/C3.png';
+import CASA4 from './Imagenes/CASAS_HOTEL/C4.png';
+import CASA5 from './Imagenes/CASAS_HOTEL/HOTEL.png';
+
 
 // Importar todas las fichas de cada skin con sus colores y numeros 1-2-3-4
 import fichaJEANCARLO1 from './Imagenes/FICHAS/AMARILLO1.png';
@@ -302,7 +309,6 @@ export const Tablero = (props) => {
     // Estas son la fila de arriba de izquierda a derecha
     casillas3.set("Casilla11", { top: "6.2%", left: "6.5%", width: "38px", height: "33px" });
 
-
     casillas3.set("Casilla12", { top: "7.6%", left: "8.8%", width: "38px", height: "33px" });
     casillas3.set("Casilla13", { top: "7.6%", left: "13.2%", width: "38px", height: "33px" });
     casillas3.set("Casilla14", { top: "7.6%", left: "17.5%", width: "38px", height: "33px" });
@@ -347,7 +353,6 @@ export const Tablero = (props) => {
     // --> 1px = 0.06%
     // 38 de ancho 33 de largo
     casillas4.set("Casilla1", { top: "730px", left: "4.8%", width: "38px", height: "33px" });
-
     casillas4.set("Casilla2", { top: "635px", left: "4.8%", width: "38px", height: "33px" });
     // TODO: Para meter mas -> +25 en left empezando en 15
     //casillas4.set("Casilla2", { top: "615px", left: "15px", width: "5.8%", height: "5.8%" });
@@ -355,7 +360,6 @@ export const Tablero = (props) => {
     //casillas4.set("Casilla2.2", { top: "615px", left: "65px", width: "50px", height: "50px" });
     //casillas4.set("Casilla2.3", { top: "615px", left: "90px", width: "50px", height: "50px" });
     casillas4.set("Casilla3", { top: "574px", left: "4.8%", width: "38px", height: "33px" });
-
    // casillas4.set("Casilla3", { top: "555px", left: "50px", width: "50px", height: "50px" });
     casillas4.set("Casilla4", { top: "515px", left: "4.8%", width: "38px", height: "33px" });
     casillas4.set("Casilla5", { top: "453px", left: "4.8%", width: "38px", height: "33px" });
@@ -369,7 +373,6 @@ export const Tablero = (props) => {
     //casillas4.set("Casilla11-carcel", { top: "65px", left: "80px", width: "50px", height: "50px" });
     //casillas4.set("Casilla11-noCarcel", { top: "20px", left: "20px", width: "50px", height: "50px" });
     casillas4.set("Casilla11", { top: "8.6%", left: "6.5%", width: "38px", height: "33px" });
-
 
     casillas4.set("Casilla12", { top: "7.6%", left: "10.6%", width: "38px", height: "33px" });
     casillas4.set("Casilla13", { top: "7.6%", left: "15.1%", width: "38px", height: "33px" });
@@ -406,8 +409,60 @@ export const Tablero = (props) => {
     casillas4.set("Casilla38", { top: "730px", left: "19.7%", width: "38px", height: "33px" });
     casillas4.set("Casilla39", { top: "730px", left: "15.1%", width: "38px", height: "33px" });
     casillas4.set("Casilla40", { top: "730px", left: "10.6%", width: "38px", height: "33px" });
-
     /* -------------------------------------------------------------------------------------*/
+
+    /* ----------------- COORDENADAS CASILLAS DEL TABLERO JUGADOR 1 ------------------------*/
+    const casitas = new Map();
+
+    casitas.set("Casilla1", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla2", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla3", { top: "560px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla4", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla5", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla6", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+
+    casitas.set("Casilla7", { top: "318px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla8", { top: "258px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla9", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla10", { top: "135px", left: "7.2%", width: "26px", height: "26px" });
+
+    
+
+    casitas.set("Casilla12", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla13", { top: "11.8%", left: "14.7%", width: "26px", height: "26px" });
+    casitas.set("Casilla14", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla15", { top: "11.8%", left: "23.6%", width: "26px", height: "26px" });
+    casitas.set("Casilla16", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla17", { top: "11.8%", left: "32.6%", width: "26px", height: "26px" });
+    casitas.set("Casilla18", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla19", { top: "11.8%", left: "41.4%", width: "26px", height: "26px" });
+    casitas.set("Casilla20", { top: "11.8%", left: "46%", width: "26px", height: "26px" });
+
+    // Estas son la columna de la derecha de arriba a abajo
+    
+    casitas.set("Casilla22", { top: "140px", left: "49%", width: "26px", height: "26px" });
+    casitas.set("Casilla23", { top: "197px", left: "49%", width: "26px", height: "26px" });
+    casitas.set("Casilla24", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla25", { top: "320px", left: "49%", width: "26px", height: "26px" });
+    casitas.set("Casilla26", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla27", { top: "440px", left: "49%", width: "26px", height: "26px" });
+    casitas.set("Casilla28", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla29", { top: "565px", left: "49%", width: "26px", height: "26px" });
+    casitas.set("Casilla30", { top: "625px", left: "49%", width: "26px", height: "26px" });
+    
+    // Esta es la fila de abajo de derecha a izquierda
+    casitas.set("Casilla31", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla32", { top: "665px", left: "46%", width: "26px", height: "26px" });
+    casitas.set("Casilla33", { top: "665px", left: "41.4%", width: "26px", height: "26px" });
+    casitas.set("Casilla34", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla35", { top: "665px", left: "32.4%", width: "26px", height: "26px" });
+    casitas.set("Casilla36", { top: "11.8%", left: "10.3%", width: "26px", height: "26px" });
+    casitas.set("Casilla37", { top: "665px", left: "23.5%", width: "26px", height: "26px" });
+    casitas.set("Casilla38", { top: "665px", left: "18.8%", width: "26px", height: "26px" });
+    casitas.set("Casilla39", { top: "620px", left: "7.2%", width: "26px", height: "26px" });
+    casitas.set("Casilla40", { top: "665px", left: "10.1%", width: "25px", height: "25px" });
+    /* -------------------------------------------------------------------------------------*/
+
 
     const [vecesAbierto, setVecesAbierto] = useState(1);
     // Funcion que compruebe cuando sea mi turno si hay algun evento y mostrar la tarjeta correspondiente
@@ -865,10 +920,14 @@ export const Tablero = (props) => {
     }
 
     // Gestiona cerrar edificar
-    const handleCloseEdificar = (edificada) => {
+    const handleCloseEdificar = (edificada, propiedadPosicion) => {
         if (edificada === 1) {
             window.alert("Has edificado la propiedad correctamente");
         }
+    
+        else if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedadPosicion) >= 5)  {
+            window.alert("No puedes edificar más casas en esta propiedad");
+        }         
         else if (edificada === 0) {
             window.alert("No tienes suficiente dinero para edificar la propiedad");
         }
@@ -912,6 +971,25 @@ export const Tablero = (props) => {
         <PopupEdificar handleClose={handleCloseEdificar} propiedad={propiedadEdificar}/>
     );
       
+
+    // Funcion que dado el numero de casas de una propiedad devuelve la imagen correspondiente
+    const obtenerImagenCasas = (numCasas) => {
+        switch (numCasas) {
+            case 1:
+                return CASA1;
+            case 2:
+                return CASA2;
+            case 3:
+                return CASA3;
+            case 4:
+                return CASA4;
+            case 5:
+                return CASA5;
+        }
+    }
+
+
+      
     const [showDice, setShowDice] = useState(false);
     // Para mostrar bien los dados cuando yo sea el primero en tirar
     useEffect(() => {
@@ -950,6 +1028,7 @@ export const Tablero = (props) => {
                         )}
 
 
+
                         {!jugadores1[0].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
@@ -958,6 +1037,33 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                             </div>
                         }
+                        {listaPropiedades.map((propiedad, index) => {
+                            let posicion = posicionTablero(propiedad);
+                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
+                            let propiedadAE;
+
+                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
+                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
+                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
+                                    break;
+                                }
+                            }
+                        
+
+                            const numCasas = estadoPartida.Jugadores[0].numCasas.get(posicion);
+
+                            return (
+                                <>
+                                {propiedadAE && numCasas > 0 && (
+                                    <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
+                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[0].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    </div>    
+                                )}
+                                </>
+                                
+                            );
+
+                        })}
 
                         {!jugadores1[1].muerto &&
                             <div style={{ 
@@ -967,6 +1073,35 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[1].ficha} style={{width:  casillas2.get(`Casilla${posicion2}`).width, height: casillas2.get(`Casilla${posicion2}`).height}} />
                             </div>
                         }
+
+                        {listaPropiedades.map((propiedad, index) => {
+                            let posicion = posicionTablero(propiedad);
+                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
+                            let propiedadAE;
+
+                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
+                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
+                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
+                                    break;
+                                }
+                            }
+                        
+
+                            const numCasas = estadoPartida.Jugadores[1].numCasas.get(posicion);
+
+                            return (
+                                <>
+                                {propiedadAE && numCasas > 0 && (
+                                    <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
+                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[1].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    </div>    
+                                )}
+                                </>
+                                
+                            );
+
+                        })}
+
                         {!jugadores1[2].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
@@ -975,6 +1110,35 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                             </div>
                         }
+                        {listaPropiedades.map((propiedad, index) => {
+                            let posicion = posicionTablero(propiedad);
+                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
+                            let propiedadAE;
+
+                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
+                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
+                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
+                                    break;
+                                }
+                            }
+                        
+
+                            const numCasas = estadoPartida.Jugadores[2].numCasas.get(posicion);
+
+                            return (
+                                <>
+                                {propiedadAE && numCasas > 0 && (
+                                    <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
+                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[2].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    </div>    
+                                )}
+                                </>
+                                
+                            );
+
+                        })}
+
+
                         {!jugadores1[3].muerto &&
                             <div style={{ 
                                     position: 'absolute', 
@@ -983,6 +1147,34 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[3].ficha} style={{width:  casillas4.get(`Casilla${posicion4}`).width, height: casillas4.get(`Casilla${posicion4}`).height}} />
                             </div>
                         }
+
+                        {listaPropiedades.map((propiedad, index) => {
+                            let posicion = posicionTablero(propiedad);
+                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
+                            let propiedadAE;
+
+                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
+                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
+                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
+                                    break;
+                                }
+                            }
+                        
+
+                            const numCasas = estadoPartida.Jugadores[3].numCasas.get(posicion);
+
+                            return (
+                                <>
+                                {propiedadAE && numCasas > 0 && (
+                                    <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
+                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[3].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    </div>    
+                                )}
+                                </>
+                                
+                            );
+
+                        })}
 
                     </div>
                     <div className="col-5">
@@ -1077,7 +1269,7 @@ export const Tablero = (props) => {
                                     
                                                 {propiedadAE && (
                                                     <button className="edificar" onClick={() =>handleEdificar(propiedad)}>
-                                                    Edificar ({propiedadAE.precio}) - {estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(posicion)}
+                                                        Edificar ({propiedadAE.precio}) - {estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(posicion)}
                                                     </button>
                                                 )}
                                                 </li>

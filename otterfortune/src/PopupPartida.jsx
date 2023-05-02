@@ -25,8 +25,8 @@ const PopupPartida = (props) => {
                 // Llamada a handleVerificarUnirsePartida dentro del then de la promesa que devuelve setTimeout
                 setTimeout(() => {
                     props.handleVerificarUnirsePartida(id, true);
-                }, 200);
-            }, 200);
+                }, 400);
+            }, 400);
         }
 
         // TODO:

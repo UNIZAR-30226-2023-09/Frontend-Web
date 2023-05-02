@@ -68,18 +68,21 @@ export const Menu = (props) => {
     };
 
     const handleVerificarUnirsePartida = async (id, loading) => {
-        console.log(loading);
         setIsOpenPartida(false);
         // Actualizamos el id introducido
         handleIdChange(id);
         // TODO: LLamar a unirsePartida
         // Actualizamos el valor de loading
-        const resultado = await socketActions.unirsePartida(socket, email, id);
+        console.log("AQUIII");
+        console.log(sesion.email);
+        const resultado = await socketActions.unirsePartida(socket, sesion.email, id);
+        console.log("El resultado de unirse a la partida es: " + resultado);
         if (resultado) {
             setLoading(true);
             setShowLoading(true);
         }
         else {
+            console.log("AQUIII2");
             setLoading(false);
             setShowLoading(false);
             window.alert("No existe la partida con ese ID");

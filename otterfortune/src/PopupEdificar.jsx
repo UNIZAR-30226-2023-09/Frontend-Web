@@ -74,10 +74,10 @@ const PopupEdificar = (props) => {
 
         let resultado = await socketActions.edificarPropiedad(socket, sesion.email, estadoPartida.id_partida, propiedadPosicion, precioEdificar);
         if (resultado === true) {
-            props.handleClose(1);
+            props.handleClose(1, propiedadPosicion);
         }
         else {
-            props.handleClose(0);
+            props.handleClose(0, propiedadPosicion);
         }
     }
 

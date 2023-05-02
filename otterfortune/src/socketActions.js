@@ -541,6 +541,7 @@ export async function quieroEdificar(socket, email, id_partida) {
         const response = await waitForResponse(socket)
         console.log(response)
         let msg = response.toString().split(",")
+        console.log("AQUIIII: " + msg[0])
         if (msg[0] === 'EDIFICAR') {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
             //msg[2], msg[3], ...  propiedades (propiedad-precio)
