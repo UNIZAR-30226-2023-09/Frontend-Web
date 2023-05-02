@@ -205,6 +205,49 @@ function cambiarEstado(data) {
             console.log("Actualiza dinero en banco: " + estadoPartida.dineroEnBanco)
             break
 
+        case 'FUERA_CARCEL':
+            //FUERA_CARCEL,${ID_jugador}
+            const indiceFueraCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            estadoPartida.Jugadores[indiceFueraCarcel].enCarcel = false
+            console.log("El jugador: " + msg[1] + " ha salido de la carcel!!")
+            break
+
+        case 'SUBASTA':
+            //SUBASTA,${ID_jugador},${propiedad},${precio}
+            estadoPartida.subastaIniciada = true
+            estadoPartida.subastaJugador = msg[1]
+            estadoPartida.subastaPropiedad = parseInt(msg[2])
+            estadoPartida.subastaPrecio = parseFloat(msg[3])
+            console.log("Subasta del jugador: " + estadoPartida.subastaJugador + " propiedad: " + estadoPartida.subastaPropiedad + " al precio: " + estadoPartida.subastaPrecio)
+            break
+
+        case 'SUBASTA_COMPRADA':
+            //SUBASTA_COMPRADA,${ID_jugador},${dineroPropietario},${propiedadSubasta}
+            // Actualizar el dinero del jugador
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
+            // Eliminar la propiedad del array de propiedades
+            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[3]));
+            if (index !== -1) {
+                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1);
+            }
+            console.log("Tu subasta ha sido comprada");
+            break
+
+        case 'ESTADO_PARTIDA':
+            console.log("¡MSG! " + msg)
+            break
+
+        case 'DESPLAZAR_JUGADOR_AVION':
+            //DESPLAZAR_JUGADOR_AVION,${posicionADesplazarse}
+            console.log("¡MSG! " + msg)
+            break
+
+        case 'GANADOR':
+            //GANADOR,${5}
+            estadoPartida.hasGanado = true
+            sesion.gemas = parseInt(msg[1])
+            console.log("Has ganado!!, gemas:" + sesion.gemas)
+            break
 
         default:
             console.log("!!!!!!! NUEVO MSG !!!!!!! " + data)
@@ -539,9 +582,8 @@ export async function quieroEdificar(socket, email, id_partida) {
         socket.send(`QUIERO_EDIFICAR,${email},${id_partida}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-        console.log(response)
+
         let msg = response.toString().split(",")
-        console.log("AQUIIII: " + msg[0])
         if (msg[0] === 'EDIFICAR') {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
             //msg[2], msg[3], ...  propiedades (propiedad-precio)
@@ -676,11 +718,58 @@ export async function unirseTorneo(socket, email, id_torneo) {
 }
 
 // Falta
-export async function subastar(socket, email, id_partida, propiedad, precio) {
+export async function empezarTorneo(socket, id_partida, email_lider) {
     if (socket) {
-        socket.send(`SUBASTAR,${email},${id_partida},${propiedad},${precio}`)
-        console.log("Inicio subasta de " + propiedad + " , precio: " + precio)
-        return true
+        socket.send(`empezarPartidaTorneo,${id_partida},${email_lider}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'EMPEZAR_OK') {
+            return true
+        } else {
+            console.log("No empezarPartida")
+            return false
+        }
+    }
+}
+
+
+export async function pagarLiberarseCarcel(socket, email, id_partida) {
+    if (socket) {
+        socket.send(`pagarLiberarseCarcel,${email},${id_partida}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'CARCEL_PAGADA') {
+            //msg[1]    dineroJugador
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = false
+            console.log("Sí pagarLiberarseCarcel")
+            return true
+        } else {
+            console.log("No pagarLiberarseCarcel")
+            return false
+        }
+    }
+}
+
+
+export async function subastar(socket, id_partida, email, propiedad, precio) {
+    if (socket) {
+        socket.send(`SUBASTAR,${id_partida},${email},${propiedad},${precio}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'SUBASTA_OK') {
+            console.log("Sí subastar")
+            return true
+        } else {
+            console.log("No subastar")
+            return false
+        }
     }
 }
 
@@ -797,11 +886,23 @@ export async function venderEdificacion(socket, email, id_partida, propiedad) {
 }
 
 
-// Falta
 export async function comprarSubasta(socket, email, id_partida, email_propietario) {
     if (socket) {
-        socket.send(`SUBASTAR,${email},${id_partida},${email_propietario}`)
-        console.log("Comprar subasta de propietario: " + email_propietario)
-        return true
+        socket.send(`COMPRAR_SUBASTA,${email},${id_partida},${email_propietario}`)
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'SUBASTA_COMPRADA_TU') {
+            //msg[2]  dineroJugador
+            //msg[3]  propiedad
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.push(parseInt(msg[3]));
+            console.log("Sí comprarSubasta")
+            return true
+        } else {
+            console.log("No comprarSubasta")
+            return false
+        }
     }
 }
