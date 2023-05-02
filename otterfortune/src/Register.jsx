@@ -10,7 +10,7 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
-    const [showMenu, setShowMenu] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
     const socket = useSocket();
@@ -32,12 +32,12 @@ export const Register = (props) => {
             const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
             if (registroExitoso) {
                 // Poner a true para mostrar el menu si se inicia correctamente
-                setShowMenu(true);
                 window.alert('Te has registrado correctamente. Inicie sesión aquí');
-                window.location.replace(Login);
+                //window.location.replace(Login);
+                setShowLogin(true);
             }
             else {
-                setShowMenu(false);
+                setShowLogin(false);
                 window.alert('Registro incorrecto: El usuario ya existe');
             }
             // console.log(email);
@@ -49,7 +49,7 @@ export const Register = (props) => {
         setRegister(true);
     };
 
-    if (register) {
+    if (register || showLogin) {
         return <Login />;
     }
 
