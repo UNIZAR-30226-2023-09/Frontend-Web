@@ -241,7 +241,8 @@ function cambiarEstado(data) {
 
         case 'DESPLAZAR_JUGADOR_AVION':
             //DESPLAZAR_JUGADOR_AVION,${posicionADesplazarse}
-            console.log("¡MSG! " + msg)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[1])
+            console.log("Desplazar jugador avion!")
             break
 
         case 'GANADOR':
