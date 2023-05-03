@@ -126,6 +126,7 @@ button.vender {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     border-bottom: 1px solid #ccc;
+    margin-right: 5px;
 }
 
 button.edificar {
@@ -144,11 +145,31 @@ button.edificar {
     margin-top: -3px;
 }
 
+button.subastar {
+    display: inline-flex;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #158ad3;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    margin-right: 5px;
+}
+
 .vender {
     margin-left: auto;
 }
 
-
+.subastar {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 button.vender:hover {
     background-color: #ff6666;
@@ -156,6 +177,10 @@ button.vender:hover {
 
 button.edificar:hover {
     background-color: #d3b38c;
+}
+
+button.subastar:hover {
+    background-color: #5c9ac1;
 }
 
 /* Para la caja de la información partida */

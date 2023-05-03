@@ -15,6 +15,8 @@ import PopupMuerto from "./PopupMuerto";
 import PopupEvento from "./PopupEvento";
 import PopupSuperpoder from "./PopupSuperpoder";
 import PopupSuperpoder1 from "./PopupSuperpoder1";
+import PopupSubastar from "./PopupSubastar";
+import PopupHaySubasta from "./PopupHaySubasta";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -148,6 +150,10 @@ export const Tablero = (props) => {
 
     // Para el superpoder 1
     const [superpoder1Visible, setSuperpoder1Visible] = useState(false);
+
+    // Para mostrar las subastas
+    const [subastaVisible, setSubastaVisible] = useState(false);
+    const [subastaPropiedad, setSubastaPropiedad] = useState(0);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
@@ -973,6 +979,34 @@ export const Tablero = (props) => {
         setEdificarVisible(false);
     }
 
+    // Para gestionar la subasta
+    const mostrarSubasta = (propiedad) => {
+        setSubastaVisible(true);
+        setSubastaPropiedad(propiedad);
+    }
+
+    // Para cerrar la subasta
+    const handleCloseSubasta = (resultado) => {
+        if (resultado === 1) {
+            window.alert("Se ha iniciado la subasta correctamente");
+        }
+        else if (resultado === 0) {
+            window.alert("Ya hay una subasta en curso");
+        }
+        setSubastaVisible(false);
+    }
+
+    // Para gestionar cuando alguien hace subasta
+    const handleCloseHaySubasta = (resultado) => {
+        if (resultado === 1) {
+            window.alert("Has comprado la propiedad correctamente");
+        }
+        else if (resultado === 0) {
+            window.alert("No tienes suficiente dinero para comprar la propiedad");
+        }
+        estadoPartida.subastaIniciada = false;
+    }
+
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupEdificar handleClose={handleCloseEdificar} />
@@ -1012,6 +1046,10 @@ export const Tablero = (props) => {
 
     const popUpEdificar = (
         <PopupEdificar handleClose={handleCloseEdificar} propiedad={propiedadEdificar}/>
+    );
+
+    const popUpSubasta = (
+        <PopupSubastar handleClose={handleCloseSubasta} propiedad={subastaPropiedad}/>
     );
       
 
@@ -1054,6 +1092,7 @@ export const Tablero = (props) => {
                 <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
             ) 
             : estadoPartida.hasGanado ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
+            : estadoPartida.subastaIniciada ? <PopupHaySubasta handleClose={handleCloseHaySubasta}/>
             : (
 
                 
@@ -1309,9 +1348,14 @@ export const Tablero = (props) => {
                                             return (
                                                 <li key={index}>
                                                 {propiedad}
-                                                <button className="vender" onClick={() => mostrarVender(propiedad)}>
-                                                    Vender
-                                                </button>
+                                                <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
+                                                    <button className="subastar" onClick={() => mostrarSubasta(propiedad)}>
+                                                        Subastar
+                                                    </button>
+                                                    <button className="vender" onClick={() => mostrarVender(propiedad)}>
+                                                        Vender
+                                                    </button>
+                                                <div/>
                                     
                                                 {propiedadAE && (
                                                     <button className="edificar" onClick={() =>handleEdificar(propiedad)}>
@@ -1336,7 +1380,8 @@ export const Tablero = (props) => {
                                 {eventoVisible && popUpEvento}
                                 {superpoderVisible && popUpSuperpoder}
                                 {superpoder1Visible && popUpSuperpoder1}
-                            
+                                {subastaVisible && popUpSubasta}
+
                             </div>
 
                         </div>
