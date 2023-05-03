@@ -58,6 +58,7 @@ class EstadoPartida {
         this.subastaPrecio = null       // float
 
         this.hasGanado = false          // bool
+        this.hasQuedadoPosicion = null  // int
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
