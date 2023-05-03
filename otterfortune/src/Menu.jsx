@@ -23,8 +23,8 @@ import { sesion, estadoPartida } from './estadoGeneral.js';
 export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props;
-    const email = props.email;
-    const gemas = props.gemas;
+    const email = sesion.email;
+    const gemas = sesion.gemas;
 
     const [showLogin, setShowLogin] = useState(false);
     // Para unirse y crear partida
@@ -73,8 +73,6 @@ export const Menu = (props) => {
         handleIdChange(id);
         // TODO: LLamar a unirsePartida
         // Actualizamos el valor de loading
-        console.log("AQUIII");
-        console.log(sesion.email);
         const resultado = await socketActions.unirsePartida(socket, sesion.email, id);
         console.log("El resultado de unirse a la partida es: " + resultado);
         if (resultado) {
