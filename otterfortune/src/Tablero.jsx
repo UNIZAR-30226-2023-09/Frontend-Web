@@ -999,12 +999,13 @@ export const Tablero = (props) => {
     // Para gestionar cuando alguien hace subasta
     const handleCloseHaySubasta = (resultado) => {
         if (resultado === 1) {
-            window.alert("Has comprado la propiedad correctamente");
+            window.alert("Has ganado la subasta");
         }
         else if (resultado === 0) {
-            window.alert("No tienes suficiente dinero para comprar la propiedad");
+            window.alert("Se te han adelantado y te han ganado la subasta");
         }
         estadoPartida.subastaIniciada = false;
+        setHaySubastaDisponible(false);
     }
 
     // Para gestionar cuando alguien hace subasta
@@ -1015,7 +1016,8 @@ export const Tablero = (props) => {
     // Funcion que compruebe cuando sea mi turno si hay algun evento y mostrar la tarjeta correspondiente
     useEffect(() => {
         // Aquí comprobamos si la variable es true o false
-        if (vecesAbiertoSubasta === 0 && estadoPartida.subastaIniciada) {
+        // vecesAbiertoSubasta === 0 && 
+        if (estadoPartida.subastaIniciada) {
             setHaySubastaDisponible(true);
             setVecesAbiertoSubasta(1);
         } 

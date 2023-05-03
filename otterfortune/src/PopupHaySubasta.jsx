@@ -53,18 +53,14 @@ const PopupSubastar = (props) => {
 
 
     const handleAccept = async () =>  {
-        if (cantidad.trim() === '') {
-            window.alert('Por favor, ingrese la cantidad.');
+
+//window.alert("Has comprado la propiedad " + nombrePropiedad);
+        let resultado = await socketActions.comprarSubasta(socket, sesion.email, estadoPartida.id_partida, estadoPartida.subastaJugador);
+        if (resultado === true) {
+            props.handleClose(1);
         }
         else {
-            //window.alert("Has comprado la propiedad " + nombrePropiedad);
-            let resultado = await socketActions.comprarSubasta(socket, sesion.email, estadoPartida.id_partida, estadoPartida.subastaJugador);
-            if (resultado === true) {
-                props.handleClose(1);
-            }
-            else {
-                props.handleClose(0);
-            }
+            props.handleClose(0);
         }
 
     }
@@ -76,8 +72,7 @@ const PopupSubastar = (props) => {
                 <button className="popup__close" onClick={props.handleClose}>X</button>
                 <div>
                     <label htmlFor="number" className="popup__label">
-                        El jugador {estadoPartida.subastaJugador} está subastando la propiedad {estadoPartida.subastaPropiedad}
-                        por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
+                        El jugador {estadoPartida.subastaJugador} está subastando la propiedad {estadoPartida.subastaPropiedad} por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
                     </label>
                 </div>
                 <div className="buttons-container">
