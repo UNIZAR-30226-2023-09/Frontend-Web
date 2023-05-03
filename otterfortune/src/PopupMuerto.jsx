@@ -20,6 +20,23 @@ const PopupMuerto = (props) => {
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;
     };  
 
+    // Funcion que dada una posicion devuelva el numero de gemas ganadas, 5-3-2-1
+    const gemasGanadas = (posicion) => {
+        if (posicion === 1) {
+            return 5;
+        }
+        else if (posicion === 2) {
+            return 3;
+        }
+        else if (posicion === 3) {
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
+    
+
     return (
         <>
             {irMenu ? <Menu email={props.email} gemas={props.gemas} /> 
@@ -28,7 +45,8 @@ const PopupMuerto = (props) => {
                     <div className="popup__content">
                         <div>
                             <label htmlFor="text" className="popup__label">
-                                Te has quedado sin dinero y estás eliminado de la partida. Has ganado {props.gemasGanadas} gemas
+                                Te has quedado sin dinero y estás eliminado de la partida. ¡¡Has ganado {gemasGanadas(estadoPartida.hasQuedadoPosicion)}{" "}
+                                {gemasGanadas(estadoPartida.hasQuedadoPosicion) === 1 ? "gema!!" : "gemas!!"}
                             </label>
 
                         </div>
