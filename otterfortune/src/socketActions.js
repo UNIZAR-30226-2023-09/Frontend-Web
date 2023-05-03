@@ -241,7 +241,8 @@ function cambiarEstado(data) {
 
         case 'DESPLAZAR_JUGADOR_AVION':
             //DESPLAZAR_JUGADOR_AVION,${posicionADesplazarse}
-            console.log("¡MSG! " + msg)
+            estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[1])
+            console.log("Desplazar jugador avion!")
             break
 
         case 'GANADOR':
@@ -590,7 +591,7 @@ export async function quieroEdificar(socket, email, id_partida) {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
             //msg[2], msg[3], ...  propiedades (propiedad-precio)
 
-            //UPDATE Partida SET propiedad17 = 'dav', propiedad19 = 'dav', propiedad20 = 'dav' WHERE idPartida = 3;
+            //UPDATE Partida SET propiedad10 = 'aaa@aaa.com', propiedad8 = 'aaa@aaa.com', propiedad7 = 'aaa@aaa.com' WHERE idPartida = 2;
 
             // Tomar los elementos desde el índice 2 (msg[2]) hasta el final
             const propiedadPrecio = msg.slice(2);
