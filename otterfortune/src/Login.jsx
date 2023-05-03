@@ -8,6 +8,9 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+
+import { mostrarAlerta } from './alertas.jsx';
+
 export const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +25,8 @@ export const Login = (props) => {
         e.preventDefault();
         // Comprobamos los campos
         if (email.trim() === '') {
-            window.alert('Por favor, ingrese su email.');
+            //window.alert('Por favor, ingrese su email.');
+            mostrarAlerta('Por favor, ingrese su email.');
         }
         else if (password.trim() === '') {
             window.alert('Por favor, ingrese su contraseña.');
