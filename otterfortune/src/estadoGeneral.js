@@ -43,8 +43,8 @@ class EstadoPartida {
         this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = null          // string
-        this.economia = null        // float
+        this.evento = "Ninguno"     // string
+        this.economia = 1           // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.resultCasino = false   // bool
         this.elegirCasilla = false  // bool
@@ -67,7 +67,6 @@ class EstadoPartida {
         this.miTurno = false        // bool
         this.pagoAlquiler = false;  // bool
         this.subastaIniciada = false // bool
-
 
 
         // Jugadores[indiceYO] es mi usuario
@@ -106,8 +105,8 @@ class EstadoPartida {
         this.tengoSuerte = null     // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = null          // string
-        this.economia = null        // float
+        this.evento = "Ninguno"     // string
+        this.economia = 1           // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.resultCasino = false   // bool
         this.elegirCasilla = false  // bool
@@ -118,6 +117,7 @@ class EstadoPartida {
         this.subastaPropiedad = null    // int
         this.subastaPrecio = null       // float
         this.hasGanado = false          // bool
+        this.hasQuedadoPosicion = null  // int
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
         this.enBanco = false        // bool
