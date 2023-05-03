@@ -39,19 +39,12 @@ import TABLERO1 from './Imagenes/TABLEROS/WEB1.png';
 import TABLERO2 from './Imagenes/TABLEROS/WEB2.png';
 import TABLERO3 from './Imagenes/TABLEROS/WEB3.png';
 import TABLERO4 from './Imagenes/TABLEROS/WEB4.png';
-// Importar las tarjetas de los eventos
-import EVENTO1 from './Imagenes/EVENTOS/EV1.png';
-import EVENTO2 from './Imagenes/EVENTOS/EV2.png';
-import EVENTO3 from './Imagenes/EVENTOS/EV3.png';
-import EVENTO4 from './Imagenes/EVENTOS/EV4.png';
-import EVENTO5 from './Imagenes/EVENTOS/EV5.png';
 // Importar las tarjetas de las casas
 import CASA1 from './Imagenes/CASAS_HOTEL/C1.png';
 import CASA2 from './Imagenes/CASAS_HOTEL/C2.png';
 import CASA3 from './Imagenes/CASAS_HOTEL/C3.png';
 import CASA4 from './Imagenes/CASAS_HOTEL/C4.png';
 import CASA5 from './Imagenes/CASAS_HOTEL/HOTEL.png';
-
 
 // Importar todas las fichas de cada skin con sus colores y numeros 1-2-3-4
 import fichaJEANCARLO1 from './Imagenes/FICHAS/AMARILLO1.png';
@@ -655,18 +648,6 @@ export const Tablero = (props) => {
             setVeces(0);   
         }
     }
-    
-    const popUpChat = (
-        // De esta forma, en popup, a través del props, se podrá acceder
-        // a handleClose y a content
-        // Se le puede pasar cualquier cosa
-        <Chat handleClose={handleCloseChat} />
-    );
-
-    // TODO: Obtener lista de jugadores
-    //       Obtener dinero de cada uno
-    //       Obtener el nombre dado el email
-    //       Obtener la posición
 
     // Funcion que dado un nombre y un numero, compruebe el nombre de la ficha y, para cada nombre
     // compruebe el numero que es y devuelva la imagen de la ficha en mayusculas
@@ -1033,6 +1014,11 @@ export const Tablero = (props) => {
     const popupCarta = (
         <PopupEdificar handleClose={handleCloseEdificar} />
     );
+
+    const popUpChat = (
+        <Chat handleClose={handleCloseChat} />
+    );
+
     
     const popUpCasino = (
         <PopupCasino handleClose={handleCloseCasino} />
