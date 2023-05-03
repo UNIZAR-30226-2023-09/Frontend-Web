@@ -73,7 +73,7 @@ const PopupSubastar = (props) => {
     return (
         <div className="popup">
             <div className="popup__content">
-                <button className="popup__close" onClick={props.handleCloseP}>X</button>
+                <button className="popup__close" onClick={props.handleClose}>X</button>
                 <div>
                     <label htmlFor="number" className="popup__label">
                         El jugador {estadoPartida.subastaJugador} está subastando la propiedad {estadoPartida.subastaPropiedad}
@@ -82,7 +82,7 @@ const PopupSubastar = (props) => {
                 </div>
                 <div className="buttons-container">
                     <div className="cancel">
-                        <button onClick={props.handleCloseP}>Rechazar</button>
+                        <button onClick={props.handleClose}>Rechazar</button>
                     </div>
                     <div className="acept">
                         <button onClick={handleAccept}>Comprar</button>

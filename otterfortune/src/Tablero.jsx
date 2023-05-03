@@ -1007,6 +1007,26 @@ export const Tablero = (props) => {
         estadoPartida.subastaIniciada = false;
     }
 
+    // Para gestionar cuando alguien hace subasta
+    const [vecesAbiertoSubasta, setVecesAbiertoSubasta] = useState(1);
+    const [haySubastaDisponible, setHaySubastaDisponible] = useState(false);
+    //             : estadoPartida.subastaIniciada ? <PopupHaySubasta handleClose={handleCloseHaySubasta}/>
+
+    // Funcion que compruebe cuando sea mi turno si hay algun evento y mostrar la tarjeta correspondiente
+    useEffect(() => {
+        // Aquí comprobamos si la variable es true o false
+        if (vecesAbiertoSubasta === 0 && estadoPartida.subastaIniciada) {
+            setHaySubastaDisponible(true);
+            setVecesAbiertoSubasta(1);
+        } 
+        else {
+            setHaySubastaDisponible(false);
+            setVecesAbiertoSubasta(0);
+        }
+    }, [estadoPartida.subastaIniciada]);  
+
+    
+
     // Gestiona la ventana emergente (lo que lo lanza)
     const popupCarta = (
         <PopupEdificar handleClose={handleCloseEdificar} />
@@ -1051,6 +1071,11 @@ export const Tablero = (props) => {
     const popUpSubasta = (
         <PopupSubastar handleClose={handleCloseSubasta} propiedad={subastaPropiedad}/>
     );
+
+    const popUpHaySubasta = (
+        <PopupHaySubasta handleClose={handleCloseHaySubasta} />
+    );
+
       
 
     // Funcion que dado el numero de casas de una propiedad devuelve la imagen correspondiente
@@ -1092,7 +1117,6 @@ export const Tablero = (props) => {
                 <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
             ) 
             : estadoPartida.hasGanado ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
-            : estadoPartida.subastaIniciada ? <PopupHaySubasta handleClose={handleCloseHaySubasta}/>
             : (
 
                 
@@ -1381,6 +1405,7 @@ export const Tablero = (props) => {
                                 {superpoderVisible && popUpSuperpoder}
                                 {superpoder1Visible && popUpSuperpoder1}
                                 {subastaVisible && popUpSubasta}
+                                {haySubastaDisponible && popUpHaySubasta}
 
                             </div>
 
