@@ -14,6 +14,7 @@ import PopupIrCarcel from "./PopupIrCarcel";
 import PopupMuerto from "./PopupMuerto";
 import PopupEvento from "./PopupEvento";
 import PopupSuperpoder from "./PopupSuperpoder";
+import PopupSuperpoder1 from "./PopupSuperpoder1";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -91,6 +92,7 @@ import fichaJULS4 from './Imagenes/FICHAS/MORADO4.png';
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
+import PopupGanador from "./PopupGanador";
 
 
 export const Tablero = (props) => {
@@ -143,6 +145,9 @@ export const Tablero = (props) => {
     // Para saber cuando mostrar la de edificar
     const [edificarVisible, setEdificarVisible] = useState(false);
     const [propiedadEdificar, setPropiedadEdificar] = useState(0);
+
+    // Para el superpoder 1
+    const [superpoder1Visible, setSuperpoder1Visible] = useState(false);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
@@ -574,6 +579,10 @@ export const Tablero = (props) => {
                     // Cuando caes en la de superpoder
                     if (estadoPartida.superPoder !== null) {
                         setSuperpoderVisible(true);
+                        // Si es el superpoder 1
+                        if (estadoPartida.superPoder == 1) {
+                            setSuperpoder1Visible(true);
+                        }
                     }
 
                     if (estadoPartida.puedesComprarPropiedad) {
@@ -902,7 +911,25 @@ export const Tablero = (props) => {
     // Gestiona cerrar el superpoder
     const handleCloseSuperpoder = (e) => {
         setSuperpoderVisible(false);
+        // Si no es el 1
+        if (estadoPartida.superPoder !== 1) {
+            estadoPartida.superPoder = null;
+        }
+    }
+
+    // Gestiona cerrar el superpoder 1
+    const handleCloseSuperpoder1 = async (posicion) => {
+        setSuperpoder1Visible(false);
         estadoPartida.superPoder = null;
+        if (posicion !== null) {
+            let resultado = await socketActions.desplazarJugador(socket, sesion.email, estadoPartida.id_partida, posicion);
+            if (resultado) {
+                window.alert("Te has desplazado correctamente");
+            }
+            else {
+                window.alert("No te puedes desplazar a esa posicion");
+            }
+        }
     }
 
     // Gestionar pagar salir carcel
@@ -910,7 +937,19 @@ export const Tablero = (props) => {
         // await socketActions.pagarSalirCarcel(socket, sesion.email, estadoPartida.id_partida);
         // estadoPartida.enCarcel = false;
         // estadoPartida.miTurno = false;
-        window.alert("Has pagado para salir de la carcel");
+        if (estadoPartida.Jugadores[estadoPartida.indiceYO].dinero < 50) {
+            window.alert("No tienes suficiente dinero para salir de la carcel");
+        }
+        else {
+            let resultado = await socketActions.pagarLiberarseCarcel(socket, sesion.email, estadoPartida.id_partida);
+            if (resultado) {
+                window.alert("Has pagado para salir de la carcel");
+            }
+            else {
+                window.alert("No has podido pagar para salir de la carcel");
+            }
+        }
+
     }
 
     // Gestiona abrir edificar
@@ -967,6 +1006,10 @@ export const Tablero = (props) => {
         <PopupSuperpoder handleClose={handleCloseSuperpoder} superPoder={estadoPartida.superPoder}/>
     );
 
+    const popUpSuperpoder1 = (
+        <PopupSuperpoder1 handleClose={handleCloseSuperpoder1} superPoder={estadoPartida.superPoder}/>
+    );
+
     const popUpEdificar = (
         <PopupEdificar handleClose={handleCloseEdificar} propiedad={propiedadEdificar}/>
     );
@@ -1009,7 +1052,10 @@ export const Tablero = (props) => {
         <>
             {estadoPartida.Jugadores[indiceYO].muerto ? (
                 <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
-            ) : (
+            ) 
+            : estadoPartida.hasGanado ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
+            : (
+
                 
                 <div className="row">
                     <div className="col-7">
@@ -1193,7 +1239,7 @@ export const Tablero = (props) => {
                                         <li>Evento: {estadoPartida.evento}</li>
                                         <li>Economía: {estadoPartida.economia} </li>
                                         
-                                        {estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel && (
+                                        {estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel && estadoPartida.miTurno && (
                                             <li>
                                                 <button onClick={handlePagarCarcel}>Pagar 50$</button>
                                             </li>
@@ -1289,6 +1335,7 @@ export const Tablero = (props) => {
                                 {openIrCarcel && popUpIrCarcel}
                                 {eventoVisible && popUpEvento}
                                 {superpoderVisible && popUpSuperpoder}
+                                {superpoder1Visible && popUpSuperpoder1}
                             
                             </div>
 

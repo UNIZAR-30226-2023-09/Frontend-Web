@@ -14,6 +14,12 @@ import SUPERPODER3 from './Imagenes/SUPERPODERES/SP3.png';
 import SUPERPODER4 from './Imagenes/SUPERPODERES/SP4.png';
 import SUPERPODER5 from './Imagenes/SUPERPODERES/SP5.png';
 import SUPERPODER6 from './Imagenes/SUPERPODERES/SP6.png';
+import SUPERPODER7 from './Imagenes/SUPERPODERES/SP7.png';
+import SUPERPODER8 from './Imagenes/SUPERPODERES/SP8.png';
+import SUPERPODER9 from './Imagenes/SUPERPODERES/SP9.png';
+import SUPERPODER10 from './Imagenes/SUPERPODERES/SP10.png';
+import SUPERPODER11 from './Imagenes/SUPERPODERES/SP11.png';
+import SUPERPODER12 from './Imagenes/SUPERPODERES/SP12.png';
 
 
 const PopupSuperpoder = (props) => {
@@ -22,7 +28,7 @@ const PopupSuperpoder = (props) => {
 
     // Funcion que dado el nombre de un superpoder devuelva la tarjeta correspondiente
     /*
-    1
+    1 - Elegir casilla
     2
     3
     4
