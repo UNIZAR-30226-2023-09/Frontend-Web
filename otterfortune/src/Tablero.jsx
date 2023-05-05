@@ -1092,9 +1092,20 @@ export const Tablero = (props) => {
         //comprobarMuerte();
     }, 300);
   
-    return () => {
-        clearTimeout(timeoutId);
-    };
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, []);
+
+    // Funcion que comprueba cada 1ms, usando useeffect, si el jugador ha ganado la partida
+    const [ganador, setGanador] = useState(false);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (estadoPartida.hasGanado) {
+                setGanador(true);
+            }
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
 
@@ -1104,7 +1115,7 @@ export const Tablero = (props) => {
             {estadoPartida.Jugadores[indiceYO].muerto ? (
                 <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
             ) 
-            : estadoPartida.hasGanado ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
+            : ganador ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
             : (
 
                 

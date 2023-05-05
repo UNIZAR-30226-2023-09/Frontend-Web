@@ -51,6 +51,18 @@ const PopupSuperpoder = (props) => {
                 return SUPERPODER5;
             case "6":
                 return SUPERPODER6;
+            case "7":
+                return SUPERPODER7;
+            case "8":
+                return SUPERPODER8;
+            case "9":
+                return SUPERPODER9;
+            case "10":
+                return SUPERPODER10;
+            case "11":
+                return SUPERPODER11;
+            case "12":
+                return SUPERPODER12;
         }
 
     };
