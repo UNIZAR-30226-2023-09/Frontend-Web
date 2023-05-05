@@ -82,6 +82,37 @@ export default function App() {
       </div>
 
       <br/><hr/><hr/>
+      <h2>Tienda</h2>
+
+      <hr/><div className="verSkins">
+        <a>verSkins</a>
+        <button onClick={() => {
+          socketActions.verSkins(socket, 
+                                sesion.email);
+        }}>Submit</button>
+      </div>
+
+      <hr/><div className="comprarSkin">
+        <a>comprarSkin</a>
+        <input type="text" id="comprarSkin_skin" placeholder="skin" />
+        <button onClick={() => {
+          socketActions.comprarSkin(socket, 
+                                sesion.email,
+                                document.getElementById('comprarSkin_skin').value);
+        }}>Submit</button>
+      </div>
+
+      <hr/><div className="equiparSkin">
+        <a>equiparSkin</a>
+        <input type="text" id="equiparSkin_skin" placeholder="skin" />
+        <button onClick={() => {
+          socketActions.equiparSkin(socket, 
+                                sesion.email,
+                                document.getElementById('equiparSkin_skin').value);
+        }}>Submit</button>
+      </div>
+
+      <br/><hr/><hr/>
       <h2>Partida</h2>
 
       <hr/><div className="lanzarDados">
@@ -96,10 +127,10 @@ export default function App() {
       <hr/><div className="apostar">
         <a>apostar</a>
         <input type="text" id="apostar_cantidad" placeholder="cantidad" />
-        suerte <input type="checkbox" name="apostar_suerte" value="verdadero" />
+        suerte <input type="checkbox" name="apostar_suerte" value="1" />
         <button onClick={() => {
           const checkbox = document.querySelector('input[name="apostar_suerte"]:checked');
-          const suerte = checkbox ? checkbox.value === 'verdadero' : false;
+          const suerte = checkbox ? '1' : '0';
           socketActions.apostar(socket, 
                                 sesion.email,
                                 estadoPartida.id_partida,
@@ -144,6 +175,17 @@ export default function App() {
         <a>noComprarPropiedad</a>
         <button onClick={() => {
           socketActions.noComprarPropiedad(socket);
+        }}>Submit</button>
+      </div>
+
+      <hr/><div className="quieroVenderPropiedad">
+        <a>quieroVenderPropiedad</a>
+        <input type="text" id="quieroVenderPropiedad_propiedad" placeholder="propiedad" />
+        <button onClick={() => {
+          socketActions.quieroVenderPropiedad(socket, 
+                                sesion.email,
+                                document.getElementById('quieroVenderPropiedad_propiedad').value,
+                                estadoPartida.id_partida);
         }}>Submit</button>
       </div>
 
@@ -200,23 +242,25 @@ export default function App() {
         }}>Submit</button>
       </div>
 
-      <hr/><div className="crearTorneo">
-        <a>crearTorneo</a>
-        <input type="text" id="crearTorneo_nPartidas" placeholder="nPartidas" />
+      <hr/><div className="pagarLiberarseCarcel">
+        <a>pagarLiberarseCarcel</a>
         <button onClick={() => {
-          socketActions.crearTorneo(socket, 
+          socketActions.pagarLiberarseCarcel(socket, 
                                 sesion.email,
-                                document.getElementById('crearTorneo_nPartidas').value);
+                                estadoPartida.id_partida);
         }}>Submit</button>
       </div>
 
-      <hr/><div className="unirseTorneo">
-        <a>unirseTorneo</a>
-        <input type="text" id="unirseTorneo_id_torneo" placeholder="id_torneo" />
+      <hr/><div className="subastar">
+        <a>subastar</a>
+        <input type="text" id="subastar_propiedad" placeholder="propiedad" />
+        <input type="text" id="subastar_precio" placeholder="precio" />
         <button onClick={() => {
-          socketActions.unirseTorneo(socket, 
+          socketActions.subastar(socket,
+                                estadoPartida.id_partida,
                                 sesion.email,
-                                document.getElementById('unirseTorneo_id_torneo').value);
+                                document.getElementById('subastar_propiedad').value,
+                                document.getElementById('subastar_precio').value);
         }}>Submit</button>
       </div>
 
@@ -231,6 +275,27 @@ export default function App() {
         }}>Submit</button>
       </div>
 
+      <hr/><div className="venderEdificacion">
+        <a>venderEdificacion</a>
+        <input type="text" id="venderEdificacion_propiedad" placeholder="propiedad" />
+        <button onClick={() => {
+          socketActions.venderEdificacion(socket,
+                                sesion.email,                    
+                                estadoPartida.id_partida,
+                                document.getElementById('venderEdificacion_propiedad').value);
+        }}>Submit</button>
+      </div>
+
+      <hr/><div className="comprarSubasta">
+        <a>comprarSubasta</a>
+        <input type="text" id="comprarSubasta_propiedad" placeholder="propiedad" />
+        <button onClick={() => {
+          socketActions.comprarSubasta(socket,
+                                sesion.email,                    
+                                estadoPartida.id_partida,
+                                estadoPartida.subastaJugador);
+        }}>Submit</button>
+      </div>
 
     </div>
   );
