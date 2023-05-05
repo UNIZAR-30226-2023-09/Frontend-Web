@@ -1372,20 +1372,21 @@ export const Tablero = (props) => {
                                             return (
                                                 <li key={index}>
                                                 {propiedad}
-                                                <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
-                                                    <button className="subastar" onClick={() => mostrarSubasta(propiedad)}>
-                                                        Subastar
-                                                    </button>
-                                                    <button className="vender" onClick={() => mostrarVender(propiedad)}>
-                                                        Vender
-                                                    </button>
-                                                <div/>
-                                    
                                                 {propiedadAE && estadoPartida.miTurno && (
-                                                    <button className="edificar" onClick={() =>handleEdificar(propiedad)}>
+                                                    <button className="subastar" onClick={() =>handleEdificar(propiedad)}>
                                                         Edificar ({propiedadAE.precio}) - {estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(posicion)}
                                                     </button>
                                                 )}
+                                                <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
+                                                    <button className="vender" onClick={() => mostrarVender(propiedad)}>
+                                                        Vender
+                                                    </button>
+                                                    <button className="edificar" onClick={() => mostrarSubasta(propiedad)}>
+                                                        Subastar
+                                                    </button>
+                                                <div/>
+                                    
+
                                                 </li>
                                                 
                                             );
