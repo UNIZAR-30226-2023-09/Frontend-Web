@@ -3,6 +3,8 @@ import './CSS/Popup.css';
 import Loading from "./Loading";
 import { Menu } from "./Menu";
 
+import { mostrarAlertaSuperpoder } from './alertas.jsx';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupSuperpoder1 = (props) => {
@@ -11,7 +13,8 @@ const PopupSuperpoder1 = (props) => {
 
     const handleAccept = () => {
         if (id.trim() === '' || id.trim() < 0 || id.trim() > 40) {
-            window.alert('Por favor, ingresa una posición correcta.');
+            //window.alert('Por favor, ingresa una posición correcta.');
+            mostrarAlertaSuperpoder("posicionMal");
         }
         else {
             props.handleClose(id);

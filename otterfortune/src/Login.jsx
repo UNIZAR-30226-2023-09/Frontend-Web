@@ -9,6 +9,7 @@ import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
 
+import { mostrarAlertaJuego } from './alertas.jsx';
 import { mostrarAlerta } from './alertas.jsx';
 
 export const Login = (props) => {
@@ -26,10 +27,12 @@ export const Login = (props) => {
         // Comprobamos los campos
         if (email.trim() === '') {
             //window.alert('Por favor, ingrese su email.');
-            mostrarAlerta('Por favor, ingrese su email.');
+            //mostrarAlertaJuego("alerta1");
+            mostrarAlerta("errorEmail");
         }
         else if (password.trim() === '') {
-            window.alert('Por favor, ingrese su contraseña.');
+            //window.alert('Por favor, ingrese su contraseña.');
+            mostrarAlerta("errorContrasenha");
         }
         else {
             // Mandar al servidor y comprobar. RegistroExitoso devuelve el numero de gemas
@@ -44,7 +47,8 @@ export const Login = (props) => {
             }
             else {
                 setShowMenu(false);
-                window.alert('Login incorrecto.');
+                //window.alert('Login incorrecto.');
+                mostrarAlerta("errorLogin");
             }
         }
     }

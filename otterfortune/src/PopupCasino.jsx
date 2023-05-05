@@ -11,6 +11,8 @@ import ruleta from './Imagenes/rule.png';
 import rule from './Imagenes/ruleta2.png';
 import bola from './Imagenes/bola2.png';
 
+import { mostrarAlertaCasino } from './alertas.jsx';
+
 const PopupCasino = (props) => {
     const socket = useSocket();
 
@@ -23,7 +25,8 @@ const PopupCasino = (props) => {
 
     const handlePlaceBet = async () => {
         if (betAmount > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
-            window.alert('No tienes suficiente dinero para apostar esa cantidad.');
+            //window.alert('No tienes suficiente dinero para apostar esa cantidad.');
+            mostrarAlertaCasino("errorCasino");
         }
         else {
             setIsBetting(true); // cambia el estado a "haciendo apuesta"

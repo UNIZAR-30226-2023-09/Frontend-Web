@@ -36,6 +36,8 @@ import AeropuertoHeathrow from './Imagenes/AEROPUERTOS/LONDRES_AP.png';
 import AeropuertoOrly from './Imagenes/AEROPUERTOS/ORLY_AP.png';
 import AeropuertoDeLosAngeles from './Imagenes/AEROPUERTOS/LA_AP.png';
 
+import { mostrarAlertaSubastar } from './alertas.jsx';
+
 
 const PopupSubastar = (props) => {
     const socket = useSocket();
@@ -65,7 +67,8 @@ const PopupSubastar = (props) => {
 
     const handleAccept = async () =>  {
         if (cantidad.trim() === '') {
-            window.alert('Por favor, ingrese la cantidad.');
+            //window.alert('Por favor, ingrese la cantidad.');
+            mostrarAlertaSubastar("ingresarCantidad");
         }
         else {
             //window.alert("Has comprado la propiedad " + nombrePropiedad);

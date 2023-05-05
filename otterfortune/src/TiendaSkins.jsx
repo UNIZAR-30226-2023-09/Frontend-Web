@@ -27,6 +27,9 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+import { mostrarAlertaMENU } from './alertas.jsx';
+import { mostrarAlertaSkins } from './alertas.jsx';
+
 export const TiendaSkins = (props) => {
     const email = sesion.email;
     const gemas = sesion.gemas;
@@ -118,9 +121,11 @@ export const TiendaSkins = (props) => {
                 newSkinList[skinId].pertenece = true;
                 newSkinList[skinId].precio = 0;
                 setSkinList(newSkinList);
-                window.alert("Skin " + skinComprar + " comprada correctamente");
+                //window.alert("Skin " + skinComprar + " comprada correctamente");
+                mostrarAlertaSkins("comprar","Skin " + skinComprar + " comprada correctamente");
             } else {
-                window.alert("No tienes gemas suficientes para comprar " + skinComprar);
+                //window.alert("No tienes gemas suficientes para comprar " + skinComprar);
+                mostrarAlertaMENU("errorGemasTienda", "No tienes gemas suficientes para comprar " + skinComprar);
             }
         }
     };
@@ -130,9 +135,11 @@ export const TiendaSkins = (props) => {
         let skinEquipar = getSkinName(skinId);
         let resultado = await socketActions.equiparSkin(socket, email, skinEquipar);
         if (resultado === true) {
-            alert("Skin " + skinEquipar + " equipada correctamente");
+            //window.alert("Skin " + skinEquipar + " equipada correctamente");
+            mostrarAlertaSkins("equipar","Skin " + skinEquipar + " equipada correctamente");
         } else {
-            alert("No tienes la skin " + skinEquipar + " comprada");
+            //window.alert("No tienes la skin " + skinEquipar + " comprada");
+            mostrarAlertaMENU("errorSkinTienda", "No tienes la skin " + skinEquipar + " comprada");
         }
     };
 

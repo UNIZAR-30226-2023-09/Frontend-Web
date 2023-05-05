@@ -3,6 +3,8 @@ import './CSS/Popup.css';
 import Loading from "./Loading";
 import { Menu } from "./Menu";
 
+import { mostrarAlertaTorneo } from './alertas.jsx';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupTorneo = (props) => {
@@ -15,7 +17,8 @@ const PopupTorneo = (props) => {
 
     const handleAccept = () => {
         if (id.trim() === '') {
-            window.alert('Por favor, ingrese el id.');
+            //window.alert('Por favor, ingrese el id.');
+            mostrarAlertaTorneo("idMal");
         }
         else {
             setLoading(true);    // mostrar el nuevo Popup de carga

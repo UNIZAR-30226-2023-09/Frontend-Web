@@ -6,6 +6,9 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import Login from "./Login";
 
+import { mostrarAlerta } from './alertas.jsx';
+import { mostrarAlertaRegister } from './alertas.jsx';
+
 export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -19,26 +22,31 @@ export const Register = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (name.trim() === '') {
-            window.alert('Por favor, ingrese su nombre.');
+            //window.alert('Por favor, ingrese su nombre.');
+            mostrarAlerta("errorIngresarNombre");
         }
         else if (email.trim() === '') {
-            window.alert('Por favor, ingrese su email.');
+            //window.alert('Por favor, ingrese su email.');
+            mostrarAlerta("errorIngresarEmail");
         }
         else if (pass.trim() === '') {
-            window.alert('Por favor, ingrese su contraseña.');
+            //window.alert('Por favor, ingrese su contraseña.');
+            mostrarAlerta("errorIngresarContrasenha");
         }
         else {
             // Mandar al servidor y comprobar
             const registroExitoso = await socketActions.registrarse(socket, email, pass, name);
             if (registroExitoso) {
                 // Poner a true para mostrar el menu si se inicia correctamente
-                window.alert('Te has registrado correctamente. Inicie sesión aquí');
+                //window.alert('Te has registrado correctamente. Inicie sesión aquí');
+                mostrarAlertaRegister("registerBien");
                 //window.location.replace(Login);
                 setShowLogin(true);
             }
             else {
                 setShowLogin(false);
-                window.alert('Registro incorrecto: El usuario ya existe');
+                //window.alert('Registro incorrecto: El usuario ya existe');
+                mostrarAlertaRegister("errorUsuario");
             }
             // console.log(email);
             //props.onFormSwitch('Menu', { email });

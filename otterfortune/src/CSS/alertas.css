@@ -1,14 +1,146 @@
 
-.alerta {
+/*============================================ CSS - ALERTA JUEGO ===============================================*/
+
+/* CSS de la caja principal donde se mete la informacion*/
+
+.alerta2 {
+    font-weight: bold;
     position: fixed;
-    top: 0;
+    top: -50px;                                       /* Posición inicial arriba */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f44336;
-    color: white;
+    background-color: rgb(255, 210, 253);
+    color: black;
     font-size: 16px;
     padding: 12px 24px;
+    border: 2px solid black;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: aparecer 0.5s ease-in-out forwards;    /* Animación de aparecer */
+}
+
+
+/* CSS de la imagen que se usa*/
+
+.imagen2 {
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.alerta2.salir2 {
+    animation: desaparecer 0.5s ease-in-out forwards; /* Animación de desaparecer */
+}
+
+@keyframes aparecer {
+    from {
+        top: -50px;                                     /* Posición inicial arriba */
+    }
+    to {
+        top: 1%;                                        /* Posición final en el centro */
+    }
+}
+
+@keyframes desaparecer {
+    from {
+        top: 1%;                                        /* Posición inicial en el centro */
+    }
+    to {
+        top: -50px;                                     /* Posición final arriba */
+    }
+}
+
+
+/* CSS del contador para desaparecer */
+
+.contadorDiv2 {
+    margin-left: 20px;
+    color: red;
+    font-weight: bolder;
+    border-radius: 50%; /* Añadir borde circular */
+    width: 30px;
+    height: 30px;
+    background-color: #FEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*============================================ CSS - ALERTA VARIA =====================================================*/
+
+
+.alerta {
+    position: fixed;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    color: rgb(255, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 24px;
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 4px;
+    box-shadow: rgba(240, 46, 46, 0.4) 0px 5px, 
+    rgba(240, 46, 46, 0.3) 0px 10px, rgba(240, 46, 46, 0.2) 0px 15px,
+    rgba(240, 46, 46, 0.1) 0px 20px, rgba(240, 46, 46, 0.05) 0px 25px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+.imagenR {
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.imagenL {
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+
+/*============================================ CSS - ALERTA MENU =====================================================*/
+
+
+.alertaM {
+    position: fixed;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #eeddf8;
+    color: rgb(125, 0, 156);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 24px;
+    border: 2px solid rgb(187, 0, 255);
+    border-radius: 4px;
+    box-shadow: rgba(182, 46, 240, 0.4) 0px 5px,
+    rgba(191, 46, 240, 0.3) 0px 10px, 
+    rgba(224, 46, 240, 0.2) 0px 15px, 
+    rgba(224, 46, 240, 0.1) 0px 20px,
+    rgba(217, 46, 240, 0.05) 0px 25px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+.imagenMR {
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.imagenML {
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+}

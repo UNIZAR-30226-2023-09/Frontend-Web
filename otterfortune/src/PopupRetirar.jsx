@@ -5,6 +5,8 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+import { mostrarAlertaRetirar } from './alertas.jsx';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupRetirar = (props) => {
@@ -14,11 +16,13 @@ const PopupRetirar = (props) => {
 
     const handleAccept = async () => {
         if (cantidad.trim() === '') {
-            window.alert('Por favor, ingrese la cantidad.');
+            //window.alert('Por favor, ingrese la cantidad.');
+            mostrarAlertaRetirar("ingresarCantidad");
         }
         // Si la cantidad es superior a mi dinero actual en el banco
         else if (cantidad > estadoPartida.dineroEnBanco) {
-            window.alert('No puede retirar más dinero del que tiene.');
+            //window.alert('No puede retirar más dinero del que tiene.');
+            mostrarAlertaRetirar("cantidadMal");
         }
         else {
             //props.handleClose(id, load);

@@ -20,6 +20,8 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+import { mostrarAlertaMENU } from './alertas.jsx';
+
 export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props;
@@ -83,7 +85,8 @@ export const Menu = (props) => {
             console.log("AQUIII2");
             setLoading(false);
             setShowLoading(false);
-            window.alert("No existe la partida con ese ID");
+            //window.alert("No existe la partida con ese ID");
+            mostrarAlertaMENU("errorIdPartida", "errorIdPartida");
         }
     }
 

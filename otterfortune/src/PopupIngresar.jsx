@@ -6,6 +6,8 @@ import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
+import { mostrarAlertaIngresar } from './alertas.jsx';
+
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupIngresar = (props) => {
@@ -15,11 +17,13 @@ const PopupIngresar = (props) => {
 
     const handleAccept = async () => {
         if (cantidad.trim() === '') {
-            window.alert('Por favor, ingrese la cantidad.');
+            //window.alert('Por favor, ingrese la cantidad.');
+            mostrarAlertaIngresar("ingresarNada");
         }
         // Si la cantidad es superior a mi dinero actual
         else if (cantidad > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
-            window.alert('No puede ingresar más dinero del que tiene.');
+            //window.alert('No puede ingresar más dinero del que tiene.');
+            mostrarAlertaIngresar("ingresarMal");
         }
         else {
             //props.handleClose(id, load);
