@@ -50,6 +50,7 @@ class EstadoPartida {
         this.elegirCasilla = false  // bool
         this.superPoder = null      // string
         this.precioVenta = null     // float
+        this.desplazarEnAvion = false; // bool
 
         this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
 
@@ -91,6 +92,7 @@ class EstadoPartida {
         this.miTurno = false        // bool
         this.pagoAlquiler = false;  // bool
         this.subastaIniciada = false // bool
+        this.desplazarEnAvion = false; // bool
     }
 
     // Reiniciar variables para empezar nueva partida

@@ -241,6 +241,7 @@ function cambiarEstado(data) {
 
         case 'DESPLAZAR_JUGADOR_AVION':
             //DESPLAZAR_JUGADOR_AVION,${posicionADesplazarse}
+            estadoPartida.desplazarEnAvion = true;
             estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[1])
             console.log("Desplazar jugador avion!")
             break

@@ -17,6 +17,7 @@ import PopupSuperpoder from "./PopupSuperpoder";
 import PopupSuperpoder1 from "./PopupSuperpoder1";
 import PopupSubastar from "./PopupSubastar";
 import PopupHaySubasta from "./PopupHaySubasta";
+import PopupDesplazaAvion from "./PopupDesplazaAvion";
 
 import dice1 from './Imagenes/Dice1.png';
 import dice2 from './Imagenes/Dice2.png';
@@ -45,6 +46,8 @@ import CASA2 from './Imagenes/CASAS_HOTEL/C2.png';
 import CASA3 from './Imagenes/CASAS_HOTEL/C3.png';
 import CASA4 from './Imagenes/CASAS_HOTEL/C4.png';
 import CASA5 from './Imagenes/CASAS_HOTEL/HOTEL.png';
+// Importar el salto felino
+import salto from './Imagenes/salto_felino.png';
 
 // Importar todas las fichas de cada skin con sus colores y numeros 1-2-3-4
 import fichaJEANCARLO1 from './Imagenes/FICHAS/AMARILLO1.png';
@@ -147,6 +150,9 @@ export const Tablero = (props) => {
     // Para mostrar las subastas
     const [subastaVisible, setSubastaVisible] = useState(false);
     const [subastaPropiedad, setSubastaPropiedad] = useState(0);
+
+    // Para desplazar en avion
+    const [desplazaEnAvionVisible, setDesplazarEnAvionVisible] = useState(false);
 
     const [num1, setNum1] = useState(1);
     const [num2, setNum2] = useState(1);
@@ -584,6 +590,11 @@ export const Tablero = (props) => {
                         }
                     }
 
+                    // Desplazar en avion
+                    if (estadoPartida.desplazarEnAvion) {
+                        setDesplazarEnAvionVisible(true);
+                    }
+
                     if (estadoPartida.puedesComprarPropiedad) {
                         setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
                         setOpenPropiedad(true);
@@ -990,6 +1001,12 @@ export const Tablero = (props) => {
         setHaySubastaDisponible(false);
     }
 
+    // Para gestionar cerrar el desplazar avion
+    const handleCloseDesplazarAvion = () => {
+        setDesplazarEnAvionVisible(false);
+        estadoPartida.desplazarEnAvion = false;
+    }
+
     // Para gestionar cuando alguien hace subasta
     const [vecesAbiertoSubasta, setVecesAbiertoSubasta] = useState(1);
     const [haySubastaDisponible, setHaySubastaDisponible] = useState(false);
@@ -1063,6 +1080,10 @@ export const Tablero = (props) => {
 
     const popUpHaySubasta = (
         <PopupHaySubasta handleClose={handleCloseHaySubasta} />
+    );
+
+    const popUpDesplazaAvion = (
+        <PopupDesplazaAvion handleClose={handleCloseDesplazarAvion} />
     );
 
       
@@ -1407,6 +1428,7 @@ export const Tablero = (props) => {
                                 {superpoder1Visible && popUpSuperpoder1}
                                 {subastaVisible && popUpSubasta}
                                 {haySubastaDisponible && popUpHaySubasta}
+                                {desplazaEnAvionVisible && popUpDesplazaAvion}
 
                             </div>
 
