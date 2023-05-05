@@ -7,6 +7,7 @@ import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
 import { mostrarAlertaIngresar } from './alertas.jsx';
+import { errorIngresar } from './alertas.jsx';
 
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
@@ -23,7 +24,7 @@ const PopupIngresar = (props) => {
         // Si la cantidad es superior a mi dinero actual
         else if (cantidad > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
             //window.alert('No puede ingresar más dinero del que tiene.');
-            mostrarAlertaIngresar("ingresarMal");
+            errorIngresar("ingresarMal");
         }
         else {
             //props.handleClose(id, load);
