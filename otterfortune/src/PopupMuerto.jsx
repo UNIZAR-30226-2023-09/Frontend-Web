@@ -39,7 +39,7 @@ const PopupMuerto = (props) => {
 
     return (
         <>
-            {irMenu ? <Menu email={sesion.email} gemas={sesion.gemas} /> 
+            {irMenu ? <Menu/> 
             : ( 
                 <div className="popup">
                     <div className="popup__content">

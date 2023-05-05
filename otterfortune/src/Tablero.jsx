@@ -1380,7 +1380,7 @@ export const Tablero = (props) => {
                                                     </button>
                                                 <div/>
                                     
-                                                {propiedadAE && (
+                                                {propiedadAE && estadoPartida.miTurno && (
                                                     <button className="edificar" onClick={() =>handleEdificar(propiedad)}>
                                                         Edificar ({propiedadAE.precio}) - {estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(posicion)}
                                                     </button>
