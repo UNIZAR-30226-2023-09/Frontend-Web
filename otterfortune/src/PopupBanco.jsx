@@ -12,6 +12,7 @@ import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 
 import { mostrarAlertaBanco } from './alertas.jsx';
+import { errorBanco } from './alertas.jsx';
 
 const PopupBanco = (props) => {
     const socket = useSocket();
@@ -54,7 +55,7 @@ const PopupBanco = (props) => {
         }
         else if (resultado === 0) {
             //window.alert('No se ha podido ingresar el dinero en el banco.');
-            mostrarAlertaBanco("bancoIngresarMal");
+            errorBanco("bancoIngresarMal");
             handleClose();
         }
         
@@ -70,7 +71,7 @@ const PopupBanco = (props) => {
         }
         else if (resultado === 0) {
             //window.alert('No hay suficiente dinero en el banco.');
-            mostrarAlertaBanco("bancoRetirarMal");
+            errorBanco("bancoRetirarMal");
             handleClose();
         }
         

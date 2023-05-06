@@ -3,7 +3,7 @@ import './CSS/Popup.css';
 import Loading from "./Loading";
 import { Menu } from "./Menu";
 
-import { mostrarAlertaPartida } from './alertas.jsx';
+import { mostrarAlertaVACIOS } from './alertas.jsx';
 
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
@@ -15,7 +15,7 @@ const PopupPartida = (props) => {
     const handleAccept = () => {
         if (id.trim() === '') {
             //window.alert('Por favor, ingrese el id.');
-            mostrarAlertaPartida("partidaId");
+            mostrarAlertaVACIOS("errorIdVacioPartida", 'Vaya! , parece que te falta introducir el ID' );
         }
         else {
             setLoading(true);    // mostrar el nuevo Popup de carga

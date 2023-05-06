@@ -92,6 +92,18 @@ import { useSocket } from './socketContext';
 import { sesion, estadoPartida } from './estadoGeneral.js';
 import PopupGanador from "./PopupGanador";
 
+import { mostrarAlertaPagar } from './alertas.jsx';
+import { mostrarAlertaPropiedad } from './alertas.jsx';
+import { errorPropiedad } from './alertas.jsx';
+import { mostrarAlertaRULETA } from './alertas.jsx';
+import { mostrarAlertaDesplazar } from './alertas.jsx';
+import { mostrarAlertaCarcel } from './alertas.jsx';
+import { errorCarcel } from './alertas.jsx';
+import { mostrarAlertaEdificar } from './alertas.jsx';
+import { errorEdificar } from './alertas.jsx';
+import { mostrarAlertaSubastarProp } from './alertas.jsx';
+import { errorSubastarProp } from './alertas.jsx';
+
 
 export const Tablero = (props) => {
 
@@ -617,23 +629,27 @@ export const Tablero = (props) => {
 
                     // Tengo que pagar alquiler a otro jugador
                     if (estadoPartida.pagoAlquiler) {
-                        window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
+                        //window.alert("Tienes que pagar el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion));
+                        mostrarAlertaPagar("alquiler", "Pagas el alquiler de: " + nombrePosicion(estadoPartida.Jugadores[estadoPartida.indiceYO].posicion) );
                         estadoPartida.pagoAlquiler = false;  // bool
                     }
 
                     // Cuando caes en la casilla de tax
                     if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 5) {
-                        window.alert("Tienes que pagar un tax por tus propiedades");
+                        //window.alert("Tienes que pagar un tax por tus propiedades");
+                        mostrarAlertaPagar("tax", "Pagas TAX por tus propiedades");
                     }
 
                     // Cuando caes en la casilla de luxury tax
                     if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 39) {
-                        window.alert("Tienes que pagar un luxury tax por tus propiedades");
+                        //window.alert("Tienes que pagar un luxury tax por tus propiedades");
+                        mostrarAlertaPagar("luxuryTax", "Pagas LUXURY TAX por tus propiedades");
                     }
 
                     // Cuando caes en la casilla de treasure
                     if (estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 4 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 24 || estadoPartida.Jugadores[estadoPartida.indiceYO].posicion == 34) {
-                        window.alert("Casilla de suerte!");
+                        //window.alert("Casilla de suerte!");
+                        mostrarAlertaPagar("suerte", "Casilla de suerte!");
                     }
                 }
 
@@ -847,10 +863,12 @@ export const Tablero = (props) => {
         setOpenPropiedad(false);
         estadoPartida.puedesComprarPropiedad = false;
         if (comprada === 1) {
-            window.alert("Has comprado la propiedad correctamente");
+            //window.alert("Has comprado la propiedad correctamente");
+            mostrarAlertaPropiedad("comprar", "Has comprado la propiedad correctamente");
         }
         else if (comprada === 0) {
-            window.alert("No tienes suficiente dinero para comprar la propiedad");
+            //window.alert("No tienes suficiente dinero para comprar la propiedad");
+            errorPropiedad("comprarMal", "No tienes suficiente dinero para comprar la propiedad");
         }
     }
 
@@ -864,7 +882,8 @@ export const Tablero = (props) => {
     const handleCloseVender = (vendida) => {
         setOpenVenderProp(false);
         if (vendida === 1) {
-            window.alert("Has vendido la propiedad correctamente");
+            //window.alert("Has vendido la propiedad correctamente");
+            mostrarAlertaPropiedad("vender", "Has vendido la propiedad correctamente");
         }
     }
 
@@ -882,10 +901,12 @@ export const Tablero = (props) => {
     const handleCloseCasino = (ganado) => {
         estadoPartida.enCasino = false;
         if (ganado === 1) {
-            window.alert("Has duplicado tu apuesta");
+            //window.alert("Has duplicado tu apuesta");
+            mostrarAlertaRULETA("ganar", "Has duplicado tu apuesta");
         }
         else if (ganado === 0) {
-            window.alert("Has perdido tu apuesta");
+            //window.alert("Has perdido tu apuesta");
+            mostrarAlertaRULETA("perder", "Has duplicado tu apuesta");
         }
         setOpenCasino(false);
     }
@@ -922,10 +943,12 @@ export const Tablero = (props) => {
         if (posicion !== null) {
             let resultado = await socketActions.desplazarJugador(socket, sesion.email, estadoPartida.id_partida, posicion);
             if (resultado) {
-                window.alert("Te has desplazado correctamente");
+                //window.alert("Te has desplazado correctamente");
+                mostrarAlertaDesplazar("bien", "Te has desplazado correctamente");
             }
             else {
-                window.alert("No te puedes desplazar a esa posicion");
+                //window.alert("No te puedes desplazar a esa posicion");
+                mostrarAlertaDesplazar("mal", "No te puedes desplazar a esa posicion");
             }
         }
     }
@@ -936,16 +959,18 @@ export const Tablero = (props) => {
         // estadoPartida.enCarcel = false;
         // estadoPartida.miTurno = false;
         if (estadoPartida.Jugadores[estadoPartida.indiceYO].dinero < 50) {
-            window.alert("No tienes suficiente dinero para salir de la carcel");
+            //window.alert("No tienes suficiente dinero para salir de la carcel");
+            errorCarcel("noDinero", "No tienes suficiente dinero para salir de la carcel");
         }
         else {
             let resultado = await socketActions.pagarLiberarseCarcel(socket, sesion.email, estadoPartida.id_partida);
             if (resultado) {
-                window.alert("Has pagado para salir de la carcel");
-                estadoPartida.enCarcel = false;
+                //window.alert("Has pagado para salir de la carcel");
+                mostrarAlertaCarcel("Has pagado para salir de la carcel");
             }
             else {
-                window.alert("No has podido pagar para salir de la carcel");
+                //window.alert("No has podido pagar para salir de la carcel");
+                errorCarcel("noPuedes", " Parece que te quedas en la carcel");
             }
         }
 
@@ -960,14 +985,17 @@ export const Tablero = (props) => {
     // Gestiona cerrar edificar
     const handleCloseEdificar = (edificada, propiedadPosicion) => {
         if (edificada === 1) {
-            window.alert("Has edificado la propiedad correctamente");
+            //window.alert("Has edificado la propiedad correctamente");
+            mostrarAlertaEdificar("Has edificado la propiedad correctamente");
         }
     
         else if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedadPosicion) >= 5)  {
-            window.alert("No puedes edificar más casas en esta propiedad");
+            //window.alert("No puedes edificar más casas en esta propiedad");
+            errorEdificar("edificarMal", "No puedes edificar más casas en esta propiedad");
         }         
         else if (edificada === 0) {
-            window.alert("No tienes suficiente dinero para edificar la propiedad");
+            //window.alert("No tienes suficiente dinero para edificar la propiedad");
+            errorEdificar("dineroMal","No tienes suficiente dinero para edificar la propiedad");
         }
         setEdificarVisible(false);
     }
@@ -981,10 +1009,12 @@ export const Tablero = (props) => {
     // Para cerrar la subasta
     const handleCloseSubasta = (resultado) => {
         if (resultado === 1) {
-            window.alert("Se ha iniciado la subasta correctamente");
+            //window.alert("Se ha iniciado la subasta correctamente");
+            mostrarAlertaSubastarProp("Se ha iniciado la subasta correctamente");
         }
         else if (resultado === 0) {
-            window.alert("Ya hay una subasta en curso");
+            //window.alert("Ya hay una subasta en curso");
+            errorSubastarProp("subastaYa", "Ya hay una subasta en curso");
         }
         setSubastaVisible(false);
     }
@@ -992,10 +1022,12 @@ export const Tablero = (props) => {
     // Para gestionar cuando alguien hace subasta
     const handleCloseHaySubasta = (resultado) => {
         if (resultado === 1) {
-            window.alert("Has ganado la subasta");
+            //window.alert("Has ganado la subasta");
+            mostrarAlertaSubastarProp("ENHORABUENA, Has ganado la subasta");
         }
         else if (resultado === 0) {
-            window.alert("Se te han adelantado y te han ganado la subasta");
+            //window.alert("Se te han adelantado y te han ganado la subasta");
+            errorSubastarProp("dineroMal", "Se te han adelantado y te han ganado la subasta");
         }
         estadoPartida.subastaIniciada = false;
         setHaySubastaDisponible(false);

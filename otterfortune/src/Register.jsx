@@ -46,7 +46,7 @@ export const Register = (props) => {
             else {
                 setShowLogin(false);
                 //window.alert('Registro incorrecto: El usuario ya existe');
-                mostrarAlertaRegister("errorUsuario");
+                mostrarAlerta("errorUsuario");
             }
             // console.log(email);
             //props.onFormSwitch('Menu', { email });
