@@ -72,7 +72,7 @@ const PopupSubastar = (props) => {
                 <button className="popup__close" onClick={props.handleClose}>X</button>
                 <div>
                     <label htmlFor="number" className="popup__label">
-                        El jugador {estadoPartida.subastaJugador} está subastando la propiedad {estadoPartida.subastaPropiedad} por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
+                        El jugador {estadoPartida.subastaJugador} está subastando la propiedad {tableroPropiedades[estadoPartida.subastaPropiedad]} por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
                     </label>
                 </div>
                 <div className="buttons-container">

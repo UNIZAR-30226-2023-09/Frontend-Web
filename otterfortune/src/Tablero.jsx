@@ -939,10 +939,10 @@ export const Tablero = (props) => {
             window.alert("No tienes suficiente dinero para salir de la carcel");
         }
         else {
-            estadoPartida.enCarcel = false;
             let resultado = await socketActions.pagarLiberarseCarcel(socket, sesion.email, estadoPartida.id_partida);
             if (resultado) {
                 window.alert("Has pagado para salir de la carcel");
+                estadoPartida.enCarcel = false;
             }
             else {
                 window.alert("No has podido pagar para salir de la carcel");
