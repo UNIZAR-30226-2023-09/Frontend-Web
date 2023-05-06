@@ -148,7 +148,7 @@ const PopupSubastar = (props) => {
     return (
         <div className="popup">
             <div className="popup__content">
-                <button className="popup__close" onClick={props.handleCloseP}>X</button>
+                <button className="popup__close" onClick={props.handleClose}>X</button>
                 <div>
                     <label htmlFor="number" className="popup__label">
                         Introduzca la cantidad para subastar {props.propiedad}:</label>
@@ -161,7 +161,7 @@ const PopupSubastar = (props) => {
                 </div>
                 <div className="buttons-container">
                     <div className="cancel">
-                        <button onClick={props.handleCloseP}>Cancelar</button>
+                        <button onClick={props.handleClose}>Cancelar</button>
                     </div>
                     <div className="acept">
                         <button onClick={handleAccept}>Aceptar</button>
