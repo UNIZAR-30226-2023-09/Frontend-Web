@@ -1191,7 +1191,7 @@ export const Tablero = (props) => {
 
 
 
-                        {!jugadores1[0].muerto &&
+                        {!jugadores1[0].muerto && jugadores1[0].dinero > 0 &&
                             <div style={{ 
                                     position: 'absolute', 
                                     top: estadoPartida.Jugadores[0].enCarcel ? '2.4%' : casillas1.get(`Casilla${posicion1}`).top, 
@@ -1227,7 +1227,7 @@ export const Tablero = (props) => {
 
                         })}
 
-                        {!jugadores1[1].muerto &&
+                        {!jugadores1[1].muerto && jugadores1[1].dinero > 0 &&
                             <div style={{ 
                                     position: 'absolute', 
                                     top: estadoPartida.Jugadores[1].enCarcel ? '4.7%' : casillas2.get(`Casilla${posicion2}`).top, 
@@ -1264,7 +1264,7 @@ export const Tablero = (props) => {
 
                         })}
 
-                        {!jugadores1[2].muerto &&
+                        {!jugadores1[2].muerto && jugadores1[2].dinero > 0 &&
                             <div style={{ 
                                     position: 'absolute', 
                                     top: estadoPartida.Jugadores[2].enCarcel ? '7%' : casillas3.get(`Casilla${posicion3}`).top, 
@@ -1301,7 +1301,7 @@ export const Tablero = (props) => {
                         })}
 
 
-                        {!jugadores1[3].muerto &&
+                        {!jugadores1[3].muerto && jugadores1[3].dinero > 0 &&
                             <div style={{ 
                                     position: 'absolute', 
                                     top: estadoPartida.Jugadores[3].enCarcel ? '9.2%' : casillas4.get(`Casilla${posicion4}`).top, 
