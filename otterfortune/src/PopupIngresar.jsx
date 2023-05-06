@@ -22,7 +22,7 @@ const PopupIngresar = (props) => {
             mostrarAlertaIngresar("ingresarNada");
         }
         // Si la cantidad es superior a mi dinero actual
-        else if (cantidad > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+        else if (cantidad > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero || cantidad <= 0) {
             //window.alert('No puede ingresar más dinero del que tiene.');
             errorIngresar("ingresarMal");
         }

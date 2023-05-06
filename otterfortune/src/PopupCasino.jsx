@@ -24,7 +24,7 @@ const PopupCasino = (props) => {
     };
 
     const handlePlaceBet = async () => {
-        if (betAmount > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
+        if (betAmount > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero || betAmount <= 0) {
             //window.alert('No tienes suficiente dinero para apostar esa cantidad.');
             mostrarAlertaCasino("errorCasino");
         }

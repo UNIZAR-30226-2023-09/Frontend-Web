@@ -21,7 +21,7 @@ const PopupRetirar = (props) => {
             mostrarAlertaRetirar("ingresarCantidad");
         }
         // Si la cantidad es superior a mi dinero actual en el banco
-        else if (cantidad > estadoPartida.dineroEnBanco) {
+        else if (cantidad > estadoPartida.dineroEnBanco || cantidad <= 0) {
             //window.alert('No puede retirar más dinero del que tiene.');
             errorRetirar("cantidadMal");
         }

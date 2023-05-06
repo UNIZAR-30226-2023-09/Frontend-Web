@@ -47,14 +47,8 @@ const PopupSubastar = (props) => {
     "Lyon", "IrCarcel", "Toronto", "Vancouver", "Treasure", "Ottawa", "AeropuertoDeLosAngeles", // 36
     "NuevaYork", "LosAngeles", "LuxuryTax", "Chicago"];
 
-    const nombrePropiedad = props.propiedad;
-
-    const [cantidad, setCantidad] = useState("");
-
-
     const handleAccept = async () =>  {
 
-//window.alert("Has comprado la propiedad " + nombrePropiedad);
         let resultado = await socketActions.comprarSubasta(socket, sesion.email, estadoPartida.id_partida, estadoPartida.subastaJugador);
         if (resultado === true) {
             props.handleClose(1);
@@ -65,25 +59,87 @@ const PopupSubastar = (props) => {
 
     }
 
-    // props.carta  -> será la carta a mostrar en el src
+    // Funcion que dado el nombre de una propiedad, devuelve su imagen
+    const getImagen = (nombrePropiedad) => {
+        switch (nombrePropiedad) {
+            case "Monterrey":
+                return Monterrey;
+            case "Guadalajara":
+                return Guadalajara;
+            case "Kioto":
+                return Kioto;
+            case "Osaka":
+                return Osaka;
+            case "Tokio":
+                return Tokio;
+            case "Napoles":
+                return Napoles;
+            case "Milan":
+                return Milan;
+            case "Roma":
+                return Roma;
+            case "Madrid":
+                return Madrid;
+            case "Barcelona":
+                return Barcelona;
+            case "Zaragoza":
+                return Zaragoza;
+            case "Paris":
+                return Paris;
+            case "Marsella":
+                return Marsella;
+            case "Lyon":
+                return Lyon;
+            case "Londres":
+                return Londres;
+            case "Manchester":
+                return Manchester;
+            case "Edimburgo":
+                return Edimburgo;
+            case "NuevaYork":
+                return NuevaYork;
+            case "LosAngeles":
+                return LosAngeles;
+            case "Chicago":
+                return Chicago;
+            case "Toronto":
+                return Toronto;
+            case "Vancouver":
+                return Vancouver;
+            case "Ottawa":
+                return Ottawa;
+            case "AeropuertoNarita":
+                return AeropuertoNarita;
+            case "Aeropuerto Heathrow":
+                return AeropuertoHeathrow;
+            case "AeropuertoOrly":
+                return AeropuertoOrly;
+            default:
+                return AeropuertoDeLosAngeles;
+        }
+    }
+
     return (
-        <div className="popup">
-            <div className="popup__content">
-                <button className="popup__close" onClick={props.handleClose}>X</button>
-                <div>
-                    <label htmlFor="number" className="popup__label">
-                        El jugador {estadoPartida.subastaJugador} está subastando la propiedad {tableroPropiedades[estadoPartida.subastaPropiedad]} por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
-                    </label>
-                </div>
-                <div className="buttons-container">
-                    <div className="cancel">
-                        <button onClick={props.handleClose}>Rechazar</button>
-                    </div>
-                    <div className="acept">
-                        <button onClick={handleAccept}>Comprar</button>
-                    </div>
+        <div className="row">
+        <div className="col-7">
+
+        </div>
+        <div className="col-7">
+        <div className="col-7">
+            <div className="popupProp">
+                <h3 className="popup__titleP">  
+                    El jugador {estadoPartida.subastaJugador} está subastando la propiedad {tableroPropiedades[estadoPartida.subastaPropiedad]} por {estadoPartida.subastaPrecio}. ¿Deseas comprarla?
+                </h3>
+                <button className="popup__close5" onClick={props.handleClose}>X</button>
+                <img className="popup__imageProp" src={getImagen(tableroPropiedades[estadoPartida.subastaPropiedad])} />
+                <div className="buttonContainer">
+                    <button className="confirmarP" onClick={handleAccept}>COMPRAR</button>
+                    <button className="rechazarP" onClick={props.handleClose}>RECHAZAR</button>
                 </div>
             </div>
+        </div>
+
+        </div>
         </div>
     );
 };

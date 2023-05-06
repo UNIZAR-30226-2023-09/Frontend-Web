@@ -915,6 +915,7 @@ export const Tablero = (props) => {
     const handleFinTurno = async (e) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
+        setHePagado(false);
         estadoPartida.miTurno = false;
         // Mandar el mensaje de quiero edificar
         await socketActions.quieroEdificar(socket, sesion.email, estadoPartida.id_partida);
@@ -945,6 +946,21 @@ export const Tablero = (props) => {
             if (resultado) {
                 //window.alert("Te has desplazado correctamente");
                 mostrarAlertaDesplazar("bien", "Te has desplazado correctamente");
+                if (estadoPartida.puedesComprarPropiedad) {
+                    setPropiedadCaida(tableroPropiedades[estadoPartida.Jugadores[estadoPartida.indiceYO].posicion]);
+                    setOpenPropiedad(true);
+                }
+
+                // Casilla del banco
+                if (posicion == 28) {
+                    setOpenBanco(true);
+                }
+
+                // Casilla del casino
+                if (posicion == 14) {
+                    setOpenCasino(true);
+                }
+
             }
             else {
                 //window.alert("No te puedes desplazar a esa posicion");
@@ -952,6 +968,8 @@ export const Tablero = (props) => {
             }
         }
     }
+
+    const [hePagado, setHePagado] = useState(false);
 
     // Gestionar pagar salir carcel
     const handlePagarCarcel = async (e) => {
@@ -967,6 +985,7 @@ export const Tablero = (props) => {
             if (resultado) {
                 //window.alert("Has pagado para salir de la carcel");
                 mostrarAlertaCarcel("Has pagado para salir de la carcel");
+                setHePagado(true);
             }
             else {
                 //window.alert("No has podido pagar para salir de la carcel");
@@ -1355,7 +1374,7 @@ export const Tablero = (props) => {
                                         <li>Evento: {estadoPartida.evento}</li>
                                         <li>Economía: {estadoPartida.economia} </li>
                                         
-                                        {estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel && estadoPartida.miTurno && (
+                                        {estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel && estadoPartida.miTurno && !hePagado && (
                                             <li>
                                                 <button onClick={handlePagarCarcel}>Pagar 50$</button>
                                             </li>
