@@ -26,7 +26,7 @@ export const Menu = (props) => {
     // Obtener el valor del email
     //const { email } = props;
     const email = sesion.email;
-    const gemas = sesion.gemas;
+    const gemas = props.gemas;
 
     const [showLogin, setShowLogin] = useState(false);
     // Para unirse y crear partida
