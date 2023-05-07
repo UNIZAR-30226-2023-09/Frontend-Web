@@ -47,12 +47,15 @@ export const Login = (props) => {
                 // Poner a true para mostrar el menu si se inicia correctamente
                 // TODO: Obtener nombre en vez de email
                 setNumGemas(sesion.gemas);
-                if (sesion.yaEstasEnPartida) {
+                // Quedarme dormido 3ms
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (sesion.yaEstasEnPartida === true) {
                     sesion.yaEstasEnPartida = false;
                     setTablero(true);
                     setShowMenu(false);
                 }
                 else {
+                    sesion.yaEstasEnPartida = false;
                     setTablero(false);
                     setShowMenu(true);
                 }
