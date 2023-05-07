@@ -236,13 +236,6 @@ function cambiarEstado(data) {
             break
 
         case 'ESTADO_PARTIDA':
-            //1,1,0,1,Ninguno,null,a|
-            //null,0;null,0;null,0;null,0;null,0;null,0;null,0;bot@bot2142.com,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0|
-            
-            //a,1,1000,0,PLEX,TABLERO1,2,0;
-            //bot@bot2142.com,1,8,900,TITE,1,0;
-            //bot@bot2443.com,1,1,1000,TITE,3,0;
-            //bot@bot6992.com,1,1,1000,TITE,4,0
             estadoPartida.reiniciarVariablesNuevaPartida()
             sesion.yaEstasEnPartida = true
 
@@ -379,6 +372,8 @@ export async function crearPartida(socket, email) {
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
+        estadoPartida.reiniciarVariablesNuevaPartida()
+
         let msg = response.toString().split(",")
         if (msg[0] === 'CREADAP_OK') {
             console.log("Sí crearPartida, id_partida: " + msg[1])
@@ -397,6 +392,8 @@ export async function unirsePartida(socket, email, id_partida) {
         socket.send(`unirsePartida,${email},${id_partida}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
+
+        estadoPartida.reiniciarVariablesNuevaPartida()
 
         let msg = response.toString().split(",")
         if (msg[0] === 'UNIRP_OK') {
