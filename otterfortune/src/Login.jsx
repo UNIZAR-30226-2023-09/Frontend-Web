@@ -3,6 +3,7 @@ import loginImage from './Imagenes/logo.png';
 import styles from './CSS/Login.module.css'; // Importar el CSS como módulo
 import { Menu } from "./Menu";
 import { Register } from "./Register";
+import Tablero from './Tablero';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -18,6 +19,9 @@ export const Login = (props) => {
     const [showMenu, setShowMenu] = useState(false);
     const [register, setRegister] = useState(false);
     const [numGemas, setNumGemas] = useState(0);
+
+    // Para mostrar el tablero
+    const [tablero, setTablero] = useState(false);
 
     const socket = useSocket();
 
@@ -43,7 +47,15 @@ export const Login = (props) => {
                 // Poner a true para mostrar el menu si se inicia correctamente
                 // TODO: Obtener nombre en vez de email
                 setNumGemas(sesion.gemas);
-                setShowMenu(true);
+                if (sesion.yaEstasEnPartida) {
+                    sesion.yaEstasEnPartida = false;
+                    setTablero(true);
+                    setShowMenu(false);
+                }
+                else {
+                    setTablero(false);
+                    setShowMenu(true);
+                }
             }
             else {
                 setShowMenu(false);
@@ -72,9 +84,11 @@ export const Login = (props) => {
     }
 
     if (showMenu) {
-        // Llamar a menu y guardar el valor del email en 'email'
-        // También se guarda en 'props.email' y se accede en menu
         return <Menu email={email} gemas={numGemas} />;
+    }
+
+    if (tablero) {
+        return <Tablero email={email} gemas={numGemas} />;
     }
 
     return (
