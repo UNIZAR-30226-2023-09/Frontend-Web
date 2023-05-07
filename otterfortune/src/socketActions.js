@@ -372,8 +372,6 @@ export async function crearPartida(socket, email) {
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
-        estadoPartida.reiniciarVariablesNuevaPartida()
-
         let msg = response.toString().split(",")
         if (msg[0] === 'CREADAP_OK') {
             console.log("Sí crearPartida, id_partida: " + msg[1])
@@ -392,8 +390,6 @@ export async function unirsePartida(socket, email, id_partida) {
         socket.send(`unirsePartida,${email},${id_partida}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-
-        estadoPartida.reiniciarVariablesNuevaPartida()
 
         let msg = response.toString().split(",")
         if (msg[0] === 'UNIRP_OK') {
