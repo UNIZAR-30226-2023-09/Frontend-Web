@@ -13,7 +13,7 @@ const PopupGanador = (props) => {
     const [irMenu, setIrMenu] = useState(false);
 
     const socket = useSocket();
-   // socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
+    socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
 
     const handleAccept = () => {
         setIrMenu(true);    // mostrar el menu de vuelta
@@ -22,7 +22,7 @@ const PopupGanador = (props) => {
 
     return (
         <>
-            {irMenu ? <Menu email={sesion.email} gemas={sesion.gemas} /> 
+            {irMenu ? <Menu email={sesion.email} gemas={sesion.gemas + 5} /> 
             : ( 
                 <div className="popup">
                     <div className="popup__content">

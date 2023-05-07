@@ -18,6 +18,7 @@ const PopupMuerto = (props) => {
     const handleAccept = () => {
         setIrMenu(true);    // mostrar el menu de vuelta
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;
+        console.log("Las gemas son en muerto: " + sesion.gemas);
     };  
 
     // Funcion que dada una posicion devuelva el numero de gemas ganadas, 5-3-2-1
@@ -39,7 +40,7 @@ const PopupMuerto = (props) => {
 
     return (
         <>
-            {irMenu ? <Menu/> 
+            {irMenu ? <Menu gemas={sesion.gemas+gemasGanadas(estadoPartida.hasQuedadoPosicion)}/> 
             : ( 
                 <div className="popup">
                     <div className="popup__content">
