@@ -269,14 +269,14 @@ function cambiarEstado(data) {
             // Información de los jugadores
             for (let i = 0; i < 4; i++) {
                 let infoJugador = infoJugadores[i].split(",")
-                estadoPartida.Jugadores[i].email = infoJugador[0]
-                estadoPartida.Jugadores[i].muerto = !Boolean(parseInt(infoJugador[1]));
-                estadoPartida.Jugadores[i].posicion = parseInt(infoJugador[1])
-                estadoPartida.Jugadores[i].dinero = parseFloat(infoJugador[2])
-                estadoPartida.Jugadores[i].skin = infoJugador[4]
+                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].email = infoJugador[0]
+                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].muerto = !Boolean(parseInt(infoJugador[1]));
+                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].posicion = parseInt(infoJugador[1])
+                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].dinero = parseFloat(infoJugador[2])
+                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].skin = infoJugador[4]
 
                 if (infoJugador[0] == sesion.email) {
-                    estadoPartida.indiceYO = i
+                    estadoPartida.indiceYO = parseInt(infoJugador[5]) - 1
                     sesion.tableroEquipada = infoJugador[5]
                 }
 
