@@ -268,20 +268,34 @@ function cambiarEstado(data) {
 
             // Información de los jugadores
             for (let i = 0; i < 4; i++) {
+
+                //yo: email, posicion, dinero, dineroInvertido, skin, smintablero, turno, turnosCarcel
+                //otros: email, vivo o no, posicion, dinero, skin,turno, turnosCarcel
+
                 let infoJugador = infoJugadores[i].split(",")
-                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].email = infoJugador[0]
-                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].muerto = !Boolean(parseInt(infoJugador[1]));
-                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].posicion = parseInt(infoJugador[1])
-                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].dinero = parseFloat(infoJugador[2])
-                estadoPartida.Jugadores[parseInt(infoJugador[5]) - 1].skin = infoJugador[4]
 
                 if (infoJugador[0] == sesion.email) {
-                    estadoPartida.indiceYO = parseInt(infoJugador[5]) - 1
+                    estadoPartida.indiceYO = parseInt(infoJugador[6]) - 1
+                    estadoPartida.Jugadores[estadoPartida.indiceYO].email = infoJugador[0]
+                    estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(infoJugador[1])
+                    estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(infoJugador[2])
+                    estadoPartida.dineroEnBanco = parseFloat(infoJugador[3])
+                    estadoPartida.Jugadores[estadoPartida.indiceYO].skin = infoJugador[4]
                     sesion.tableroEquipada = infoJugador[5]
+                    if (parseInt(infoJugador[7]) > 0) {
+                        estadoPartida.Jugadores[estadoPartida.indiceYO].enCarcel = true
+                    }
                 }
-
-                if (parseInt(infoJugador[7]) > 0) {
-                    estadoPartida.Jugadores[i].enCarcel = true
+                else {
+                    let inidiceOtro = parseInt(infoJugador[5]) - 1
+                    estadoPartida.Jugadores[inidiceOtro].email = infoJugador[0]
+                    estadoPartida.Jugadores[inidiceOtro].muerto = !Boolean(parseInt(infoJugador[1]))
+                    estadoPartida.Jugadores[inidiceOtro].posicion = parseInt(infoJugador[2])
+                    estadoPartida.Jugadores[inidiceOtro].dinero = parseFloat(infoJugador[3])
+                    estadoPartida.Jugadores[inidiceOtro].skin = infoJugador[4]
+                    if (parseInt(infoJugador[6]) > 0) {
+                        estadoPartida.Jugadores[inidiceOtro].enCarcel = true
+                    }
                 }
             }
 
