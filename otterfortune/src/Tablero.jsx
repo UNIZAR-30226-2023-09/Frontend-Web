@@ -1395,12 +1395,12 @@ export const Tablero = (props) => {
                                     <input type="button" className="btn-jugadores" value="Lista de jugadores" onClick={() => setJugadoresVisible(!jugadoresVisible)} />
                                 </div>
 
-                                {jugadoresVisible &&
+                                {jugadoresVisible && 
                                     <div className="lista-jugadores">
 
                                         <ul style={{ display: 'flex', flexDirection: 'column' }}>
                                             {jugadores1.map((jugador) => (
-                                                jugador.muerto ? null :
+                                                (jugador.muerto || jugador.dinero <= 0) ? null :
                                                 <li key={jugador.nombre} style={{ display: 'flex', alignItems: 'center', marginRight: '80px', fontSize: '20px' }}>
                                                     <img src={jugador.ficha} alt={jugador.ficha} style={{ width: '80px', height: '80px', marginRight: '10px' }} />
                                                     <img src={jugador.imagen} alt={jugador.nombre} style={{ width: '80px', height: '80px', marginRight: '10px' }} />

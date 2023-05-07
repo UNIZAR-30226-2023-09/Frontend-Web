@@ -24,7 +24,6 @@ const PopupSuperpoder1 = (props) => {
     return (
         <div className="popup">
             <div className="popup__content">
-                <button className="popup__close" onClick={props.handleClose}>X</button>
                 <div>
                     <label htmlFor="text" className="popup__label">
                         Introduzca la posicion a la que quieres ir:</label>
@@ -36,9 +35,6 @@ const PopupSuperpoder1 = (props) => {
                     />
                 </div>
                 <div className="buttons-container">
-                    <div className="cancel">
-                        <button onClick={props.handleClose}>Cancelar</button>
-                    </div>
                     <div className="acept">
                         <button onClick={handleAccept}>Aceptar</button>
                     </div>
