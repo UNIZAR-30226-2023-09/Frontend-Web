@@ -26,7 +26,7 @@ const PopupSuperpoder1 = (props) => {
             <div className="popup__content">
                 <div>
                     <label htmlFor="text" className="popup__label">
-                        Introduzca la posicion a la que quieres ir:</label>
+                        Introduzca la posición a la que quieres ir:</label>
                     <input
                         type="number"
                         id="input-id" /* Para modificar solo este en el css*/

@@ -1010,11 +1010,11 @@ export const Tablero = (props) => {
     
         else if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedadPosicion) >= 5)  {
             //window.alert("No puedes edificar más casas en esta propiedad");
-            errorEdificar("edificarMal", "No puedes edificar más casas en esta propiedad");
+            errorEdificar("noPuedes", "No puedes edificar más casas en esta propiedad");
         }         
         else if (edificada === 0) {
             //window.alert("No tienes suficiente dinero para edificar la propiedad");
-            errorEdificar("dineroMal","No tienes suficiente dinero para edificar la propiedad");
+            errorEdificar("noDinero","No tienes suficiente dinero para edificar la propiedad");
         }
         setEdificarVisible(false);
     }

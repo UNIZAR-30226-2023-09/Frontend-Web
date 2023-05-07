@@ -15,11 +15,20 @@ const PopupMuerto = (props) => {
     const socket = useSocket();
     socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
 
-    const handleAccept = () => {
+    // Dormirme 1ms
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+
+
+    const handleAccept = async () => {
+        // Esperar 1 segundo antes de establecer el estado de irMenu en true
+        await sleep(300);
         setIrMenu(true);    // mostrar el menu de vuelta
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;
         console.log("Las gemas son en muerto: " + sesion.gemas);
-    };  
+      };  
+      
 
     // Funcion que dada una posicion devuelva el numero de gemas ganadas, 5-3-2-1
     const gemasGanadas = (posicion) => {
