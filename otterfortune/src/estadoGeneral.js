@@ -47,17 +47,12 @@ class EstadoPartida {
         this.economia = 1           // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.resultCasino = false   // bool
-        this.elegirCasilla = false  // bool
         this.superPoder = null      // string
         this.precioVenta = null     // float
-        this.desplazarEnAvion = false; // bool
-
         this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
-
         this.subastaJugador = null      // string
         this.subastaPropiedad = null    // int
         this.subastaPrecio = null       // float
-
         this.hasGanado = false          // bool
         this.hasQuedadoPosicion = null  // int
 
@@ -68,7 +63,8 @@ class EstadoPartida {
         this.miTurno = false        // bool
         this.pagoAlquiler = false;  // bool
         this.subastaIniciada = false // bool
-
+        this.desplazarEnAvion = false; // bool
+        this.elegirCasilla = false  // bool
 
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
@@ -93,6 +89,7 @@ class EstadoPartida {
         this.pagoAlquiler = false;  // bool
         this.subastaIniciada = false // bool
         this.desplazarEnAvion = false; // bool
+        this.elegirCasilla = false  // bool
     }
 
     // Reiniciar variables para empezar nueva partida
@@ -111,7 +108,6 @@ class EstadoPartida {
         this.economia = 1           // float
         this.chat = [];             // string ["pablo: hola", "alex: adios"]
         this.resultCasino = false   // bool
-        this.elegirCasilla = false  // bool
         this.superPoder = null      // string
         this.precioVenta = null     // float
         this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
@@ -127,6 +123,8 @@ class EstadoPartida {
         this.miTurno = false        // bool
         this.pagoAlquiler = false;  // bool
         this.subastaIniciada = false // bool
+        this.desplazarEnAvion = false; // bool
+        this.elegirCasilla = false  // bool
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
         this.indiceYO = 0           // int [0, 3]
