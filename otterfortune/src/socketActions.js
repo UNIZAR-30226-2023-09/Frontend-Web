@@ -4,7 +4,7 @@
 * Autor: David Rivera Seves (NIP: 815124)                                      *
 \******************************************************************************/
 
-import { sesion, estadoPartida } from './estadoGeneral.js';
+import { sesion, estadoPartida } from './estadoGeneral.js'
 
 
 let waitingForResponse = false
@@ -54,15 +54,15 @@ function cambiarEstado(data) {
 
         case 'ACTUALIZAR_USUARIO':
             //ACTUALIZAR_USUARIO,${ID_jugador},${dinero},${casilla},${propiedades}
-            const jugadorIndex = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
-            estadoPartida.Jugadores[jugadorIndex].dinero = parseFloat(msg[2]);
-            estadoPartida.Jugadores[jugadorIndex].posicion = parseInt(msg[3]);
+            const jugadorIndex = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1])
+            estadoPartida.Jugadores[jugadorIndex].dinero = parseFloat(msg[2])
+            estadoPartida.Jugadores[jugadorIndex].posicion = parseInt(msg[3])
             // Tomar los elementos desde el índice 4 (msg[4]) hasta el final
-            const newMsg = msg.slice(4);
+            const newMsg = msg.slice(4)
             // Reemplazar 'propiedad' con '' en cada elemento de newMsg
-            const replacedMsg = newMsg.map(element => element.replace(/propiedad/g, ''));
+            const replacedMsg = newMsg.map(element => element.replace(/propiedad/g, ''))
             // Si es null, se queda null, sino es "propiedad1, propiedad2, ..." -> [1,2,...]
-            estadoPartida.Jugadores[jugadorIndex].propiedades = replacedMsg;
+            estadoPartida.Jugadores[jugadorIndex].propiedades = replacedMsg
             console.log("Actualizar usuario: " + msg[1] + " dinero: " + estadoPartida.Jugadores[jugadorIndex].dinero + " posicion: " + estadoPartida.Jugadores[jugadorIndex].posicion + " propiedades: " + estadoPartida.Jugadores[jugadorIndex].propiedades)
             break
 
@@ -107,7 +107,7 @@ function cambiarEstado(data) {
 
         case 'DENTRO_CARCEL':
             //DENTRO_CARCEL,${ID_jugador}
-            const indiceCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            const indiceCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1])
             estadoPartida.Jugadores[indiceCarcel].enCarcel = true
             estadoPartida.Jugadores[indiceCarcel].posicion = 11
             console.log("El jugador: " + msg[1] + " ha entrado a la carcel!!")
@@ -147,14 +147,14 @@ function cambiarEstado(data) {
         case 'NUEVO_DINERO_ALQUILER':
             //NUEVO_DINERO_ALQUILER,${dineroJugadorPaga},${dineroJugadorRecibe}
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[1])
-            estadoPartida.pagoAlquiler = true;
+            estadoPartida.pagoAlquiler = true
             console.log("Nuevo dinero alquiler, dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero)
             break
 
         case 'NUEVO_DINERO_ALQUILER_RECIBES':
             //NUEVO_DINERO_ALQUILER_RECIBES,${dineroJugadorRecibe},${ID_jugador},${dineroJugadorPaga}
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[3])
-            const indiceJugadorPropiedad = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[2]);
+            const indiceJugadorPropiedad = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[2])
             estadoPartida.Jugadores[indiceJugadorPropiedad].dinero = parseFloat(msg[1])
             console.log("Nuevo dinero alquiler, recibes dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero + " desde: " + msg[2], + " [" + indiceJugadorPropiedad + "] " + " jugador paga: " + estadoPartida.Jugadores[indiceJugadorPropiedad].dinero)
             break
@@ -172,7 +172,7 @@ function cambiarEstado(data) {
 
         case 'JugadorMuerto':
             //JugadorMuerto,${ID_jugador}
-            const indiceMuerto = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            const indiceMuerto = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1])
             estadoPartida.Jugadores[indiceMuerto].muerto = true
             console.log("Jugador muerto: " + estadoPartida.Jugadores[indiceMuerto].email)
             break
@@ -209,7 +209,7 @@ function cambiarEstado(data) {
 
         case 'FUERA_CARCEL':
             //FUERA_CARCEL,${ID_jugador}
-            const indiceFueraCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1]);
+            const indiceFueraCarcel = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1])
             estadoPartida.Jugadores[indiceFueraCarcel].enCarcel = false
             console.log("El jugador: " + msg[1] + " ha salido de la carcel!!")
             break
@@ -228,20 +228,82 @@ function cambiarEstado(data) {
             // Actualizar el dinero del jugador
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
             // Eliminar la propiedad del array de propiedades
-            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[3]));
+            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[3]))
             if (index !== -1) {
-                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1);
+                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1)
             }
-            console.log("Tu subasta ha sido comprada");
+            console.log("Tu subasta ha sido comprada")
             break
 
         case 'ESTADO_PARTIDA':
-            console.log("¡MSG! " + msg)
+            //1,1,0,1,Ninguno,null,a|
+            //null,0;null,0;null,0;null,0;null,0;null,0;null,0;bot@bot2142.com,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0;null,0|
+            
+            //a,1,1000,0,PLEX,TABLERO1,2,0;
+            //bot@bot2142.com,1,8,900,TITE,1,0;
+            //bot@bot2443.com,1,1,1000,TITE,3,0;
+            //bot@bot6992.com,1,1,1000,TITE,4,0
+            estadoPartida.reiniciarVariablesNuevaPartida()
+            sesion.yaEstasEnPartida = true
+
+            msg = msg.slice(1)  // Quitar ESTADO_PARTIDA
+            let submsg = msg.toString().split("|")
+            //submsg[0] -> información sobre la partida
+            //submsg[1] -> información sobre el tablero
+            //submsg[2] -> información sobre los jugadores
+            let infoPartida = submsg[0].toString().split(",")
+            let infoTablero = submsg[1].toString().split(";")
+            let infoJugadores = submsg[2].toString().split(";")
+
+            // Información de la partida
+            estadoPartida.id_partida = parseInt(infoPartida[0])
+            estadoPartida.ronda = parseInt(infoPartida[1])
+            estadoPartida.dineroBote = parseFloat(infoPartida[2])
+            estadoPartida.economia =  parseFloat(infoPartida[3])
+            estadoPartida.evento = infoPartida[4]
+            //estadoPartida.perteneceTorneo = Boolean(parseInt(infoPartida[5])
+            if (infoPartida[6] == sesion.email) {
+                estadoPartida.miTurno = true
+            }
+
+            // Información de los jugadores
+            for (let i = 0; i < 4; i++) {
+                let infoJugador = infoJugadores[i].split(",")
+                estadoPartida.Jugadores[i].email = infoJugador[0]
+                estadoPartida.Jugadores[i].muerto = !Boolean(parseInt(infoJugador[1]));
+                estadoPartida.Jugadores[i].posicion = parseInt(infoJugador[1])
+                estadoPartida.Jugadores[i].dinero = parseFloat(infoJugador[2])
+                estadoPartida.Jugadores[i].skin = infoJugador[4]
+
+                if (infoJugador[0] == sesion.email) {
+                    estadoPartida.indiceYO = i
+                    sesion.tableroEquipada = infoJugador[5]
+                }
+
+                if (parseInt(infoJugador[7]) > 0) {
+                    estadoPartida.Jugadores[i].enCarcel = true
+                }
+            }
+
+            // Información del tablero
+            for (let i = 0; i < infoTablero.length; i++) {
+                let propiedadInfo = infoTablero[i].split(",")
+                let propietario = propiedadInfo[0]
+                let numCasas = parseInt(propiedadInfo[1])
+            
+                if (propietario != 'null') {
+                    const indicePropietario = estadoPartida.Jugadores.findIndex(jugador => jugador.email === propietario)
+                    estadoPartida.Jugadores[indicePropietario].propiedades.push(i + 1)
+                    estadoPartida.Jugadores[indicePropietario].numCasas.set((i + 1).toString(), numCasas);
+                }
+            }
+
+            console.log("Ya estas jugando una partida!!")
             break
 
         case 'DESPLAZAR_JUGADOR_AVION':
             //DESPLAZAR_JUGADOR_AVION,${posicionADesplazarse}
-            estadoPartida.desplazarEnAvion = true;
+            estadoPartida.desplazarEnAvion = true
             estadoPartida.Jugadores[estadoPartida.indiceYO].posicion = parseInt(msg[1])
             console.log("Desplazar jugador avion!")
             break
@@ -433,7 +495,7 @@ export async function apostar(socket, email, id_partida, cantidad, suerte) {
         socket.send(`APOSTAR,${email},${id_partida},${cantidad},${suerte}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
-        let dineroAntesApostar = estadoPartida.Jugadores[estadoPartida.indiceYO].dinero;
+        let dineroAntesApostar = estadoPartida.Jugadores[estadoPartida.indiceYO].dinero
 
         let msg = response.toString().split(",")
         if (msg[0] === 'APOSTAR_OK') {
@@ -441,10 +503,10 @@ export async function apostar(socket, email, id_partida, cantidad, suerte) {
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseInt(msg[2])
             // He perdido la apuesta
             if (dineroAntesApostar > estadoPartida.Jugadores[estadoPartida.indiceYO].dinero) {
-                estadoPartida.resultCasino = false;
+                estadoPartida.resultCasino = false
             }
             else {
-                estadoPartida.resultCasino = true;
+                estadoPartida.resultCasino = true
             }
             console.log("Sí apostar")
             return true
@@ -511,7 +573,7 @@ export async function comprarPropiedad(socket, email, propiedad, id_partida) {
             //msg[2]  propiedad
             //msg[3]  dineroJugador
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[3])
-            estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.push(parseInt(msg[2]));
+            estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.push(parseInt(msg[2]))
             console.log("Sí comprarPropiedad")
             return true
         } else {
@@ -541,11 +603,11 @@ export async function quieroVenderPropiedad(socket, email, id_partida, propiedad
         if (msg[0] === 'PRECIO_VENTA') {
             //msg[1]  precioPropiedad
             estadoPartida.precioVenta = parseFloat(msg[1])
-            console.log("Sí quieroVenderPropiedad, precio de la propiedad " + propiedad + ": " + estadoPartida.precioVenta);
-            return true;
+            console.log("Sí quieroVenderPropiedad, precio de la propiedad " + propiedad + ": " + estadoPartida.precioVenta)
+            return true
         } else {
-            console.log("No quieroVenderPropiedad");
-            return false;
+            console.log("No quieroVenderPropiedad")
+            return false
         }
     }
 }
@@ -563,19 +625,19 @@ export async function venderPropiedad(socket, email, propiedad, id_partida) {
             //msg[2]  dineroJugador
             
             // Actualizar el dinero del jugador
-            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2]);
+            estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
 
             // Eliminar la propiedad del array de propiedades
-            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[1]));
+            const index = estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.indexOf(parseInt(msg[1]))
             if (index !== -1) {
-                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1);
+                estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.splice(index, 1)
             }
 
-            console.log("Sí venderPropiedad");
-            return true;
+            console.log("Sí venderPropiedad")
+            return true
         } else {
-            console.log("No venderPropiedad");
-            return false;
+            console.log("No venderPropiedad")
+            return false
         }
     }
 }
@@ -595,24 +657,24 @@ export async function quieroEdificar(socket, email, id_partida) {
             //UPDATE Partida SET propiedad10 = 'aaa@aaa.com', propiedad8 = 'aaa@aaa.com', propiedad7 = 'aaa@aaa.com' WHERE idPartida = 2;
 
             // Tomar los elementos desde el índice 2 (msg[2]) hasta el final
-            const propiedadPrecio = msg.slice(2);
+            const propiedadPrecio = msg.slice(2)
 
             // Vaciar propiedades
             estadoPartida.propiedadesEdificar = []
 
             for (let i = 0; i < propiedadPrecio.length; i++) {
-                let submsg = propiedadPrecio[i].toString().split("-");
+                let submsg = propiedadPrecio[i].toString().split("-")
                 // submsg[0] nombre (propiedad1, propiedad2, ...)
                 // submsg[1] precio
 
                 // Reemplazar 'propiedad' con '' en cada elemento de newMsg
-                const replacedNombre = submsg[0].replace(/propiedad/g, ''); // Reemplazar 'map' con 'replace'
+                const replacedNombre = submsg[0].replace(/propiedad/g, '')  // Reemplazar 'map' con 'replace'
                 
                 let newPropiedad = {
                     nombre: replacedNombre,
                     precio: parseFloat(submsg[1])
-                };
-                estadoPartida.propiedadesEdificar.push(newPropiedad);
+                }
+                estadoPartida.propiedadesEdificar.push(newPropiedad)
             }
 
             console.log("Sí quieroEdificar")
@@ -638,9 +700,9 @@ export async function edificarPropiedad(socket, email, id_partida, propiedad, pr
 
             // Incremento una edificación
             if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) == null) {
-                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, 1);
+                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, 1)
             } else {
-                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) + 1);
+                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) + 1)
             }
 
             console.log("Sí edificarPropiedad")
@@ -657,7 +719,7 @@ export async function finTurno(socket, email, id_partida) {
     if (socket) {
         socket.send(`finTurno,${email},${id_partida}`)
 
-        estadoPartida.reiniciarVariablesTurno();
+        estadoPartida.reiniciarVariablesTurno()
         
         console.log("Turno finalizado")
         return true
@@ -808,20 +870,20 @@ export async function verSkins(socket, email) {
         if (msg[0] === 'LISTA_SKIN') {
             //msg[1], msg[2], ...    lista skins
             // Tomar los elementos desde el índice 1 (msg[1]) hasta el final
-            const skinsPrecio = msg.slice(1);
+            const skinsPrecio = msg.slice(1)
 
             // Vaciar skins
             sesion.todasSkins = []
 
             for (let i = 0; i < skinsPrecio.length; i++) {
-                let submsg = skinsPrecio[i].toString().split(":");
+                let submsg = skinsPrecio[i].toString().split(":")
                 // submsg[0] nombre
                 // submsg[1] precio
                 let newSkin = {
                     nombre: submsg[0],
                     precio: parseFloat(submsg[1])
-                };
-                sesion.todasSkins.push(newSkin);
+                }
+                sesion.todasSkins.push(newSkin)
             }
             console.log("Sí verSkins")
             return true
@@ -845,9 +907,9 @@ export async function equiparSkin(socket, email, skin) {
 
             // Si contiene 8 caracteres es un tablero
             if (skin.length === 8) {
-                sesion.tableroEquipada = msg[2];
+                sesion.tableroEquipada = msg[2]
             } else {
-                sesion.skinEquipada = msg[2];
+                sesion.skinEquipada = msg[2]
             }
 
             console.log("Sí equiparSkin")
@@ -880,6 +942,12 @@ export async function venderEdificacion(socket, email, id_partida, propiedad) {
         if (msg[0] === 'VENDER_EDIFICACION_OK') {
             //msg[2]    dineroJugador
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
+
+            // Decrementa una edificación
+            if (estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) != null && estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) !== 0) {
+                estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.set(propiedad, estadoPartida.Jugadores[estadoPartida.indiceYO].numCasas.get(propiedad) - 1)
+            }
+
             console.log("Sí venderEdificacion")
             return true
         } else {
@@ -888,6 +956,7 @@ export async function venderEdificacion(socket, email, id_partida, propiedad) {
         }
     }
 }
+
 
 
 export async function comprarSubasta(socket, email, id_partida, email_propietario) {
@@ -901,7 +970,7 @@ export async function comprarSubasta(socket, email, id_partida, email_propietari
             //msg[2]  dineroJugador
             //msg[3]  propiedad
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[2])
-            estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.push(parseInt(msg[3]));
+            estadoPartida.Jugadores[estadoPartida.indiceYO].propiedades.push(parseInt(msg[3]))
             console.log("Sí comprarSubasta")
             return true
         } else {
