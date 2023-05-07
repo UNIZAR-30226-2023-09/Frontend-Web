@@ -12,6 +12,7 @@ class Sesion {
         this.skinEquipada = null;    // string
         this.tableroEquipada = null  // string
         this.todasSkins = [];        // [nombre: string, precio: string], sesion.todasSkins[i].nombre, sesion.todasSkins[i].precio
+        this.yaEstasEnPartida = false   // bool
     }
 }
 
