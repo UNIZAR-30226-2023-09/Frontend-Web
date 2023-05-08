@@ -66,6 +66,7 @@ class EstadoPartida {
         this.subastaIniciada = false // bool
         this.desplazarEnAvion = false; // bool
         this.elegirCasilla = false  // bool
+        this.meHanPagado = false;   // bool
 
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
@@ -91,6 +92,7 @@ class EstadoPartida {
         this.subastaIniciada = false // bool
         this.desplazarEnAvion = false; // bool
         this.elegirCasilla = false  // bool
+        this.meHanPagado = false; // bool
     }
 
     // Reiniciar variables para empezar nueva partida

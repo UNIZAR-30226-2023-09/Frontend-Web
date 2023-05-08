@@ -516,8 +516,18 @@ export const Tablero = (props) => {
     
     useEffect(() => {
         const intervalId = setInterval(actualizarPosicion, 1000);
-
         return () => clearInterval(intervalId);
+    }, []);
+
+    // Funcion que comprueba si me han pagado algún alquiler
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (estadoPartida.meHanPagado) {
+                mostrarAlertaPagar("alquiler", "Te han pagado un alquiler.");
+                estadoPartida.meHanPagado = false;
+            }
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     const rollDice = async () => {
@@ -1046,7 +1056,7 @@ export const Tablero = (props) => {
         }
         else if (resultado === 0) {
             //window.alert("Se te han adelantado y te han ganado la subasta");
-            errorSubastarProp("dineroMal", "Se te han adelantado y te han ganado la subasta");
+            errorSubastarProp("noDinero", "Se te han adelantado y te han ganado la subasta");
         }
         estadoPartida.subastaIniciada = false;
         setHaySubastaDisponible(false);
@@ -1160,10 +1170,9 @@ export const Tablero = (props) => {
     const [showDice, setShowDice] = useState(false);
     // Para mostrar bien los dados cuando yo sea el primero en tirar
     useEffect(() => {
-      const timeoutId = setTimeout(() => {
-        setShowDice(true);
-        //comprobarMuerte();
-    }, 300);
+        const timeoutId = setTimeout(() => {
+            setShowDice(true);
+        }, 300);
   
         return () => {
             clearTimeout(timeoutId);
@@ -1453,9 +1462,13 @@ export const Tablero = (props) => {
                                                     <button className="vender" onClick={() => mostrarVender(propiedad)}>
                                                         Vender
                                                     </button>
+
+                                                {estadoPartida.miTurno && (
                                                     <button className="edificar" onClick={() => mostrarSubasta(propiedad)}>
                                                         Subastar
                                                     </button>
+                                                )}
+
                                                 <div/>
                                     
 

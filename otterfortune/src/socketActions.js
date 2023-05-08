@@ -154,6 +154,7 @@ function cambiarEstado(data) {
         case 'NUEVO_DINERO_ALQUILER_RECIBES':
             //NUEVO_DINERO_ALQUILER_RECIBES,${dineroJugadorRecibe},${ID_jugador},${dineroJugadorPaga}
             estadoPartida.Jugadores[estadoPartida.indiceYO].dinero = parseFloat(msg[3])
+            estadoPartida.meHanPagado = true;
             const indiceJugadorPropiedad = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[2])
             estadoPartida.Jugadores[indiceJugadorPropiedad].dinero = parseFloat(msg[1])
             console.log("Nuevo dinero alquiler, recibes dinero: " + estadoPartida.Jugadores[estadoPartida.indiceYO].dinero + " desde: " + msg[2], + " [" + indiceJugadorPropiedad + "] " + " jugador paga: " + estadoPartida.Jugadores[indiceJugadorPropiedad].dinero)
