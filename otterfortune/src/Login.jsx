@@ -12,6 +12,7 @@ import { sesion, estadoPartida } from './estadoGeneral.js';
 
 import { mostrarAlertaJuego } from './alertas.jsx';
 import { mostrarAlerta } from './alertas.jsx';
+import { mostrarAlertaLogin } from './alertas.jsx';
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -46,6 +47,7 @@ export const Login = (props) => {
             if (login === true) {
                 // Poner a true para mostrar el menu si se inicia correctamente
                 // TODO: Obtener nombre en vez de email
+                mostrarAlertaLogin("loginBien");
                 setNumGemas(sesion.gemas);
                 // Quedarme dormido 3ms
                 await new Promise(resolve => setTimeout(resolve, 2000));

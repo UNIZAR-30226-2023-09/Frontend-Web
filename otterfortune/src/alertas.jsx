@@ -573,6 +573,43 @@ export function mostrarAlertaRegister(mensaje) {
     }, 1000);
 }
 
+/* Para cuando inicias sesión correctamente */
+export function mostrarAlertaLogin(mensaje) {
+    const div = document.createElement('div');
+    div.className = 'alerta2';
+
+    // Añadimos imagen
+    const imagen = document.createElement('img');
+    imagen.className = 'imagen2';
+    imagen.src = banco;
+    div.appendChild(imagen);
+
+    // Añadimos mensaje
+    const mensajeDiv = document.createElement('div');
+    mensajeDiv.textContent = "Bienvenido de nuevo a OtterFortune!";
+    div.appendChild(mensajeDiv);
+
+    // Añadimos el contador
+    const contadorDiv = document.createElement('div');
+    contadorDiv.className = 'contadorDiv2';
+    let segundosRestantes = 2;
+    contadorDiv.textContent = ` ${segundosRestantes} `;
+    div.appendChild(contadorDiv);
+
+    document.body.appendChild(div);
+
+    const intervalo = setInterval(() => {
+        segundosRestantes--;
+        contadorDiv.textContent = `${segundosRestantes}`;
+        if (segundosRestantes === 0) {
+            clearInterval(intervalo);
+            div.classList.add('salir2'); 
+            setTimeout(() => {
+                div.remove();
+            }, 500); 
+        }
+    }, 1000);
+}
 
 
 /*  =====================================================================================
