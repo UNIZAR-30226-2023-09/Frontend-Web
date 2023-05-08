@@ -1,7 +1,8 @@
 .popup2 {
     position: fixed;
     top: 0;
-    width: 885px;
+    width: 41.5%;
+    right: 6px;
     height: 91vh;
     display: flex;
     flex-direction: column;
@@ -17,10 +18,7 @@
     flex-direction: column;
     text-align: center;
     border-radius: 20px;
-    margin-right: 200px;
     margin-top: 6px;
-    width: 75%;
-    margin-left: -20px;
     height: 95%;
 }
 
