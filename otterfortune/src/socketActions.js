@@ -237,8 +237,8 @@ function cambiarEstado(data, socket) {
             break
 
         case 'ESTADO_PARTIDA':
+            sesion.yaEstasEnPartida = true    
             estadoPartida.reiniciarVariablesNuevaPartida()
-            sesion.yaEstasEnPartida = true
 
             msg = msg.slice(1)  // Quitar ESTADO_PARTIDA
             let submsg = msg.toString().split("|")

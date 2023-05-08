@@ -48,7 +48,7 @@ export const Login = (props) => {
                 // TODO: Obtener nombre en vez de email
                 setNumGemas(sesion.gemas);
                 // Quedarme dormido 3ms
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 if (sesion.yaEstasEnPartida === true) {
                     sesion.yaEstasEnPartida = false;
                     setTablero(true);
