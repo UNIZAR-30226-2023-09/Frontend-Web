@@ -16,7 +16,7 @@ const waitForResponse = (socket) => {
                 waitingForResponse = false
                 resolve(event.data)
             } else {
-                cambiarEstado(event.data)
+                cambiarEstado(event.data, socket)
             }
         }
     })
@@ -30,7 +30,7 @@ export function printEstado() {
 }
 
 
-function cambiarEstado(data) {
+function cambiarEstado(data, socket) {
     
     let msg = data.toString().split(",")
     switch (msg[0]) {
@@ -305,6 +305,8 @@ function cambiarEstado(data) {
                     estadoPartida.Jugadores[indicePropietario].numCasas.set((i + 1).toString(), numCasas);
                 }
             }
+
+            quieroEdificar(socket, sesion.email, estadoPartida.id_partida)
 
             console.log("Ya estas jugando una partida!!")
             break
@@ -662,7 +664,7 @@ export async function quieroEdificar(socket, email, id_partida) {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
             //msg[2], msg[3], ...  propiedades (propiedad-precio)
 
-            //UPDATE Partida SET propiedad10 = 'aaa@aaa.com', propiedad8 = 'aaa@aaa.com', propiedad7 = 'aaa@aaa.com' WHERE idPartida = 2;
+            //UPDATE Partida SET propiedad7 = 'a', propiedad8 = 'a', propiedad10 = 'a' WHERE idPartida = 2;
 
             // Tomar los elementos desde el índice 2 (msg[2]) hasta el final
             const propiedadPrecio = msg.slice(2)
