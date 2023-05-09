@@ -13,7 +13,6 @@ const PopupMuerto = (props) => {
     const [irMenu, setIrMenu] = useState(false);
 
     const socket = useSocket();
-    socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
 
     // Dormirme 1ms
     const sleep = (milliseconds) => {
@@ -23,6 +22,7 @@ const PopupMuerto = (props) => {
 
     const handleAccept = async () => {
         // Esperar 1 segundo antes de establecer el estado de irMenu en true
+        await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         await sleep(300);
         setIrMenu(true);    // mostrar el menu de vuelta
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;
