@@ -1404,7 +1404,7 @@ export const Tablero = (props) => {
                                     <input type="button" className="btn-jugadores" value="Lista de jugadores" onClick={() => setJugadoresVisible(!jugadoresVisible)} />
                                 </div>
 
-                                {jugadoresVisible && 
+                                {!jugadoresVisible && 
                                     <div className="lista-jugadores">
 
                                         <ul style={{ display: 'flex', flexDirection: 'column' }}>
@@ -1435,7 +1435,7 @@ export const Tablero = (props) => {
                                     </div>
                                 </div>
 
-                                {propiedadesVisible &&
+                                {!propiedadesVisible &&
                                     <div className="lista-propiedades">
                                         <ul>
                                         {listaPropiedades.map((propiedad, index) => {
