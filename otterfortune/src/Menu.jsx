@@ -14,6 +14,7 @@ import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
 import { TiendaSkins } from "./TiendaSkins";
 import perfil from './Imagenes/perfil.png';
+import logout from './Imagenes/logout.png';
 import gema from './Imagenes/gema.png';
 
 import * as socketActions from './socketActions';
@@ -273,8 +274,9 @@ export const Menu = (props) => {
 
                 <div className="menu-container">
                     <header className="App-header">
-                        <button className="menu-sesion-button2"
-                            onClick={handleCerrarSesion}>Cerrar sesión</button>
+                        <button className="menu-sesion-button2" onClick={handleCerrarSesion}>
+                            <img src={logout} alt="Cerrar sesión" className="logo-logout" />
+                        </button>
                         <div className="titulo">
                             <p>Bienvenido a OtterFortune </p>
                         </div>
