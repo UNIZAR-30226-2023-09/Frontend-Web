@@ -23,6 +23,8 @@ const PopupMuerto = (props) => {
     const handleAccept = async () => {
         // Esperar 1 segundo antes de establecer el estado de irMenu en true
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
+        estadoPartida.miTurno = false;
+
         await sleep(300);
         setIrMenu(true);    // mostrar el menu de vuelta
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;

@@ -24,7 +24,7 @@ const PopupSuperpoder = (props) => {
             <div className="col-7">
             <div className="col-7">
                 <div className="popupProp">
-                    <h3 className="popup__titleP"> ¡¡¡JESÚS Y SU FIRUALIS TE LLEVAN AL SIGUIENTE AEROPUERTO!!! </h3>
+                    <h3 className="popup__titleP"> ¡¡¡JESÚS Y SU FIRULAIS TE LLEVAN AL SIGUIENTE AEROPUERTO!!! </h3>
                     <button className="popup__close5" onClick={props.handleClose}>X</button>
                     <img className="popup__imageProp" src={salto} />
                 </div>
