@@ -22,6 +22,7 @@ const waitForResponse = (socket) => {
     })
 }
 
+
 // Funcion para escribir en pantalla todas las variables
 export function printEstado() {
     
@@ -323,6 +324,26 @@ function cambiarEstado(data, socket) {
             estadoPartida.hasGanado = true
             sesion.gemas = parseInt(msg[1])
             console.log("Has ganado!!, gemas:" + sesion.gemas)
+            break
+
+        case 'ELIMINADO_TORNEO':
+            //ELIMINADO_TORNEO,${posicion}
+            console.log("¡¡MSG!!:" + msg)
+            break
+
+        case 'GANADOR_TORNEO':
+            //GANADOR_TORNEO
+            console.log("¡¡MSG!!:" + msg)
+            break
+
+        case 'CLASIFICACION_TORNEO':
+            //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
+            console.log("¡¡MSG!!:" + msg)
+            break
+
+        case 'TORNEO_FINALIZADO':
+            //TORNEO_FINALIZADO
+            console.log("¡¡MSG!!:" + msg)
             break
 
         default:
@@ -755,17 +776,18 @@ export async function desplazarJugador(socket, email, id_partida, posicion) {
     }
 }
 
-// Falta
-export async function crearTorneo(socket, email, nPartidas) {
+
+export async function crearTorneo(socket, email) {
     if (socket) {
-        socket.send(`crearTorneo,${email},${nPartidas}`)
+        socket.send(`crearTorneo,${email}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
         let msg = response.toString().split(",")
         if (msg[0] === 'CREADOT_OK') {
             //msg[1]    id_torneo
-            console.log("Sí crearTorneo")
+            estadoPartida.id_torneo = parseInt(msg[1])
+            console.log("Sí crearTorneo, id: " + estadoPartida.id_torneo)
             return true
         } else {
             console.log("No crearTorneo")
@@ -774,7 +796,7 @@ export async function crearTorneo(socket, email, nPartidas) {
     }
 }
 
-// Falta
+
 export async function unirseTorneo(socket, email, id_torneo) {
     if (socket) {
         socket.send(`unirseTorneo,${email},${id_torneo}`)
@@ -784,6 +806,7 @@ export async function unirseTorneo(socket, email, id_torneo) {
         let msg = response.toString().split(",")
         if (msg[0] === 'UNIRSET_OK') {
             //msg[1]    id_torneo
+            estadoPartida.id_torneo = parseInt(msg[1])
             console.log("Sí unirseTorneo")
             return true
         } else {
@@ -793,18 +816,67 @@ export async function unirseTorneo(socket, email, id_torneo) {
     }
 }
 
-// Falta
-export async function empezarTorneo(socket, id_partida, email_lider) {
+
+export async function empezarTorneo(socket, id_torneo, email_lider) {
     if (socket) {
-        socket.send(`empezarPartidaTorneo,${id_partida},${email_lider}`)
+        socket.send(`empezarPartidaTorneo,${id_torneo},${email_lider}`)
         waitingForResponse = true
         const response = await waitForResponse(socket)
 
+        estadoPartida.reiniciarVariablesNuevaPartida()
+
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
+            // Guarda los Jugadores
+            estadoPartida.indiceYO = parseInt(msg[2])
+            estadoPartida.Jugadores[0].email = msg[3]
+            estadoPartida.Jugadores[1].email = msg[4]
+            estadoPartida.Jugadores[2].email = msg[5]
+            estadoPartida.Jugadores[3].email = msg[6]
+            estadoPartida.Jugadores[0].skin = msg[7]
+            estadoPartida.Jugadores[1].skin = msg[8]
+            estadoPartida.Jugadores[2].skin = msg[9]
+            estadoPartida.Jugadores[3].skin = msg[10]
+            sesion.tableroEquipada = msg[11]
+
+            console.log("Sí empezarTorneo, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
         } else {
-            console.log("No empezarPartida")
+            console.log("No empezarTorneo")
+            return false
+        }
+    }
+}
+
+
+export async function esperarEmpezarTorneo(socket) {
+    if (socket) {
+        
+        console.log('Esperando ...')
+
+        waitingForResponse = true
+        const response = await waitForResponse(socket)
+
+        estadoPartida.reiniciarVariablesNuevaPartida()
+
+        let msg = response.toString().split(",")
+        if (msg[0] === 'EMPEZAR_OK') {
+            // Guarda los Jugadores
+            estadoPartida.indiceYO = parseInt(msg[2])
+            estadoPartida.Jugadores[0].email = msg[3]
+            estadoPartida.Jugadores[1].email = msg[4]
+            estadoPartida.Jugadores[2].email = msg[5]
+            estadoPartida.Jugadores[3].email = msg[6]
+            estadoPartida.Jugadores[0].skin = msg[7]
+            estadoPartida.Jugadores[1].skin = msg[8]
+            estadoPartida.Jugadores[2].skin = msg[9]
+            estadoPartida.Jugadores[3].skin = msg[10]
+            sesion.tableroEquipada = msg[11]
+
+            console.log("Sí empezarTorneo, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
+            return true
+        } else {
+            console.log("No empezarTorneo")
             return false
         }
     }
@@ -966,7 +1038,6 @@ export async function venderEdificacion(socket, email, id_partida, propiedad) {
         }
     }
 }
-
 
 
 export async function comprarSubasta(socket, email, id_partida, email_propietario) {

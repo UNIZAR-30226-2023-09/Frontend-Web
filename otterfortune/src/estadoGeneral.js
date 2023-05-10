@@ -35,6 +35,7 @@ class EstadoPartida {
 
     constructor() {
         // Información de la partida y de mi usuario
+        this.id_torneo = null       // int
         this.id_partida = null      // int
         this.ronda = 1              // int
         this.dado1 = null           // int
@@ -98,7 +99,8 @@ class EstadoPartida {
     // Reiniciar variables para empezar nueva partida
     reiniciarVariablesNuevaPartida() {
         // Información de la partida y de mi usuario
-        // this.id_partida = null      // int NOOOOOO BORRAR
+        //this.id_torneo = null     // int
+        // this.id_partida = null   // int NOOOOOO BORRAR
         this.ronda = 1              // int
         this.dado1 = null           // int
         this.dado2 = null           // int
@@ -128,6 +130,7 @@ class EstadoPartida {
         this.subastaIniciada = false // bool
         this.desplazarEnAvion = false; // bool
         this.elegirCasilla = false  // bool
+        this.meHanPagado = false;   // bool
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
         this.indiceYO = 0           // int [0, 3]
