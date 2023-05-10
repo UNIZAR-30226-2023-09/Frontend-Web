@@ -131,10 +131,3 @@ const Chat = (props) => {
 };
 
 export default Chat;
-
-/*
-                <div style={{ position: "absolute", right: "10px", bottom: "6px" }}>
-                <button type="submit" className="btn btn-primary btn-send">
-                  Enviar
-                </button>
-*/
