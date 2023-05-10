@@ -47,6 +47,30 @@ const Chat = (props) => {
         setNewMessage("");
     };
 
+    // Funcion que dado el de una skin devuelva la imagen importada
+    const skinToImage = (skin) => {
+        switch (skin) {
+            case "TITE":
+                return TITE;
+            case "PLEX":
+                return PLEX;
+            case "LUCAS":
+                return LUCAS;
+            case "JEANCARLO":
+                return JEANCARLO;
+            case "BAXTER":
+                return BAXTER;
+            case "BERTA":
+                return BERTA;
+            case "DIONIX":
+                return DIONIX;
+            case "JULS":
+                return JULS;
+            default:
+                return TITE;
+        }
+    }
+
     const handleClose = () => {
         props.handleClose();
     };
@@ -68,29 +92,6 @@ const Chat = (props) => {
                                 // Buscar en que posicion de estadoPartida.jugadores está el autor
                                 const posicion = estadoPartida.Jugadores.findIndex(jugador => jugador.email == author);
                                 console.log("posicion: " + posicion);
-                                // Funcion que dado el de una skin devuelva la imagen importada
-                                const skinToImage = (skin) => {
-                                    switch (skin) {
-                                        case "TITE":
-                                            return TITE;
-                                        case "PLEX":
-                                            return PLEX;
-                                        case "LUCAS":
-                                            return LUCAS;
-                                        case "JEAN-CARLO":
-                                            return JEANCARLO;
-                                        case "BAXTER":
-                                            return BAXTER;
-                                        case "BERTA":
-                                            return BERTA;
-                                        case "DIONIX":
-                                            return DIONIX;
-                                        case "JULS":
-                                            return JULS;
-                                        default:
-                                            return TITE;
-                                    }
-                                }
 
                                 return (
                                     <div key={index} className="message">
