@@ -31,13 +31,13 @@ const Chat = (props) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-          // Cargar la variable chat aquí
-          // Actualizar el estado de messages con los nuevos mensajes recibidos
-          setChatNuestro(estadoPartida.chat);
-        }, 100);
-      
+            setChatNuestro(estadoPartida.chat);
+            setMessages(prevMessages => [...prevMessages, ...estadoPartida.chat]);
+        }, 1000);
+    
         return () => clearInterval(interval);
-      }, []);
+    }, [estadoPartida.chat]);
+      
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -88,10 +88,8 @@ const Chat = (props) => {
                             {chatNuestro.map((message, index) => {
                                 const [author, text] = String(message).split(':');
                                 const isMyMessage = author === miEmail;
-                                console.log("autor: " + author);
                                 // Buscar en que posicion de estadoPartida.jugadores está el autor
                                 const posicion = estadoPartida.Jugadores.findIndex(jugador => jugador.email == author);
-                                console.log("posicion: " + posicion);
 
                                 return (
                                     <div key={index} className="message">
