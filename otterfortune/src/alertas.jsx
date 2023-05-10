@@ -872,6 +872,19 @@ export function mostrarAlertaRULETA(causa, mensaje) {
 
     }
 
+    else if (causa === "retiro") {
+        // Añadimos imagen
+        const imagen = document.createElement('img');
+        imagen.className = 'imagen2';
+        imagen.src = sadOtter;
+        div.appendChild(imagen);
+
+        // Añadimos mensaje
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.textContent = "Que sea la última vez que no apuestas...";
+        div.appendChild(mensajeDiv);
+    }
+
     // Añadimos el contador
     const contadorDiv = document.createElement('div');
     contadorDiv.className = 'contadorDiv2';

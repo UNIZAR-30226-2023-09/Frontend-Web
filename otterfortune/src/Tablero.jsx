@@ -918,6 +918,9 @@ export const Tablero = (props) => {
             //window.alert("Has perdido tu apuesta");
             mostrarAlertaRULETA("perder", "Has duplicado tu apuesta");
         }
+        else {
+            mostrarAlertaRULETA("retiro", "Has duplicado tu apuesta");
+        }
         setOpenCasino(false);
     }
 
