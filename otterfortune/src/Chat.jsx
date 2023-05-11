@@ -41,10 +41,16 @@ const Chat = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes colocar el código para enviar el nuevo mensaje al chat
-        setMessages([...messages, { text: newMessage, timestamp: new Date() },]);
-        await socketActions.chat(socket, sesion.email, estadoPartida.id_partida, newMessage);
-        setNewMessage("");
+        // Validar que el mensaje no tenga comas ni dos puntos
+        const regex = /[,|:]/;
+        // Comprobar si el mensaje contiene alguna coma o dos puntos
+        if (!regex.test(newMessage)) {
+            // Aquí puedes colocar el código para enviar el nuevo mensaje al chat
+            setMessages([...messages, { text: newMessage, timestamp: new Date() },]);
+            await socketActions.chat(socket, sesion.email, estadoPartida.id_partida, newMessage);
+            setNewMessage("");
+        }
+
     };
 
     // Funcion que dado el de una skin devuelva la imagen importada
