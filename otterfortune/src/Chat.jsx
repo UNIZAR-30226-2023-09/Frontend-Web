@@ -18,6 +18,8 @@ import BAXTER from './Imagenes/BAXTER.png';
 import BERTA from './Imagenes/BERTA.png';
 import DIONIX from './Imagenes/DIONIX.png';
 import JULS from './Imagenes/JULS.png';
+import VECTOR from './Imagenes/SKINS/VECTOR.png';
+
 
 const Chat = (props) => {
     const socket = useSocket();
@@ -72,6 +74,8 @@ const Chat = (props) => {
                 return DIONIX;
             case "JULS":
                 return JULS;
+            case "VECTOR":
+                return VECTOR;
             default:
                 return TITE;
         }

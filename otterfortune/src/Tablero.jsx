@@ -35,6 +35,7 @@ import BAXTER from './Imagenes/BAXTER.png';
 import BERTA from './Imagenes/BERTA.png';
 import DIONIX from './Imagenes/DIONIX.png';
 import JULS from './Imagenes/JULS.png';
+import VECTOR from './Imagenes/SKINS/VECTOR.png';
 // Importar los tableros
 import TABLERO1 from './Imagenes/TABLEROS/WEB1.png';
 import TABLERO2 from './Imagenes/TABLEROS/WEB2.png';
@@ -58,6 +59,7 @@ import fichaBAXTER1 from './Imagenes/FICHAS/AZUL1.png';
 import fichaBERTA1 from './Imagenes/FICHAS/NARANJA1.png';
 import fichaDIONIX1 from './Imagenes/FICHAS/VERDE1.png';
 import fichaJULS1 from './Imagenes/FICHAS/MORADO1.png';
+import fichaVECTOR1 from './Imagenes/FICHAS/FOSFO1.png';
 
 import fichaJEANCARLO2 from './Imagenes/FICHAS/AMARILLO2.png';
 import fichaLUCAS2 from './Imagenes/FICHAS/ROJO2.png';
@@ -67,6 +69,7 @@ import fichaBAXTER2 from './Imagenes/FICHAS/AZUL2.png';
 import fichaBERTA2 from './Imagenes/FICHAS/NARANJA2.png';
 import fichaDIONIX2 from './Imagenes/FICHAS/VERDE2.png';
 import fichaJULS2 from './Imagenes/FICHAS/MORADO2.png';
+import fichaVECTOR2 from './Imagenes/FICHAS/FOSFO2.png';
 
 import fichaJEANCARLO3 from './Imagenes/FICHAS/AMARILLO3.png';
 import fichaLUCAS3 from './Imagenes/FICHAS/ROJO3.png';
@@ -76,6 +79,7 @@ import fichaBAXTER3 from './Imagenes/FICHAS/AZUL3.png';
 import fichaBERTA3 from './Imagenes/FICHAS/NARANJA3.png';
 import fichaDIONIX3 from './Imagenes/FICHAS/VERDE3.png';
 import fichaJULS3 from './Imagenes/FICHAS/MORADO3.png';
+import fichaVECTOR3 from './Imagenes/FICHAS/FOSFO3.png';
 
 import fichaJEANCARLO4 from './Imagenes/FICHAS/AMARILLO4.png';
 import fichaLUCAS4 from './Imagenes/FICHAS/ROJO4.png';
@@ -85,6 +89,7 @@ import fichaBAXTER4 from './Imagenes/FICHAS/AZUL4.png';
 import fichaBERTA4 from './Imagenes/FICHAS/NARANJA4.png';
 import fichaDIONIX4 from './Imagenes/FICHAS/VERDE4.png';
 import fichaJULS4 from './Imagenes/FICHAS/MORADO4.png';
+import fichaVECTOR4 from './Imagenes/FICHAS/FOSFO4.png';
 
 
 import * as socketActions from './socketActions';
@@ -778,6 +783,17 @@ export const Tablero = (props) => {
                     case 4:
                         return fichaJULS4;
                 }
+            case "VECTOR":
+                switch (numero) {
+                    case 1:
+                        return fichaVECTOR1;
+                    case 2:
+                        return fichaVECTOR2;
+                    case 3:
+                        return fichaVECTOR3;
+                    case 4:
+                        return fichaVECTOR4;
+                }
             }
     }
 
@@ -800,6 +816,8 @@ export const Tablero = (props) => {
                 return DIONIX;
             case "JULS":
                 return JULS;
+            case "VECTOR":
+                return VECTOR;
             case "TABLERO1":
                 return TABLERO1;
             case "TABLERO2":

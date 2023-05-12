@@ -15,6 +15,7 @@ import JULS from './Imagenes/JULS.png';
 import LUCAS from './Imagenes/LUCAS.png';
 import PLEX from './Imagenes/PLEX.png';
 import TITE from './Imagenes/TITE.png';
+import VECTOR from './Imagenes/SKINS/VECTOR.png';
 
 // Importar los tableros
 import TABLERO1 from './Imagenes/TABLEROS/WEB1.png';
@@ -66,6 +67,8 @@ export const TiendaSkins = (props) => {
                 return TABLERO3;
             case "TABLERO4":
                 return TABLERO4;
+            case "VECTOR":
+                return VECTOR;
             default:
                 return BAXTER;
         }
@@ -185,8 +188,6 @@ export const TiendaSkins = (props) => {
             <div className="skin">
                 <img src={skin.imagen} alt={skin.nombre} className="spin img-fluid"/>
                     <h2>{skin.nombre}</h2>
-
-                        
                             {skin.pertenece ? (
                                 <div className="skin-price">
                                     <h3> 
