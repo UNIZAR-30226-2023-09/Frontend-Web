@@ -28,7 +28,7 @@ const PopupMuerto = (props) => {
         // Esperar 1 segundo antes de establecer el estado de irMenu en true
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         // estadoPartida.miTurno = false;
-
+        props.actualizarDados();
         await sleep(300);
 
         if (estadoPartida.menuEsperaTorneo) {

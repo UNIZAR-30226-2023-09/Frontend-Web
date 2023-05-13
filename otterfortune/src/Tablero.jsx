@@ -132,6 +132,11 @@ export const Tablero = (props) => {
     const [openIrCarcel, setOpenIrCarcel] = useState(false);
     // Para controlar que solo se tiren una vez los dados
     const [tirarDados, setTirarDados] = useState(true);
+    const actualizarDados = () => {
+        setTirarDados(true);
+    }
+
+    console.log("tirarDados: ", tirarDados);
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -1215,9 +1220,9 @@ export const Tablero = (props) => {
     return (
         <>
             {estadoPartida.Jugadores[indiceYO].muerto ? (
-                <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2}/>
+                <PopupMuerto email={sesion.email} gemas={sesion.gemas} gemasGanadas={2} actualizarDados={actualizarDados}/>
             ) 
-            : ganador ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5}/>    
+            : ganador ? <PopupGanador email={sesion.email} gemas={sesion.gemas} gemasGanadas={5} actualizarDados={actualizarDados}/>    
             : (
 
                 

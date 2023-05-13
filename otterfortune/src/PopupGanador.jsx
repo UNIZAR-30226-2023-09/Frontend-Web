@@ -28,6 +28,7 @@ const PopupGanador = (props) => {
         // estadoPartida.miTurno = false;
 
         //await sleep(300);
+        props.actualizarDados();
 
         if (estadoPartida.menuEsperaTorneo) {
             setIrClasificacion(true);
