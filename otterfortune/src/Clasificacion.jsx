@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './CSS/Clasificacion.css';
 
 import * as socketActions from './socketActions';
@@ -71,13 +71,27 @@ const Clasificacion = (props) => {
                 return BAXTER;
         }
     }    
+    const [clasificacionGeneral, setClasificacionGeneral] = useState([]);
 
-    const clasificacionGeneral = [
-        { posicion: estadoPartida.clasificacionTorneo[0].posicion, nombre: estadoPartida.clasificacionTorneo[0].email, puntos: 20, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[0].email) },
-        { posicion: estadoPartida.clasificacionTorneo[1].posicion, nombre: estadoPartida.clasificacionTorneo[1].email, puntos: 15, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[1].email) },
-        { posicion: estadoPartida.clasificacionTorneo[2].posicion, nombre: estadoPartida.clasificacionTorneo[2].email, puntos: 12, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[2].email) },
-        { posicion: estadoPartida.clasificacionTorneo[3].posicion, nombre: estadoPartida.clasificacionTorneo[3].email, puntos: 10, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[3].email) },
-    ];
+    const actualizarClasificacion = () => {
+        const nuevaClasificacion = [
+            { posicion: estadoPartida.clasificacionTorneo[0].posicion, nombre: estadoPartida.clasificacionTorneo[0].email, puntos: 20, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[0].email) },
+            { posicion: estadoPartida.clasificacionTorneo[1].posicion, nombre: estadoPartida.clasificacionTorneo[1].email, puntos: 15, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[1].email) },
+            { posicion: estadoPartida.clasificacionTorneo[2].posicion, nombre: estadoPartida.clasificacionTorneo[2].email, puntos: 12, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[2].email) },
+            { posicion: estadoPartida.clasificacionTorneo[3].posicion, nombre: estadoPartida.clasificacionTorneo[3].email, puntos: 10, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[3].email) },        
+        ];
+        setClasificacionGeneral(nuevaClasificacion);
+    };
+
+    useEffect(() => {
+        actualizarClasificacion();
+        const intervalId = setInterval(() => {
+            actualizarClasificacion();
+        }, 1000);
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [estadoPartida]);
 
 	const handleClose = () => {
 		props.handleClose();
