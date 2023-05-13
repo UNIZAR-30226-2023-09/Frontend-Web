@@ -917,6 +917,12 @@ export async function esperarEmpezarTorneo(socket) {
 
             console.log("Sí empezarTorneo, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
+        } else if (msg[0] === 'CLASIFICACION_TORNEO') {
+            //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
+            estadoPartida.clasificacionTorneo.set(msg[1], parseInt(msg[2]))
+            estadoPartida.jugadoresFinalizados = estadoPartida.jugadoresFinalizados + 1
+            console.log("En el torneo, el jugador: " + msg[1] + " va en la posicion: " + msg[2])
+            return esperarEmpezarTorneo(socket)
         } else {
             console.log("No empezarTorneo")
             return false
