@@ -58,25 +58,31 @@ function cambiarEstado(data, socket) {
             const jugadorIndex = estadoPartida.Jugadores.findIndex(jugador => jugador.email === msg[1])
             estadoPartida.Jugadores[jugadorIndex].dinero = parseFloat(msg[2])
             estadoPartida.Jugadores[jugadorIndex].posicion = parseInt(msg[3])
+            
             // Tomar los elementos desde el índice 4 (msg[4]) hasta el final
             const newMsg = msg.slice(4)
+            
             // Reemplazar 'propiedad' con '' en cada elemento de newMsg
             const replacedMsg = newMsg.map(element => element.replace(/propiedad/g, ''))
+            
             // Separa el identificador de la propiedad y la cantidad de casas
             const propiedadesConCasas = replacedMsg.map(element => {
                 const [propiedad, numCasas] = element.split(':')
                 return { propiedad, numCasas: parseInt(numCasas) }
             })
-            // Limpiar el array propiedades
+            
+            // Limpiar el array propiedades y el mapa numCasas
             estadoPartida.Jugadores[jugadorIndex].propiedades = [];
-            // Limpiar el mapa numCasas
             estadoPartida.Jugadores[jugadorIndex].numCasas.clear();
+            
             // Si es null, se queda null, sino es "propiedad1, propiedad2, ..." -> [1,2,...]
             estadoPartida.Jugadores[jugadorIndex].propiedades = propiedadesConCasas.map(({ propiedad }) => propiedad);
+            
             // Guarda la cantidad de casas en cada propiedad
             propiedadesConCasas.forEach(({ propiedad, numCasas }) => {
                 estadoPartida.Jugadores[jugadorIndex].numCasas.set(propiedad.toString(), numCasas);
             });
+            
             console.log("Actualizar usuario: " + msg[1] + " dinero: " + estadoPartida.Jugadores[jugadorIndex].dinero + " posicion: " + estadoPartida.Jugadores[jugadorIndex].posicion + " propiedades y numCasas: " + newMsg)
             break
 
@@ -341,27 +347,32 @@ function cambiarEstado(data, socket) {
 
         case 'ELIMINADO_TORNEO':
             //ELIMINADO_TORNEO,${posicion}
-            // Has quedado ${posicion} en esta partida
-            console.log("¡¡MSG!!:" + msg)
+            estadoPartida.eliminadoTorneo = true
+            estadoPartida.hasQuedadoPosicionTorneo = parseInt(msg[1])
+            console.log("En el torneo has quedado en la posicion: " + estadoPartida.hasQuedadoPosicionTorneo)
             break
 
         case 'GANADOR_TORNEO':
             //GANADOR_TORNEO
-            console.log("¡¡MSG!!:" + msg)
+            estadoPartida.hasGanadoTorneo = true
+            console.log("Has ganado el torneo!!")
             break
 
         case 'CLASIFICACION_TORNEO':
             //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
-            // Jugador email1 - posicion
-            // Jugador email2 - posicion
-            // Jugador email3 - posicion
-            // Jugador email4 - posicion
-            console.log("¡¡MSG!!:" + msg)
+            // Objeto con las propiedades email y posicion
+            const jugadorClasificacion = {
+                email: msg[1],
+                posicion: parseInt(msg[2]),
+            }
+            estadoPartida.clasificacionTorneo.push(jugadorClasificacion)
+            console.log("En el torneo, el jugador: " + jugadorClasificacion.email + " va en la posicion: " + jugadorClasificacion.posicion)
             break
 
         case 'TORNEO_FINALIZADO':
             //TORNEO_FINALIZADO
-            console.log("¡¡MSG!!:" + msg)
+            estadoPartida.torneoFinalizado = true
+            console.log("El torneo ha finalizado!!")
             break
 
         default:
@@ -462,6 +473,7 @@ export async function empezarPartida(socket, id_partida, email_lider) {
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
+            estadoPartida.id_partida = parseInt(msg[1])   // Guarda id_partida
             estadoPartida.indiceYO = parseInt(msg[2])
             estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]
@@ -496,6 +508,7 @@ export async function esperarEmpezarPartida(socket) {
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
+            estadoPartida.id_partida = parseInt(msg[1])   // Guarda id_partida
             estadoPartida.indiceYO = parseInt(msg[2])
             estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]

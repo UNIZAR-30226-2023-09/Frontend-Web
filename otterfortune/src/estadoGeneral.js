@@ -34,23 +34,31 @@ class Jugador {
 class EstadoPartida {
 
     constructor() {
+
+        // Variables de torneo
+        this.id_torneo = null           // int
+        this.eliminadoTorneo = false    // bool
+        this.hasQuedadoPosicionTorneo = null  // int
+        this.hasGanadoTorneo = false    // bool
+        this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
+        this.torneoFinalizado = false   // int
+
         // Información de la partida y de mi usuario
-        this.id_torneo = null       // int
-        this.id_partida = null      // int
-        this.ronda = 1              // int
-        this.dado1 = null           // int
-        this.dado2 = null           // int
-        this.dineroEnBanco = 0      // float
-        this.dineroBote = 0         // float
-        this.tengoSuerte = null     // string '0' o '1'
+        this.id_partida = null          // int
+        this.ronda = 1                  // int
+        this.dado1 = null               // int
+        this.dado2 = null               // int
+        this.dineroEnBanco = 0          // float
+        this.dineroBote = 0             // float
+        this.tengoSuerte = null         // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = "Ninguno"     // string
-        this.economia = 1           // float
-        this.chat = [];             // string ["pablo: hola", "alex: adios"]
-        this.resultCasino = false   // bool
-        this.superPoder = null      // string
-        this.precioVenta = null     // float
+        this.evento = "Ninguno"         // string
+        this.economia = 1               // float
+        this.chat = [];                 // string ["pablo: hola", "alex: adios"]
+        this.resultCasino = false       // bool
+        this.superPoder = null          // string
+        this.precioVenta = null         // float
         this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
         this.subastaJugador = null      // string
         this.subastaPropiedad = null    // int
@@ -60,25 +68,25 @@ class EstadoPartida {
 
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
-        this.enBanco = false        // bool
-        this.enCasino = false       // bool
-        this.miTurno = false        // bool
-        this.pagoAlquiler = false;  // bool
-        this.subastaIniciada = false // bool
-        this.desplazarEnAvion = false; // bool
-        this.elegirCasilla = false  // bool
-        this.meHanPagado = false;   // bool
+        this.enBanco = false            // bool
+        this.enCasino = false           // bool
+        this.miTurno = false            // bool
+        this.pagoAlquiler = false;      // bool
+        this.subastaIniciada = false    // bool
+        this.desplazarEnAvion = false;  // bool
+        this.elegirCasilla = false      // bool
+        this.meHanPagado = false;       // bool
 
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
-        this.indiceYO = 0           // int [0, 3]
+        this.indiceYO = 0               // int [0, 3]
 
         // Vector de Jugadores
         this.Jugadores = [
-            new Jugador(),          // Jugador0  [0]
-            new Jugador(),          // Jugador1  [1]
-            new Jugador(),          // Jugador2  [2]
-            new Jugador()           // Jugador3  [3]
+            new Jugador(),              // Jugador0  [0]
+            new Jugador(),              // Jugador1  [1]
+            new Jugador(),              // Jugador2  [2]
+            new Jugador()               // Jugador3  [3]
         ]
     }
 
@@ -86,35 +94,41 @@ class EstadoPartida {
     reiniciarVariablesTurno() {
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
-        this.enBanco = false        // bool
-        this.enCasino = false       // bool
-        this.miTurno = false        // bool
-        this.pagoAlquiler = false;  // bool
-        this.subastaIniciada = false // bool
-        this.desplazarEnAvion = false; // bool
-        this.elegirCasilla = false  // bool
-        this.meHanPagado = false; // bool
+        this.enBanco = false            // bool
+        this.enCasino = false           // bool
+        this.miTurno = false            // bool
+        this.pagoAlquiler = false;      // bool
+        this.subastaIniciada = false    // bool
+        this.desplazarEnAvion = false;  // bool
+        this.elegirCasilla = false      // bool
+        this.meHanPagado = false;       // bool
     }
 
     // Reiniciar variables para empezar nueva partida
     reiniciarVariablesNuevaPartida() {
+        // Variables de torneo
+        this.id_torneo = null           // int
+        this.eliminadoTorneo = false    // bool
+        this.hasQuedadoPosicionTorneo = null  // int
+        this.hasGanadoTorneo = false    // bool
+        this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
+        this.torneoFinalizado = false   // int
         // Información de la partida y de mi usuario
-        //this.id_torneo = null     // int
-        // this.id_partida = null   // int NOOOOOO BORRAR
-        this.ronda = 1              // int
-        this.dado1 = null           // int
-        this.dado2 = null           // int
-        this.dineroEnBanco = 0      // float
-        this.dineroBote = 0         // float
-        this.tengoSuerte = null     // string '0' o '1'
+        this.id_partida = null          // int
+        this.ronda = 1                  // int
+        this.dado1 = null               // int
+        this.dado2 = null               // int
+        this.dineroEnBanco = 0          // float
+        this.dineroBote = 0             // float
+        this.tengoSuerte = null         // string '0' o '1'
         this.comprarPropiedad = null        // int
         this.comprarPropiedadPrecio = null  // float
-        this.evento = "Ninguno"     // string
-        this.economia = 1           // float
-        this.chat = [];             // string ["pablo: hola", "alex: adios"]
-        this.resultCasino = false   // bool
-        this.superPoder = null      // string
-        this.precioVenta = null     // float
+        this.evento = "Ninguno"         // string
+        this.economia = 1               // float
+        this.chat = [];                 // string ["pablo: hola", "alex: adios"]
+        this.resultCasino = false       // bool
+        this.superPoder = null          // string
+        this.precioVenta = null         // float
         this.propiedadesEdificar = []   // [nombre: string, precio: string], estadoPartida.propiedadesEdificar[i].nombre, estadoPartida.propiedadesEdificar[i].precio
         this.subastaJugador = null      // string
         this.subastaPropiedad = null    // int
@@ -123,23 +137,23 @@ class EstadoPartida {
         this.hasQuedadoPosicion = null  // int
         // Variables de turno
         this.puedesComprarPropiedad = false // bool
-        this.enBanco = false        // bool
-        this.enCasino = false       // bool
-        this.miTurno = false        // bool
-        this.pagoAlquiler = false;  // bool
-        this.subastaIniciada = false // bool
-        this.desplazarEnAvion = false; // bool
-        this.elegirCasilla = false  // bool
-        this.meHanPagado = false;   // bool
+        this.enBanco = false            // bool
+        this.enCasino = false           // bool
+        this.miTurno = false            // bool
+        this.pagoAlquiler = false;      // bool
+        this.subastaIniciada = false    // bool
+        this.desplazarEnAvion = false;  // bool
+        this.elegirCasilla = false      // bool
+        this.meHanPagado = false;       // bool
         // Jugadores[indiceYO] es mi usuario
         // Se actualiza al indice real cuando inicia partida
-        this.indiceYO = 0           // int [0, 3]
+        this.indiceYO = 0               // int [0, 3]
         // Vector de Jugadores
         this.Jugadores = [
-            new Jugador(),          // Jugador0  [0]
-            new Jugador(),          // Jugador1  [1]
-            new Jugador(),          // Jugador2  [2]
-            new Jugador()           // Jugador3  [3]
+            new Jugador(),              // Jugador0  [0]
+            new Jugador(),              // Jugador1  [1]
+            new Jugador(),              // Jugador2  [2]
+            new Jugador()               // Jugador3  [3]
         ]
     }
 }
