@@ -136,7 +136,6 @@ export const Tablero = (props) => {
         setTirarDados(true);
     }
 
-    console.log("tirarDados: ", tirarDados);
 
     // Para los dados
     const [diceFace, setDiceFace] = useState(dice1);
@@ -1112,6 +1111,7 @@ export const Tablero = (props) => {
         }
     }, [estadoPartida.subastaIniciada]);  
 
+
     
 
     // Gestiona la ventana emergente (lo que lo lanza)
@@ -1191,7 +1191,7 @@ export const Tablero = (props) => {
     }
 
 
-      
+
     const [showDice, setShowDice] = useState(false);
     // Para mostrar bien los dados cuando yo sea el primero en tirar
     useEffect(() => {
@@ -1214,6 +1214,7 @@ export const Tablero = (props) => {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
+
 
 
     // TODO: Mirar cuantas gemas has ganado en la partida y pasarlas al popupMuerto
@@ -1252,33 +1253,20 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[0].ficha} style={{width:  casillas1.get(`Casilla${posicion1}`).width, height: casillas1.get(`Casilla${posicion1}`).height}} />
                             </div>
                         }
-                        {listaPropiedades.map((propiedad, index) => {
-                            let posicion = posicionTablero(propiedad);
-                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
-                            let propiedadAE;
-
-                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
-                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
-                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
-                                    break;
-                                }
-                            }
-                        
-
+                        {Array.from(estadoPartida.Jugadores[0].numCasas.keys()).map((posicion) => {
                             const numCasas = estadoPartida.Jugadores[0].numCasas.get(posicion);
 
                             return (
                                 <>
-                                {propiedadAE && numCasas > 0 && (
+                                {numCasas > 0 && (
                                     <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
-                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[0].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    <img src={obtenerImagenCasas(estadoPartida.Jugadores[0].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
                                     </div>    
                                 )}
                                 </>
-                                
                             );
-
-                        })}
+                            }
+                        )}
 
                         {!jugadores1[1].muerto && jugadores1[1].dinero > 0 &&
                             <div style={{ 
@@ -1289,33 +1277,20 @@ export const Tablero = (props) => {
                             </div>
                         }
 
-                        {listaPropiedades.map((propiedad, index) => {
-                            let posicion = posicionTablero(propiedad);
-                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
-                            let propiedadAE;
-
-                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
-                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
-                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
-                                    break;
-                                }
-                            }
-                        
-
+                        {Array.from(estadoPartida.Jugadores[1].numCasas.keys()).map((posicion) => {
                             const numCasas = estadoPartida.Jugadores[1].numCasas.get(posicion);
 
                             return (
                                 <>
-                                {propiedadAE && numCasas > 0 && (
+                                {numCasas > 0 && (
                                     <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
-                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[1].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    <img src={obtenerImagenCasas(estadoPartida.Jugadores[1].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
                                     </div>    
                                 )}
                                 </>
-                                
                             );
-
-                        })}
+                            }
+                        )}
 
                         {!jugadores1[2].muerto && jugadores1[2].dinero > 0 &&
                             <div style={{ 
@@ -1325,33 +1300,20 @@ export const Tablero = (props) => {
                                 <img src={jugadores1[2].ficha} style={{width:  casillas3.get(`Casilla${posicion3}`).width, height: casillas3.get(`Casilla${posicion3}`).height}} />
                             </div>
                         }
-                        {listaPropiedades.map((propiedad, index) => {
-                            let posicion = posicionTablero(propiedad);
-                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
-                            let propiedadAE;
-
-                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
-                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
-                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
-                                    break;
-                                }
-                            }
-                        
-
+                        {Array.from(estadoPartida.Jugadores[2].numCasas.keys()).map((posicion) => {
                             const numCasas = estadoPartida.Jugadores[2].numCasas.get(posicion);
 
                             return (
                                 <>
-                                {propiedadAE && numCasas > 0 && (
+                                {numCasas > 0 && (
                                     <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
-                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[2].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    <img src={obtenerImagenCasas(estadoPartida.Jugadores[2].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
                                     </div>    
                                 )}
                                 </>
-                                
                             );
-
-                        })}
+                            }
+                        )}
 
 
                         {!jugadores1[3].muerto && jugadores1[3].dinero > 0 &&
@@ -1363,33 +1325,20 @@ export const Tablero = (props) => {
                             </div>
                         }
 
-                        {listaPropiedades.map((propiedad, index) => {
-                            let posicion = posicionTablero(propiedad);
-                            {/* Hacer un bucle que dado el numero de una posicion, busque en el vector estadoPartida.propiedadesEdificar[i].nombre === posicion*/}
-                            let propiedadAE;
-
-                            for (let i = 0; i < estadoPartida.propiedadesEdificar.length; i++) {
-                                if (estadoPartida.propiedadesEdificar[i].nombre == posicion) {
-                                    propiedadAE = estadoPartida.propiedadesEdificar[i];
-                                    break;
-                                }
-                            }
-                        
-
+                        {Array.from(estadoPartida.Jugadores[3].numCasas.keys()).map((posicion) => {
                             const numCasas = estadoPartida.Jugadores[3].numCasas.get(posicion);
 
                             return (
                                 <>
-                                {propiedadAE && numCasas > 0 && (
+                                {numCasas > 0 && (
                                     <div style={{ position: 'absolute', top: casitas.get(`Casilla${posicion}`).top, left: casitas.get(`Casilla${posicion}`).left }}>
-                                        <img src={obtenerImagenCasas(estadoPartida.Jugadores[3].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
+                                    <img src={obtenerImagenCasas(estadoPartida.Jugadores[3].numCasas.get(posicion))} style={{width: casitas.get(`Casilla${posicion}`).width, height: casitas.get(`Casilla${posicion}`).height }} />
                                     </div>    
                                 )}
                                 </>
-                                
                             );
-
-                        })}
+                            }
+                        )}  
 
                     </div>
                     <div className="col-5">
