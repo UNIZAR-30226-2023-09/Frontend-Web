@@ -362,6 +362,7 @@ function cambiarEstado(data, socket) {
         case 'CLASIFICACION_TORNEO':
             //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
             estadoPartida.clasificacionTorneo.set(msg[1], parseInt(msg[2]))
+            estadoPartida.jugadoresFinalizados = estadoPartida.jugadoresFinalizados + 1
             console.log("En el torneo, el jugador: " + msg[1] + " va en la posicion: " + msg[2])
             break
 

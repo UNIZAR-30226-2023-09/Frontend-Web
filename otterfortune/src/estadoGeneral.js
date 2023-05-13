@@ -41,6 +41,7 @@ class EstadoPartida {
         this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = new Map()   // estadoPartida.clasificacionTorneo.set(key, value), estadoPartida.clasificacionTorneo.get(key)
         this.torneoFinalizado = false   // int
+        this.jugadoresFinalizados = 0   // int
 
         // Información de la partida y de mi usuario
         this.id_partida = null          // int
@@ -111,6 +112,7 @@ class EstadoPartida {
         this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = new Map()   // estadoPartida.clasificacionTorneo.set(key, value), estadoPartida.clasificacionTorneo.get(key)
         this.torneoFinalizado = false   // int
+        this.jugadoresFinalizados = 0   // int
         // Información de la partida y de mi usuario
         this.id_partida = null          // int
         this.ronda = 1                  // int
