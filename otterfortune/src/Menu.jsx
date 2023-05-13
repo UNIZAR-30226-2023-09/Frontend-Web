@@ -9,6 +9,7 @@ import PopupCrearPartida from "./PopupCrearPartida";
 import PopupCrearTorneo from "./PopupCrearTorneo";
 import Tablero from "./Tablero";
 import Clasificacion from "./Clasificacion";
+import PopupEmpezarTorneo from "./PopupEmpezarTorneo";
 
 import Loading from "./Loading";
 import PopupEmpezar from "./PopupEmpezar";
@@ -70,11 +71,15 @@ export const Menu = (props) => {
         setId(newId); // Establecemos el nuevo id
     };
 
+    // Para guardar el ID introducido
+    const handleIdChangeTorneo = (newId) => {
+        setIdTorneo(newId); // Establecemos el nuevo id
+    };
+
     const handleVerificarUnirsePartida = async (id, loading) => {
         setIsOpenPartida(false);
         // Actualizamos el id introducido
         handleIdChange(id);
-        // TODO: LLamar a unirsePartida
         // Actualizamos el valor de loading
         const resultado = await socketActions.unirsePartida(socket, sesion.email, id);
         console.log("El resultado de unirse a la partida es: " + resultado);
@@ -92,14 +97,12 @@ export const Menu = (props) => {
     }
 
     const handleVerificarUnirseTorneo = async (id, loading) => {
-        /*console.log(loading);
-        setIsOpenPartida(false);
+        setIsOpenTorneo(false);
         // Actualizamos el id introducido
-        handleIdChange(id);
-        console.log(id);
-        // TODO: LLamar a unirsePartida
+        handleIdChangeTorneo(id);
         // Actualizamos el valor de loading
-        const resultado = await socketActions.unirsePartida(socket, email, id);
+        const resultado = await socketActions.unirseTorneo(socket, sesion.email, id);
+        console.log("El resultado de unirse al torneo es: " + resultado);
         if (resultado) {
             setLoading(true);
             setShowLoading(true);
@@ -107,8 +110,8 @@ export const Menu = (props) => {
         else {
             setLoading(false);
             setShowLoading(false);
-            window.alert("No existe la partida con ese ID");
-        }*/
+            mostrarAlertaMENU("errorIdPartida", "errorIdPartida");
+        }
     }
 
     //const handleOpen = () => setIsOpen(true);
@@ -210,7 +213,7 @@ export const Menu = (props) => {
         // a handleClose y a content
         // Se le puede pasar cualquier cosa
         <PopupTorneo handleClose={handleClose}
-            handleVerificarUnirsePartida={handleVerificarUnirseTorneo}
+            handleVerificarUnirseTorneo={handleVerificarUnirseTorneo}
             email={email} gemas={gemas} />
     );
 
@@ -230,6 +233,11 @@ export const Menu = (props) => {
     const popupEmpezar = (
         <PopupEmpezar handleCloseCreate={handleIrTablero} id={idPartida} 
             email={email} gemas={gemas}/>
+    );
+
+    const popupEmpezarTorneo = (
+        <PopupEmpezarTorneo handleCloseCreate={handleIrTablero} id={idTorneo}
+            email={email} gemas={gemas} />
     );
 
 
@@ -270,7 +278,8 @@ export const Menu = (props) => {
                     ) 
                     : irTablero ? <Tablero email={email} gemas={gemas}/>
                     : tiendaSkin ? <TiendaSkins email={email} gemas={gemas}/>
-                    : empTorneo ? <Clasificacion email={email} gemas={gemas}/> : (
+                    // : empTorneo ? <Clasificacion email={email} gemas={gemas}/> 
+                    : (
 
                 <div className="menu-container">
                     <header className="App-header">
@@ -330,6 +339,7 @@ export const Menu = (props) => {
                                 id="crearTorneo" />
                         </div>
                         {isOpenCreateTorneo && popupCrearTorneo}
+                        {empTorneo && popupEmpezarTorneo}
 
                         <div className="menu-option" onClick={handleUnirseTorneo}>
                             <label htmlFor="unirseTorneo">Unirse a torneo</label>
