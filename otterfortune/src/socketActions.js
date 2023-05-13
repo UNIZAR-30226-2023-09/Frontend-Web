@@ -62,9 +62,22 @@ function cambiarEstado(data, socket) {
             const newMsg = msg.slice(4)
             // Reemplazar 'propiedad' con '' en cada elemento de newMsg
             const replacedMsg = newMsg.map(element => element.replace(/propiedad/g, ''))
+            // Separa el identificador de la propiedad y la cantidad de casas
+            const propiedadesConCasas = replacedMsg.map(element => {
+                const [propiedad, numCasas] = element.split(':')
+                return { propiedad, numCasas: parseInt(numCasas) }
+            })
+            // Limpiar el array propiedades
+            estadoPartida.Jugadores[jugadorIndex].propiedades = [];
+            // Limpiar el mapa numCasas
+            estadoPartida.Jugadores[jugadorIndex].numCasas.clear();
             // Si es null, se queda null, sino es "propiedad1, propiedad2, ..." -> [1,2,...]
-            estadoPartida.Jugadores[jugadorIndex].propiedades = replacedMsg
-            console.log("Actualizar usuario: " + msg[1] + " dinero: " + estadoPartida.Jugadores[jugadorIndex].dinero + " posicion: " + estadoPartida.Jugadores[jugadorIndex].posicion + " propiedades: " + estadoPartida.Jugadores[jugadorIndex].propiedades)
+            estadoPartida.Jugadores[jugadorIndex].propiedades = propiedadesConCasas.map(({ propiedad }) => propiedad);
+            // Guarda la cantidad de casas en cada propiedad
+            propiedadesConCasas.forEach(({ propiedad, numCasas }) => {
+                estadoPartida.Jugadores[jugadorIndex].numCasas.set(propiedad.toString(), numCasas);
+            });
+            console.log("Actualizar usuario: " + msg[1] + " dinero: " + estadoPartida.Jugadores[jugadorIndex].dinero + " posicion: " + estadoPartida.Jugadores[jugadorIndex].posicion + " propiedades y numCasas: " + newMsg)
             break
 
         case 'NUEVO_DINERO_JUGADOR':
@@ -328,6 +341,7 @@ function cambiarEstado(data, socket) {
 
         case 'ELIMINADO_TORNEO':
             //ELIMINADO_TORNEO,${posicion}
+            // Has quedado ${posicion} en esta partida
             console.log("¡¡MSG!!:" + msg)
             break
 
@@ -338,6 +352,10 @@ function cambiarEstado(data, socket) {
 
         case 'CLASIFICACION_TORNEO':
             //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
+            // Jugador email1 - posicion
+            // Jugador email2 - posicion
+            // Jugador email3 - posicion
+            // Jugador email4 - posicion
             console.log("¡¡MSG!!:" + msg)
             break
 
@@ -685,7 +703,7 @@ export async function quieroEdificar(socket, email, id_partida) {
             //EDIFICAR,b,propiedad17-100,propiedad19-100,propiedad20-100
             //msg[2], msg[3], ...  propiedades (propiedad-precio)
 
-            //UPDATE Partida SET propiedad7 = 'a', propiedad8 = 'a', propiedad10 = 'a' WHERE idPartida = 2;
+            //UPDATE Partida SET propiedad7 = 'q', propiedad8 = 'q', propiedad10 = 'q' WHERE idPartida = 4;
 
             // Tomar los elementos desde el índice 2 (msg[2]) hasta el final
             const propiedadPrecio = msg.slice(2)
@@ -828,6 +846,7 @@ export async function empezarTorneo(socket, id_torneo, email_lider) {
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
+            estadoPartida.id_partida = parseInt(msg[1])   // Guarda id_partida
             estadoPartida.indiceYO = parseInt(msg[2])
             estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]
@@ -862,6 +881,7 @@ export async function esperarEmpezarTorneo(socket) {
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
+            estadoPartida.id_partida = parseInt(msg[1])   // Guarda id_partida
             estadoPartida.indiceYO = parseInt(msg[2])
             estadoPartida.Jugadores[0].email = msg[3]
             estadoPartida.Jugadores[1].email = msg[4]
