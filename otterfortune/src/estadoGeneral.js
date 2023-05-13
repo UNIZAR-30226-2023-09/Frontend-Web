@@ -37,9 +37,7 @@ class EstadoPartida {
 
         // Variables de torneo
         this.id_torneo = null           // int
-        this.eliminadoTorneo = false    // bool
-        this.hasQuedadoPosicionTorneo = null  // int
-        this.hasGanadoTorneo = false    // bool
+        this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
         this.torneoFinalizado = false   // int
 

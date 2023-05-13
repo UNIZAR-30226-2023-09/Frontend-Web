@@ -347,15 +347,16 @@ function cambiarEstado(data, socket) {
 
         case 'ELIMINADO_TORNEO':
             //ELIMINADO_TORNEO,${posicion}
-            estadoPartida.eliminadoTorneo = true
-            estadoPartida.hasQuedadoPosicionTorneo = parseInt(msg[1])
-            console.log("En el torneo has quedado en la posicion: " + estadoPartida.hasQuedadoPosicionTorneo)
+            estadoPartida.menuEsperaTorneo = true
+            estadoPartida.hasQuedadoPosicion = parseInt(msg[1])
+            estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = true
+            console.log("Has quedado en la partida del torneo: " + estadoPartida.hasQuedadoPosicionTorneo)
             break
 
         case 'GANADOR_TORNEO':
             //GANADOR_TORNEO
-            estadoPartida.hasGanadoTorneo = true
-            console.log("Has ganado el torneo!!")
+            estadoPartida.hasGanado = true
+            console.log("Has ganado en la partida del torneo")
             break
 
         case 'CLASIFICACION_TORNEO':
