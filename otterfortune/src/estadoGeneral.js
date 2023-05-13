@@ -105,10 +105,8 @@ class EstadoPartida {
     // Reiniciar variables para empezar nueva partida
     reiniciarVariablesNuevaPartida() {
         // Variables de torneo
-        this.id_torneo = null           // int
-        this.eliminadoTorneo = false    // bool
-        this.hasQuedadoPosicionTorneo = null  // int
-        this.hasGanadoTorneo = false    // bool
+        //this.id_torneo = null         // int
+        this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
         this.torneoFinalizado = false   // int
         // Información de la partida y de mi usuario
