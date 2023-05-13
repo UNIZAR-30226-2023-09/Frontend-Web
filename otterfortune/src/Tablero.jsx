@@ -947,7 +947,7 @@ export const Tablero = (props) => {
         // TODO: Aqui seria mandar al servidor que se ha acabado el turno
         await socketActions.finTurno(socket, sesion.email, estadoPartida.id_partida);
         setHePagado(false);
-        estadoPartida.miTurno = false;
+        // estadoPartida.miTurno = false;
         // Mandar el mensaje de quiero edificar
         await socketActions.quieroEdificar(socket, sesion.email, estadoPartida.id_partida);
         setTirarDados(true);
@@ -1006,7 +1006,6 @@ export const Tablero = (props) => {
     const handlePagarCarcel = async (e) => {
         // await socketActions.pagarSalirCarcel(socket, sesion.email, estadoPartida.id_partida);
         // estadoPartida.enCarcel = false;
-        // estadoPartida.miTurno = false;
         if (estadoPartida.Jugadores[estadoPartida.indiceYO].dinero < 50) {
             //window.alert("No tienes suficiente dinero para salir de la carcel");
             errorCarcel("noDinero", "No tienes suficiente dinero para salir de la carcel");

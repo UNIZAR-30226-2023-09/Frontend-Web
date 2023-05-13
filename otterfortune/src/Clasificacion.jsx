@@ -71,13 +71,21 @@ const Clasificacion = (props) => {
     }    
     const [clasificacionGeneral, setClasificacionGeneral] = useState([]);
 
-    const actualizarClasificacion = () => {
+    const actualizarClasificacion = async () => {
+
         const nuevaClasificacion = [
             { posicion: 1, nombre: estadoPartida.Jugadores[0].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[0].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[0].email) },
             { posicion: 2, nombre: estadoPartida.Jugadores[1].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[1].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[1].email) },
             { posicion: 3, nombre: estadoPartida.Jugadores[2].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[2].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[2].email) },
             { posicion: 4, nombre: estadoPartida.Jugadores[3].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[3].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[3].email) },        
         ];
+
+        console.log("Jugadores finalizados: " + estadoPartida.jugadoresFinalizados);
+
+        if (estadoPartida.jugadoresFinalizados > 3 && !estadoPartida.liderTorneo) {
+            console.log("Todos los jugadores han finalizado");
+            await socketActions.esperarEmpezarTorneo(socket, sesion.email, estadoPartida.id_torneo);
+        }
 
         // Ordenar el vector por puntos
         nuevaClasificacion.sort((a, b) => a.puntos - b.puntos);
@@ -183,7 +191,7 @@ const Clasificacion = (props) => {
                     </tbody>
                     </table>
                 </div>
-                {estadoPartida.liderTorneo && (
+                {estadoPartida.liderTorneo && estadoPartida.jugadoresFinalizados > 3 && (
                     <div>
                         <button onClick={handleIniciarPartida}>
                                 Iniciar partida

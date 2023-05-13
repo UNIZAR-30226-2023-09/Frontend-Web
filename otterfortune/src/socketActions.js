@@ -355,6 +355,7 @@ function cambiarEstado(data, socket) {
 
         case 'GANADOR_TORNEO':
             //GANADOR_TORNEO
+            estadoPartida.menuEsperaTorneo = true
             estadoPartida.hasGanado = true
             console.log("Has ganado en la partida del torneo")
             break
