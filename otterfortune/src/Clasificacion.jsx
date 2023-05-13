@@ -3,6 +3,7 @@ import './CSS/Clasificacion.css';
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
+import { sesion, estadoPartida } from './estadoGeneral.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,10 +12,15 @@ import Menu from "./Menu";
 import perfil from './Imagenes/perfil.png';
 import gema from './Imagenes/gema.png';
 
-import tite from './Imagenes/TITE.png';
-import plex from './Imagenes/PLEX.png';
-import lucas from './Imagenes/LUCAS.png';
-import jeancarlo from './Imagenes/JEAN-CARLO.png';
+import BAXTER from './Imagenes/BAXTER.png';
+import BERTA from './Imagenes/BERTA.png';
+import DIONIX from './Imagenes/DIONIX.png';
+import JEANCARLO from './Imagenes/JEAN-CARLO.png';
+import JULS from './Imagenes/JULS.png';
+import LUCAS from './Imagenes/LUCAS.png';
+import PLEX from './Imagenes/PLEX.png';
+import TITE from './Imagenes/TITE.png';
+
 import logo from './Imagenes/logo.png';
 
 
@@ -28,18 +34,49 @@ const Clasificacion = (props) => {
     // Para el perfil
     const [isHovered, setIsHovered] = useState(false);
 
-    const email = props.email;
-    const gemas = props.gemas;
-
-	console.log(props.content);
+    const email = sesion.email;
+    const gemas = sesion.gemas;
 
 	const socket = useSocket();
 
+    function obtenerSkinDelJugadorEnPosicion(jugadorBuscado) {
+        console.log("Jugador buscado: " + jugadorBuscado);
+
+        const jugadorEncontrado = estadoPartida.Jugadores.find(
+            (j) => j.email === jugadorBuscado
+        );
+        return jugadorEncontrado ? jugadorEncontrado.skin : null;
+    }
+      
+    // Funcion que dado el nombre de una skin devuelva su imagen
+    const obtenerImagen = (nombre) => {
+        switch (nombre) {
+            case "PLEX":
+                return PLEX;
+            case "JULS":
+                return JULS;
+            case "JEANCARLO":
+                return JEANCARLO;
+            case "TITE":
+                return TITE;
+            case "DIONIX":
+                return DIONIX;
+            case "BERTA":
+                return BERTA;
+            case "LUCAS":
+                return LUCAS;
+            case "BAXTER":
+                return BAXTER;
+            default:
+                return BAXTER;
+        }
+    }    
+
     const clasificacionGeneral = [
-        { posicion: 1, nombre: "Equipo 1", puntos: 20, skin: tite },
-        { posicion: 2, nombre: "Equipo 2", puntos: 15, skin: plex },
-        { posicion: 3, nombre: "Equipo 3", puntos: 12, skin: lucas },
-        { posicion: 4, nombre: "Equipo 4", puntos: 10, skin: jeancarlo },
+        { posicion: estadoPartida.clasificacionTorneo[0].posicion, nombre: estadoPartida.clasificacionTorneo[0].email, puntos: 20, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[0].email) },
+        { posicion: estadoPartida.clasificacionTorneo[1].posicion, nombre: estadoPartida.clasificacionTorneo[1].email, puntos: 15, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[1].email) },
+        { posicion: estadoPartida.clasificacionTorneo[2].posicion, nombre: estadoPartida.clasificacionTorneo[2].email, puntos: 12, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[2].email) },
+        { posicion: estadoPartida.clasificacionTorneo[3].posicion, nombre: estadoPartida.clasificacionTorneo[3].email, puntos: 10, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[3].email) },
     ];
 
 	const handleClose = () => {
@@ -65,13 +102,15 @@ const Clasificacion = (props) => {
     if (showMenu) {
         // Llamar a menu y guardar el valor del email en 'email'
         // También se guarda en 'props.email' y se accede en menu
-        return <Menu email={props.email} gemas={props.gemas}/>;
+        return <Menu email={sesion.email} gemas={sesion.gemas}/>;
     }
 	
     return (
         <div className="fondoC">
             <header className="App-header">
-                <img src={logo} className="menu-sesion-button" onClick={handleMenu}/>
+                {estadoPartida.torneoFinalizado && (
+                    <img src={logo} className="menu-sesion-button" onClick={handleMenu}/>
+                )}
                 <div className="titulo">
                     <p> Clasificación general </p>
                 </div>
@@ -106,7 +145,7 @@ const Clasificacion = (props) => {
                             <td className="position">{equipo.posicion}</td>
                             <td className="name">
                                 <div className="nombre-skin">
-                                    <img src={equipo.skin} className="skinC" />
+                                    <img src={obtenerImagen(equipo.skin)} className="skinC" />
                                     {equipo.nombre}
                                 </div>
 

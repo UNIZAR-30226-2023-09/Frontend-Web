@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './CSS/Popup.css';
 import { Menu } from "./Menu";
+import Clasificacion from "./Clasificacion";
 
 import * as socketActions from './socketActions';
 import { useSocket } from './socketContext';
@@ -9,8 +10,11 @@ import { sesion, estadoPartida } from './estadoGeneral.js';
 // Props es como un struct que almacena la informacion con el nombre que
 // se le da cuando llamas a la función.
 const PopupMuerto = (props) => {
-    // Para ir al meno
+    // Para ir al menu
     const [irMenu, setIrMenu] = useState(false);
+
+    // Para ir a la clasificacion
+    const [irClasificacion, setIrClasificacion] = useState(false);
 
     const socket = useSocket();
 
@@ -26,9 +30,17 @@ const PopupMuerto = (props) => {
         estadoPartida.miTurno = false;
 
         await sleep(300);
-        setIrMenu(true);    // mostrar el menu de vuelta
+
+        if (estadoPartida.menuEsperaTorneo) {
+            setIrClasificacion(true);
+            setIrMenu(false);
+        }
+        else {
+            setIrMenu(true);    // mostrar el menu de vuelta
+            setIrClasificacion(false);
+        }
         estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = false;
-        console.log("Las gemas son en muerto: " + sesion.gemas);
+        console.log("Valor de: " + estadoPartida.menuEsperaTorneo);
       };  
       
 
@@ -52,19 +64,26 @@ const PopupMuerto = (props) => {
     return (
         <>
             {irMenu ? <Menu gemas={sesion.gemas+gemasGanadas(estadoPartida.hasQuedadoPosicion)}/> 
-            : ( 
+            : irClasificacion ? <Clasificacion/> : (
+                 
                 <div className="popup">
                     <div className="popup__content">
-                        <div>
-                            <label htmlFor="text" className="popup__label">
-                                Te has quedado sin dinero y estás eliminado de la partida. ¡¡Has ganado {gemasGanadas(estadoPartida.hasQuedadoPosicion)}{" "}
-                                {gemasGanadas(estadoPartida.hasQuedadoPosicion) === 1 ? "gema!!" : "gemas!!"}
-                            </label>
+                    {!estadoPartida.menuEsperaTorneo && (
+                        <label htmlFor="text" className="popup__label">
+                            Te has quedado sin dinero y estás eliminado de la partida. ¡¡Has ganado {gemasGanadas(estadoPartida.hasQuedadoPosicion)}{" "}
+                            {gemasGanadas(estadoPartida.hasQuedadoPosicion) === 1 ? "gema!!" : "gemas!!"}
+                        </label>
+                    )}
 
-                        </div>
+                    {estadoPartida.menuEsperaTorneo && (
+                        <label htmlFor="text" className="popup__label">
+                            Te has quedado sin dinero y estás eliminado de la partida. Te toca esperar a los demás.
+                        </label>
+                    )}
+
                         <div className="buttons-container">
                             <div className="acept">
-                                <button onClick={handleAccept}>Ir al menu</button>
+                                <button onClick={handleAccept}>{estadoPartida.menuEsperaTorneo ? "Clasificación" : "Ir al menu"}</button>
                             </div>
                         </div>
                     </div>
