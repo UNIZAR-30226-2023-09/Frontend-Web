@@ -350,7 +350,7 @@ function cambiarEstado(data, socket) {
             estadoPartida.menuEsperaTorneo = true
             estadoPartida.hasQuedadoPosicion = parseInt(msg[1])
             estadoPartida.Jugadores[estadoPartida.indiceYO].muerto = true
-            console.log("Has quedado en la partida del torneo: " + estadoPartida.hasQuedadoPosicionTorneo)
+            console.log("Has quedado en la partida del torneo: " + estadoPartida.hasQuedadoPosicion)
             break
 
         case 'GANADOR_TORNEO':
@@ -856,6 +856,8 @@ export async function empezarTorneo(socket, id_torneo, email_lider) {
         const response = await waitForResponse(socket)
 
         estadoPartida.reiniciarVariablesNuevaPartida()
+
+        estadoPartida.liderTorneo = true
 
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {

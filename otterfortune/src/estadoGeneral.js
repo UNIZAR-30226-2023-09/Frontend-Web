@@ -37,6 +37,7 @@ class EstadoPartida {
 
         // Variables de torneo
         this.id_torneo = null           // int
+        this.liderTorneo = false        // bool
         this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
         this.torneoFinalizado = false   // int
@@ -106,6 +107,7 @@ class EstadoPartida {
     reiniciarVariablesNuevaPartida() {
         // Variables de torneo
         //this.id_torneo = null         // int
+        this.liderTorneo = false        // bool
         this.menuEsperaTorneo = false   // bool
         this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
         this.torneoFinalizado = false   // int
