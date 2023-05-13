@@ -361,13 +361,8 @@ function cambiarEstado(data, socket) {
 
         case 'CLASIFICACION_TORNEO':
             //CLASIFICACION_TORNEO,${ID_jugador_actual},${clasificacion_actual}
-            // Objeto con las propiedades email y posicion
-            const jugadorClasificacion = {
-                email: msg[1],
-                posicion: parseInt(msg[2]),
-            }
-            estadoPartida.clasificacionTorneo.push(jugadorClasificacion)
-            console.log("En el torneo, el jugador: " + jugadorClasificacion.email + " va en la posicion: " + jugadorClasificacion.posicion)
+            estadoPartida.clasificacionTorneo.set(msg[1], parseInt(msg[2]))
+            console.log("En el torneo, el jugador: " + msg[1] + " va en la posicion: " + msg[2])
             break
 
         case 'TORNEO_FINALIZADO':
@@ -857,8 +852,6 @@ export async function empezarTorneo(socket, id_torneo, email_lider) {
 
         estadoPartida.reiniciarVariablesNuevaPartida()
 
-        estadoPartida.liderTorneo = true
-
         let msg = response.toString().split(",")
         if (msg[0] === 'EMPEZAR_OK') {
             // Guarda los Jugadores
@@ -873,6 +866,12 @@ export async function empezarTorneo(socket, id_torneo, email_lider) {
             estadoPartida.Jugadores[2].skin = msg[9]
             estadoPartida.Jugadores[3].skin = msg[10]
             sesion.tableroEquipada = msg[11]
+
+            estadoPartida.liderTorneo = true
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[0].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[1].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[2].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[3].email , 0)
 
             console.log("Sí empezarTorneo, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true
@@ -908,6 +907,11 @@ export async function esperarEmpezarTorneo(socket) {
             estadoPartida.Jugadores[2].skin = msg[9]
             estadoPartida.Jugadores[3].skin = msg[10]
             sesion.tableroEquipada = msg[11]
+
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[0].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[1].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[2].email , 0)
+            estadoPartida.clasificacionTorneo.set(estadoPartida.Jugadores[3].email , 0)
 
             console.log("Sí empezarTorneo, tablero: " + sesion.tableroEquipada + ", id_partida: " + msg[1] + ", Jugadores: " + estadoPartida.Jugadores[0].email + " skin: " + estadoPartida.Jugadores[0].skin + ", " + estadoPartida.Jugadores[1].email + " skin: " + estadoPartida.Jugadores[1].skin + ", " + estadoPartida.Jugadores[2].email + " skin: " + estadoPartida.Jugadores[2].skin + ", " + estadoPartida.Jugadores[3].email + " skin: " + estadoPartida.Jugadores[3].skin + ", YOsoy [" + estadoPartida.indiceYO + "]")
             return true

@@ -39,7 +39,7 @@ class EstadoPartida {
         this.id_torneo = null           // int
         this.liderTorneo = false        // bool
         this.menuEsperaTorneo = false   // bool
-        this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
+        this.clasificacionTorneo = new Map()   // estadoPartida.clasificacionTorneo.set(key, value), estadoPartida.clasificacionTorneo.get(key)
         this.torneoFinalizado = false   // int
 
         // Información de la partida y de mi usuario
@@ -109,7 +109,7 @@ class EstadoPartida {
         //this.id_torneo = null         // int
         this.liderTorneo = false        // bool
         this.menuEsperaTorneo = false   // bool
-        this.clasificacionTorneo = []   // clasificacionTorneo.email, clasificacionTorneo.posicion
+        this.clasificacionTorneo = new Map()   // estadoPartida.clasificacionTorneo.set(key, value), estadoPartida.clasificacionTorneo.get(key)
         this.torneoFinalizado = false   // int
         // Información de la partida y de mi usuario
         this.id_partida = null          // int
