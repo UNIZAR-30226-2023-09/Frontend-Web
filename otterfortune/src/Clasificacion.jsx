@@ -40,8 +40,6 @@ const Clasificacion = (props) => {
 	const socket = useSocket();
 
     function obtenerSkinDelJugadorEnPosicion(jugadorBuscado) {
-        console.log("Jugador buscado: " + jugadorBuscado);
-
         const jugadorEncontrado = estadoPartida.Jugadores.find(
             (j) => j.email === jugadorBuscado
         );
@@ -75,11 +73,20 @@ const Clasificacion = (props) => {
 
     const actualizarClasificacion = () => {
         const nuevaClasificacion = [
-            { posicion: estadoPartida.clasificacionTorneo[0].posicion, nombre: estadoPartida.clasificacionTorneo[0].email, puntos: 20, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[0].email) },
-            { posicion: estadoPartida.clasificacionTorneo[1].posicion, nombre: estadoPartida.clasificacionTorneo[1].email, puntos: 15, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[1].email) },
-            { posicion: estadoPartida.clasificacionTorneo[2].posicion, nombre: estadoPartida.clasificacionTorneo[2].email, puntos: 12, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[2].email) },
-            { posicion: estadoPartida.clasificacionTorneo[3].posicion, nombre: estadoPartida.clasificacionTorneo[3].email, puntos: 10, skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.clasificacionTorneo[3].email) },        
+            { posicion: 1, nombre: estadoPartida.Jugadores[0].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[0].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[0].email) },
+            { posicion: 2, nombre: estadoPartida.Jugadores[1].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[1].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[1].email) },
+            { posicion: 3, nombre: estadoPartida.Jugadores[2].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[2].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[2].email) },
+            { posicion: 4, nombre: estadoPartida.Jugadores[3].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[3].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[3].email) },        
         ];
+
+        // Ordenar el vector por puntos
+        nuevaClasificacion.sort((a, b) => a.puntos - b.puntos);
+
+        // Asignar el orden correspondiente a la posición
+        nuevaClasificacion.forEach((item, index) => {
+            item.posicion = index + 1;
+        });
+
         setClasificacionGeneral(nuevaClasificacion);
     };
 
@@ -111,6 +118,12 @@ const Clasificacion = (props) => {
     const handleMenu = (e) => {
         setShowMenu(true);
     };
+
+    // Para iniciar la partida cuando todos los jugadores estén listos
+    const handleIniciarPartida = async () => {
+        await socketActions.empezarTorneo(socket, estadoPartida.id_torneo, sesion.email);
+    };
+
 
     // Muestra el log in cuando se pone a true (cuando se cierra sesion)
     if (showMenu) {
@@ -170,12 +183,14 @@ const Clasificacion = (props) => {
                     </tbody>
                     </table>
                 </div>
-                <button>
-                        Finalizar torneo
-                </button>
-                <button>
-                        Iniciar partida
-                </button>
+                {estadoPartida.liderTorneo && (
+                    <div>
+                        <button onClick={handleIniciarPartida}>
+                                Iniciar partida
+                        </button>
+                    </div>
+                )}
+
 
             </div>
       </div>

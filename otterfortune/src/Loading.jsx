@@ -33,6 +33,8 @@ const Loading = (props) => {
 
 	const socket = useSocket();
 
+	console.log("props.partidaJuego: " + props.partidaJuego);
+
 	async function iniciarPartida(socket) {
 		const empezar = await socketActions.esperarEmpezarPartida(socket);
 		if (empezar) {
@@ -40,8 +42,20 @@ const Loading = (props) => {
 		}
 	}
 
+	async function iniciarTorneo(socket) {
+		const empezar = await socketActions.esperarEmpezarTorneo(socket);
+		if (empezar) {
+			setshowTablero(true);
+		}
+	}
+
 	useEffect(() => {
-		iniciarPartida(socket, setshowTablero);
+		if (props.partidaJuego) {
+			iniciarTorneo(socket, setshowTablero);
+		}
+		else {
+			iniciarPartida(socket, setshowTablero);
+		}
 	  }, [socket, setshowTablero]);
 
 	

@@ -63,6 +63,10 @@ export const Menu = (props) => {
     // Para ir al tablero
     const [irTablero, setIrTablero] = useState(false);
 
+    // Para saber si estoy jugando partida o torneo
+    // False es partida, true es torneo
+    const [partidaJuego, setPartidaJuego] = useState(false);
+
     const socket = useSocket();
 
 
@@ -85,10 +89,10 @@ export const Menu = (props) => {
         console.log("El resultado de unirse a la partida es: " + resultado);
         if (resultado) {
             setLoading(true);
+            setPartidaJuego(false);
             setShowLoading(true);
         }
         else {
-            console.log("AQUIII2");
             setLoading(false);
             setShowLoading(false);
             //window.alert("No existe la partida con ese ID");
@@ -105,6 +109,7 @@ export const Menu = (props) => {
         console.log("El resultado de unirse al torneo es: " + resultado);
         if (resultado) {
             setLoading(true);
+            setPartidaJuego(true);
             setShowLoading(true);
         }
         else {
@@ -274,7 +279,7 @@ export const Menu = (props) => {
     return (
         <>
             {loading ? (
-                        <Loading email={email} gemas={gemas} />
+                        <Loading email={email} gemas={gemas} partidaJuego={partidaJuego} />
                     ) 
                     : irTablero ? <Tablero email={email} gemas={gemas}/>
                     : tiendaSkin ? <TiendaSkins email={email} gemas={gemas}/>
