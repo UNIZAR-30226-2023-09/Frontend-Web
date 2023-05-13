@@ -80,13 +80,6 @@ const Clasificacion = (props) => {
             { posicion: 4, nombre: estadoPartida.Jugadores[3].email, puntos: estadoPartida.clasificacionTorneo.get(estadoPartida.Jugadores[3].email), skin: obtenerSkinDelJugadorEnPosicion(estadoPartida.Jugadores[3].email) },        
         ];
 
-        console.log("Jugadores finalizados: " + estadoPartida.jugadoresFinalizados);
-
-        if (estadoPartida.jugadoresFinalizados > 3 && !estadoPartida.liderTorneo) {
-            console.log("Todos los jugadores han finalizado");
-            await socketActions.esperarEmpezarTorneo(socket, sesion.email, estadoPartida.id_torneo);
-        }
-
         // Ordenar el vector por puntos
         nuevaClasificacion.sort((a, b) => a.puntos - b.puntos);
 
@@ -96,6 +89,15 @@ const Clasificacion = (props) => {
         });
 
         setClasificacionGeneral(nuevaClasificacion);
+
+        console.log("Jugadores finalizados: " + estadoPartida.jugadoresFinalizados);
+
+        if (estadoPartida.jugadoresFinalizados > 3 && !estadoPartida.liderTorneo) {
+            console.log("Todos los jugadores han finalizado");
+            await socketActions.esperarEmpezarTorneo(socket, sesion.email, estadoPartida.id_torneo);
+        }
+
+
     };
 
     useEffect(() => {
@@ -191,10 +193,18 @@ const Clasificacion = (props) => {
                     </tbody>
                     </table>
                 </div>
-                {estadoPartida.liderTorneo && estadoPartida.jugadoresFinalizados > 3 && (
+                {estadoPartida.liderTorneo && estadoPartida.jugadoresFinalizados > 3 && !estadoPartida.torneoFinalizado && (
                     <div>
                         <button onClick={handleIniciarPartida}>
                                 Iniciar partida
+                        </button>
+                    </div>
+                )}
+
+                {estadoPartida.torneoFinalizado && (
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <button style={{ width: '100%' }} onClick={handleMenu}>
+                            ¡¡SE HA ACABADO EL TORNEO MÁQUINAS!!
                         </button>
                     </div>
                 )}
