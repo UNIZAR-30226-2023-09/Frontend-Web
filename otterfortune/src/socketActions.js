@@ -269,6 +269,9 @@ function cambiarEstado(data, socket) {
             let infoTablero = submsg[1].toString().split(";")
             let infoJugadores = submsg[2].toString().split(";")
 
+            estadoPartida.liderTorneo = Boolean(parseInt(submsg[3]))
+            estadoPartida.id_torneo = parseInt(submsg[4])
+
             // Información de la partida
             estadoPartida.id_partida = parseInt(infoPartida[0])
             estadoPartida.ronda = parseInt(infoPartida[1])
